@@ -1,3 +1,52 @@
 /* card component */
 
+.card {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    @include dropDownShadow;
+  }
+  &-body{
+    .projectName {
+      font-size: 1.9rem;
+      color: #222;
+    }
+    .card-text {
+      font-size: 1.2rem;
+    }
+    &__details{
+      padding: 2.4rem 5rem 0 5rem;
+      text-align: center;
+
+      h2{
+        color: #222;
+        font-weight:bold;
+      }
+      & > *{
+        padding: 0 5rem;
+      }
+      &-status{
+        padding-top:0.7rem;
+        h2{
+          font-size:1.3rem;
+        }
+      }
+      &-icon{
+        text-align: center;
+        font-size: 2.6rem;
+        line-height: 20px;
+        background-color: $color-gray-light-1;
+        border-radius: 50%;
+        width: 40px;
+        height:40px;
+        transition: all 0.2s ease-in-out;
+        &:hover{
+          background-color: #007ac0;
+          color:#fff;
+        }
+      }
+    }
+  }
+}
+
 /* card component end----------------- */
