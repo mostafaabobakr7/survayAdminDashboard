@@ -43,7 +43,7 @@ $('#createProjectBack').on('click', function () {
 $('#createProjectBTN').on('click', function () {
   const projectName = $('#projectName').val();
   const d = new Date();
-const strDate = d.getFullYear() + "/" + (d.getMonth()+1) + "/" + d.getDate();
+  const strDate = d.getFullYear() + "/" + (d.getMonth()+1) + "/" + d.getDate();
   var card = $(`<div class="row py-3">
   <div class="col-md-12">
     <div class="projects-list-container pl-5">
