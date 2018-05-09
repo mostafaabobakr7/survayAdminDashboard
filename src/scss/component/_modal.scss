@@ -20,7 +20,7 @@
       top: -15px;
       left: 0;
       height: 300rem;
-      width: 17rem;
+      width: 22rem;
       border-right: 1px solid #ccc;
       @include dropDownShadow(0.3);
       .active {
@@ -33,7 +33,7 @@
           display: inline;
           position: absolute;
           z-index: 100000;
-          left: 193px;
+          left: 21rem;
           top: 15px;
           border-bottom: 8.5px solid #fff;
           border-right: 8.5px solid #fff;
@@ -60,7 +60,41 @@
   &-footer {
     border-top: 1px solid #eee;
   }
-  .tab-content {}
+  .tab-content {
+    .list-Research {
+      position: relative;
+      span {
+        display: inline-block;
+        &:hover i {
+          border: 1px solid #000;
+          cursor: pointer;
+        }
+        i {
+          border: 1px solid transparent;
+          border-radius: 5px;
+          padding: 0 2rem;
+          transition: all 0.2s ease;
+          font-size: 2.5rem;
+        }
+      }
+      .tab-pane__research {
+        margin: 1rem 0;
+        display: block;
+        &-text {
+          position: absolute;
+          top: 5.5rem;
+          left: 12rem;
+          h5 {
+            font-size: 1.7rem;
+            color: #484848;
+          }
+          p {
+            font-size: 1.2rem;
+          }
+        }
+      }
+    }
+  }
   .tab-pane {
     a {
       &:hover .tab-pane__research {
@@ -90,7 +124,6 @@
         }
       }
       h5 {
-        cursor: pointer;
         overflow-wrap: break-word;
         word-wrap: break-word;
         padding-left: 6px;
