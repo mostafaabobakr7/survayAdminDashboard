@@ -8,6 +8,7 @@ var cleanCSS = require("gulp-clean-css");
 var concatCss = require("gulp-concat-css");
 var imagemin = require("gulp-imagemin");
 var uglify = require("gulp-uglify");
+var babel = require('gulp-babel');
 var pump = require("pump");
 var plumber = require("gulp-plumber");
 var autoprefixer = require("gulp-autoprefixer");
@@ -54,7 +55,9 @@ gulp.task("minify-css", function () {
 
 // watch sass files & serve:
 gulp.task("serve", ["sass"], function () {
-  browserSync.init({server: "./src"});
+  browserSync.init({
+    server: "./src"
+  });
 });
 
 // minify Html:
@@ -78,6 +81,9 @@ gulp.task("scripts", function () {
   return gulp
     .src(jsSrc)
     .pipe(newer(jsDest))
+    .pipe(babel({
+      presets: ['@babel/env']
+    }))
     .pipe(uglify())
     .pipe(gulp.dest(jsDest))
     .pipe(browserSync.stream());

@@ -14,3 +14,14 @@ $('#folder__menu-close').on("click", function () {
   $('#folder__menu').toggleClass('menu__close')
 })
 /* section-home-folders__menu end----- */
+/* section-home-folders-dropdown */
+$('#folderDropdown').on('click', function () {
+  $(this).toggleClass('dropDownClickBorder')
+  console.log(this)
+})
+$('#folderDropdown-menu .dropdown-item').map(function () {
+  $(this).on('click', function () {
+    $(this).addClass('checked').siblings().removeClass('checked')
+  })
+})
+/* section-home-folders-dropdown end------ */
