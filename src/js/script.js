@@ -43,4 +43,10 @@ $('#createProjectBTN').on('click', function () {
   const projectName = $('#projectName').val();
   console.log(projectName)
 })
+// when press Enter on keyboard as create project
+$('#projectName').keyup(function (event) {
+  if (event.keyCode === 13) {
+    $("#createProjectBTN").click();
+  }
+});
 /* create project end----------*/
