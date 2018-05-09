@@ -500,12 +500,13 @@ body {
       background-color: #f2f2f2;
       border-radius: 0px !important;
       border: 0px !important;
-      padding-top: 1rem;
-      padding-bottom: 1rem;
+      padding: 1rem;
       border: none;
       font-size: 1.1rem; }
       .modal-body .list-group-item:nth-child(1) {
         margin-top: 3rem; }
+      .modal-body .list-group-item span {
+        padding-right: 1rem; }
 
 .modal-footer {
   border-top: 1px solid #eee; }

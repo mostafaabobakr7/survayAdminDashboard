@@ -50,10 +50,12 @@
         &:nth-child(1) {
           margin-top: 3rem;
         }
-        padding-top: 1rem;
-        padding-bottom: 1rem;
+        padding: 1rem;
         border: none;
         font-size: 1.1rem;
+        span {
+          padding-right: 1rem;
+        }
       }
     }
   }
