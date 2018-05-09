@@ -32,9 +32,15 @@ $('#BlankSurvayProject').on('click', function () {
   $('.list-Research').removeClass('d-none')
 })
 /* create Blank Project end------------ */
-/* create Project Back */
+/* create Project Back arrow */
 $('#createProjectBack').on('click', function () {
   $(this).parent().addClass('d-none')
   $('#CreateFromExisting, #BlankSurvayProject').removeClass('d-none');
 })
-/* create Project Back end-------------*/
+/* create Project Back arrow end-------------*/
+/* create project */
+$('#createProjectBTN').on('click', function () {
+  const projectName = $('#projectName').val();
+  console.log(projectName)
+})
+/* create project end----------*/
