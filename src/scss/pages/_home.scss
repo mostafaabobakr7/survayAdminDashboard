@@ -1,0 +1,83 @@
+/* home */
+
+.menu__close {
+  left: -27rem;
+}
+
+.menu__folder {
+  margin-left: 27rem;
+}
+
+main {
+  min-height: 85vh;
+  overflow: hidden;
+  .section-home {
+    position: relative;
+    &-folders {
+      transition: all 0.5s ease;
+      &__link {
+        font-size: 2rem;
+        i {
+          font-size: 2.5rem;
+        }
+      }
+      &__menu {
+        transition: left 0.6s ease;
+        position: absolute;
+        z-index: 100;
+        top: -3rem;
+        width: 25rem;
+        height: 100rem;
+        background-color: #fff;
+        @include dropDownShadow;
+        &-close {
+          position: relative;
+          i {
+            cursor: pointer;
+            position: absolute;
+            right: 0.9rem;
+            font-weight: normal;
+            &:hover {
+              color: red;
+            }
+          }
+        }
+        .nav {
+          &-item {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            &:nth-child(2) {
+              border-bottom: 1px solid #eee;
+            }
+            .active {
+              font-weight: bold;
+              color: $nav-main-color;
+              background-color: #f9f9f9;
+            }
+            &:last-child a {
+              font-size: 1.1rem;
+            }
+          }
+          &-link {
+            font-size: 1.5rem;
+          }
+        }
+      }
+    }
+    .form-inline {
+      position: relative;
+      .fa-search {
+        color: #a5a5a5;
+        font-size: 1.7rem;
+        position: absolute;
+        top: 7px;
+        left: 9px;
+      }
+      input {
+        padding-left: 3rem;
+      }
+    }
+  }
+}
+
+/* home end----------------- */

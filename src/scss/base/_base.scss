@@ -1,0 +1,65 @@
+/* Base */
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  /* defines 1 rem = 62.5% of browser default rem which is 16px
+  this leads to 1 rem = 62.5% of 16px = 10px to could make every font and size with rem and this is for easy responsive */
+  font-size: 62.5%;
+  @include respond(big-desktop) {
+    font-size: 75%; //want: 1rem = 12px, 12/16px(base) = 75%
+  }
+  @include respond(tab-land) {
+    font-size: 56.25%; //want: 1rem = 9px, 9/16px(base) = 56.25%
+  }
+  @include respond(tab-port) {
+    font-size: 50%; //want: 1rem = 8px, 8/16px(base) = 50%
+  }
+}
+
+body {
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  cursor: default;
+}
+
+::selection {
+  color: $color-white;
+  background: $Light-green;
+}
+
+::placeholder {
+  color: $main-gray;
+}
+
+a {
+  text-decoration: none !important;
+  color: $main-gray;
+  &:hover {
+    color: $nav-main-color;
+  }
+}
+
+img {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Base end-------------------- */

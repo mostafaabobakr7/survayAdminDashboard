@@ -1,0 +1,38 @@
+/* navigation */
+
+.navbar {
+  background-color: $color-white !important;
+  border-bottom: 1px solid #e8e8e8;
+  &-nav {
+    .active a {
+      color: $nav-main-color !important;
+    }
+    .nav {
+      &-item {
+        padding-right: 1.2rem !important;
+        padding-left: 1.2rem !important;
+      }
+      &-link {
+        font-size: 1.3rem;
+        i {
+          font-size: 25px;
+        }
+      }
+    }
+    .dropdown {
+      &-menu {
+        @include dropDownShadow;
+        left: -8rem;
+      }
+      &-item {
+        font-size: 1.2rem;
+        &:hover {
+          color: #fff;
+          background-color: $nav-main-color;
+        }
+      }
+    }
+  }
+}
+
+/* navigation end-------------------------------------- */

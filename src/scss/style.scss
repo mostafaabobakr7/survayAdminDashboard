@@ -1,0 +1,34 @@
+/*@import abstract folder */
+
+@import "./abstracts/variables";
+@import "./abstracts/mixins";
+@import "./abstracts/functions";
+/*@import abstract folder end-----------------------------*/
+
+/*@import base folder */
+
+@import "./base/base";
+@import "./base/typography";
+@import "./base/utilities";
+@import "./base/animation";
+/*@import base folder end-----------------------------*/
+
+/*@import layout folder */
+
+@import "./layouts/navigation";
+@import "./layouts/header";
+@import "./layouts/footer";
+/*@import layout folder end-----------------------------*/
+
+/*@import component */
+
+@import "./component/button";
+@import "./component/card";
+@import "./component/form";
+@import "./component/modal";
+/*@import component end-----------------------------*/
+
+/*@import pages folder */
+
+@import "./pages/home";
+/*@import pages folder end-----------------------------*/

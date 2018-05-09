@@ -1,0 +1,90 @@
+.modal {
+  &-dialog {
+    transform: translate(-50%, 90px) !important;
+  }
+  &-content {
+    background-color: #f2f2f2;
+    width: 70rem;
+    overflow: hidden;
+  }
+  &-body {
+    height: 40rem;
+    position: relative;
+    .container-fluid {
+      padding-right: 0;
+      padding-left: 0;
+    }
+    .list-group {
+      position: absolute;
+      z-index: 100;
+      top: -15px;
+      left: 0;
+      height: 300rem;
+      width: 17rem;
+      border-right: 1px solid #ccc;
+      @include dropDownShadow(0.3);
+      .active {
+        background-color: #fff;
+        color: #000;
+        @include dropDownShadow(0.3);
+        position: relative;
+        &:after {
+          content: "";
+          display: inline;
+          position: absolute;
+          z-index: 100000;
+          left: 193px;
+          top: 15px;
+          border-bottom: 8.5px solid #fff;
+          border-right: 8.5px solid #fff;
+          border-top: 8.5px solid transparent;
+          border-left: 8.5px solid transparent;
+          box-shadow: 3px 3px 6px -1px rgba(0, 0, 0, .16);
+          transform: rotate(-45deg);
+        }
+      }
+      &-item {
+        background-color: #f2f2f2;
+        border-radius: 0px !important;
+        border: 0px !important;
+        &:nth-child(1) {
+          margin-top: 3rem;
+        }
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        border: none;
+        font-size: 1.1rem;
+      }
+    }
+  }
+  &-footer {
+    border-top: 1px solid #eee;
+  }
+  .tab-content {}
+  .tab-pane {
+    a {}
+    &__research {
+      width: 10rem;
+      margin: 1rem;
+      display: inline-block;
+      background-color: #fff;
+      border: 1px solid #d7d7d7;
+      &-head {
+        width: 100%;
+        height: 10rem;
+        background-image: linear-gradient(#4d5f69, #000);
+        position: relative;
+        i {
+          color: #fff;
+          font-size: 3rem;
+          @include center;
+        }
+      }
+      h5 {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        padding-left: 6px;
+      }
+    }
+  }
+}
