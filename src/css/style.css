@@ -519,7 +519,31 @@ body {
 .modal-footer {
   border-top: 1px solid #eee; }
 
+.modal .tab-pane a:hover .tab-pane__research {
+  -webkit-transform: scale(1.03);
+     -moz-transform: scale(1.03);
+      -ms-transform: scale(1.03);
+       -o-transform: scale(1.03);
+          transform: scale(1.03); }
+
+.modal .tab-pane a:active .tab-pane__research {
+  -webkit-transform: scale(0.9);
+     -moz-transform: scale(0.9);
+      -ms-transform: scale(0.9);
+       -o-transform: scale(0.9);
+          transform: scale(0.9); }
+
 .modal .tab-pane__research {
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  -webkit-box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
+  border: 1px solid #c6c6c6;
+  border-color: #000000;
+  border-color: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
   width: 10rem;
   margin: 1rem;
   display: inline-block;
@@ -546,6 +570,7 @@ body {
            -o-transform: translate(-50%, -50%);
               transform: translate(-50%, -50%); }
   .modal .tab-pane__research h5 {
+    cursor: pointer;
     overflow-wrap: break-word;
     word-wrap: break-word;
     padding-left: 6px; }

@@ -62,8 +62,17 @@
   }
   .tab-content {}
   .tab-pane {
-    a {}
+    a {
+      &:hover .tab-pane__research {
+        transform: scale(1.03);
+      }
+      &:active .tab-pane__research {
+        transform: scale(0.9);
+      }
+    }
     &__research {
+      transition: all 0.2s ease;
+      @include dropDownShadow;
       width: 10rem;
       margin: 1rem;
       display: inline-block;
@@ -81,6 +90,7 @@
         }
       }
       h5 {
+        cursor: pointer;
         overflow-wrap: break-word;
         word-wrap: break-word;
         padding-left: 6px;
