@@ -446,24 +446,17 @@ body {
     border-color: #000000;
     border-color: rgba(0, 0, 0, 0.05);
     border-radius: 4px; }
-  .card-body .projectName {
-    font-size: 1.9rem;
-    color: #222; }
-  .card-body .card-text {
-    font-size: 1.2rem; }
-  .card-body__details {
-    padding: 2.4rem 5rem 0 5rem;
-    text-align: center; }
-    .card-body__details h2 {
-      color: #222;
-      font-weight: bold; }
-    .card-body__details > * {
-      padding: 0 5rem; }
-    .card-body__details-status {
-      padding-top: 0.7rem; }
-      .card-body__details-status h2 {
-        font-size: 1.3rem; }
-    .card-body__details-icon {
+  .card-body {
+    position: relative; }
+    .card-body .projectName {
+      font-size: 1.9rem;
+      color: #222; }
+    .card-body .card-text {
+      font-size: 1.2rem; }
+    .card-body-icon {
+      position: absolute;
+      top: -10px;
+      right: 10px;
       text-align: center;
       font-size: 2.6rem;
       line-height: 20px;
@@ -475,9 +468,21 @@ body {
       -o-transition: all 0.2s ease-in-out;
       -moz-transition: all 0.2s ease-in-out;
       transition: all 0.2s ease-in-out; }
-      .card-body__details-icon:hover {
+      .card-body-icon:hover {
         background-color: #007ac0;
         color: #fff; }
+    .card-body__details {
+      padding: 2.4rem 5rem 0 5rem;
+      text-align: center; }
+      .card-body__details h2 {
+        color: #222;
+        font-weight: bold; }
+      .card-body__details > * {
+        padding: 0 5rem; }
+      .card-body__details-status {
+        padding-top: 0.7rem; }
+        .card-body__details-status h2 {
+          font-size: 1.3rem; }
 
 /* card component end----------------- */
 /* form */
