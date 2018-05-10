@@ -9,9 +9,10 @@ $('#folder__link').on("click", function () {
   $('#folder__menu').toggleClass('menu__close')
 })
 $('#folder__menu-close').on("click", function () {
-  $('#folder__link, .projects-list-container')
+  $('#folder__link')
     .parent()
     .toggleClass('menu__folder')
+  $('.projects-list-container').toggleClass('menu__folder')
   $('#folder__menu').toggleClass('menu__close')
 })
 /* section-home-folders__menu end----- */
@@ -43,8 +44,8 @@ $('#createProjectBack').on('click', function () {
 $('#createProjectBTN').on('click', function () {
   const projectCreationName = $('#projectName').val();
   const d = new Date();
-  const projectCreationDate = d.getDate() + "/" + (d.getMonth()+1) + "/" + d.getFullYear();
-  var card = $(`        <div class="row py-3">
+  const projectCreationDate= d.toLocaleString('en-US', { day:'numeric', month:'long',year:'numeric', hour:'numeric', minute: 'numeric', hour12: true });
+  var card = $(`<div class="row py-3">
   <div class="col-md-12">
     <div class="projects-list-container pl-5">
       <div class="card">
@@ -56,7 +57,7 @@ $('#createProjectBTN').on('click', function () {
                 <span class="pl-1"> Survey</span>
               </h6>
               <h2 class="projectName">${projectCreationName}</h2>
-              <p class="card-text">Modified ${projectCreationDate}</p>
+              <p class="card-text">Modified at: ${projectCreationDate}</p>
             </div>
             <div class="col-md-9 d-flex justify-content-end">
               <div class="card-body__details d-flex justify-content-start">

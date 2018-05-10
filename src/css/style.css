@@ -82,7 +82,14 @@ ORDER:
   padding: 0;
   -webkit-box-sizing: inherit;
      -moz-box-sizing: inherit;
-          box-sizing: inherit; }
+          box-sizing: inherit;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-repeat: no-repeat;
+  /* projects that use icons. It doesn't affect much on most layouts I tried applying it on, as it only really comes up when inline or inline-block elements line up with each other on the same line. */
+  vertical-align: middle; }
 
 html {
   /* defines 1 rem = 62.5% of browser default rem which is 16px
@@ -664,63 +671,50 @@ main {
   overflow: hidden; }
   main .section-home {
     position: relative; }
-    main .section-home-folders {
-      -webkit-transition: all 0.5s ease;
-      -o-transition: all 0.5s ease;
-      -moz-transition: all 0.5s ease;
-      transition: all 0.5s ease; }
-      main .section-home-folders__link {
-        font-size: 2rem; }
-        main .section-home-folders__link i {
-          font-size: 2.5rem; }
-      main .section-home-folders__menu {
-        -webkit-transition: left 0.6s ease;
-        -o-transition: left 0.6s ease;
-        -moz-transition: left 0.6s ease;
-        transition: left 0.6s ease;
-        position: absolute;
-        z-index: 100;
-        top: -3rem;
-        width: 25rem;
-        height: 100rem;
-        background-color: #fff;
-        -webkit-box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
-                box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
-        border: 1px solid #c6c6c6;
-        border-color: #000000;
-        border-color: rgba(0, 0, 0, 0.05);
-        border-radius: 4px; }
-        main .section-home-folders__menu-close {
-          position: relative; }
-          main .section-home-folders__menu-close i {
-            cursor: pointer;
-            position: absolute;
-            right: 0.9rem;
-            font-weight: normal; }
-            main .section-home-folders__menu-close i:hover {
-              color: red; }
-        main .section-home-folders__menu .nav-item {
-          padding-top: 1rem;
-          padding-bottom: 1rem; }
-          main .section-home-folders__menu .nav-item:nth-child(2) {
-            border-bottom: 1px solid #eee; }
-          main .section-home-folders__menu .nav-item .active {
-            font-weight: bold;
-            color: #007ac0;
-            background-color: #f9f9f9; }
-          main .section-home-folders__menu .nav-item:last-child a {
-            font-size: 1.1rem; }
-        main .section-home-folders__menu .nav-link {
-          font-size: 1.5rem; }
+    main .section-home-folders__link {
+      font-size: 2rem; }
+      main .section-home-folders__link i {
+        font-size: 2.5rem; }
+    main .section-home-folders__menu {
+      position: absolute;
+      z-index: 100;
+      top: -3rem;
+      width: 25rem;
+      height: 100rem;
+      background-color: #fff;
+      -webkit-box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
+              box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
+      border: 1px solid #c6c6c6;
+      border-color: #000000;
+      border-color: rgba(0, 0, 0, 0.05);
+      border-radius: 4px; }
+      main .section-home-folders__menu-close {
+        position: relative; }
+        main .section-home-folders__menu-close i {
+          cursor: pointer;
+          position: absolute;
+          right: 0.9rem;
+          font-weight: normal; }
+          main .section-home-folders__menu-close i:hover {
+            color: red; }
+      main .section-home-folders__menu .nav-item {
+        padding-top: 1rem;
+        padding-bottom: 1rem; }
+        main .section-home-folders__menu .nav-item:nth-child(2) {
+          border-bottom: 1px solid #eee; }
+        main .section-home-folders__menu .nav-item .active {
+          font-weight: bold;
+          color: #007ac0;
+          background-color: #f9f9f9; }
+        main .section-home-folders__menu .nav-item:last-child a {
+          font-size: 1.1rem; }
+      main .section-home-folders__menu .nav-link {
+        font-size: 1.5rem; }
     main .section-home-dropdown {
       position: relative; }
       main .section-home-dropdown__link {
         padding: 1rem;
         font-size: 1.2rem;
-        -webkit-transition: all 0.3s ease-in-out;
-        -o-transition: all 0.3s ease-in-out;
-        -moz-transition: all 0.3s ease-in-out;
-        transition: all 0.3s ease-in-out;
         border-radius: 5px;
         border: 1px solid transparent; }
         main .section-home-dropdown__link:hover {
