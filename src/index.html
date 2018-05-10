@@ -91,22 +91,22 @@
                 Last Modified
 
               </a>
-              <div id="folderDropdown-menu" class="dropdown-menu" aria-labelledby="folderDropdown">
-                <a class="dropdown-item" href="#">
+              <div id="folderDropdown-menu" class="dropdown-menu section-home-dropdown__menu" aria-labelledby="folderDropdown">
+                <a class="dropdown-item section-home-dropdown__item" href="#">
                   <i class="fa fa-check"></i> Project Type</a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item section-home-dropdown__item" href="#">
                   <i class="fa fa-check"></i> Project Name</a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item section-home-dropdown__item" href="#">
                   <i class="fa fa-check"></i> Starred</a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item section-home-dropdown__item" href="#">
                   <i class="fa fa-check"></i> Status</a>
-                <a class="dropdown-item checked" href="#">
+                <a class="dropdown-item section-home-dropdown__item checked" href="#">
                   <i class="fa fa-check"></i> Last Modified</a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item section-home-dropdown__item" href="#">
                   <i class="fa fa-check"></i> Created</a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item section-home-dropdown__item" href="#">
                   <i class="fa fa-check"></i> Responses</a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item section-home-dropdown__item" href="#">
                   <i class="fa fa-check"></i> Owner</a>
               </div>
             </div>
@@ -157,9 +157,38 @@
                           <h6>Languages</h6>
                         </div>
                       </div>
-                      <span class="card-body-icon">
+                      <div class="card-body-icon " id="projectCardDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                      </span>
+                        <div class="dropdown-menu" aria-labelledby="projectCardDropdown">
+                          <a class="dropdown-item">
+                            <i class="fa fa-check-filled"></i>Activate</a>
+                          <li class="dropdown-divider"></li>
+                          <a class="dropdown-item">
+                            <i class="fa fa-collaborate-lg"></i>Collaborate</a>
+                          <a class="dropdown-item">
+                            <i class="fa fa-folder"></i>Reveal in Folder</a>
+                          <a class="dropdown-item">
+                            <i class="fa fa-text"></i>Rename Project</a>
+                          <a class="dropdown-item">
+                            <i class="fa fa-squarestack"></i>Copy Project</a>
+                          <li class="dropdown-divider"></li>
+                          <a class="dropdown-item">
+                            <i class="fa fa-pencil"></i>Edit Survey</a>
+                          <a class="dropdown-item">
+                            <i class="fa fa-open"></i>Preview Survey</a>
+                          <a class="dropdown-item">
+                            <i class="fa fa-translate"></i>Translate Survey</a>
+                          <a class="dropdown-item">
+                            <i class="fa fa-airplane-wire"></i>Distribute Survey</a>
+                          <a class="dropdown-item">
+                            <i class="fa fa-comment"></i>Data &amp; Analysis</a>
+                          <a class="dropdown-item">
+                            <i class="fa nav-fa-bargraph-unboxed-alt"></i>View Reports</a>
+                          <li class="dropdown-divider"></li>
+                          <a class="dropdown-item">
+                            <i class="fa fa-x-filled"></i>Delete Project</a>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
