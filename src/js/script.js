@@ -41,10 +41,10 @@ $('#createProjectBack').on('click', function () {
 /* create Project Back arrow end-------------*/
 /* create project */
 $('#createProjectBTN').on('click', function () {
-  const projectName = $('#projectName').val();
+  const projectCreationName = $('#projectName').val();
   const d = new Date();
-  const strDate = d.getFullYear() + "/" + (d.getMonth()+1) + "/" + d.getDate();
-  var card = $(`<div class="row py-3">
+  const projectCreationDate = d.getDate() + "/" + (d.getMonth()+1) + "/" + d.getFullYear();
+  var card = $(`        <div class="row py-3">
   <div class="col-md-12">
     <div class="projects-list-container pl-5">
       <div class="card">
@@ -55,28 +55,28 @@ $('#createProjectBTN').on('click', function () {
                 <img width="24" height="24" src="./img/research_core.svg" alt="research core img">
                 <span class="pl-1"> Survey</span>
               </h6>
-              <h2 class="projectName">${projectName}</h2>
-              <p class="card-text">Modified ${strDate}</p>
+              <h2 class="projectName">${projectCreationName}</h2>
+              <p class="card-text">Modified ${projectCreationDate}</p>
             </div>
             <div class="col-md-9 d-flex justify-content-end">
-            <div class="card-body__details d-flex justify-content-start">
-              <div class="card-body__details-status ">
-                <h2>NEW</h2>
-                <h6>Statues</h6>
+              <div class="card-body__details d-flex justify-content-start">
+                <div class="card-body__details-status ">
+                  <h2>NEW</h2>
+                  <h6>Statues</h6>
+                </div>
+                <div class="card-body__details-questions ">
+                  <h2>1</h2>
+                  <h6>Questions</h6>
+                </div>
+                <div class="card-body__details-languages ">
+                  <h2>0</h2>
+                  <h6>Languages</h6>
+                </div>
               </div>
-              <div class="card-body__details-questions ">
-                <h2>1</h2>
-                <h6>Questions</h6>
-              </div>
-              <div class="card-body__details-languages ">
-                <h2>0</h2>
-                <h6>Languages</h6>
-              </div>
+              <span class="card-body-icon">
+                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+              </span>
             </div>
-            <span class="card-body__details-icon">
-              ...
-            </span>
-          </div>
           </div>
         </div>
       </div>
