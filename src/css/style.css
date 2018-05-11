@@ -92,10 +92,10 @@ ORDER:
   -webkit-box-sizing: inherit;
      -moz-box-sizing: inherit;
           box-sizing: inherit;
-  -webkit-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   background-repeat: no-repeat;
   /* projects that use icons. It doesn't affect much on most layouts I tried applying it on, as it only really comes up when inline or inline-block elements line up with each other on the same line. */
   vertical-align: middle;
@@ -644,10 +644,6 @@ body {
           transform: scale(0.9); }
 
 .modal .tab-pane__research {
-  -webkit-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
-  -moz-transition: all 0.2s ease;
-  transition: all 0.2s ease;
   -webkit-box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
           box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
   border: 1px solid #c6c6c6;
@@ -672,8 +668,8 @@ body {
       color: #fff;
       font-size: 3rem;
       position: absolute;
-      top: -50%;
-      left: -50%;
+      top: 50%;
+      left: 50%;
       -webkit-transform: translate(-50%, -50%);
          -moz-transform: translate(-50%, -50%);
           -ms-transform: translate(-50%, -50%);

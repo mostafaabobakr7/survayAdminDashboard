@@ -1,47 +1,52 @@
-/*global $ document, console, moment, window*/
-"use strict";
 /* section-home-folders__menu */
-$('#folder__link').on("click", function () {
-  $(this)
-    .parent()
-    .toggleClass('menu__folder')
-  $('.projects-list-container').toggleClass('menu__folder')
-  $('#folder__menu').toggleClass('menu__close')
-})
-$('#folder__menu-close').on("click", function () {
+$('#folder__link')
+  .on('click', function () {
+    $(this)
+      .parent()
+      .toggleClass('menu__folder');
+    $('.projects-list-container').toggleClass('menu__folder');
+    $('#folder__menu').toggleClass('menu__close');
+  });
+$('#folder__menu-close').on('click', () => {
   $('#folder__link')
     .parent()
-    .toggleClass('menu__folder')
-  $('.projects-list-container').toggleClass('menu__folder')
-  $('#folder__menu').toggleClass('menu__close')
-})
+    .toggleClass('menu__folder');
+  $('.projects-list-container').toggleClass('menu__folder');
+  $('#folder__menu').toggleClass('menu__close');
+});
 /* section-home-folders__menu end----- */
 /* section-home-folders-dropdown */
 $('#folderDropdown').on('click', function () {
-  $(this).toggleClass('dropDownClickBorder')
-})
+  $(this).toggleClass('dropDownClickBorder');
+});
 $('#folderDropdown-menu .dropdown-item').map(function () {
-  $(this).on('click', function () {
-    $(this).addClass('checked').siblings().removeClass('checked')
-  })
-})
+  $(this)
+    .on('click', function () {
+      $(this)
+        .addClass('checked')
+        .siblings()
+        .removeClass('checked');
+    });
+});
 /* section-home-folders-dropdown end------ */
 
 /* create Blank Project */
 $('#BlankSurvayProject').on('click', function () {
   $(this).addClass('d-none');
   $('#CreateFromExisting').addClass('d-none');
-  $('.list-Research').removeClass('d-none')
-})
+  $('.list-Research').removeClass('d-none');
+});
 /* create Blank Project end------------ */
 /* create Project Back arrow */
 $('#createProjectBack').on('click', function () {
-  $(this).parent().addClass('d-none')
+  $(this)
+    .parent()
+    .addClass('d-none');
   $('#CreateFromExisting, #BlankSurvayProject').removeClass('d-none');
-})
+});
 /* create Project Back arrow end-------------*/
 /* create project */
-$('#createProjectBTN').on('click', function () {
+$('#createProjectBTN').on('click', () => {
   const projectCreationName = $('#projectName').val();
   const d = new Date();
   const projectCreationDate = d.toLocaleString('en-US', {
@@ -50,9 +55,9 @@ $('#createProjectBTN').on('click', function () {
     year: 'numeric',
     hour: 'numeric',
     minute: 'numeric',
-    hour12: true
+    hour12: true,
   });
-  var card = $(`
+  const card = $(`
   <div class="row py-3">
     <div class="col-md-12">
       <div class="projects-list-container pl-5">
@@ -121,12 +126,12 @@ $('#createProjectBTN').on('click', function () {
       </div>
     </div>
 </div>`);
-  $('.projects-list .container-fluid').append(card)
-})
+  $('.projects-list .container-fluid').append(card);
+});
 // when press Enter on keyboard as create project
-$('#projectName').keyup(function (event) {
+$('#projectName').keyup((event) => {
   if (event.keyCode === 13) {
-    $("#createProjectBTN").click();
+    $('#createProjectBTN').click();
   }
 });
 /* create project end----------*/
