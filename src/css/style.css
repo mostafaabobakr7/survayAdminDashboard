@@ -676,8 +676,6 @@ body {
            -o-transform: translate(-50%, -50%);
               transform: translate(-50%, -50%); }
   .modal .tab-pane__research h5 {
-    overflow-wrap: break-word;
-    word-wrap: break-word;
     padding-left: 6px; }
 
 /*@import component end-----------------------------*/
