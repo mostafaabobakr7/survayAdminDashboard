@@ -147,7 +147,9 @@ $('.projects-list').on('click', '.card', function () {
     .find('.projectName')
     .html();
   localStorage.setItem('projectCreationName', projectCreationName);
-  window.location.replace('../edit_survey.html');
+  const path = ('edit_survey.html');
+  const newURL = `${window.location.protocol}//${window.location.host}/${path}`;
+  window.location.replace(newURL);
 });
 /* card (project) on click go to edit_survey end--- */
 /* get the clicked PROJECT name from localstorage */
