@@ -163,23 +163,6 @@ img {
   -ms-user-select: none;
   user-select: none; }
 
-.dropdown-menu {
-  -webkit-box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
-          box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
-  border: 1px solid #c6c6c6;
-  border-color: #000000;
-  border-color: rgba(0, 0, 0, 0.05);
-  border-radius: 4px; }
-
-.dropdown-item {
-  font-size: 1.3rem;
-  padding: .25rem 1.5rem; }
-  .dropdown-item > .fa {
-    padding-right: 6px; }
-  .dropdown-item:hover {
-    color: #fff !important;
-    background-color: #007ac0; }
-
 /* radio and checkbox style */
 label {
   display: inline-block;
@@ -244,6 +227,15 @@ input[type="checkbox"] {
       border-radius: 50%; }
 
 /* radio and checkbox style end---- */
+.outline-border {
+  padding: 1rem;
+  font-size: 1.3rem;
+  border-radius: 5px;
+  border: 1px solid transparent; }
+  .outline-border:hover {
+    color: #222;
+    border: 1px solid #737373; }
+
 /* Base end-------------------- */
 /* typography */
 body {
@@ -536,6 +528,50 @@ body {
     color: #fff;
     background-color: #007ac0; }
 
+/* edit_survey nav */
+.section-edit-survey-option {
+  color: #222;
+  background-color: #fff;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #ccc; }
+  .section-edit-survey-option .toolsDropdown a {
+    position: relative;
+    padding-left: 2.2rem; }
+    .section-edit-survey-option .toolsDropdown a i {
+      position: absolute;
+      right: 2px;
+      top: 6px; }
+  .section-edit-survey-option .toolsDropdown .review-sub-menu,
+  .section-edit-survey-option .toolsDropdown .salesforce-sub-menu,
+  .section-edit-survey-option .toolsDropdown .versions-sub-menu,
+  .section-edit-survey-option .toolsDropdown .importExport-sub-menu {
+    position: absolute;
+    left: 100%;
+    visibility: hidden;
+    display: block; }
+    .section-edit-survey-option .toolsDropdown .review-sub-menu:hover,
+    .section-edit-survey-option .toolsDropdown .salesforce-sub-menu:hover,
+    .section-edit-survey-option .toolsDropdown .versions-sub-menu:hover,
+    .section-edit-survey-option .toolsDropdown .importExport-sub-menu:hover {
+      visibility: visible; }
+  .section-edit-survey-option .toolsDropdown .review-sub-menu {
+    top: 6rem; }
+  .section-edit-survey-option .toolsDropdown .salesforce-sub-menu {
+    top: 9rem; }
+  .section-edit-survey-option .toolsDropdown .versions-sub-menu {
+    top: 28rem; }
+  .section-edit-survey-option .toolsDropdown .importExport-sub-menu {
+    top: 30rem; }
+  .section-edit-survey-option .toolsDropdown .review:hover + .review-sub-menu {
+    visibility: visible; }
+  .section-edit-survey-option .toolsDropdown .salesforce:hover + .salesforce-sub-menu {
+    visibility: visible; }
+  .section-edit-survey-option .toolsDropdown .versions:hover + .versions-sub-menu {
+    visibility: visible; }
+  .section-edit-survey-option .toolsDropdown .importExport:hover + .importExport-sub-menu {
+    visibility: visible; }
+
+/* edit_survey nav end-- */
 /* navigation end-------------------------------------- */
 /* header */
 /* header end------------------ */
@@ -549,56 +585,57 @@ body {
 /* btn component */
 /* btn component end--------------------- */
 /* card component */
-.card {
-  cursor: pointer;
-  -webkit-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out; }
-  .card:hover {
-    -webkit-box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
-            box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
-    border: 1px solid #c6c6c6;
-    border-color: #000000;
-    border-color: rgba(0, 0, 0, 0.05);
-    border-radius: 4px; }
-  .card-body {
-    position: relative; }
-    .card-body .projectName {
+.projects-list-container {
+  position: relative; }
+  .projects-list-container .card {
+    cursor: pointer;
+    -webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out; }
+    .projects-list-container .card:hover {
+      -webkit-box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
+              box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
+      border: 1px solid #c6c6c6;
+      border-color: #000000;
+      border-color: rgba(0, 0, 0, 0.05);
+      border-radius: 4px; }
+    .projects-list-container .card-body .projectName {
       font-size: 1.9rem;
       color: #222; }
-    .card-body .card-text {
+    .projects-list-container .card-body .card-text {
       font-size: 1.2rem; }
-    .card-body-icon {
-      position: relative;
-      top: -10px;
-      right: 10px;
-      text-align: center;
-      font-size: 2rem;
-      line-height: 40px;
-      background-color: #e9e9e9;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      -webkit-transition: all 0.2s ease-in-out;
-      -o-transition: all 0.2s ease-in-out;
-      -moz-transition: all 0.2s ease-in-out;
-      transition: all 0.2s ease-in-out; }
-      .card-body-icon:hover {
-        background-color: #007ac0;
-        color: #fff; }
-    .card-body__details {
+    .projects-list-container .card-body__details {
       padding: 2.4rem 5rem 0 5rem;
       text-align: center; }
-      .card-body__details h2 {
+      .projects-list-container .card-body__details h2 {
         color: #222;
         font-weight: bold; }
-      .card-body__details > * {
+      .projects-list-container .card-body__details > * {
         padding: 0 5rem; }
-      .card-body__details-status {
+      .projects-list-container .card-body__details-status {
         padding-top: 0.7rem; }
-        .card-body__details-status h2 {
+        .projects-list-container .card-body__details-status h2 {
           font-size: 1.3rem; }
+  .projects-list-container .card-body-icon {
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    text-align: center;
+    font-size: 2rem;
+    line-height: 40px;
+    background-color: #e9e9e9;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out; }
+    .projects-list-container .card-body-icon:hover {
+      background-color: #007ac0;
+      color: #fff; }
 
 /* card component end----------------- */
 /* form */
@@ -756,6 +793,27 @@ body {
   .modal .tab-pane__research h5 {
     padding-left: 6px; }
 
+.dropDownClickBorder {
+  border: 1px solid #737373 !important;
+  color: #007ac0 !important; }
+
+.dropdown-menu {
+  -webkit-box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
+  border: 1px solid #c6c6c6;
+  border-color: #000000;
+  border-color: rgba(0, 0, 0, 0.05);
+  border-radius: 4px; }
+
+.dropdown-item {
+  font-size: 1.3rem;
+  padding: .25rem 1.5rem; }
+  .dropdown-item > .fa {
+    padding-right: 6px; }
+  .dropdown-item:hover {
+    color: #fff !important;
+    background-color: #007ac0; }
+
 /*@import component end-----------------------------*/
 /*@import pages folder */
 /* home */
@@ -764,10 +822,6 @@ body {
 
 .menu__folder {
   margin-left: 27rem; }
-
-.dropDownClickBorder {
-  border: 1px solid #737373 !important;
-  color: #007ac0 !important; }
 
 main {
   min-height: 85vh;
@@ -838,70 +892,18 @@ main {
       padding-left: 3rem; }
 
 /* home end----------------- */
-.section-edit-survey-option {
-  color: #222;
-  background-color: #fff;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #ccc; }
-  .section-edit-survey-option .toolsDropdown a {
-    position: relative;
-    padding-left: 2.2rem; }
-    .section-edit-survey-option .toolsDropdown a i {
-      position: absolute;
-      right: 2px;
-      top: 6px; }
-    .section-edit-survey-option .toolsDropdown a .review-dropdown {
-      display: none; }
-    .section-edit-survey-option .toolsDropdown a .review:hover .review-dropdown {
-      display: inline-block; }
+/* edit_survey section */
+.editSurveySection {
+  min-height: 75vh;
+  overflow: hidden; }
+  .editSurveySection .leftContent .projectNameEdit {
+    color: #222; }
+  .editSurveySection .rightControls {
+    height: 75vh;
+    background-color: #f2f5f8;
+    border-left: 1px solid #ccc; }
 
-.outline-border {
-  padding: 1rem;
-  font-size: 1.3rem;
-  border-radius: 5px;
-  border: 1px solid transparent; }
-  .outline-border:hover {
-    color: #222;
-    border: 1px solid #737373; }
-
-.dropdown-menu .review-sub-menu,
-.dropdown-menu .salesforce-sub-menu,
-.dropdown-menu .versions-sub-menu,
-.dropdown-menu .importExport-sub-menu {
-  position: absolute;
-  left: 100%;
-  visibility: hidden;
-  display: block; }
-  .dropdown-menu .review-sub-menu:hover,
-  .dropdown-menu .salesforce-sub-menu:hover,
-  .dropdown-menu .versions-sub-menu:hover,
-  .dropdown-menu .importExport-sub-menu:hover {
-    visibility: visible; }
-
-.review-sub-menu {
-  top: 6rem; }
-
-.salesforce-sub-menu {
-  top: 9rem; }
-
-.versions-sub-menu {
-  top: 28rem; }
-
-.importExport-sub-menu {
-  top: 30rem; }
-
-.review:hover + .review-sub-menu {
-  visibility: visible; }
-
-.salesforce:hover + .salesforce-sub-menu {
-  visibility: visible; }
-
-.versions:hover + .versions-sub-menu {
-  visibility: visible; }
-
-.importExport:hover + .importExport-sub-menu {
-  visibility: visible; }
-
+/* edit_survey section end- */
 /*@import pages folder end-----------------------------*/
 
 /*# sourceMappingURL=style.css.map */
