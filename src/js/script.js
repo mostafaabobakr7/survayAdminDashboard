@@ -149,7 +149,7 @@ $('.projects-list').on('click', '.card', function () {
   localStorage.setItem('projectCreationName', projectCreationName);
   const path = ('edit_survey.html');
   const newURL = `${window.location.protocol}//${window.location.host}/${window.location.pathname}/${path}`;
-  window.location.replace(newURL);
+  window.location = newURL;
 });
 /* card (project) on click go to edit_survey end--- */
 /* get the clicked PROJECT name from localstorage */
