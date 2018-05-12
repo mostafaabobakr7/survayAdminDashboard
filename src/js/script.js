@@ -70,74 +70,74 @@ $('#createProjectBTN').on('click', () => {
   });
   const card = $(`
   <div class="row py-3">
-          <div class="col-md-12">
-            <div class="projects-list-container pl-5">
-              <div class="card">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <h6 class="card-title">
-                        <img width="24" height="24" src="./img/research_core.svg" alt="research core img">
-                        <span class="pl-1"> Survey</span>
-                      </h6>
-                      <h2 class="projectName">${projectCreationName}</h2>
-                      <p class="card-text">Modified at: ${projectCreationDate}</p>
-                    </div>
-                    <div class="col-md-9 d-flex justify-content-end">
-                      <div class="card-body__details d-flex justify-content-start">
-                        <div class="card-body__details-status ">
-                          <h2>NEW</h2>
-                          <h6>Statues</h6>
-                        </div>
-                        <div class="card-body__details-questions ">
-                          <h2>1</h2>
-                          <h6>Questions</h6>
-                        </div>
-                        <div class="card-body__details-languages ">
-                          <h2>0</h2>
-                          <h6>Languages</h6>
-                        </div>
-                      </div>
-
-                    </div>
+    <div class="col-md-12">
+      <div class="projects-list-container pl-5">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-3">
+                <h6 class="card-title">
+                  <img width="24" height="24" src="./img/research_core.svg" alt="research core img">
+                  <span class="pl-1"> Survey</span>
+                </h6>
+                <h2 class="projectName">${projectCreationName}</h2>
+                <p class="card-text">Modified at: ${projectCreationDate}</p>
+              </div>
+              <div class="col-md-9 d-flex justify-content-end">
+                <div class="card-body__details d-flex justify-content-start">
+                  <div class="card-body__details-status ">
+                    <h2>NEW</h2>
+                    <h6>Statues</h6>
+                  </div>
+                  <div class="card-body__details-questions ">
+                    <h2>1</h2>
+                    <h6>Questions</h6>
+                  </div>
+                  <div class="card-body__details-languages ">
+                    <h2>0</h2>
+                    <h6>Languages</h6>
                   </div>
                 </div>
-              </div>
-              <div class="card-body-icon " id="projectCardDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                <div class="dropdown-menu" aria-labelledby="projectCardDropdown">
-                  <a class="dropdown-item">
-                    <i class="fa fa-check-circle"></i>Activate</a>
-                  <li class="dropdown-divider"></li>
-                  <a class="dropdown-item">
-                    <i class="fa fa-share-alt"></i>Collaborate</a>
-                  <a class="dropdown-item">
-                    <i class="fa fa-folder"></i>Reveal in Folder</a>
-                  <a class="dropdown-item">
-                    <i class="fa fa-font"></i>Rename Project</a>
-                  <a class="dropdown-item">
-                    <i class="fa fa-files-o"></i>Copy Project</a>
-                  <li class="dropdown-divider"></li>
-                  <a class="dropdown-item">
-                    <i class="fa fa-pencil"></i>Edit Survey</a>
-                  <a class="dropdown-item">
-                    <i class="fa fa-sign-out"></i>Preview Survey</a>
-                  <a class="dropdown-item">
-                    <i class="fa fa-language"></i>Translate Survey</a>
-                  <a class="dropdown-item">
-                    <i class="fa fa-paper-plane"></i>Distribute Survey</a>
-                  <a class="dropdown-item">
-                    <i class="fa fa-comment"></i>Data &amp; Analysis</a>
-                  <a class="dropdown-item">
-                    <i class="fa fa-bar-chart"></i>View Reports</a>
-                  <li class="dropdown-divider"></li>
-                  <a class="dropdown-item">
-                    <i class="fa fa-times-circle"></i>Delete Project</a>
-                </div>
+
               </div>
             </div>
           </div>
-        </div>`);
+        </div>
+        <div class="card-body-icon " id="projectCardDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+          <div class="dropdown-menu" aria-labelledby="projectCardDropdown">
+            <a class="dropdown-item">
+              <i class="fa fa-check-circle"></i>Activate</a>
+            <li class="dropdown-divider"></li>
+            <a class="dropdown-item">
+              <i class="fa fa-share-alt"></i>Collaborate</a>
+            <a class="dropdown-item">
+              <i class="fa fa-folder"></i>Reveal in Folder</a>
+            <a class="dropdown-item">
+              <i class="fa fa-font"></i>Rename Project</a>
+            <a class="dropdown-item">
+              <i class="fa fa-files-o"></i>Copy Project</a>
+            <li class="dropdown-divider"></li>
+            <a class="dropdown-item">
+              <i class="fa fa-pencil"></i>Edit Survey</a>
+            <a class="dropdown-item">
+              <i class="fa fa-sign-out"></i>Preview Survey</a>
+            <a class="dropdown-item">
+              <i class="fa fa-language"></i>Translate Survey</a>
+            <a class="dropdown-item">
+              <i class="fa fa-paper-plane"></i>Distribute Survey</a>
+            <a class="dropdown-item">
+              <i class="fa fa-comment"></i>Data &amp; Analysis</a>
+            <a class="dropdown-item">
+              <i class="fa fa-bar-chart"></i>View Reports</a>
+            <li class="dropdown-divider"></li>
+            <a class="dropdown-item">
+              <i class="fa fa-times-circle"></i>Delete Project</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`);
   $('.projects-list .container-fluid').append(card);
 });
 // when press Enter on keyboard as create project
