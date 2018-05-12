@@ -1,53 +1,56 @@
 /* card component */
 
-.card {
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  &:hover {
-    @include dropDownShadow;
-  }
-  &-body {
-    position: relative;
-    .projectName {
-      font-size: 1.9rem;
-      color: #222;
+.projects-list-container {
+  position: relative;
+  .card {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      @include dropDownShadow;
     }
-    .card-text {
-      font-size: 1.2rem;
-    }
-    &-icon {
-      position: relative;
-      top: -10px;
-      right: 10px;
-      text-align: center;
-      font-size: 2rem;
-      line-height: 40px;
-      background-color: $color-gray-light-1;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      transition: all 0.2s ease-in-out;
-      &:hover {
-        background-color: #007ac0;
-        color: #fff;
-      }
-    }
-    &__details {
-      padding: 2.4rem 5rem 0 5rem;
-      text-align: center;
-      h2 {
+    &-body {
+      .projectName {
+        font-size: 1.9rem;
         color: #222;
-        font-weight: bold;
       }
-      &>* {
-        padding: 0 5rem;
+      .card-text {
+        font-size: 1.2rem;
       }
-      &-status {
-        padding-top: 0.7rem;
+      &__details {
+        padding: 2.4rem 5rem 0 5rem;
+        text-align: center;
         h2 {
-          font-size: 1.3rem;
+          color: #222;
+          font-weight: bold;
+        }
+        &>* {
+          padding: 0 5rem;
+        }
+        &-status {
+          padding-top: 0.7rem;
+          h2 {
+            font-size: 1.3rem;
+          }
         }
       }
+    }
+  }
+  .card-body-icon {
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    text-align: center;
+    font-size: 2rem;
+    line-height: 40px;
+    background-color: $color-gray-light-1;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      background-color: #007ac0;
+      color: #fff;
     }
   }
 }
