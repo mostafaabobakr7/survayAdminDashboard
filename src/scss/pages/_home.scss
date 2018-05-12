@@ -87,13 +87,16 @@ main {
         }
       }
     }
-    .form-inline {
+  }
+  .form-inline {
+    span {
       position: relative;
-      .fa-search {
-        color: #a5a5a5;
+      &:before {
+        content: "\f002";
+        font-family: FontAwesome;
         font-size: 1.7rem;
         position: absolute;
-        top: 7px;
+        top: 1px;
         left: 9px;
       }
       input {

@@ -1,8 +1,25 @@
 /* navigation */
 
-.navbar {
+/* navbar-main */
+
+.navbar-main {
   background-color: $color-white !important;
   border-bottom: 1px solid #e8e8e8;
+}
+
+/* navbar-main */
+
+.navbar-bottom {
+  a {
+    font-weight: bold;
+    border-bottom: 3px solid transparent;
+  }
+  .active a {
+    border-bottom: 3px solid $nav-main-color;
+  }
+}
+
+.navbar {
   &-nav {
     .active a {
       color: $nav-main-color !important;

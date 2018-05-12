@@ -1,3 +1,9 @@
+/* navbar active */
+$('.nav-link').on('click', function () {
+  $(this).parent().siblings().removeClass('active');
+  $(this).parent().addClass('active');
+});
+/* navbar active end-- */
 /* section-home-folders__menu */
 $('#folder__link')
   .on('click', function () {
