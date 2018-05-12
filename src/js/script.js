@@ -125,7 +125,7 @@ $('#createProjectBTN').on('click', () => {
         </div>
       </div>
     </div>
-</div>`);
+  </div>`);
   $('.projects-list .container-fluid').append(card);
 });
 // when press Enter on keyboard as create project
@@ -135,3 +135,21 @@ $('#projectName').keyup((event) => {
   }
 });
 /* create project end----------*/
+/* card (project) on click go to edit_survey */
+$('.projects-list').on('click', '.card', function () {
+  const projectCreationName = $(this)
+    .find('.projectName')
+    .html();
+  localStorage.setItem('projectCreationName', projectCreationName);
+  window.location = '../edit_survey.html';
+});
+/* card (project) on click go to edit_survey end--- */
+/* get the clicked PROJECT name from localstorage */
+$(document).ready(() => {
+  const loc = window.location.href;
+  const projectCreationName = localStorage.getItem('projectCreationName');
+  if (/edit_survey/.test(loc)) {
+    $('.projectNameEdit').html(`${projectCreationName}`);
+  }
+});
+/* get the clicked PROJECT name from localstorage end--*/
