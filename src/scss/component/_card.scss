@@ -37,7 +37,7 @@
   }
   .card-body-icon {
     cursor: pointer;
-    position: absolute;
+    position: relative;
     top: 5px;
     right: 5px;
     text-align: center;
@@ -50,7 +50,9 @@
     transition: all 0.2s ease-in-out;
     &:hover {
       background-color: #007ac0;
-      color: #fff;
+      a#projectCardDropdown {
+        color: #fff;
+      }
     }
   }
 }

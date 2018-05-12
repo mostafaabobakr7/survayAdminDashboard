@@ -62,26 +62,6 @@ main {
         }
       }
     }
-    &-dropdown {
-      &__link {
-        padding: 1rem;
-        font-size: 1.2rem;
-        border-radius: 5px;
-        border: 1px solid transparent;
-        &:hover {
-          border: 1px solid #737373;
-        }
-      }
-      .dropdown-item {
-        &>.fa {
-          padding-right: 4px;
-          visibility: hidden;
-        }
-        &.checked>.fa {
-          visibility: visible;
-        }
-      }
-    }
   }
   .form-inline {
     span {
