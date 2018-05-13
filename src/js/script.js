@@ -66,7 +66,7 @@ $('#createProjectBTN').on('click', () => {
     year: 'numeric',
     hour: 'numeric',
     minute: 'numeric',
-    hour12: true
+    hour12: true,
   });
   const card = $(`        <div class="row py-3">
           <div class="col-md-12">
