@@ -185,13 +185,13 @@ editableDivs.on('click', () => {
 /* CONTENTEDITABLE on CLICK end--- */
 /* ADD BLOCK function */
 $('.section-block').on('click', '#addBlock', () => {
-  const block = $(`  <div class="section-block-card">
+  const block = $(`<div class="section-block-card">
                         <div class="card">
                           <div contenteditable="true">
                             <h5 class="card-header">Default Question Block</h5>
                           </div>
                           <div class="card-body">
-                            <div class="row py-3 hoverQuestion">
+                            <div class="row py-3 hoverQuestion ">
                               <div class="col-1">
                                 <div class="questionNumber" contenteditable="true">
                                   <h4>Q1</h4>
@@ -314,12 +314,21 @@ $('.section-block').on('click', '.questionDelete', function () {
 
 /* ADD QUESTION CHECKBOX end-- */
 /* QUESTION ON CLICK BACKGROUNND */
-$('.card-body').on('click', '.hoverQuestion', function () {
+$('.section-block').on('click', '.hoverQuestion', function () {
   $(this)
     .addClass('hoverQuestionClicked')
     .siblings()
     .removeClass('hoverQuestionClicked');
-
+  /* questionHoverClicked class remove from all blocks when clicked on current block */
+  const x = $(this)
+    .parent()
+    .parent()
+    .parent()
+    .siblings()
+    .children()
+    .children()
+    .children();
+  x.removeClass('hoverQuestionClicked');
   $('.choices span').text(choicesCurrentNum);
 });
 /* QUESTION ON CLICK BACKGROUNND end-- */
