@@ -971,6 +971,8 @@ main {
         color: #222; }
       .editSurveySection .rightControls .choices i.fa-plus-circle {
         color: green; }
+    .editSurveySection .rightControls .answers #multibleAnswers {
+      border-radius: 0; }
 
 /* edit_survey section end- */
 /*@import pages folder end-----------------------------*/
