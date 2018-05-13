@@ -64,9 +64,9 @@ img {
 /* radio and checkbox style */
 
 label {
-  display: inline-block;
+  display: block;
   line-height: 20px;
-  font-size: 2rem;
+  font-size: 1.2rem;
 }
 
 input[type="radio"],
@@ -116,11 +116,12 @@ input[type="checkbox"] {
     position: relative;
     z-index: 100;
   }
-  input[type="radio"] {
+}
+
+input[type="radio"] {
+  border-radius: 50%;
+  &::after {
     border-radius: 50%;
-    &::after {
-      border-radius: 50%;
-    }
   }
 }
 

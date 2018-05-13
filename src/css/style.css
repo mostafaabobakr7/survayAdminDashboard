@@ -165,9 +165,9 @@ img {
 
 /* radio and checkbox style */
 label {
-  display: inline-block;
+  display: block;
   line-height: 20px;
-  font-size: 2rem; }
+  font-size: 1.2rem; }
 
 input[type="radio"],
 input[type="checkbox"] {
@@ -219,12 +219,11 @@ input[type="checkbox"] {
     display: block;
     position: relative;
     z-index: 100; }
-  input[type="radio"] input[type="radio"],
-  input[type="checkbox"] input[type="radio"] {
+
+input[type="radio"] {
+  border-radius: 50%; }
+  input[type="radio"]::after {
     border-radius: 50%; }
-    input[type="radio"] input[type="radio"]::after,
-    input[type="checkbox"] input[type="radio"]::after {
-      border-radius: 50%; }
 
 /* radio and checkbox style end---- */
 .outline-border {
@@ -530,6 +529,7 @@ body {
 
 /* edit_survey nav */
 .section-edit-survey-option {
+  width: 100%;
   color: #222;
   background-color: #fff;
   border-top: 1px solid #eee;
@@ -577,6 +577,8 @@ body {
 /* header end------------------ */
 /* footer */
 .footer {
+  overflow: hidden;
+  padding: 2rem;
   border-top: 1px solid #a5a5a5;
   background: transparent; }
 
@@ -831,6 +833,17 @@ body {
     color: #fff !important;
     background-color: #007ac0; }
 
+/* editable  */
+[contenteditable="true"]:hover {
+  background-color: #D1E1ED; }
+  [contenteditable="true"]:hover:focus {
+    background-color: #D1E1ED;
+    outline: 0px solid transparent; }
+
+.editable-focus {
+  background-color: #D1E1ED; }
+
+/* editable end */
 /*@import component end-----------------------------*/
 /*@import pages folder */
 /* home */
@@ -899,14 +912,20 @@ main {
 /* home end----------------- */
 /* edit_survey section */
 .editSurveySection {
-  min-height: 75vh;
   overflow: hidden; }
   .editSurveySection .leftContent .projectNameEdit {
     color: #222; }
-  .editSurveySection .rightControls {
-    height: 75vh;
+  .editSurveySection .leftContent .section-block .card-body {
+    overflow: hidden; }
+    .editSurveySection .leftContent .section-block .card-body .col-1 {
+      border-right: 1px solid #ccc; }
+  .editSurveySection .leftContent .section-block .card-text span {
+    font-size: 1.2rem; }
+  .editSurveySection .rightControlsColor {
     background-color: #f2f5f8;
     border-left: 1px solid #ccc; }
+  .editSurveySection .rightControls {
+    min-height: 100vh; }
 
 /* edit_survey section end- */
 /*@import pages folder end-----------------------------*/

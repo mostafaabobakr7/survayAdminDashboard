@@ -1,17 +1,33 @@
 /* edit_survey section */
 
 .editSurveySection {
-  min-height: 75vh;
   overflow: hidden;
   .leftContent {
     .projectNameEdit {
       color: #222;
     }
+    .section-block {
+      .card {
+        &-body {
+          overflow: hidden;
+          .col-1 {
+            border-right: 1px solid #ccc;
+          }
+        }
+      }
+      .card-text {
+        span {
+          font-size: 1.2rem;
+        }
+      }
+    }
   }
-  .rightControls {
-    height: 75vh;
+  .rightControlsColor {
     background-color: #f2f5f8;
     border-left: 1px solid #ccc;
+  }
+  .rightControls {
+    min-height: 100vh;
   }
 }
 

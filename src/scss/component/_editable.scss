@@ -1,0 +1,15 @@
+/* editable  */
+
+[contenteditable="true"]:hover {
+  background-color: #D1E1ED;
+  &:focus {
+    background-color: #D1E1ED;
+    outline: 0px solid transparent;
+  }
+}
+
+.editable-focus {
+  background-color: #D1E1ED;
+}
+
+/* editable end */

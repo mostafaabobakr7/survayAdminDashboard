@@ -175,3 +175,59 @@ $(document).ready(() => {
   }
 });
 /* get the clicked PROJECT name from localstorage end--*/
+/* CONTENTEDITABLE on CLICK */
+const editableDivs = $('[contenteditable="true"]');
+editableDivs.on('click', () => {
+  document.execCommand('selectAll', false, null);
+  this.toggleClass('editable-focus');
+});
+
+/* CONTENTEDITABLE on CLICK end--- */
+/* ADD BLOCK function */
+$('.section-block').on('click', '#addBlock', () => {
+  const block = $(`
+<div class="section-block-card">
+  <div class="card">
+    <div contenteditable="true">
+      <h5 class="card-header">Default Question Block</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-1">
+          <div class="questionNumber" contenteditable="true">
+            <h4>Q1</h4>
+          </div>
+        </div>
+        <div class="col-11">
+          <div class="questionBlock">
+            <div contenteditable="true">
+              <h3 class="card-title questionHeader mb-3">
+                Click to write the question text
+              </h3>
+            </div>
+            <div class="card-text mb-2">
+              <input type="radio" name="question">
+              <span contenteditable="true">Click to write Choice 1</span>
+            </div>
+            <div class="card-text mb-2">
+              <input type="radio" name="question">
+              <span contenteditable="true">Click to write Choice 2</span>
+            </div>
+            <div class="card-text mb-2">
+              <input type="radio" name="question">
+              <span contenteditable="true">Click to write Choice 3</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer"></div>
+  </div>
+  <div class="text-center py-4">
+    <a id="addBlock" href="#" class="btn btn-primary btn-lg">
+      <i class="fa fa-plus mr-2"></i> Add Block</a>
+  </div>
+</div>`);
+  $('.section-block .col-12').append(block);
+});
+/* ADD BLOCK function end--*/
