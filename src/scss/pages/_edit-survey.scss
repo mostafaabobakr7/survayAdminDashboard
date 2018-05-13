@@ -11,10 +11,8 @@
         &-body {
           overflow: hidden;
           .hoverQuestion {
-            position: relative;
-            &:hover {
-              background-color: #f2f5f8;
-            }
+            border-top: 1px solid transparent;
+            border-bottom: 1px solid transparent;
             .col-1 {
               border-right: 1px solid #ccc;
             }
@@ -51,12 +49,36 @@
       }
     }
   }
+  .hoverQuestionClicked {
+    border-top: 1px solid #ccc !important;
+    border-bottom: 1px solid #ccc !important;
+    background-color: #f2f5f8;
+  }
   .rightControlsColor {
     background-color: #f2f5f8;
     border-left: 1px solid #ccc;
   }
   .rightControls {
+    overflow: hidden;
     min-height: 100vh;
+    p {
+      font-size: 1.2rem;
+    }
+    .choices {
+      font-size: 1.6rem;
+      i {
+        cursor: pointer;
+      }
+      i.fa-minus-circle {
+        color: #cb0c0c;
+      }
+      span {
+        color: #222;
+      }
+      i.fa-plus-circle {
+        color: green;
+      }
+    }
   }
 }
 

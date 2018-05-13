@@ -200,7 +200,7 @@
                             <h5 class="card-header">Default Question Block</h5>
                           </div>
                           <div class="card-body">
-                            <div class="row py-3 hoverQuestion">
+                            <div class="row py-3 hoverQuestion hoverQuestionClicked">
                               <div class="col-1">
                                 <div class="questionNumber" contenteditable="true">
                                   <h4>Q1</h4>
@@ -249,19 +249,37 @@
           <!-- left side survey content end- -->
           <!-- right side controls -->
           <div class="col-md-2 pr-0 rightControlsColor">
-            <section class="rightControls pr-4">
-              <!-- change question type -->
-              <div class="change-question-type ">
-                <label for="changeQuestionType"></label>
-                <p>Change Question Type</p>
-                <a href="#" class="btn btn-block btn-lg btn-success" id="addRadioQuestion">
-                  <i class="fa fa-list-ul pr-2"></i> test addRadioQuestion</a>
+            <section class="rightControls pr-4 ">
+              <div class="rightControls-container ">
+                <!-- change question type -->
+                <div class="change-question-type py-2">
+                  <p>Change Question Type</p>
+                  <a href="#" class="btn btn-block btn-lg btn-success" id="addRadioQuestion">
+                    <i class="fa fa-list-ul pr-2"></i> test addRadioQuestion</a>
+                </div>
+                <div class="change-choices py-2">
+                  <p>Choices</p>
+                  <div class="choices">
+                    <i class="fa fa-minus-circle choicesDecrease"></i>
+                    <span class="px-3">3</span>
+                    <i class="fa fa-plus-circle choicesIncrease"></i>
+                  </div>
+                </div>
+                <div class="change-answers py-2">
+                  <p>Answers</p>
+                  <div class="answers">
+                    <label>
+                      <input type="radio" name="answers" id="singleAnswers"> Single Answer
+                    </label>
+                    <label>
+                      <input type="radio" name="answers" id="multibleAnswers"> Multible Answer
+                    </label>
+                  </div>
+                </div>
               </div>
               <!-- change question type end -->
             </section>
           </div>
-          <!-- right side controls end- -->
-
         </div>
       </div>
     </div>

@@ -918,9 +918,8 @@ main {
   .editSurveySection .leftContent .section-block .card-body {
     overflow: hidden; }
     .editSurveySection .leftContent .section-block .card-body .hoverQuestion {
-      position: relative; }
-      .editSurveySection .leftContent .section-block .card-body .hoverQuestion:hover {
-        background-color: #f2f5f8; }
+      border-top: 1px solid transparent;
+      border-bottom: 1px solid transparent; }
       .editSurveySection .leftContent .section-block .card-body .hoverQuestion .col-1 {
         border-right: 1px solid #ccc; }
       .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionHeader {
@@ -950,11 +949,28 @@ main {
         color: #cb0c0c; }
   .editSurveySection .leftContent .section-block .card-text span {
     font-size: 1.2rem; }
+  .editSurveySection .hoverQuestionClicked {
+    border-top: 1px solid #ccc !important;
+    border-bottom: 1px solid #ccc !important;
+    background-color: #f2f5f8; }
   .editSurveySection .rightControlsColor {
     background-color: #f2f5f8;
     border-left: 1px solid #ccc; }
   .editSurveySection .rightControls {
+    overflow: hidden;
     min-height: 100vh; }
+    .editSurveySection .rightControls p {
+      font-size: 1.2rem; }
+    .editSurveySection .rightControls .choices {
+      font-size: 1.6rem; }
+      .editSurveySection .rightControls .choices i {
+        cursor: pointer; }
+      .editSurveySection .rightControls .choices i.fa-minus-circle {
+        color: #cb0c0c; }
+      .editSurveySection .rightControls .choices span {
+        color: #222; }
+      .editSurveySection .rightControls .choices i.fa-plus-circle {
+        color: green; }
 
 /* edit_survey section end- */
 /*@import pages folder end-----------------------------*/
