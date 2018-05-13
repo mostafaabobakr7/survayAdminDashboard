@@ -10,8 +10,37 @@
       .card {
         &-body {
           overflow: hidden;
-          .col-1 {
-            border-right: 1px solid #ccc;
+          .hoverQuestion {
+            position: relative;
+            &:hover {
+              background-color: #f2f5f8;
+            }
+            .col-1 {
+              border-right: 1px solid #ccc;
+            }
+            .questionBlock {
+              .questionHeader {
+                display: inline-block;
+                padding: 0.1rem 0.3rem;
+              }
+            }
+          }
+          & .row:hover .addQuestionControls {
+            display: flex;
+          }
+          .addQuestionControls {
+            display: none;
+            flex-direction: column;
+            i {
+              cursor: pointer;
+              font-size: 1.9rem;
+            }
+            .fa-plus-circle {
+              color: green;
+            }
+            .fa-minus-circle {
+              color: #cb0c0c;
+            }
           }
         }
       }

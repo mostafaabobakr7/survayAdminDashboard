@@ -190,7 +190,7 @@
               <div class="mb-5" contenteditable="true">
                 <h3 class="projectNameEdit"></h3>
               </div>
-              <section class="section-block ">
+              <section class="section-block">
                 <div class="container-fluid">
                   <div class="row">
                     <div class="col-12">
@@ -200,16 +200,16 @@
                             <h5 class="card-header">Default Question Block</h5>
                           </div>
                           <div class="card-body">
-                            <div class="row">
+                            <div class="row py-3 hoverQuestion">
                               <div class="col-1">
                                 <div class="questionNumber" contenteditable="true">
                                   <h4>Q1</h4>
                                 </div>
                               </div>
-                              <div class="col-11">
+                              <div class="col-11 d-flex justify-content-between">
                                 <div class="questionBlock">
-                                  <div contenteditable="true">
-                                    <h3 class="card-title questionHeader mb-3">
+                                  <div class="questionHeader" contenteditable="true">
+                                    <h3 class="card-title  mb-3">
                                       Click to write the question text
                                     </h3>
                                   </div>
@@ -225,6 +225,11 @@
                                     <input type="radio" name="question">
                                     <span contenteditable="true">Click to write Choice 3</span>
                                   </div>
+                                </div>
+                                <div class="addQuestionControls  justify-content-between">
+                                  <i class="fa fa-plus-circle questionInserBefore" title="Insert Question Before"></i>
+                                  <i class="fa fa-minus-circle questionDelete" title="Delete Question"></i>
+                                  <i class="fa fa-plus-circle questionInserAfter" title="Insert Question After"></i>
                                 </div>
                               </div>
                             </div>
@@ -249,7 +254,7 @@
               <!-- change question type -->
               <div class="change-question-type">
                 <label for="changeQuestionType"></label>
-                but
+                <a href="#" class="btn btn-lg btn-primary" id="addRadioQuestion">test addRadioQuestion</a>
               </div>
               <!-- change question type end -->
             </section>

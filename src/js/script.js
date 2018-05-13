@@ -186,48 +186,128 @@ editableDivs.on('click', () => {
 /* ADD BLOCK function */
 $('.section-block').on('click', '#addBlock', () => {
   const block = $(`
-<div class="section-block-card">
-  <div class="card">
-    <div contenteditable="true">
-      <h5 class="card-header">Default Question Block</h5>
-    </div>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-1">
-          <div class="questionNumber" contenteditable="true">
-            <h4>Q1</h4>
+        <div class="section-block-card">
+        <div class="card">
+        <div contenteditable="true">
+          <h5 class="card-header">Default Question Block</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-1">
+              <div class="questionNumber" contenteditable="true">
+                <h4>Q1</h4>
+              </div>
+            </div>
+            <div class="col-11">
+              <div class="questionBlock">
+                <div contenteditable="true">
+                  <h3 class="card-title questionHeader mb-3">
+                    Click to write the question text
+                  </h3>
+                </div>
+                <div class="card-text mb-2">
+                  <input type="radio" name="question">
+                  <span contenteditable="true">Click to write Choice 1</span>
+                </div>
+                <div class="card-text mb-2">
+                  <input type="radio" name="question">
+                  <span contenteditable="true">Click to write Choice 2</span>
+                </div>
+                <div class="card-text mb-2">
+                  <input type="radio" name="question">
+                  <span contenteditable="true">Click to write Choice 3</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="col-11">
-          <div class="questionBlock">
-            <div contenteditable="true">
-              <h3 class="card-title questionHeader mb-3">
-                Click to write the question text
-              </h3>
-            </div>
-            <div class="card-text mb-2">
-              <input type="radio" name="question">
-              <span contenteditable="true">Click to write Choice 1</span>
-            </div>
-            <div class="card-text mb-2">
-              <input type="radio" name="question">
-              <span contenteditable="true">Click to write Choice 2</span>
-            </div>
-            <div class="card-text mb-2">
-              <input type="radio" name="question">
-              <span contenteditable="true">Click to write Choice 3</span>
-            </div>
-          </div>
+        <div class="card-footer"></div>
         </div>
-      </div>
-    </div>
-    <div class="card-footer"></div>
-  </div>
-  <div class="text-center py-4">
-    <a id="addBlock" href="#" class="btn btn-primary btn-lg">
-      <i class="fa fa-plus mr-2"></i> Add Block</a>
-  </div>
-</div>`);
+        <div class="text-center py-4">
+        <a id="addBlock" href="#" class="btn btn-primary btn-lg">
+          <i class="fa fa-plus mr-2"></i> Add Block</a>
+          </div>
+        </div>`);
   $('.section-block .col-12').append(block);
 });
 /* ADD BLOCK function end--*/
+/* ADD QUESTION RADIO */
+let num = 1;
+function addRadio(place, elementPlaceInDOM) {
+  const radioName = new Date().getTime();
+  const radioQuestion = $(`
+    <div class = "row py-3 hoverQuestion" > <div class="col-1">
+        <div class="questionNumber" contenteditable="true">
+          <h4>Q${num + 1}</h4>
+        </div>
+      </div> <div class = "col-11 d-flex justify-content-between" > <div class="questionBlock">
+        <div class="questionHeader" contenteditable="true">
+          <h3 class="card-title  mb-3">
+            Click to write the question text
+          </h3>
+        </div>
+        <div class="card-text mb-2">
+          <input type="radio" name=${radioName}>
+            <span contenteditable="true">Click to write Choice 1</span>
+          </div>
+          <div class="card-text mb-2">
+            <input type="radio" name=${radioName}>
+              <span contenteditable="true">Click to write Choice 2</span>
+            </div>
+            <div class="card-text mb-2">
+              <input type="radio" name=${radioName}>
+                <span contenteditable="true">Click to write Choice 3</span>
+              </div>
+            </div>
+            <div class="addQuestionControls justify-content-between">
+              <i class="fa fa-plus-circle questionInserBefore" title="Insert Question Before"></i>
+              <i class="fa fa-minus-circle questionDelete" title="Delete Question"></i>
+              <i class="fa fa-plus-circle questionInserAfter" title="Insert Question After"></i>
+            </div>
+          </div>
+        </div>
+`);
+
+  /* INSERT BEFORE QUESTION */
+  if (place === 'BEFORE') {
+    radioQuestion.insertBefore(elementPlaceInDOM);
+  }
+  /* INSERT AFTER QUESTION */
+  if (place === 'AFTER') {
+    radioQuestion.insertAfter(elementPlaceInDOM);
+  }
+  ++num;
+}
+$('.section-block')
+  .on('click', '.questionInserBefore', function () {
+    /* GET CARD_BODY of the CLICKED ICON to insert BEFORE IT */
+    const elBefore = $(this)
+      .parent()
+      .parent()
+      .parent();
+    /* elBefore = <div class="row py-3"> */
+    addRadio('BEFORE', elBefore);
+  });
+$('.section-block').on('click', '.questionInserAfter', function () {
+  /* GET CARD_BODY of the CLICKED ICON to insert AFTER IT */
+  const elAfter = $(this)
+    .parent()
+    .parent()
+    .parent();
+  /* elAfter = <div class="row py-3"> */
+  addRadio('AFTER', elAfter);
+});
+$('.section-block').on('click', '.questionDelete', function () {
+  /* GET CARD_BODY of the CLICKED ICON to insert AFTER IT */
+  /* elementDelete = <div class="row py-3"> */
+  $(this)
+    .parent()
+    .parent()
+    .parent()
+    .remove();
+});
+
+/* ADD QUESTION RADIO end-- */
+/* ADD QUESTION CHECKBOX */
+
+/* ADD QUESTION CHECKBOX end-- */

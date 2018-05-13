@@ -917,8 +917,37 @@ main {
     color: #222; }
   .editSurveySection .leftContent .section-block .card-body {
     overflow: hidden; }
-    .editSurveySection .leftContent .section-block .card-body .col-1 {
-      border-right: 1px solid #ccc; }
+    .editSurveySection .leftContent .section-block .card-body .hoverQuestion {
+      position: relative; }
+      .editSurveySection .leftContent .section-block .card-body .hoverQuestion:hover {
+        background-color: #f2f5f8; }
+      .editSurveySection .leftContent .section-block .card-body .hoverQuestion .col-1 {
+        border-right: 1px solid #ccc; }
+      .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionHeader {
+        display: inline-block;
+        padding: 0.1rem 0.3rem; }
+    .editSurveySection .leftContent .section-block .card-body .row:hover .addQuestionControls {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: flex; }
+    .editSurveySection .leftContent .section-block .card-body .addQuestionControls {
+      display: none;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+         -moz-box-orient: vertical;
+         -moz-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column; }
+      .editSurveySection .leftContent .section-block .card-body .addQuestionControls i {
+        cursor: pointer;
+        font-size: 1.9rem; }
+      .editSurveySection .leftContent .section-block .card-body .addQuestionControls .fa-plus-circle {
+        color: green; }
+      .editSurveySection .leftContent .section-block .card-body .addQuestionControls .fa-minus-circle {
+        color: #cb0c0c; }
   .editSurveySection .leftContent .section-block .card-text span {
     font-size: 1.2rem; }
   .editSurveySection .rightControlsColor {
