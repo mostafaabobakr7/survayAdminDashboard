@@ -6,7 +6,7 @@
 
 ## Specs:
 - Base Question Type -> Single Answer (radio) when adding new Block/Question.
-- The SELECTED Question :-
+- O The SELECTED Question you can:-
   - --> INSERT [Before/After] .
   - --> REMOVE .
   - --> CHANGE TYPE [radio/checkbox] .
