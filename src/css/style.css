@@ -772,6 +772,7 @@ body {
   visibility: visible; }
 
 .dropdown-menu {
+  z-index: 6000;
   -webkit-box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
           box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
   border: 1px solid #c6c6c6;
@@ -786,7 +787,7 @@ body {
     padding-right: 6px; }
   .dropdown-item:hover {
     color: #fff !important;
-    background-color: #007ac0; }
+    background-color: #007ac0 !important; }
 
 /* edit_survey nav */
 .section-edit-survey-option {

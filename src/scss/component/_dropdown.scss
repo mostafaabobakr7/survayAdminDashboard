@@ -25,6 +25,7 @@
 }
 
 .dropdown-menu {
+  z-index: 6000;
   @include dropDownShadow;
 }
 
@@ -36,7 +37,7 @@
   }
   &:hover {
     color: #fff !important;
-    background-color: $nav-main-color;
+    background-color: $nav-main-color !important;
   }
 }
 
