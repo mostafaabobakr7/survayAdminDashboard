@@ -66,7 +66,7 @@ $('#createProjectBTN').on('click', () => {
     year: 'numeric',
     hour: 'numeric',
     minute: 'numeric',
-    hour12: true,
+    hour12: true
   });
   const card = $(`        <div class="row py-3">
           <div class="col-md-12">
@@ -310,46 +310,73 @@ $('.section-block').on('click', '.questionDelete', function () {
     .remove();
 });
 /* ADD QUESTION RADIO end-- */
-/* ADD QUESTION CHECKBOX */
-
-/* ADD QUESTION CHECKBOX end-- */
-/* QUESTION ON CLICK BACKGROUNND */
-$('.section-block').on('click', '.hoverQuestion', function () {
-  $(this)
-    .addClass('hoverQuestionClicked')
-    .siblings()
-    .removeClass('hoverQuestionClicked');
-  /* questionHoverClicked class remove from all blocks when clicked on current block */
-  const x = $(this)
-    .parent()
-    .parent()
-    .parent()
-    .siblings()
-    .children()
-    .children()
-    .children();
-  x.removeClass('hoverQuestionClicked');
-  $('.choices span').text(choicesCurrentNum);
-});
-/* QUESTION ON CLICK BACKGROUNND end-- */
-/* CHOICES */
 function choicesCurrentNum() {
   return $('.hoverQuestionClicked .card-text').length;
 }
-$('.choicesDecrease')
-  .on('click', function () {
-    $('.hoverQuestionClicked .card-text:last-child').remove();
+/* QUESTION ON CLICK CHANGE BACKGROUNND */
+$('.section-block')
+  .on('click', '.hoverQuestion', function () {
+    $(this)
+      .addClass('hoverQuestionClicked')
+      .siblings()
+      .removeClass('hoverQuestionClicked');
+    /* DEFINE IF IT A RADIO OR CHECKBOX */
+    if ($(this).find(':radio').length > 0) {
+      $('#singleAnswers').prop('checked', true);
+      $('#multibleAnswers').prop('checked', false);
+    }
+    if ($(this).find(':checkbox').length > 0) {
+      $('#multibleAnswers').prop('checked', true);
+      $('#singleAnswers').prop('checked', false);
+    }
+    /* questionHoverClicked class remove from all blocks when clicked on current block */
+    const x = $(this)
+      .parent()
+      .parent()
+      .parent()
+      .siblings()
+      .children()
+      .children()
+      .children();
+    x.removeClass('hoverQuestionClicked');
     $('.choices span').text(choicesCurrentNum);
   });
+/* QUESTION ON CLICK CHANGE BACKGROUNND end-- */
+/* RADIO CHOICES */
+$('.choicesDecrease').on('click', function () {
+  $('.hoverQuestionClicked .card-text:last-child').remove();
+  $('.choices span').text(choicesCurrentNum);
+});
 $('.choicesIncrease').on('click', function () {
   let choiceNum = choicesCurrentNum();
-  const choice = $(`<div class="card-text mb-2">
-                                    <input type="radio" name="question">
+  const radioName = $('.hoverQuestionClicked input:radio').attr('name');
+
+  const choiceRadio = $(`<div class="card-text mb-2">
+                                    <input type="radio" name="${radioName}">
                                     <span contenteditable="true">Click to write Choice ${choiceNum + 1}</span>
                                   </div>`);
+  const choiceCheckbox = $(`<div class="card-text mb-2">
+                                    <input type="checkbox" name="question">
+                                    <span contenteditable="true">Click to write Choice ${choiceNum + 1}</span>
+                                  </div>`);
+  if ($('.hoverQuestionClicked').find(':radio').length > 0) {
+    choiceRadio.insertAfter($('.hoverQuestionClicked .card-text:last-child'));
+  }
+  if ($('.hoverQuestionClicked').find(':checkbox').length > 0) {
 
-  choice.insertAfter($('.hoverQuestionClicked .card-text:last-child'));
+    choiceCheckbox.insertAfter($('.hoverQuestionClicked .card-text:last-child'));
+  }
   $('.choices span').text(choicesCurrentNum);
 });
 
-/* CHOICES end */
+/* RADIO CHOICES end */
+/* CHANGE TO QUESTION CHECKBOX */
+$('#multibleAnswers').on('click', function () {
+  $('.hoverQuestionClicked input:radio').prop('checked', false);
+  $('.hoverQuestionClicked input:radio').attr('type', 'checkbox');
+});
+$('#singleAnswers').on('click', function () {
+  $('.hoverQuestionClicked input:checkbox').prop('checked', false);
+  $('.hoverQuestionClicked input:checkbox').attr('type', 'radio');
+});
+/* CHANGE TO QUESTION CHECKBOX end-- */
