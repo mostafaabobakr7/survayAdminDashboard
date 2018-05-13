@@ -943,7 +943,7 @@ main {
               flex-direction: column; }
       .editSurveySection .leftContent .section-block .card-body .addQuestionControls i {
         cursor: pointer;
-        font-size: 1.9rem; }
+        font-size: 2.2rem; }
       .editSurveySection .leftContent .section-block .card-body .addQuestionControls .fa-plus-circle {
         color: green; }
       .editSurveySection .leftContent .section-block .card-body .addQuestionControls .fa-minus-circle {
