@@ -491,6 +491,10 @@ body {
 .navbar-main {
   background-color: white !important;
   border-bottom: 1px solid #e8e8e8; }
+  .navbar-main .projectNameEdit {
+    cursor: pointer; }
+    .navbar-main .projectNameEdit:hover {
+      color: #222; }
 
 /* navbar-main */
 .navbar-bottom {

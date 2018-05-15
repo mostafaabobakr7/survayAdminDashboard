@@ -16,8 +16,14 @@
   <header class="header">
     <nav class="navbar navbar-main navbar-expand-lg navbar-light bg-light py-4">
       <a class="navbar-brand" href="#">Company logo</a>
-      <div contenteditable="true">
-        <h3 class="projectNameEdit"></h3>
+      <div class="dropdown">
+        <h5 class="projectNameEdit dropdown-toggle" type="button" id="projNameDropdown" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false"></h5>
+        <div class="dropdown-menu" aria-labelledby="projNameDropdown">
+          <a class="dropdown-item" href="#">project 1</a>
+          <a class="dropdown-item" href="#">project 2</a>
+          <a class="dropdown-item" href="#">project 3</a>
+        </div>
       </div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
         aria-expanded="false" aria-label="Toggle navigation">
