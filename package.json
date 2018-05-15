@@ -9,10 +9,11 @@
   "author": "Mostafa Abobakr",
   "license": "ISC",
   "dependencies": {
-    "jquery": "^3.3.1",
-    "popper.js": "^1.14.3",
     "bootstrap": "4.0.0",
-    "font-awesome": "^4.7.0"
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.3.1",
+    "medium-editor": "^5.23.3",
+    "popper.js": "^1.14.3"
   },
   "browserslist": [
     "Chrome >= 5",

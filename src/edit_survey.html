@@ -26,11 +26,11 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
+          <li class="nav-item ">
+            <a class="nav-link" href="#">Dashboard</a>
+          </li>
           <li class="nav-item active">
             <a class="nav-link" href="#">Projects</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contacts</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Library</a>
@@ -50,7 +50,7 @@
       </div>
     </nav>
     <!-- navbar-bootm -->
-    <nav class="navbar navbar-bottom navbar-expand-lg navbar-light bg-light p-0 pl-2 pt-2">
+    <nav class="navbar navbar-bottom navbar-expand-lg navbar-light bg-light p-0 pl-2 pt-2 ">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarEditSurvey"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -64,121 +64,24 @@
             <a class="nav-link" href="#">Distributions</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Data & Analysis</a>
+            <a class="nav-link" href="#">Responses</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Reports</a>
           </li>
         </ul>
+        <form class="form-inline mr-4">
+          <a class="btn btn-primary btn-lg mr-4" data-toggle="modal" href="#create_project">
+            <i class="fa fa-sign-out pr-2"></i> Preview
+          </a>
+          <button class="btn btn-lg btn-success px-4">
+            <i class="fa fa-bookmark-o pr-2"></i> Save</button>
+        </form>
       </div>
     </nav>
     <!-- navbar-bootm end -->
   </header>
   <!-- Header end-->
-  <section id="sticky" class="section-edit-survey-option py-4 sticky-top">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="look-feel d-inline-block">
-            <a href="#" class="outline-border">
-              <i class="fa fa-paint-brush mr-2"></i> Look & Feel</a>
-          </div>
-          <div class="survey-flow d-inline-block">
-            <a href="#" class="outline-border">
-              <i class="fa fa-random mr-2"></i> Survey Flow</a>
-          </div>
-          <div class="survey-options d-inline-block">
-            <a href="#" class="outline-border">
-              <i class="fa fa-gear mr-2"></i> Survey Options</a>
-          </div>
-          <div class="tools d-inline-block dropright">
-            <a href="#" id="toolsDropdown" class="outline-border dropdown-toggle " role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              <i class="fa fa-wrench mr-2"></i> Tools</a>
-
-            <div id="toolsDropdown-menu" class="dropdown-menu toolsDropdown" aria-labelledby="toolsDropdown">
-              <a class="dropdown-item">Auto-Number Questions...</a>
-              <a class="dropdown-item">Reset Recode Values...</a>
-              <a class="dropdown-item review">Review
-                <i class="fa fa-angle-right"></i>
-              </a>
-              <ul class="dropdown-menu review-sub-menu">
-                <li>
-                  <a href="#" class="dropdown-item">Search and Replace</a>
-                </li>
-                <li>
-                  <a href="#" class="dropdown-item">Strip Formatting</a>
-                </li>
-                <li>
-                  <a href="#" class="dropdown-item">Spell Check</a>
-                </li>
-                <li>
-                  <a href="#" class="dropdown-item">Generate Test Responses...</a>
-                </li>
-                <li>
-                  <a href="#" class="dropdown-item">Check Survey Accessibility...</a>
-                </li>
-              </ul>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item salesforce">Salesforce
-                <i class="fa fa-angle-right"></i>
-              </a>
-              <ul class="dropdown-menu salesforce-sub-menu">
-                <li>
-                  <a href="#" class="dropdown-item">Web-to-Lead</a>
-                </li>
-              </ul>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item">Quotas...</a>
-              <a class="dropdown-item">Conjoint Analyses...</a>
-              <a class="dropdown-item">Manage Reusable Choices...</a>
-              <a class="dropdown-item">Scoring...</a>
-              <a class="dropdown-item">Translate Survey...</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item versions">Versions
-                <i class="fa fa-angle-right"></i>
-              </a>
-              <ul class="dropdown-menu versions-sub-menu">
-                <li>
-                  <a href="#" class="dropdown-item">Create New Version...</a>
-                </li>
-                <li>
-                  <a href="#" class="dropdown-item">View Version History...</a>
-                </li>
-              </ul>
-              <a class="dropdown-item importExport">Import/Export
-                <i class="fa fa-angle-right"></i>
-              </a>
-              <ul class="dropdown-menu importExport-sub-menu">
-                <li>
-                  <a href="#" class="dropdown-item">Print Survey</a>
-                </li>
-                <li>
-                  <a href="#" class="dropdown-item">Import Survey</a>
-                </li>
-                <li>
-                  <a href="#" class="dropdown-item">Export Survey</a>
-                </li>
-                <li>
-                  <a href="#" class="dropdown-item">Export Survey to Word...</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 d-flex justify-content-end">
-          <form class="form-inline my-2 my-lg-0">
-            <a class="btn btn-primary btn-lg mr-4" data-toggle="modal" href="#create_project">
-              <i class="fa fa-sign-out pr-2"></i> Preview
-            </a>
-            <span>
-              <input class="form-control form-control-lg mr-sm-2 " type="search" placeholder="Search Projects..." aria-label="Search">
-            </span>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
   <!-- main -->
   <main>
     <div class="editSurveySection">
@@ -187,8 +90,8 @@
           <!-- left side survey content -->
           <div class="col-md-10">
             <section class="leftContent pt-5 pl-3">
-              <div class="mb-5" contenteditable="true">
-                <h3 class="projectNameEdit"></h3>
+              <div class="mb-5">
+                <h3 class="projectNameEdit" contenteditable="true"></h3>
               </div>
               <section class="section-block">
                 <div class="container-fluid">
@@ -196,14 +99,14 @@
                     <div class="col-12">
                       <div class="section-block-card">
                         <div class="card">
-                          <div contenteditable="true">
-                            <h5 class="card-header">Default Question Block</h5>
+                          <div class="card-header">
+                            <h5 contenteditable="true">Default Question Block</h5>
                           </div>
                           <div class="card-body">
                             <div class="row py-3 hoverQuestion">
                               <div class="col-1">
-                                <div class="questionNumber" contenteditable="true">
-                                  <h4>Q1</h4>
+                                <div class="questionNumber">
+                                  <h4 contenteditable="true">Q1</h4>
                                 </div>
                               </div>
                               <div class="col-11 d-flex justify-content-between">

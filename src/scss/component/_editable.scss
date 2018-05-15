@@ -1,15 +1,13 @@
 /* editable  */
 
-[contenteditable="true"]:hover {
-  background-color: #D1E1ED;
-  &:focus {
-    background-color: #D1E1ED;
-    outline: 0px solid transparent;
-  }
+[contenteditable="true"] {
+  padding: 0.2rem 0.3rem;
+  border: 1px solid transparent;
 }
 
 .editable-focus {
-  background-color: #D1E1ED;
+  background-color: #fff;
+  border: 1px solid blue;
 }
 
 /* editable end */

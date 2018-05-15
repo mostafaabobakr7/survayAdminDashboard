@@ -41,21 +41,6 @@ $('#folderDropdown-menu .dropdown-item').map(function () {
 });
 /* section-home-folders-dropdown end------ */
 
-/* create Blank Project */
-$('#BlankSurvayProject').on('click', function () {
-  $(this).addClass('d-none');
-  $('#CreateFromExisting').addClass('d-none');
-  $('.list-Research').removeClass('d-none');
-});
-/* create Blank Project end------------ */
-/* create Project Back arrow */
-$('#createProjectBack').on('click', function () {
-  $(this)
-    .parent()
-    .addClass('d-none');
-  $('#CreateFromExisting, #BlankSurvayProject').removeClass('d-none');
-});
-/* create Project Back arrow end-------------*/
 /* create project */
 $('#createProjectBTN').on('click', () => {
   const projectCreationName = $('#projectName').val();
@@ -176,10 +161,15 @@ $(document).ready(() => {
 });
 /* get the clicked PROJECT name from localstorage end--*/
 /* CONTENTEDITABLE on CLICK */
-const editableDivs = $('[contenteditable="true"]');
-editableDivs.on('click', () => {
+$(document).on('click', '[contenteditable="true"]', function () {
+  $(document)
+    .find('[contenteditable="true"]')
+    .removeClass('editable-focus');
+  $(this).addClass('editable-focus');
+  $(this).focusout(function () {
+    $(this).removeClass('editable-focus');
+  });
   document.execCommand('selectAll', false, null);
-  this.toggleClass('editable-focus');
 });
 
 /* CONTENTEDITABLE on CLICK end--- */
@@ -187,20 +177,20 @@ editableDivs.on('click', () => {
 $('.section-block').on('click', '#addBlock', () => {
   const block = $(`<div class="section-block-card">
                         <div class="card">
-                          <div contenteditable="true">
-                            <h5 class="card-header">Default Question Block</h5>
+                          <div class="card-header" >
+                            <h5 contenteditable="true">Default Question Block</h5>
                           </div>
                           <div class="card-body">
                             <div class="row py-3 hoverQuestion ">
                               <div class="col-1">
-                                <div class="questionNumber" contenteditable="true">
-                                  <h4>Q1</h4>
+                                <div class="questionNumber">
+                                  <h4 contenteditable="true">Q1</h4>
                                 </div>
                               </div>
                               <div class="col-11 d-flex justify-content-between">
                                 <div class="questionBlock">
-                                  <div class="questionHeader" contenteditable="true">
-                                    <h3 class="card-title  mb-3">
+                                  <div class="questionHeader" >
+                                    <h3 contenteditable="true" class="card-title  mb-3">
                                       Click to write the question text
                                     </h3>
                                   </div>
@@ -240,12 +230,12 @@ function addRadio(place, elementPlaceInDOM) {
   const radioName = new Date().getTime();
   const radioQuestion = $(`
     <div class = "row py-3 hoverQuestion" > <div class="col-1">
-        <div class="questionNumber" contenteditable="true">
-          <h4>Q${num + 1}</h4>
+        <div class="questionNumber">
+          <h4 contenteditable="true">Q${num + 1}</h4>
         </div>
       </div> <div class = "col-11 d-flex justify-content-between" > <div class="questionBlock">
-        <div class="questionHeader" contenteditable="true">
-          <h3 class="card-title  mb-3">
+        <div class="questionHeader" >
+          <h3 contenteditable="true" class="card-title  mb-3">
             Click to write the question text
           </h3>
         </div>
@@ -363,7 +353,6 @@ $('.choicesIncrease').on('click', function () {
     choiceRadio.insertAfter($('.hoverQuestionClicked .card-text:last-child'));
   }
   if ($('.hoverQuestionClicked').find(':checkbox').length > 0) {
-
     choiceCheckbox.insertAfter($('.hoverQuestionClicked .card-text:last-child'));
   }
   $('.choices span').text(choicesCurrentNum);
