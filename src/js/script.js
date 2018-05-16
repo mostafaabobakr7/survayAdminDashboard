@@ -400,7 +400,7 @@ $('.medical-survey').on('click', function () {
 });
 /* RESPONSES VIEW ON-CLICK end-- */
 /* REPORTS TOGGLE TEXTAREA ADD NOTE */
-$('.reportSection').on('click', '#reportAddNote', function () {
+$('.reportSection').on('click', '.reportAddNote', function () {
   $('.note').toggleClass('d-none');
 });
 /* REPORTS TOGGLE TEXTAREA ADD NOTE end */
