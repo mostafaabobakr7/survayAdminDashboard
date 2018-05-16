@@ -137,7 +137,7 @@ $('.projects-list').on('click', '.card-body', function () {
   localStorage.setItem('projectCreationName', projectCreationName);
   const path = ('edit_survey.html');
   /* FOR GITHUB redirect only, else remove pathname paramater */
-  const newURL = `${window.location.protocol}//${window.location.host}${window.location.pathname}${path}`;
+  const newURL = `${window.location.protocol}//${window.location.host}/${path}`;
   window.location = newURL;
 });
 /* card (project) on click go to edit_survey end--- */
