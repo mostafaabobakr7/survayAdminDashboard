@@ -213,6 +213,7 @@ $('.section-block').on('click', '#addBlock', () => {
 /* ADD BLOCK function end--*/
 /* ADD QUESTION RADIO */
 let num = 1;
+
 function addRadio(place, elementPlaceInDOM) {
   const radioName = new Date().getTime();
   const radioQuestion = $(`
@@ -398,3 +399,8 @@ $('.medical-survey').on('click', function () {
   $('.showResponse').toggleClass('d-none');
 });
 /* RESPONSES VIEW ON-CLICK end-- */
+/* REPORTS TOGGLE TEXTAREA ADD NOTE */
+$('.reportSection').on('click', '#reportAddNote', function () {
+  $('.note').toggleClass('d-none');
+});
+/* REPORTS TOGGLE TEXTAREA ADD NOTE end */
