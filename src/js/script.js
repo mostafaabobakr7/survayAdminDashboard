@@ -1,23 +1,12 @@
-/* navbar active */
-$('.nav-link')
+/* section-home-folders__menu */
+$('#folder__link')
   .on('click', function () {
     $(this)
       .parent()
-      .siblings()
-      .removeClass('active');
-    $(this)
-      .parent()
-      .addClass('active');
+      .toggleClass('menu__folder');
+    $('.projects-list-container').toggleClass('menu__folder');
+    $('#folder__menu').toggleClass('menu__close');
   });
-/* navbar active end-- */
-/* section-home-folders__menu */
-$('#folder__link').on('click', function () {
-  $(this)
-    .parent()
-    .toggleClass('menu__folder');
-  $('.projects-list-container').toggleClass('menu__folder');
-  $('#folder__menu').toggleClass('menu__close');
-});
 $('#folder__menu-close').on('click', () => {
   $('#folder__link')
     .parent()
