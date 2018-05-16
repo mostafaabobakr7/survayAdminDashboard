@@ -155,7 +155,7 @@ $('.projects-list').on('click', '.card-body', function () {
 $(document).ready(() => {
   const loc = window.location.href;
   const projectCreationName = localStorage.getItem('projectCreationName');
-  if (/edit_survey/.test(loc)) {
+  if (/edit_survey/.test(loc) || /distributions/.test(loc) || /responses/.test(loc) || /reports/.test(loc)) {
     $('.projectNameEdit').html(`${projectCreationName}`);
   }
 });
@@ -406,3 +406,13 @@ $('#singleAnswers').on('click', function () {
   $('.hoverQuestionClicked input:checkbox').attr('type', 'radio');
 });
 /* CHANGE TO QUESTION CHECKBOX end-- */
+//---------------------------------------------
+/* DISTRIBUTE web copylick */
+$('#distribute__web-btn').on('click', function (e) {
+  e.preventDefault();
+  const urlValue = $('#distribute__web').val();
+  $('#distribute__web').select();
+  document.execCommand('copy');
+});
+
+/* DISTRIBUTE web copylick end */

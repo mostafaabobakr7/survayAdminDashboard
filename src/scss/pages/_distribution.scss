@@ -1,0 +1,60 @@
+.distributeSection {
+  color: #222;
+  .form-control:focus {
+    box-shadow: none;
+  }
+  .distribute {
+    .fa-globe,
+    .fa-mobile {
+      font-size: 6rem;
+    }
+    &__web:hover,
+    &__mobile:hover {
+      border: 1px solid #c6c6c6;
+      box-shadow: 0 0.1rem 1rem 0.1rem rgba(black, 0.2);
+    }
+    &__web {
+      border: 1px solid transparent;
+      border-radius: 4px;
+      .fa-globe,
+      h2 {
+        color: $nav-main-color
+      }
+    }
+    &__mobile {
+      min-height: 55rem;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      #userID {
+        width: 5rem;
+      }
+      #userMOBILE {
+        width: 15rem;
+      }
+      #userNAME {
+        width: 25rem;
+      }
+      #userFULLNAME {
+        width: 40rem;
+      }
+      .fa-mobile,
+      h2 {
+        color: $Dark-green
+      }
+      .nav-link {
+        font-size: 1.5rem;
+        border: 1px solid transparent;
+        &:hover {
+          border: 1px solid $Dark-green;
+          color: $Dark-green;
+        }
+      }
+      .nav-link.active {
+        background-color: $Dark-green;
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+  }
+}
