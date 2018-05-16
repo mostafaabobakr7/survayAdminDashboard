@@ -395,7 +395,7 @@ $('#distribute__web-btn').on('click', function (e) {
 });
 /* DISTRIBUTE web copylick end */
 /* RESPONSES VIEW ON-CLICK  */
-$('.medical-survey').on('click', function () {
+$('.sport-survey').on('click', function () {
   $('.showResponse').toggleClass('d-none');
 });
 /* RESPONSES VIEW ON-CLICK end-- */
