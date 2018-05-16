@@ -182,6 +182,14 @@ $('.section-block').on('click', '#addBlock', () => {
                           </div>
                           <div class="card-body">
                             <div class="row py-3 hoverQuestion ">
+                              <div class="questionMove">
+                                <div class="questionMove__up py-2">
+                                  <i class="fa fa-arrow-up"></i>
+                                </div>
+                                <div class="questionMove__down py-2">
+                                  <i class="fa fa-arrow-down"></i>
+                                </div>
+                              </div>
                               <div class="col-1">
                                 <div class="questionNumber">
                                   <h4 contenteditable="true">Q1</h4>
@@ -229,7 +237,16 @@ let num = 1;
 function addRadio(place, elementPlaceInDOM) {
   const radioName = new Date().getTime();
   const radioQuestion = $(`
-    <div class = "row py-3 hoverQuestion" > <div class="col-1">
+    <div class = "row py-3 hoverQuestion">
+      <div class="questionMove">
+        <div class="questionMove__up py-2">
+          <i class="fa fa-arrow-up"></i>
+        </div>
+        <div class="questionMove__down py-2">
+          <i class="fa fa-arrow-down"></i>
+        </div>
+      </div>
+      <div class="col-1">
         <div class="questionNumber">
           <h4 contenteditable="true">Q${num + 1}</h4>
         </div>
@@ -303,34 +320,54 @@ $('.section-block').on('click', '.questionDelete', function () {
 function choicesCurrentNum() {
   return $('.hoverQuestionClicked .card-text').length;
 }
-/* QUESTION ON CLICK CHANGE BACKGROUNND */
+/* MOVE QUESTION UP and DOWN */
 $('.section-block')
-  .on('click', '.hoverQuestion', function () {
-    $(this)
-      .addClass('hoverQuestionClicked')
-      .siblings()
-      .removeClass('hoverQuestionClicked');
-    /* DEFINE IF IT A RADIO OR CHECKBOX */
-    if ($(this).find(':radio').length > 0) {
-      $('#singleAnswers').prop('checked', true);
-      $('#multibleAnswers').prop('checked', false);
-    }
-    if ($(this).find(':checkbox').length > 0) {
-      $('#multibleAnswers').prop('checked', true);
-      $('#singleAnswers').prop('checked', false);
-    }
-    /* questionHoverClicked class remove from all blocks when clicked on current block */
-    const x = $(this)
+  .on('click', '.questionMove__up', function () {
+    // <div .row></div>
+    const questionPosition = $(this)
       .parent()
-      .parent()
-      .parent()
-      .siblings()
-      .children()
-      .children()
-      .children();
-    x.removeClass('hoverQuestionClicked');
-    $('.choices span').text(choicesCurrentNum);
+      .parent();
+    // get upper sibling
+    const questionPositionPrevSibling = questionPosition.prev();
+    $(questionPosition).insertBefore(questionPositionPrevSibling);
   });
+
+$('.section-block').on('click', '.questionMove__down', function () {
+  const questionPosition = $(this)
+    .parent()
+    .parent();
+  const questionPositionPrevSibling = questionPosition.next();
+  $(questionPosition).insertAfter(questionPositionPrevSibling);
+});
+/* MOVE QUESTION UP and DOWN end-- */
+
+/* QUESTION ON CLICK CHANGE BACKGROUNND */
+$('.section-block').on('click', '.hoverQuestion', function () {
+  $(this)
+    .addClass('hoverQuestionClicked')
+    .siblings()
+    .removeClass('hoverQuestionClicked');
+  /* DEFINE IF IT A RADIO OR CHECKBOX */
+  if ($(this).find(':radio').length > 0) {
+    $('#singleAnswers').prop('checked', true);
+    $('#multibleAnswers').prop('checked', false);
+  }
+  if ($(this).find(':checkbox').length > 0) {
+    $('#multibleAnswers').prop('checked', true);
+    $('#singleAnswers').prop('checked', false);
+  }
+  /* questionHoverClicked class remove from all blocks when clicked on current block */
+  const x = $(this)
+    .parent()
+    .parent()
+    .parent()
+    .siblings()
+    .children()
+    .children()
+    .children();
+  x.removeClass('hoverQuestionClicked');
+  $('.choices span').text(choicesCurrentNum);
+});
 /* QUESTION ON CLICK CHANGE BACKGROUNND end-- */
 /* RADIO CHOICES */
 $('.choicesDecrease').on('click', function () {

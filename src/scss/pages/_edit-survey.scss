@@ -9,10 +9,33 @@
     .section-block {
       .card {
         &-body {
-          overflow: hidden;
           .hoverQuestion {
             border-top: 1px solid transparent;
             border-bottom: 1px solid transparent;
+            position: relative;
+            &:hover .questionMove {
+              display: block;
+            }
+            .questionMove {
+              position: absolute;
+              top: 35%;
+              left: -30px;
+              background-color: #909090;
+              color: #fff;
+              border-radius: 10px;
+              width: 30px;
+              text-align: center;
+              overflow: hidden;
+              display: none;
+              &__up,
+              &__down {
+                cursor: pointer;
+                &:hover,
+                &:hover {
+                  background-color: #222;
+                }
+              }
+            }
             .col-1 {
               border-right: 1px solid #ccc;
             }
