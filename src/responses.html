@@ -83,22 +83,101 @@
   <!-- Header end-->
   <!-- main -->
   <main>
-    <div class="editSurveySection">
+    <div class="responsesSection">
       <div class="container-fluid">
         <div class="row">
-          <!-- left side survey content -->
-          <div class="col-md-10">
-            <section class="leftContent pt-5 pl-3">
-              <div class="mb-5">
-                <h3 class="projectNameEdit" contenteditable="true"></h3>
+          <div class="col-12">
+            <section class="pt-5 pl-3">
+              <div class="mb-5 border-bottom">
+                <h3>All Responses :
+                  <span class="responseNumber">1</span>
+                </h3>
               </div>
             </section>
-          </div>
-          <!-- left side survey content end- -->
-          <!-- right side controls -->
-          <div class="col-md-2 pr-0 rightControlsColor">
-            <section class="rightControls pr-4 ">
-            </section>
+            <table class="responseTable table table-hover table-bordered text-center">
+              <thead class="thead-light">
+                <tr>
+                  <th style="width: 5%">ID</th>
+                  <th style="width: 20%">RESPONSE DATE</th>
+                  <th style="width: 65%">SURVEY NAME</th>
+                  <th style="width: 10%">ACTION</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td scope="row">1</td>
+                  <td>JUNE 7, 2017</td>
+                  <td class="medical-survey">
+                    <h4>Medical Survey</h4>
+                  </td>
+                  <td class="responseTableActionMenu">
+                    <div class="dropdown">
+                      <i id="response" class="fa fa-angle-down" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                      <div class="dropdown-menu" aria-labelledby="response">
+                        <li class="dropdown-item">Approve Response</li>
+                        <li class="dropdown-item">Edit Response</li>
+                        <li class="dropdown-item">Hide Response</li>
+                        <div class="dropdown-divider"></div>
+                        <li class="dropdown-item">Delete Response</li>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="showResponse d-none">
+              <section class="responseView p-5 border rounded">
+                <div class="row py-3">
+                  <div class="col-1">
+                    <div class="questionNumber">
+                      <h4>Q1</h4>
+                    </div>
+                  </div>
+                  <div class="col-11 d-flex justify-content-between">
+                    <div class="questionBlock">
+                      <div class="questionHeader">
+                        <h3 class="card-title  mb-3">
+                          What is your favorite player?
+                        </h3>
+                      </div>
+                      <div class="card-text mb-2">
+                        <input disabled type="radio" name="radioName">
+                        <span>Click to write Choice 1</span>
+                      </div>
+                      <div class="card-text mb-2">
+                        <input disabled checked type="radio" name="radioName">
+                        <span>Click to write Choice 2</span>
+                      </div>
+                      <div class="card-text mb-2">
+                        <input disabled type="radio" name="radioName">
+                        <span>Click to write Choice 3</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <section class="QC">
+                <div class="QC-comment py-2">
+                  <h2>QC Comment:</h2>
+                  <form>
+                    <textarea readonly class="form-control" name="" id="" cols="60" rows="5">this is a good survey
+                    </textarea>
+                  </form>
+                </div>
+                <div class="QC-status py-2">
+                  <h2 class="d-inline-block pr-5">QC Status:</h2>
+                  <h4 class="status-approved d-inline-block">
+                    <i class="fa fa-check-circle"></i> approved
+                  </h4>
+                </div>
+                <div class="QC-status py-2">
+                  <h2 class="d-inline-block pr-5">QC Status:</h2>
+                  <h4 class="status-rejected d-inline-block">
+                    <i class="fa fa-times-circle"></i> rejected
+                  </h4>
+                </div>
+              </section>
+            </div>
           </div>
         </div>
       </div>

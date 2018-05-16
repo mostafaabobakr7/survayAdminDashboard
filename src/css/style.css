@@ -618,7 +618,7 @@ body {
     transition: all 0.2s ease-in-out; }
     .projects-list-container .card-body-icon:hover {
       background-color: #007ac0; }
-      .projects-list-container .card-body-icon:hover a#projectCardDropdown {
+      .projects-list-container .card-body-icon:hover a[role="button"] {
         color: #fff; }
 
 /* card component end----------------- */
@@ -806,6 +806,7 @@ body {
   border-radius: 4px; }
 
 .dropdown-item {
+  cursor: pointer;
   font-size: 1.2rem;
   padding: 0 1.5rem; }
   .dropdown-item > .fa {
@@ -1016,6 +1017,29 @@ main {
       background-color: #28b485; }
       .distributeSection .distribute__mobile .nav-link.active:hover {
         color: #fff; }
+
+.responsesSection .responseNumber {
+  color: #222;
+  font-weight: bold; }
+
+.responsesSection .responseTable td:nth-child(3) {
+  cursor: pointer; }
+
+.responsesSection .responseTable .responseTableActionMenu i {
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 0.5rem 1rem; }
+  .responsesSection .responseTable .responseTableActionMenu i:hover {
+    border: 1px solid #222;
+    color: #222;
+    background-color: #eee; }
+
+.responsesSection .QC-status .status-approved {
+  color: #28b485; }
+
+.responsesSection .QC-status .status-rejected {
+  color: red; }
 
 /*@import pages folder end-----------------------------*/
 

@@ -1,0 +1,34 @@
+.responsesSection {
+  .responseNumber {
+    color: #222;
+    font-weight: bold;
+  }
+  .responseTable {
+    td:nth-child(3) {
+      cursor: pointer;
+    }
+    .responseTableActionMenu {
+      i {
+        cursor: pointer;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        padding: 0.5rem 1rem;
+        &:hover {
+          border: 1px solid #222;
+          color: #222;
+          background-color: #eee;
+        }
+      }
+    }
+  }
+  .QC {
+    &-status {
+      .status-approved {
+        color: $Dark-green;
+      }
+      .status-rejected {
+        color: red;
+      }
+    }
+  }
+}

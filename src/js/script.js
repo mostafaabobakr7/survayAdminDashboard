@@ -42,9 +42,11 @@ $('#folderDropdown-menu .dropdown-item').map(function () {
 /* section-home-folders-dropdown end------ */
 
 /* create project */
-$('#createProjectBTN').on('click', () => {
+$('#createProjectBTN').on('click', function (e) {
+  e.preventDefault();
   const projectCreationName = $('#projectName').val();
   const d = new Date();
+  const menuID = new Date().getTime();
   const projectCreationDate = d.toLocaleString('en-US', {
     day: 'numeric',
     month: 'long',
@@ -91,32 +93,26 @@ $('#createProjectBTN').on('click', () => {
                   </div>
                   <div class="col-md-1 d-flex justify-content-end">
                     <div class="card-body-icon dropleft">
-                      <a href="#" id="projectCardDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <a href="#" id=${menuID} role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
                       </a>
-                      <div class="dropdown-menu" aria-labelledby="projectCardDropdown">
+                      <div class="dropdown-menu" aria-labelledby=${menuID}>
                         <a class="dropdown-item">
                           <i class="fa fa-check-circle"></i>Activate</a>
                         <li class="dropdown-divider"></li>
                         <a class="dropdown-item">
-                          <i class="fa fa-share-alt"></i>Collaborate</a>
-                        <a class="dropdown-item">
-                          <i class="fa fa-folder"></i>Reveal in Folder</a>
+                          <i class="fa fa-user"></i>Add QC User</a>
                         <a class="dropdown-item">
                           <i class="fa fa-font"></i>Rename Project</a>
-                        <a class="dropdown-item">
-                          <i class="fa fa-files-o"></i>Copy Project</a>
                         <li class="dropdown-divider"></li>
                         <a class="dropdown-item">
                           <i class="fa fa-pencil"></i>Edit Survey</a>
                         <a class="dropdown-item">
                           <i class="fa fa-sign-out"></i>Preview Survey</a>
                         <a class="dropdown-item">
-                          <i class="fa fa-language"></i>Translate Survey</a>
-                        <a class="dropdown-item">
                           <i class="fa fa-paper-plane"></i>Distribute Survey</a>
                         <a class="dropdown-item">
-                          <i class="fa fa-comment"></i>Data &amp; Analysis</a>
+                          <i class="fa fa-comment"></i>Responses</a>
                         <a class="dropdown-item">
                           <i class="fa fa-bar-chart"></i>View Reports</a>
                         <li class="dropdown-divider"></li>
@@ -131,12 +127,6 @@ $('#createProjectBTN').on('click', () => {
           </div>
         </div>`);
   $('.projects-list .container-fluid').prepend(card);
-});
-// when press Enter on keyboard as create project
-$('#projectName').keyup((event) => {
-  if (event.keyCode === 13) {
-    $('#createProjectBTN').click();
-  }
 });
 /* create project end----------*/
 /* card (project) on click go to edit_survey */
@@ -410,9 +400,12 @@ $('#singleAnswers').on('click', function () {
 /* DISTRIBUTE web copylick */
 $('#distribute__web-btn').on('click', function (e) {
   e.preventDefault();
-  const urlValue = $('#distribute__web').val();
   $('#distribute__web').select();
   document.execCommand('copy');
 });
-
 /* DISTRIBUTE web copylick end */
+/* RESPONSES VIEW ON-CLICK  */
+$('.medical-survey').on('click', function () {
+  $('.showResponse').toggleClass('d-none');
+});
+/* RESPONSES VIEW ON-CLICK end-- */
