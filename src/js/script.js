@@ -15,11 +15,13 @@ $('#folder__menu-close').on('click', () => {
   $('#folder__menu').toggleClass('menu__close');
 });
 /* section-home-folders__menu end----- */
+
+
 /* section-home-folders-dropdown */
 $('#folderDropdown').on('click', function () {
   $(this).toggleClass('dropDownClickBorder');
 });
-$('#folderDropdown-menu .dropdown-item').map(function () {
+$('#folderDropdown-menu .dropdown-item').each(function () {
   $(this)
     .on('click', function () {
       $(this)
@@ -29,6 +31,7 @@ $('#folderDropdown-menu .dropdown-item').map(function () {
     });
 });
 /* section-home-folders-dropdown end------ */
+
 
 /* create project */
 $('#createProjectBTN').on('click', function (e) {
@@ -118,6 +121,8 @@ $('#createProjectBTN').on('click', function (e) {
   $('.projects-list .container-fluid').prepend(card);
 });
 /* create project end----------*/
+
+
 /* card (project) on click go to edit_survey */
 $('.projects-list').on('click', '.card-body', function () {
   const projectCreationName = $(this)
@@ -130,6 +135,8 @@ $('.projects-list').on('click', '.card-body', function () {
   window.location = newURL;
 });
 /* card (project) on click go to edit_survey end--- */
+
+
 /* get the clicked PROJECT name from localstorage */
 $(document).ready(() => {
   const loc = window.location.href;
@@ -139,6 +146,8 @@ $(document).ready(() => {
   }
 });
 /* get the clicked PROJECT name from localstorage end--*/
+
+
 /* CONTENTEDITABLE on CLICK */
 $(document).on('click', '[contenteditable="true"]', function () {
   $(document)
@@ -150,8 +159,9 @@ $(document).on('click', '[contenteditable="true"]', function () {
   });
   document.execCommand('selectAll', false, null);
 });
-
 /* CONTENTEDITABLE on CLICK end--- */
+
+
 /* ADD BLOCK function */
 $('.section-block').on('click', '#addBlock', () => {
   const block = $(`<div class="section-block-card">
@@ -211,6 +221,8 @@ $('.section-block').on('click', '#addBlock', () => {
   $('.section-block .col-12').append(block);
 });
 /* ADD BLOCK function end--*/
+
+
 /* ADD QUESTION RADIO */
 let num = 1;
 
@@ -297,10 +309,12 @@ $('.section-block').on('click', '.questionDelete', function () {
     .remove();
 });
 /* ADD QUESTION RADIO end-- */
+
+
+/* MOVE QUESTION UP and DOWN */
 function choicesCurrentNum() {
   return $('.hoverQuestionClicked .card-text').length;
 }
-/* MOVE QUESTION UP and DOWN */
 $('.section-block')
   .on('click', '.questionMove__up', function () {
     // <div .row></div>
@@ -320,6 +334,7 @@ $('.section-block').on('click', '.questionMove__down', function () {
   $(questionPosition).insertAfter(questionPositionPrevSibling);
 });
 /* MOVE QUESTION UP and DOWN end-- */
+
 
 /* QUESTION ON CLICK CHANGE BACKGROUNND */
 $('.section-block').on('click', '.hoverQuestion', function () {
@@ -349,6 +364,8 @@ $('.section-block').on('click', '.hoverQuestion', function () {
   $('.choices span').text(choicesCurrentNum);
 });
 /* QUESTION ON CLICK CHANGE BACKGROUNND end-- */
+
+
 /* RADIO CHOICES */
 $('.choicesDecrease').on('click', function () {
   $('.hoverQuestionClicked .card-text:last-child').remove();
@@ -376,6 +393,8 @@ $('.choicesIncrease').on('click', function () {
 });
 
 /* RADIO CHOICES end */
+
+
 /* CHANGE TO QUESTION CHECKBOX */
 $('#multibleAnswers').on('click', function () {
   $('.hoverQuestionClicked input:radio').prop('checked', false);
@@ -386,6 +405,8 @@ $('#singleAnswers').on('click', function () {
   $('.hoverQuestionClicked input:checkbox').attr('type', 'radio');
 });
 /* CHANGE TO QUESTION CHECKBOX end-- */
+
+
 //---------------------------------------------
 /* DISTRIBUTE web copylick */
 $('#distribute__web-btn').on('click', function (e) {
@@ -394,11 +415,15 @@ $('#distribute__web-btn').on('click', function (e) {
   document.execCommand('copy');
 });
 /* DISTRIBUTE web copylick end */
+
+
 /* RESPONSES VIEW ON-CLICK  */
 $('.sport-survey').on('click', function () {
   $('.showResponse').toggleClass('d-none');
 });
 /* RESPONSES VIEW ON-CLICK end-- */
+
+
 /* REPORTS TOGGLE TEXTAREA ADD NOTE */
 $('.reportSection').on('click', '.reportAddNote', function () {
   $('.note').toggleClass('d-none');

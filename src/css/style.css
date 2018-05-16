@@ -1,53 +1,73 @@
 @font-face{
-  font-family: Lato;
+  font-family: Nunito;
   font-style: italic;
-  font-weight: 100;
-  src: local("Lato Hairline Italic"),local(Lato-HairlineItalic),url(//fonts.gstatic.com/s/lato/v14/81DMwqUqq96weubmVpbDyvesZW2xOQ-xsNqO47m55DA.eot?#) format("eot"),url(//fonts.gstatic.com/s/lato/v14/9TBVFLzQ3GUZLG8FZ4yrEfesZW2xOQ-xsNqO47m55DA.woff2) format("woff2"),url(//fonts.gstatic.com/s/lato/v14/CggrdU0t5c42NcNxN-VM3_esZW2xOQ-xsNqO47m55DA.woff) format("woff"); }
+  font-weight: 200;
+  src: local("Nunito ExtraLight Italic"),local(Nunito-ExtraLightItalic),url(//fonts.gstatic.com/s/nunito/v9/7OqZTbfdEIbjL5TSZvx5M2fQcKutQXcIrRfyR5jdjY8.eot?#) format("eot"),url(//fonts.gstatic.com/s/nunito/v9/7OqZTbfdEIbjL5TSZvx5M44P5ICox8Kq3LLUNMylGO4.woff2) format("woff2"),url(//fonts.gstatic.com/s/nunito/v9/7OqZTbfdEIbjL5TSZvx5M4bN6UDyHWBl620a-IRfuBk.woff) format("woff"); }
 @font-face{
-  font-family: Lato;
+  font-family: Nunito;
   font-style: italic;
   font-weight: 300;
-  src: local("Lato Light Italic"),local(Lato-LightItalic),url(//fonts.gstatic.com/s/lato/v14/2HG_tEPiQ4Z6795cGfdivPY6323mHUZFJMgTvxaG2iE.eot?#) format("eot"),url(//fonts.gstatic.com/s/lato/v14/2HG_tEPiQ4Z6795cGfdivFtXRa8TVwTICgirnJhmVJw.woff2) format("woff2"),url(//fonts.gstatic.com/s/lato/v14/2HG_tEPiQ4Z6795cGfdivD8E0i7KZn-EPnyo3HZu7kw.woff) format("woff"); }
+  src: local("Nunito Light Italic"),local(Nunito-LightItalic),url(//fonts.gstatic.com/s/nunito/v9/_C_xq8cfm7bmasVf4cTGmmfQcKutQXcIrRfyR5jdjY8.eot?#) format("eot"),url(//fonts.gstatic.com/s/nunito/v9/_C_xq8cfm7bmasVf4cTGmo4P5ICox8Kq3LLUNMylGO4.woff2) format("woff2"),url(//fonts.gstatic.com/s/nunito/v9/_C_xq8cfm7bmasVf4cTGmobN6UDyHWBl620a-IRfuBk.woff) format("woff"); }
 @font-face{
-  font-family: Lato;
+  font-family: Nunito;
   font-style: italic;
   font-weight: 400;
-  src: local("Lato Italic"),local(Lato-Italic),url(//fonts.gstatic.com/s/lato/v14/bjaQ6jyWa8A2XFrSKceJyA.eot?#) format("eot"),url(//fonts.gstatic.com/s/lato/v14/PLygLKRVCQnA5fhu3qk5fQ.woff2) format("woff2"),url(//fonts.gstatic.com/s/lato/v14/oUan5VrEkpzIazlUe5ieaA.woff) format("woff"); }
+  src: local("Nunito Italic"),local(Nunito-Italic),url(//fonts.gstatic.com/s/nunito/v9/e1JIfv55TNOgCFQk8L4i7fesZW2xOQ-xsNqO47m55DA.eot?#) format("eot"),url(//fonts.gstatic.com/s/nunito/v9/TKXondz8XS_niu2DEyc9EfesZW2xOQ-xsNqO47m55DA.woff2) format("woff2"),url(//fonts.gstatic.com/s/nunito/v9/HJv9SI174j8r18hqo4OctvesZW2xOQ-xsNqO47m55DA.woff) format("woff"); }
 @font-face{
-  font-family: Lato;
+  font-family: Nunito;
+  font-style: italic;
+  font-weight: 600;
+  src: local("Nunito SemiBold Italic"),local(Nunito-SemiBoldItalic),url(//fonts.gstatic.com/s/nunito/v9/PcNqAMqDrzfKE6Iowq7NvGfQcKutQXcIrRfyR5jdjY8.eot?#) format("eot"),url(//fonts.gstatic.com/s/nunito/v9/PcNqAMqDrzfKE6Iowq7NvI4P5ICox8Kq3LLUNMylGO4.woff2) format("woff2"),url(//fonts.gstatic.com/s/nunito/v9/PcNqAMqDrzfKE6Iowq7NvIbN6UDyHWBl620a-IRfuBk.woff) format("woff"); }
+@font-face{
+  font-family: Nunito;
   font-style: italic;
   font-weight: 700;
-  src: local("Lato Bold Italic"),local(Lato-BoldItalic),url(//fonts.gstatic.com/s/lato/v14/HkF_qI1x_noxlxhrhMQYEPY6323mHUZFJMgTvxaG2iE.eot?#) format("eot"),url(//fonts.gstatic.com/s/lato/v14/HkF_qI1x_noxlxhrhMQYEFtXRa8TVwTICgirnJhmVJw.woff2) format("woff2"),url(//fonts.gstatic.com/s/lato/v14/HkF_qI1x_noxlxhrhMQYED8E0i7KZn-EPnyo3HZu7kw.woff) format("woff"); }
+  src: local("Nunito Bold Italic"),local(Nunito-BoldItalic),url(//fonts.gstatic.com/s/nunito/v9/opLCcgSQ1qknYem5jTk00mfQcKutQXcIrRfyR5jdjY8.eot?#) format("eot"),url(//fonts.gstatic.com/s/nunito/v9/opLCcgSQ1qknYem5jTk00o4P5ICox8Kq3LLUNMylGO4.woff2) format("woff2"),url(//fonts.gstatic.com/s/nunito/v9/opLCcgSQ1qknYem5jTk00obN6UDyHWBl620a-IRfuBk.woff) format("woff"); }
 @font-face{
-  font-family: Lato;
+  font-family: Nunito;
+  font-style: italic;
+  font-weight: 800;
+  src: local("Nunito ExtraBold Italic"),local(Nunito-ExtraBoldItalic),url(//fonts.gstatic.com/s/nunito/v9/UJeC1HH28GiylGna4brNoWfQcKutQXcIrRfyR5jdjY8.eot?#) format("eot"),url(//fonts.gstatic.com/s/nunito/v9/UJeC1HH28GiylGna4brNoY4P5ICox8Kq3LLUNMylGO4.woff2) format("woff2"),url(//fonts.gstatic.com/s/nunito/v9/UJeC1HH28GiylGna4brNoYbN6UDyHWBl620a-IRfuBk.woff) format("woff"); }
+@font-face{
+  font-family: Nunito;
   font-style: italic;
   font-weight: 900;
-  src: local("Lato Black Italic"),local(Lato-BlackItalic),url(//fonts.gstatic.com/s/lato/v14/VNUH7ZAcagYBWsAiBBCEY_Y6323mHUZFJMgTvxaG2iE.eot?#) format("eot"),url(//fonts.gstatic.com/s/lato/v14/VNUH7ZAcagYBWsAiBBCEY1tXRa8TVwTICgirnJhmVJw.woff2) format("woff2"),url(//fonts.gstatic.com/s/lato/v14/VNUH7ZAcagYBWsAiBBCEYz8E0i7KZn-EPnyo3HZu7kw.woff) format("woff"); }
+  src: local("Nunito Black Italic"),local(Nunito-BlackItalic),url(//fonts.gstatic.com/s/nunito/v9/zn-qzKw_O9wBPVv0pW4_ZmfQcKutQXcIrRfyR5jdjY8.eot?#) format("eot"),url(//fonts.gstatic.com/s/nunito/v9/zn-qzKw_O9wBPVv0pW4_Zo4P5ICox8Kq3LLUNMylGO4.woff2) format("woff2"),url(//fonts.gstatic.com/s/nunito/v9/zn-qzKw_O9wBPVv0pW4_ZobN6UDyHWBl620a-IRfuBk.woff) format("woff"); }
 @font-face{
-  font-family: Lato;
+  font-family: Nunito;
   font-style: normal;
-  font-weight: 100;
-  src: local("Lato Hairline"),local(Lato-Hairline),url(//fonts.gstatic.com/s/lato/v14/KlmP_Vc2zOZBldw8AfXD5g.eot?#) format("eot"),url(//fonts.gstatic.com/s/lato/v14/GtRkRNTnri0g82CjKnEB0Q.woff2) format("woff2"),url(//fonts.gstatic.com/s/lato/v14/boeCNmOCCh-EWFLSfVffDg.woff) format("woff"); }
+  font-weight: 200;
+  src: local("Nunito ExtraLight"),local(Nunito-ExtraLight),url(//fonts.gstatic.com/s/nunito/v9/BCVslGnw-rd3HMmA07k03_Y6323mHUZFJMgTvxaG2iE.eot?#) format("eot"),url(//fonts.gstatic.com/s/nunito/v9/BCVslGnw-rd3HMmA07k031tXRa8TVwTICgirnJhmVJw.woff2) format("woff2"),url(//fonts.gstatic.com/s/nunito/v9/BCVslGnw-rd3HMmA07k03z8E0i7KZn-EPnyo3HZu7kw.woff) format("woff"); }
 @font-face{
-  font-family: Lato;
+  font-family: Nunito;
   font-style: normal;
   font-weight: 300;
-  src: local("Lato Light"),local(Lato-Light),url(//fonts.gstatic.com/s/lato/v14/zLhfkPOm_5ykmdm-wXaiuw.eot?#) format("eot"),url(//fonts.gstatic.com/s/lato/v14/EsvMC5un3kjyUhB9ZEPPwg.woff2) format("woff2"),url(//fonts.gstatic.com/s/lato/v14/KT3KS9Aol4WfR6Vas8kNcg.woff) format("woff"); }
+  src: local("Nunito Light"),local(Nunito-Light),url(//fonts.gstatic.com/s/nunito/v9/1TiHc9yag0wq3lDO9cw0vvY6323mHUZFJMgTvxaG2iE.eot?#) format("eot"),url(//fonts.gstatic.com/s/nunito/v9/1TiHc9yag0wq3lDO9cw0vltXRa8TVwTICgirnJhmVJw.woff2) format("woff2"),url(//fonts.gstatic.com/s/nunito/v9/1TiHc9yag0wq3lDO9cw0vj8E0i7KZn-EPnyo3HZu7kw.woff) format("woff"); }
 @font-face{
-  font-family: Lato;
+  font-family: Nunito;
   font-style: normal;
   font-weight: 400;
-  src: local("Lato Regular"),local(Lato-Regular),url(//fonts.gstatic.com/s/lato/v14/nQhiC-wSiJx0pvEuJl8d8A.eot?#) format("eot"),url(//fonts.gstatic.com/s/lato/v14/1YwB1sO8YE1Lyjf12WNiUA.woff2) format("woff2"),url(//fonts.gstatic.com/s/lato/v14/9k-RPmcnxYEPm8CNFsH2gg.woff) format("woff"); }
+  src: local("Nunito Regular"),local(Nunito-Regular),url(//fonts.gstatic.com/s/nunito/v9/JzBfLWXc4Z6sd0WuCbRTgg.eot?#) format("eot"),url(//fonts.gstatic.com/s/nunito/v9/cSNs3NwpEgPVRQzvkh3NeQ.woff2) format("woff2"),url(//fonts.gstatic.com/s/nunito/v9/0rdItLTcOd8TSMl72RUU5w.woff) format("woff"); }
 @font-face{
-  font-family: Lato;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: 600;
+  src: local("Nunito SemiBold"),local(Nunito-SemiBold),url(//fonts.gstatic.com/s/nunito/v9/NcqjkPJTQZlJIFxZdZcTe_Y6323mHUZFJMgTvxaG2iE.eot?#) format("eot"),url(//fonts.gstatic.com/s/nunito/v9/NcqjkPJTQZlJIFxZdZcTe1tXRa8TVwTICgirnJhmVJw.woff2) format("woff2"),url(//fonts.gstatic.com/s/nunito/v9/NcqjkPJTQZlJIFxZdZcTez8E0i7KZn-EPnyo3HZu7kw.woff) format("woff"); }
+@font-face{
+  font-family: Nunito;
   font-style: normal;
   font-weight: 700;
-  src: local("Lato Bold"),local(Lato-Bold),url(//fonts.gstatic.com/s/lato/v14/sBtfDPlEIwvKKU53nAG7AQ.eot?#) format("eot"),url(//fonts.gstatic.com/s/lato/v14/H2DMvhDLycM56KNuAtbJYA.woff2) format("woff2"),url(//fonts.gstatic.com/s/lato/v14/wkfQbvfT_02e2IWO3yYueQ.woff) format("woff"); }
+  src: local("Nunito Bold"),local(Nunito-Bold),url(//fonts.gstatic.com/s/nunito/v9/TttUCfJ272GBgSKaOaD7KvY6323mHUZFJMgTvxaG2iE.eot?#) format("eot"),url(//fonts.gstatic.com/s/nunito/v9/TttUCfJ272GBgSKaOaD7KltXRa8TVwTICgirnJhmVJw.woff2) format("woff2"),url(//fonts.gstatic.com/s/nunito/v9/TttUCfJ272GBgSKaOaD7Kj8E0i7KZn-EPnyo3HZu7kw.woff) format("woff"); }
 @font-face{
-  font-family: Lato;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: 800;
+  src: local("Nunito ExtraBold"),local(Nunito-ExtraBold),url(//fonts.gstatic.com/s/nunito/v9/uWPftrNW4xALzHc_KE-W1PY6323mHUZFJMgTvxaG2iE.eot?#) format("eot"),url(//fonts.gstatic.com/s/nunito/v9/uWPftrNW4xALzHc_KE-W1FtXRa8TVwTICgirnJhmVJw.woff2) format("woff2"),url(//fonts.gstatic.com/s/nunito/v9/uWPftrNW4xALzHc_KE-W1D8E0i7KZn-EPnyo3HZu7kw.woff) format("woff"); }
+@font-face{
+  font-family: Nunito;
   font-style: normal;
   font-weight: 900;
-  src: local("Lato Black"),local(Lato-Black),url(//fonts.gstatic.com/s/lato/v14/BjDVcwQGWPX2RAidnkd0Bw.eot?#) format("eot"),url(//fonts.gstatic.com/s/lato/v14/tI4j516nok_GrVf4dhunkg.woff2) format("woff2"),url(//fonts.gstatic.com/s/lato/v14/BVtM30trf7q_jfqYeHfjtA.woff) format("woff"); }
+  src: local("Nunito Black"),local(Nunito-Black),url(//fonts.gstatic.com/s/nunito/v9/Cj2facSP9LFhbctU5GJ2WPY6323mHUZFJMgTvxaG2iE.eot?#) format("eot"),url(//fonts.gstatic.com/s/nunito/v9/Cj2facSP9LFhbctU5GJ2WFtXRa8TVwTICgirnJhmVJw.woff2) format("woff2"),url(//fonts.gstatic.com/s/nunito/v9/Cj2facSP9LFhbctU5GJ2WD8E0i7KZn-EPnyo3HZu7kw.woff) format("woff"); }
 @charset "UTF-8";
 /*@import abstract folder */
 /* colors */
@@ -238,7 +258,7 @@ input[type="radio"] {
 /* Base end-------------------- */
 /* typography */
 body {
-  font-family: "Lato", Arial, Helvetica, sans-serif;
+  font-family: "Nunito", Arial, Helvetica, sans-serif;
   font-weight: 400;
   line-height: 1.7;
   color: #777; }
@@ -1045,6 +1065,13 @@ main {
 .responsesSection .QC-status .status-rejected {
   color: red; }
 
+/* library */
+.librarySection .rightControls {
+  font-size: 1.9rem; }
+  .librarySection .rightControls .nav-link {
+    border-radius: 0; }
+
+/* library end */
 /*@import pages folder end-----------------------------*/
 
 /*# sourceMappingURL=style.css.map */
