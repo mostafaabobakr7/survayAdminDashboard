@@ -590,6 +590,30 @@ body {
     -webkit-box-shadow: none;
             box-shadow: none; }
 
+.reportSection .rightControls .btn-group .btn {
+  font-size: 1.7rem;
+  background-color: #fff;
+  padding: 1rem 3rem;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+  -webkit-transform: scale(1) !important;
+     -moz-transform: scale(1) !important;
+      -ms-transform: scale(1) !important;
+       -o-transform: scale(1) !important;
+          transform: scale(1) !important;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out; }
+  .reportSection .rightControls .btn-group .btn:hover {
+    background-color: #e9e9e9; }
+  .reportSection .rightControls .btn-group .btn:active {
+    -webkit-transform: scale(1) !important;
+       -moz-transform: scale(1) !important;
+        -ms-transform: scale(1) !important;
+         -o-transform: scale(1) !important;
+            transform: scale(1) !important; }
+
 /* btn component end--------------------- */
 /* card component */
 .projects-list-container {
@@ -1080,10 +1104,14 @@ main {
           box-shadow: none !important;
   background-color: transparent !important; }
 
-.visibilityHidden {
+.reportSection .visibilityHidden {
   visibility: hidden !important; }
 
-/* REPORT end */
+.reportSection .btn-group-active {
+  background-color: #007ac0 !important;
+  color: #fff !important; }
+
+/* REPORT end--*/
 /* library */
 .librarySection .leftContent .dropzone {
   cursor: pointer;

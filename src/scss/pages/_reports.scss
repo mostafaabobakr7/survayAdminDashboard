@@ -9,10 +9,13 @@
     box-shadow: none !important;
     background-color: transparent !important;
   }
+  .visibilityHidden {
+    visibility: hidden !important;
+  }
+  .btn-group-active {
+    background-color: $nav-main-color !important;
+    color: #fff !important;
+  }
 }
 
-.visibilityHidden {
-  visibility: hidden !important;
-}
-
-/* REPORT end */
+/* REPORT end--*/

@@ -1,3 +1,10 @@
+/* Enable tooltips everywhere */
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+});
+/* Enable tooltips everywhere end */
+
+
 /* section-home-folders__menu */
 $('#folder__link')
   .on('click', function () {
@@ -449,6 +456,57 @@ $('.reportSection').on('change keyup keydown paste cut', '.note', function () {
 
 
 /* REPORTS TOGGLE TEXTAREA ADD NOTE end */
+
+
+/* REPORT ADD VISUAL */
+$('.reportSection').on('click', '.btn-group .btn', function () {
+  $(this).addClass('btn-group-active');
+  $(this).siblings().removeClass('btn-group-active');
+});
+$('.reportSection').on('click', '.reportAddVisual', function () {
+
+});
+
+function chart(type) {
+  const canvasClass = `class${new Date().getTime()}`;
+  const canvas = $(`<canvas class=${canvasClass} width="400" height="400"></canvas>`);
+  $('.chartSection').append(canvas);
+  let ctx = document.querySelector(`.${canvasClass}`).getContext('2d');
+  let myChart = new Chart(ctx, {
+    type: `${type}`,
+    data: {
+      labels: ['answer1', 'answer2'],
+      datasets: [{
+        label: 'number of answers',
+        data: [1, 1],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.8)',
+          'rgba(54, 162, 235, 0.8)',
+
+        ],
+        borderColor: [
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+        ],
+        borderWidth: 1,
+      }],
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+          },
+        }],
+      },
+    },
+  });
+}
+chart('bar');
+/* REPORT ADD VISUAL end */
+
+
 /* LIBRARY */
 
 /* LIBRARY end */

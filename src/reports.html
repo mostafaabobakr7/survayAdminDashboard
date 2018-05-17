@@ -102,42 +102,47 @@
                         What is your favorite player?
                       </h3>
                     </div>
-                    <div class="card-text mb-2">
-                      <input disabled type="radio" name="radioName">
-                      <span>Click to write Choice 1</span>
-                    </div>
-                    <div class="card-text mb-2">
-                      <input disabled checked type="radio" name="radioName">
-                      <span>Click to write Choice 2</span>
-                    </div>
-                    <div class="card-text mb-2">
-                      <input disabled type="radio" name="radioName">
-                      <span>Click to write Choice 3</span>
-                    </div>
                   </div>
                 </div>
+              </div>
+              <div class="chartSection">
               </div>
               <div class="noteValue pt-4 visibilityHidden">
                 <h3>NOTE:</h3>
                 <textarea class="form-control" readonly id="noteVal" cols="30" rows="4"></textarea>
               </div>
             </section>
-            <section class="reportBtns">
+            <section class="reportBtns mb-5">
               <form class="text-center">
                 <textarea class="form-control my-4 d-none note" cols="10" rows="5"></textarea>
                 <button type="button" class="noteBTN reportAddNote btn btn-lg btn-secondary mx-4">
                   <i class="fa fa-sticky-note-o"></i> Add note</button>
                 <button type="button" class="noteBTN reportCloseNote btn btn-lg btn-secondary mx-4 d-none">
                   <i class="fa fa-times"></i> Close note</button>
-                <button type="button" class="reportAddVisual btn btn-lg btn-primary">
-                  <i class="fa fa-line-chart"></i> Add Visual</button>
               </form>
             </section>
           </div>
           <!-- left side survey content end- -->
           <!-- right side controls -->
           <div class="col-md-2 pr-0 rightControlsColor">
-            <section class="rightControls pr-4 ">
+            <section class="rightControls pr-4 text-center">
+              <div class="row">
+                <div class="col-12 py-5">
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                    <button id="bar" type="button" class="btn btn-group-active" data-toggle="tooltip" data-placement="bottom" title="bar">
+                      <i class="fa fa-bar-chart"></i>
+                    </button>
+                    <button id="line" type="button" class=" btn " data-toggle="tooltip" data-placement="top" title="line">
+                      <i class="fa fa-line-chart"></i>
+                    </button>
+                    <button id="pie" type="button" class=" btn" data-toggle="tooltip" data-placement="bottom" title="pie">
+                      <i class="fa fa-pie-chart"></i>
+                    </button>
+                  </div>
+                  <button type="button" class="mt-5 reportAddVisual btn btn-lg btn-primary">
+                    <i class="fa fa-line-chart"></i> Add Visual</button>
+                </div>
+              </div>
             </section>
           </div>
         </div>
@@ -145,9 +150,7 @@
     </div>
   </main>
   <!-- main end-->
-  <!-- footer -->
-  <footer class="footer"></footer>
-  <!-- footer end -->
+
 
   <!-- ........................................ -->
   <script src="./js/jquery-3.3.1.slim.min.js"></script>
