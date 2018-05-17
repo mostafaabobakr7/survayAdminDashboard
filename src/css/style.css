@@ -1066,12 +1066,8 @@ main {
   color: red; }
 
 /* library */
-.librarySection .rightControls {
-  font-size: 1.9rem; }
-  .librarySection .rightControls .nav-link {
-    border-radius: 0; }
-
-.dropzone {
+.librarySection .leftContent .dropzone {
+  cursor: pointer;
   padding: 9rem 2rem;
   background: white;
   border-radius: 5px;
@@ -1084,19 +1080,24 @@ main {
   margin-left: auto;
   margin-right: auto;
   font-size: 3rem; }
-  .dropzone i {
+  .librarySection .leftContent .dropzone i {
     font-size: 8rem; }
-  .dropzone .dz-success-mark,
-  .dropzone .dz-error-mark {
+  .librarySection .leftContent .dropzone .dz-success-mark,
+  .librarySection .leftContent .dropzone .dz-error-mark {
     margin: 5px 10px; }
-  .dropzone .dz-success-mark svg g path {
+  .librarySection .leftContent .dropzone .dz-success-mark svg g path {
     fill: green !important; }
-  .dropzone .dz-success-mark:hover svg g path {
+  .librarySection .leftContent .dropzone .dz-success-mark:hover svg g path {
     fill: #046404 !important; }
-  .dropzone .dz-error-mark svg g path {
+  .librarySection .leftContent .dropzone .dz-error-mark svg g path {
     fill: red !important; }
-  .dropzone .dz-error-mark:hover svg g path {
+  .librarySection .leftContent .dropzone .dz-error-mark:hover svg g path {
     fill: #af0505 !important; }
+
+.librarySection .rightControls {
+  font-size: 1.9rem; }
+  .librarySection .rightControls .nav-link {
+    border-radius: 0; }
 
 /* library end */
 /*@import pages folder end-----------------------------*/
