@@ -425,8 +425,12 @@ $('.sport-survey').on('click', function () {
 
 
 /* REPORTS TOGGLE TEXTAREA ADD NOTE */
+
 $('.reportSection').on('click', '.reportAddNote', function () {
   $('.note').toggleClass('d-none');
+  if ($('.note').val()) {
+    $('.noteValue').removeClass('visibilityHidden');
+  }
 });
 $('.reportSection').on('change keyup keydown paste cut', '.note', function () {
   let note = $(this).val();
