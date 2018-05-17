@@ -425,8 +425,10 @@ $('.sport-survey').on('click', function () {
 
 
 /* REPORTS TOGGLE TEXTAREA ADD NOTE */
+$('.reportSection').on('click', '.noteBTN', function () {
+  $('.reportAddNote').toggleClass('d-none');
+  $('.reportCloseNote').toggleClass('d-none');
 
-$('.reportSection').on('click', '.reportAddNote', function () {
   $('.note').toggleClass('d-none');
   if ($('.note').val()) {
     $('.noteValue').removeClass('visibilityHidden');

@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "bootstrap": "4.0.0",
+    "chart.js": "^2.7.2",
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
     "medium-editor": "^5.23.3",
