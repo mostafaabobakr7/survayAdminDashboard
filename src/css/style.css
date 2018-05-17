@@ -839,6 +839,11 @@ body {
     color: #fff !important;
     background-color: #007ac0 !important; }
 
+.dropdown {
+  border: 0 !important;
+  background-color: transparent;
+  outline: 0 !important; }
+
 /* edit_survey nav */
 /* edit_survey nav end-- */
 /* editable  */

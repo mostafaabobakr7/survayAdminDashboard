@@ -83,7 +83,7 @@
   <!-- Header end-->
   <!-- main -->
   <main>
-<div class="editSurveySection reportSection">
+    <div class="editSurveySection reportSection">
       <div class="container-fluid">
         <div class="row">
           <!-- left side survey content -->
@@ -117,11 +117,15 @@
                   </div>
                 </div>
               </div>
+              <div class="noteValue pt-4 d-none">
+                <h3>NOTE:</h3>
+                <textarea class="form-control" readonly id="noteVal" cols="30" rows="10"></textarea>
+              </div>
             </section>
             <section class="reportBtns">
               <form class="text-center">
                 <textarea class="form-control my-4 d-none note" cols="10" rows="5"></textarea>
-                <button type="button" class="reportAddNote btn btn-lg btn-outline-secondary mx-4">
+                <button type="button" class="reportAddNote btn btn-lg btn-secondary mx-4">
                   <i class="fa fa-sticky-note-o"></i> Add note</button>
                 <button type="button" class="reportAddVisual btn btn-lg btn-primary">
                   <i class="fa fa-line-chart"></i> Add Visual</button>

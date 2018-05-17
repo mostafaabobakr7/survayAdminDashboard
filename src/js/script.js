@@ -428,6 +428,16 @@ $('.sport-survey').on('click', function () {
 $('.reportSection').on('click', '.reportAddNote', function () {
   $('.note').toggleClass('d-none');
 });
+$('.reportSection').on('keyup', '.note', function () {
+  let note = $(this).val();
+  $('#noteVal').val(note);
+  if (!$('#noteVal').val()) {
+    $('.noteValue').addClass('d-none');
+  } else {
+    $('.noteValue').removeClass('d-none');
+  }
+});
+
 /* REPORTS TOGGLE TEXTAREA ADD NOTE end */
 /* LIBRARY */
 
