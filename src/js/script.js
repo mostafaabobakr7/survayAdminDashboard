@@ -429,3 +429,6 @@ $('.reportSection').on('click', '.reportAddNote', function () {
   $('.note').toggleClass('d-none');
 });
 /* REPORTS TOGGLE TEXTAREA ADD NOTE end */
+/* LIBRARY */
+
+/* LIBRARY end */

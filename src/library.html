@@ -69,12 +69,36 @@
               <div class="mb-5">
                 <h3 class="projectNameEdit" contenteditable="true"></h3>
               </div>
-              <div class="tab-content" id="v-pills-tabContent">
-                <div class="tab-pane fade show active" id="v-pills-upload" role="tabpanel" aria-labelledby="v-pills-upload-tab">
-
+              <div class="tab-content " id="v-pills-tabContent">
+                <div class="tab-pane fade show active text-center" id="v-pills-upload" role="tabpanel" aria-labelledby="v-pills-upload-tab">
+                  <form action="../img/media/" class="dropzone" id="my-awesome-dropzone">
+                    <i class="fa fa-upload"></i>
+                  </form>
                 </div>
-                <div class="tab-pane fade" id="v-pills-media" role="tabpanel" aria-labelledby="v-pills-media-tab">media</div>
+                <div class="tab-pane fade" id="v-pills-media" role="tabpanel" aria-labelledby="v-pills-media-tab">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <img width="300" height="300" src="./img/media/brand_Experience.jpg" alt="img1">
 
+                    </div>
+                    <div class="col-md-3">
+                      <picture>
+                        <img width="300" height="300" src="./img/media/customer_Experience.jpg" alt="img1">
+                      </picture>
+                    </div>
+                    <div class="col-md-3">
+                      <picture>
+                        <img width="300" height="300" src="./img/media/employee_Experience.jpg" alt="img1">
+                      </picture>
+                    </div>
+                    <div class="col-md-3">
+                      <picture>
+                        <img width="300" height="300" src="./img/media/product_Experience.jpg" alt="img1">
+
+                      </picture>
+                    </div>
+                  </div>
+                </div>
               </div>
             </section>
           </div>
@@ -105,6 +129,7 @@
   <script src="./js/jquery-3.3.1.slim.min.js"></script>
   <script src="./js/popper.min.js"></script>
   <script src="./js/bootstrap.min.js"></script>
+  <script src="./js/dropzone.js"></script>
   <script src="./js/script.js"></script>
 </body>
 

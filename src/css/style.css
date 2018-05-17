@@ -258,7 +258,7 @@ input[type="radio"] {
 /* Base end-------------------- */
 /* typography */
 body {
-  font-family: "Nunito", Arial, Helvetica, sans-serif;
+  font-family: "Nunito", Helvetica, sans-serif;
   font-weight: 400;
   line-height: 1.7;
   color: #777; }
@@ -1070,6 +1070,33 @@ main {
   font-size: 1.9rem; }
   .librarySection .rightControls .nav-link {
     border-radius: 0; }
+
+.dropzone {
+  padding: 9rem 2rem;
+  background: white;
+  border-radius: 5px;
+  border: 2px dashed #0087f7;
+  -webkit-border-image: none;
+     -moz-border-image: none;
+       -o-border-image: none;
+          border-image: none;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 3rem; }
+  .dropzone i {
+    font-size: 8rem; }
+  .dropzone .dz-success-mark,
+  .dropzone .dz-error-mark {
+    margin: 5px 10px; }
+  .dropzone .dz-success-mark svg g path {
+    fill: green !important; }
+  .dropzone .dz-success-mark:hover svg g path {
+    fill: #046404 !important; }
+  .dropzone .dz-error-mark svg g path {
+    fill: red !important; }
+  .dropzone .dz-error-mark:hover svg g path {
+    fill: #af0505 !important; }
 
 /* library end */
 /*@import pages folder end-----------------------------*/
