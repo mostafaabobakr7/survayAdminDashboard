@@ -1,0 +1,18 @@
+/* REPORT */
+
+.reportSection {
+  .noteValue textarea {
+    resize: none;
+    border: none !important;
+    overflow: auto;
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+  }
+}
+
+.visibilityHidden {
+  visibility: hidden !important;
+}
+
+/* REPORT end */

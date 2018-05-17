@@ -428,15 +428,19 @@ $('.sport-survey').on('click', function () {
 $('.reportSection').on('click', '.reportAddNote', function () {
   $('.note').toggleClass('d-none');
 });
-$('.reportSection').on('keyup', '.note', function () {
+$('.reportSection').on('change keyup keydown paste cut', '.note', function () {
   let note = $(this).val();
+  $(this).height(0).height(this.scrollHeight);
   $('#noteVal').val(note);
+  $('#noteVal').height(0).height(this.scrollHeight);
+
   if (!$('#noteVal').val()) {
-    $('.noteValue').addClass('d-none');
+    $('.noteValue').addClass('visibilityHidden');
   } else {
-    $('.noteValue').removeClass('d-none');
+    $('.noteValue').removeClass('visibilityHidden');
   }
 });
+
 
 /* REPORTS TOGGLE TEXTAREA ADD NOTE end */
 /* LIBRARY */

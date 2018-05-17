@@ -1070,6 +1070,20 @@ main {
 .responsesSection .QC-status .status-rejected {
   color: red; }
 
+/* REPORT */
+.reportSection .noteValue textarea {
+  resize: none;
+  border: none !important;
+  overflow: auto;
+  outline: none !important;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+  background-color: transparent !important; }
+
+.visibilityHidden {
+  visibility: hidden !important; }
+
+/* REPORT end */
 /* library */
 .librarySection .leftContent .dropzone {
   cursor: pointer;
