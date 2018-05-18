@@ -136,8 +136,9 @@ $('.projects-list').on('click', '.card-body', function () {
     const path = ('survayAdminDashboard/edit_survey.html');
     const newURL = `${window.location.protocol}//${window.location.host}/${path}`;
     window.location = newURL;
+  } else {
+    window.location.pathname = 'edit_survey.html';
   }
-  window.location.pathname = 'edit_survey.html';
 });
 /* card (project) on click go to edit_survey end--- */
 
