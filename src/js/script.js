@@ -132,7 +132,7 @@ $('.projects-list').on('click', '.card-body', function () {
     .html();
   localStorage.setItem('projectCreationName', projectCreationName);
   /* FOR GITHUB redirect only, else remove pathname paramater */
-  if (window.location.protocol === 'mostafaabobakr7.github.io') {
+  if (window.location.host === 'mostafaabobakr7.github.io') {
     const path = ('survayAdminDashboard/edit_survey.html');
     const newURL = `${window.location.protocol}//${window.location.host}/${path}`;
     window.location = newURL;
