@@ -4,16 +4,14 @@ $(function () {
 });
 /* Enable tooltips everywhere end */
 
-
 /* section-home-folders__menu */
-$('#folder__link')
-  .on('click', function () {
-    $(this)
-      .parent()
-      .toggleClass('menu__folder');
-    $('.projects-list-container').toggleClass('menu__folder');
-    $('#folder__menu').toggleClass('menu__close');
-  });
+$('#folder__link').on('click', function () {
+  $(this)
+    .parent()
+    .toggleClass('menu__folder');
+  $('.projects-list-container').toggleClass('menu__folder');
+  $('#folder__menu').toggleClass('menu__close');
+});
 $('#folder__menu-close').on('click', () => {
   $('#folder__link')
     .parent()
@@ -22,7 +20,6 @@ $('#folder__menu-close').on('click', () => {
   $('#folder__menu').toggleClass('menu__close');
 });
 /* section-home-folders__menu end----- */
-
 
 /* section-home-folders-dropdown */
 $('#folderDropdown').on('click', function () {
@@ -38,7 +35,6 @@ $('#folderDropdown-menu .dropdown-item').each(function () {
     });
 });
 /* section-home-folders-dropdown end------ */
-
 
 /* create project */
 $('#createProjectBTN').on('click', function (e) {
@@ -129,7 +125,6 @@ $('#createProjectBTN').on('click', function (e) {
 });
 /* create project end----------*/
 
-
 /* card (project) on click go to edit_survey */
 $('.projects-list').on('click', '.card-body', function () {
   const projectCreationName = $(this)
@@ -138,11 +133,15 @@ $('.projects-list').on('click', '.card-body', function () {
   localStorage.setItem('projectCreationName', projectCreationName);
   const path = ('edit_survey.html');
   /* FOR GITHUB redirect only, else remove pathname paramater */
-  const newURL = `${window.location.protocol}//${window.location.host}/${path}`;
+  let urlLast = window
+    .location
+    .href
+    .match(/[^\/]*$/);
+  urlLast = path;
+  const newURL = `${window.location.protocol}//${window.location.host}${window.location.pathname}/${urlLast}`;
   window.location = newURL;
 });
 /* card (project) on click go to edit_survey end--- */
-
 
 /* get the clicked PROJECT name from localstorage */
 $(document).ready(() => {
@@ -153,7 +152,6 @@ $(document).ready(() => {
   }
 });
 /* get the clicked PROJECT name from localstorage end--*/
-
 
 /* CONTENTEDITABLE on CLICK */
 $(document).on('click', '[contenteditable="true"]', function () {
@@ -167,7 +165,6 @@ $(document).on('click', '[contenteditable="true"]', function () {
   document.execCommand('selectAll', false, null);
 });
 /* CONTENTEDITABLE on CLICK end--- */
-
 
 /* ADD BLOCK function */
 $('.section-block').on('click', '#addBlock', () => {
@@ -228,7 +225,6 @@ $('.section-block').on('click', '#addBlock', () => {
   $('.section-block .col-12').append(block);
 });
 /* ADD BLOCK function end--*/
-
 
 /* ADD QUESTION RADIO */
 let num = 1;
@@ -317,7 +313,6 @@ $('.section-block').on('click', '.questionDelete', function () {
 });
 /* ADD QUESTION RADIO end-- */
 
-
 /* MOVE QUESTION UP and DOWN */
 function choicesCurrentNum() {
   return $('.hoverQuestionClicked .card-text').length;
@@ -341,7 +336,6 @@ $('.section-block').on('click', '.questionMove__down', function () {
   $(questionPosition).insertAfter(questionPositionPrevSibling);
 });
 /* MOVE QUESTION UP and DOWN end-- */
-
 
 /* QUESTION ON CLICK CHANGE BACKGROUNND */
 $('.section-block').on('click', '.hoverQuestion', function () {
@@ -372,7 +366,6 @@ $('.section-block').on('click', '.hoverQuestion', function () {
 });
 /* QUESTION ON CLICK CHANGE BACKGROUNND end-- */
 
-
 /* RADIO CHOICES */
 $('.choicesDecrease').on('click', function () {
   $('.hoverQuestionClicked .card-text:last-child').remove();
@@ -401,7 +394,6 @@ $('.choicesIncrease').on('click', function () {
 
 /* RADIO CHOICES end */
 
-
 /* CHANGE TO QUESTION CHECKBOX */
 $('#multibleAnswers').on('click', function () {
   $('.hoverQuestionClicked input:radio').prop('checked', false);
@@ -413,7 +405,6 @@ $('#singleAnswers').on('click', function () {
 });
 /* CHANGE TO QUESTION CHECKBOX end-- */
 
-
 //---------------------------------------------
 /* DISTRIBUTE web copylick */
 $('#distribute__web-btn').on('click', function (e) {
@@ -423,13 +414,11 @@ $('#distribute__web-btn').on('click', function (e) {
 });
 /* DISTRIBUTE web copylick end */
 
-
 /* RESPONSES VIEW ON-CLICK  */
 $('.sport-survey').on('click', function () {
   $('.showResponse').toggleClass('d-none');
 });
 /* RESPONSES VIEW ON-CLICK end-- */
-
 
 /* REPORTS TOGGLE TEXTAREA ADD NOTE */
 $('.reportSection').on('click', '.noteBTN', function () {
@@ -443,9 +432,13 @@ $('.reportSection').on('click', '.noteBTN', function () {
 });
 $('.reportSection').on('change keyup keydown paste cut', '.note', function () {
   let note = $(this).val();
-  $(this).height(0).height(this.scrollHeight);
+  $(this)
+    .height(0)
+    .height(this.scrollHeight);
   $('#noteVal').val(note);
-  $('#noteVal').height(0).height(this.scrollHeight);
+  $('#noteVal')
+    .height(0)
+    .height(this.scrollHeight);
 
   if (!$('#noteVal').val()) {
     $('.noteValue').addClass('visibilityHidden');
@@ -454,58 +447,61 @@ $('.reportSection').on('change keyup keydown paste cut', '.note', function () {
   }
 });
 
-
 /* REPORTS TOGGLE TEXTAREA ADD NOTE end */
-
 
 /* REPORT ADD VISUAL */
 $('.reportSection').on('click', '.btn-group .btn', function () {
   $(this).addClass('btn-group-active');
-  $(this).siblings().removeClass('btn-group-active');
+  $(this)
+    .siblings()
+    .removeClass('btn-group-active');
 });
-$('.reportSection').on('click', '.reportAddVisual', function () {
-
-});
+$('.reportSection').on('click', '.reportAddVisual', function () {});
 
 function chart(type) {
   const canvasClass = `class${new Date().getTime()}`;
   const canvas = $(`<canvas class=${canvasClass} width="400" height="400"></canvas>`);
   $('.chartSection').append(canvas);
-  let ctx = document.querySelector(`.${canvasClass}`).getContext('2d');
+  let ctx = document
+    .querySelector(`.${canvasClass}`)
+    .getContext('2d');
   let myChart = new Chart(ctx, {
     type: `${type}`,
     data: {
-      labels: ['answer1', 'answer2'],
-      datasets: [{
-        label: 'number of answers',
-        data: [1, 1],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.8)',
-          'rgba(54, 162, 235, 0.8)',
-
-        ],
-        borderColor: [
-          'rgba(255,99,132,1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-        ],
-        borderWidth: 1,
-      }],
+      labels: [
+        'answer1', 'answer2',
+      ],
+      datasets: [
+        {
+          label: 'number of answers',
+          data: [
+            1, 1,
+          ],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.8)', 'rgba(54, 162, 235, 0.8)',
+          ],
+          borderColor: [
+            'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
+          ],
+          borderWidth: 1,
+        },
+      ],
     },
     options: {
       scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true,
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true,
+            },
           },
-        }],
+        ],
       },
     },
   });
 }
 chart('bar');
 /* REPORT ADD VISUAL end */
-
 
 /* LIBRARY */
 
