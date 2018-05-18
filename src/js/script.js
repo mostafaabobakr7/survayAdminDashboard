@@ -131,10 +131,13 @@ $('.projects-list').on('click', '.card-body', function () {
     .find('.projectName')
     .html();
   localStorage.setItem('projectCreationName', projectCreationName);
-  const path = ('edit_survey.html');
   /* FOR GITHUB redirect only, else remove pathname paramater */
-  const newURL = `${window.location.protocol}//${window.location.host}${window.location.pathname}/${path}`;
-  window.location = newURL;
+  if (window.location.protocol === 'mostafaabobakr7.github.io') {
+    const path = ('survayAdminDashboard/edit_survey.html');
+    const newURL = `${window.location.protocol}//${window.location.host}/${path}`;
+    window.location = newURL;
+  }
+  window.location.pathname = 'edit_survey.html';
 });
 /* card (project) on click go to edit_survey end--- */
 
