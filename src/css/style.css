@@ -1040,21 +1040,29 @@ main {
     min-height: 70vh;
     background-color: #4e5861; }
     .preview-right__container {
-      margin: auto;
       background: url("../img/iphone.png") no-repeat;
-      width: 30rem;
-      height: 70rem; }
-      @media (max-width: 75em) {
+      margin: auto;
+      width: 49rem;
+      height: 94rem; }
+      @media (max-width: 1500px) {
         .preview-right__container {
-          width: 49rem;
-          height: 94rem; } }
-      .preview-right__container iframe {
-        margin: 8rem 0 0 1.5rem;
+          width: 46rem;
+          height: 75rem; } }
+      .preview-right__container-mobile {
         width: 26.7rem;
         height: 45rem; }
-        @media (max-width: 75em) {
-          .preview-right__container iframe {
-            width: 47rem; } }
+        @media (max-width: 1500px) {
+          .preview-right__container-mobile {
+            width: 32.1rem;
+            height: 56rem; } }
+        .preview-right__container-mobile iframe {
+          position: relative;
+          margin: 8.1rem 0 0 1.4rem;
+          width: 100%;
+          height: 100%; }
+          @media (max-width: 1500px) {
+            .preview-right__container-mobile iframe {
+              margin: 8.5rem 0 0 1.8rem; } }
 
 /* PREVIEW end */
 .distributeSection {
