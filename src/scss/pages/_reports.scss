@@ -1,14 +1,10 @@
 /* REPORT */
 
 .reportSection {
-  .noteValue textarea {
-    resize: none;
-    border: none !important;
-    overflow: auto;
-    outline: none !important;
-    box-shadow: none !important;
-    background-color: transparent !important;
+  .note {
+    min-height: 8rem;
   }
+  .noteValue {}
   .visibilityHidden {
     visibility: hidden !important;
   }

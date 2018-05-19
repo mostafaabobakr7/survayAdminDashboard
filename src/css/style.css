@@ -1174,14 +1174,8 @@ main {
   color: red; }
 
 /* REPORT */
-.reportSection .noteValue textarea {
-  resize: none;
-  border: none !important;
-  overflow: auto;
-  outline: none !important;
-  -webkit-box-shadow: none !important;
-          box-shadow: none !important;
-  background-color: transparent !important; }
+.reportSection .note {
+  min-height: 8rem; }
 
 .reportSection .visibilityHidden {
   visibility: hidden !important; }

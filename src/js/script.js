@@ -150,16 +150,19 @@ $(document).ready(() => {
 });
 /* PROJECTS: get the clicked PROJECT name from localstorage end--*/
 /* PROJECTS\SURVEY: CONTENTEDITABLE on CLICK */
-$(document).on('click', '[contenteditable="true"]', function () {
+if (/edit_survey.html/.test(window.location)) {
   $(document)
-    .find('[contenteditable="true"]')
-    .removeClass('editable-focus');
-  $(this).addClass('editable-focus');
-  $(this).focusout(function () {
-    $(this).removeClass('editable-focus');
-  });
-  document.execCommand('selectAll', false, null);
-});
+    .on('click', '[contenteditable="true"]', function () {
+      $(document)
+        .find('[contenteditable="true"]')
+        .removeClass('editable-focus');
+      $(this).addClass('editable-focus');
+      $(this).focusout(function () {
+        $(this).removeClass('editable-focus');
+      });
+      document.execCommand('selectAll', false, null);
+    });
+}
 /* PROJECTS\SURVEY: CONTENTEDITABLE on CLICK end--- */
 /* PROJECTS\SURVEY: ADD BLOCK function */
 $('.section-block').on('click', '#addBlock', () => {
@@ -436,26 +439,29 @@ $('.sport-survey').on('click', function () {
 /* RESPONSES: VIEW ON-CLICK end-- */
 
 /* REPORTS: TOGGLE TEXTAREA ADD NOTE */
-$('.reportSection').on('click', '.noteBTN', function () {
-  $('.reportAddNote').toggleClass('d-none');
-  $('.reportCloseNote').toggleClass('d-none');
-
-  $('.note').toggleClass('d-none');
-  if ($('.note').val()) {
-    $('.noteValue').removeClass('visibilityHidden');
-  }
-});
+if (/reports.html/.test(window.location)) {
+  const quill = new Quill('.note', {
+    modules: {
+      toolbar: true
+    },
+    placeholder: 'start typing....',
+    theme: 'snow'
+  });
+  $('.ql-toolbar').addClass('d-none')
+}
+$('.reportSection')
+  .on('click', '.noteBTN', function () {
+    $('.ql-toolbar').toggleClass('d-none');
+    $('.reportAddNote').toggleClass('d-none');
+    $('.reportCloseNote').toggleClass('d-none');
+    $('.note').toggleClass('d-none');
+    if ($('.note').val()) {
+      $('.noteValue').removeClass('visibilityHidden');
+    }
+  });
 $('.reportSection').on('change keyup keydown paste cut', '.note', function () {
-  let note = $(this).val();
-  $(this)
-    .height(0)
-    .height(this.scrollHeight);
-  $('#noteVal').val(note);
-  $('#noteVal')
-    .height(0)
-    .height(this.scrollHeight);
-
-  if (!$('#noteVal').val()) {
+  $('.noteVal').html($('.ql-editor').html());
+  if ($('.noteVal').is(':empty')) {
     $('.noteValue').addClass('visibilityHidden');
   } else {
     $('.noteValue').removeClass('visibilityHidden');
