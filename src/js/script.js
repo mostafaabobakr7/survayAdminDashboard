@@ -553,6 +553,41 @@ $('.chartSection').on('click', '.btn-danger', function () {
 });
 /* REPORTS: ADD VISUAL end */
 
-/* LIBRARY: */
-
-/* LIBRARY: end */
+/* DASHBOARD: */
+function chartDashboard(type, canvasID) {
+  let ctx = document
+    .querySelector(`#${canvasID}`)
+    .getContext('2d');
+  let chart = new Chart(ctx, {
+    type: `${type}`,
+    data: {
+      datasets: [
+        {
+          label: 'First dataset',
+          data: [0, 20, 40, 50]
+        }
+      ],
+      labels: ['January', 'February', 'March', 'April']
+    },
+    options: {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              suggestedMin: 1,
+              suggestedMax: 50
+            }
+          }
+        ]
+      }
+    }
+  });
+}
+if (/index.html/.test(window.location.href)) {
+  chartDashboard('bar', 'Number-of-Users');
+  chartDashboard('pie', 'Number-of-Surveys');
+  chartDashboard('bar', 'Generated-Reports');
+  chartDashboard('line', 'Number-of-Responses');
+  chartDashboard('line', 'New-Survey-per-Month');
+}
+/* DASHBOARD: end */

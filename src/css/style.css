@@ -263,7 +263,7 @@ body {
   font-family: "Nunito", Helvetica, sans-serif;
   font-weight: 400;
   line-height: 1.7;
-  color: #777; }
+  color: #222; }
 
 /* typography end----------------------- */
 /* utility margin padding */
@@ -1123,7 +1123,8 @@ main {
       width: 15rem; }
     .distributeSection .distribute__mobile #userNAME {
       width: 25rem; }
-    .distributeSection .distribute__mobile #userFULLNAME {
+    .distributeSection .distribute__mobile #userFULLNAME,
+    .distributeSection .distribute__mobile #userPASSWORD {
       width: 40rem; }
     .distributeSection .distribute__mobile .fa-mobile,
     .distributeSection .distribute__mobile h2 {
