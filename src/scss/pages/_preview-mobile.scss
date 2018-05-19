@@ -1,0 +1,51 @@
+/* preview-mobile */
+
+.preview-mobile {
+  .preview-left {
+    .questionBlock {
+      padding: 20px 0;
+      border-bottom: 1px solid #ccc;
+      width: 100vh;
+      input {
+        position: relative;
+        padding: 3rem 0;
+        border-radius: 5px;
+        background-color: transparent;
+        margin: 5px 0;
+        &:hover {
+          background-color: #20e0d0;
+        }
+        &:checked {
+          background: transparent;
+        }
+        &:checked+span {
+          background: #20e0d0;
+        }
+        &:checked::before {
+          content: "";
+        }
+      }
+      .card-text span {
+        width: 90vh;
+        @include respond(phone) {
+          width: 40vh;
+        }
+        cursor: pointer;
+        font-size: 1.7rem;
+        text-align: center;
+        color: #fff;
+        position: absolute;
+        left: 15px;
+        border-radius: 5px;
+        padding: 2rem 0;
+        z-index: 100;
+        background-color: #9faab7;
+        &:hover {
+          background: #20e0d0;
+        }
+      }
+    }
+  }
+}
+
+/* preview-mobile end */

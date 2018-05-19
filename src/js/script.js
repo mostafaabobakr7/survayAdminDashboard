@@ -46,7 +46,7 @@ $('#createProjectBTN').on('click', function (e) {
     year: 'numeric',
     hour: 'numeric',
     minute: 'numeric',
-    hour12: true,
+    hour12: true
   });
   const card = $(`        <div class="row py-3">
           <div class="col-md-12">
@@ -396,18 +396,39 @@ $('#singleAnswers').on('click', function () {
 });
 /* PROJECTS\SURVEY: CHANGE TO QUESTION CHECKBOX end-- */
 /* PROJECTS\SURVEY: PREVIEW */
-if (/preview.html/.test(window.location.href)) {
-  const url = window.location.href;
-}
+// when check span checkbox checked
+$('.preview-mobile').on('click', 'span', function () {
+  $(this)
+    .prev()
+    .prop('checked', 'checked');
+});
+
+// copy elements from edit_survey to preview-mobile;
+$('#previewBTN').on('click', function () {
+  const elements = $('.hoverQuestion').clone();
+  localStorage.setItem(elements);
+
+});
+
+// remove unnecessary things when preview
+$(document).ready(function () {
+  $('.preview-mobile *').removeAttr('contenteditable = "true"');
+  $('.preview-mobile .questionMove')
+    .next()
+    .remove();
+  $('.preview-mobile .hoverQuestionClicked').remove();
+  $('.preview-mobile .questionMove').remove();
+  $('.preview-mobile .addQuestionControls').remove();
+});
 /* PROJECTS\SURVEY: PREVIEW end--*/
+
 //---------------------------------------------
 /* DISTRIBUTE: web copylick */
-$('#distribute__web-btn')
-  .on('click', function (e) {
-    e.preventDefault();
-    $('#distribute__web').select();
-    document.execCommand('copy');
-  });
+$('#distribute__web-btn').on('click', function (e) {
+  e.preventDefault();
+  $('#distribute__web').select();
+  document.execCommand('copy');
+});
 /* DISTRIBUTE: web copylick end */
 
 /* RESPONSES: VIEW ON-CLICK  */
@@ -472,35 +493,35 @@ function chart(type) {
     type: `${type}`,
     data: {
       labels: [
-        'answer1', 'answer2',
+        'answer1', 'answer2'
       ],
       datasets: [
         {
           label: 'number of answers',
           data: [
-            1, 2,
+            1, 2
           ],
           backgroundColor: [
-            'rgba(255, 99, 132, 0.8)', 'rgba(54, 162, 235, 0.8)',
+            'rgba(255, 99, 132, 0.8)', 'rgba(54, 162, 235, 0.8)'
           ],
           borderColor: [
-            'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
+            'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'
           ],
-          borderWidth: 1,
-        },
-      ],
+          borderWidth: 1
+        }
+      ]
     },
     options: {
       scales: {
         yAxes: [
           {
             ticks: {
-              beginAtZero: true,
-            },
-          },
-        ],
-      },
-    },
+              beginAtZero: true
+            }
+          }
+        ]
+      }
+    }
   });
 }
 
