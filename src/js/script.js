@@ -129,8 +129,11 @@ $('.projects-list').on('click', '.card-body', function () {
     .html();
   localStorage.setItem('projectCreationName', projectCreationName);
   /* FOR GITHUB redirect only, else remove pathname paramater */
-  if (window.location.host == 'mostafaabobakr7.github.io') {
+  if (window.location.host === 'mostafaabobakr7.github.io') {
     const path = ('survayAdminDashboard/edit_survey.html');
+    window.location.pathname = path;
+  } else if (window.location.host === 'invadems.com') {
+    const path = ('projects/FreeMinds/edit_survey.html');
     window.location.pathname = path;
   } else {
     window.location.pathname = 'edit_survey.html';
@@ -403,11 +406,10 @@ $('.preview-mobile').on('click', 'span', function () {
 });
 
 // copy elements from edit_survey to preview-mobile;
-$('#previewBTN').on('click', function () {});
+/* $('#previewBTN').on('click', function () {}); */
 
 // remove unnecessary things when preview
 $(document).ready(function () {
-
   $('.preview-mobile *').removeAttr('contenteditable = "true"');
   $('.preview-mobile .questionMove')
     .next()
