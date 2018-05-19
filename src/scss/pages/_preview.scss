@@ -1,0 +1,43 @@
+/* PREVIEW */
+
+.previewHeader {
+  padding: 2.5rem 0;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+}
+
+.preview {
+  background-color: #fff;
+  min-height: 70vh;
+  &-left {
+    min-height: 70vh;
+    iframe {
+      width: 100%;
+      height: 90vh;
+    }
+  }
+  &-right {
+    min-height: 70vh;
+    background-color: #4e5861;
+    &__container {
+      margin: auto;
+      background: url('../img/iphone.png') no-repeat;
+      width: 30rem;
+      height: 70rem;
+      @include respond(tab-land) {
+        width: 49rem;
+        height: 94rem;
+      }
+      iframe {
+        margin: 8rem 0 0 1.5rem;
+        width: 26.7rem;
+        height: 45rem;
+        @include respond(tab-land) {
+          width: 47rem;
+        }
+      }
+    }
+  }
+}
+
+/* PREVIEW end */

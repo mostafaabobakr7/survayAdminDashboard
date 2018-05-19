@@ -4,7 +4,7 @@ $(function () {
 });
 /* Enable tooltips everywhere end */
 
-/* section-home-folders__menu */
+/* PROJECTS: section-home-folders__menu */
 $('#folder__link').on('click', function () {
   $(this)
     .parent()
@@ -19,9 +19,8 @@ $('#folder__menu-close').on('click', () => {
   $('.projects-list-container').toggleClass('menu__folder');
   $('#folder__menu').toggleClass('menu__close');
 });
-/* section-home-folders__menu end----- */
-
-/* section-home-folders-dropdown */
+/* PROJECTS: section-home-folders__menu end----- */
+/* PROJECTS: section-home-folders-dropdown */
 $('#folderDropdown').on('click', function () {
   $(this).toggleClass('dropDownClickBorder');
 });
@@ -34,9 +33,8 @@ $('#folderDropdown-menu .dropdown-item').each(function () {
         .removeClass('checked');
     });
 });
-/* section-home-folders-dropdown end------ */
-
-/* create project */
+/* PROJECTS: section-home-folders-dropdown end------ */
+/* PROJECTS: create project */
 $('#createProjectBTN').on('click', function (e) {
   e.preventDefault();
   const projectCreationName = $('#projectName').val();
@@ -123,9 +121,8 @@ $('#createProjectBTN').on('click', function (e) {
         </div>`);
   $('.projects-list .container-fluid').prepend(card);
 });
-/* create project end----------*/
-
-/* card (project) on click go to edit_survey */
+/* PROJECTS: create project end----------*/
+/* PROJECTS: card (project) on click go to edit_survey */
 $('.projects-list').on('click', '.card-body', function () {
   const projectCreationName = $(this)
     .find('.projectName')
@@ -140,9 +137,8 @@ $('.projects-list').on('click', '.card-body', function () {
     window.location.pathname = 'edit_survey.html';
   }
 });
-/* card (project) on click go to edit_survey end--- */
-
-/* get the clicked PROJECT name from localstorage */
+/* PROJECTS: card (project) on click go to edit_survey end--- */
+/* PROJECTS: get the clicked PROJECT name from localstorage */
 $(document).ready(() => {
   const loc = window.location.href;
   const projectCreationName = localStorage.getItem('projectCreationName');
@@ -150,9 +146,8 @@ $(document).ready(() => {
     $('.projectNameEdit').html(`${projectCreationName}`);
   }
 });
-/* get the clicked PROJECT name from localstorage end--*/
-
-/* CONTENTEDITABLE on CLICK */
+/* PROJECTS: get the clicked PROJECT name from localstorage end--*/
+/* PROJECTS\SURVEY: CONTENTEDITABLE on CLICK */
 $(document).on('click', '[contenteditable="true"]', function () {
   $(document)
     .find('[contenteditable="true"]')
@@ -163,9 +158,8 @@ $(document).on('click', '[contenteditable="true"]', function () {
   });
   document.execCommand('selectAll', false, null);
 });
-/* CONTENTEDITABLE on CLICK end--- */
-
-/* ADD BLOCK function */
+/* PROJECTS\SURVEY: CONTENTEDITABLE on CLICK end--- */
+/* PROJECTS\SURVEY: ADD BLOCK function */
 $('.section-block').on('click', '#addBlock', () => {
   const block = $(`<div class="section-block-card">
                         <div class="card">
@@ -223,11 +217,9 @@ $('.section-block').on('click', '#addBlock', () => {
                       </div>`);
   $('.section-block .col-12').append(block);
 });
-/* ADD BLOCK function end--*/
-
-/* ADD QUESTION RADIO */
+/* PROJECTS\SURVEY: ADD BLOCK function end--*/
+/* PROJECTS\SURVEY: ADD QUESTION RADIO */
 let num = 1;
-
 function addRadio(place, elementPlaceInDOM) {
   const radioName = new Date().getTime();
   const radioQuestion = $(`
@@ -310,9 +302,8 @@ $('.section-block').on('click', '.questionDelete', function () {
     .parent()
     .remove();
 });
-/* ADD QUESTION RADIO end-- */
-
-/* MOVE QUESTION UP and DOWN */
+/* PROJECTS\SURVEY: ADD QUESTION RADIO end-- */
+/* PROJECTS\SURVEY: MOVE QUESTION UP and DOWN */
 function choicesCurrentNum() {
   return $('.hoverQuestionClicked .card-text').length;
 }
@@ -334,42 +325,44 @@ $('.section-block').on('click', '.questionMove__down', function () {
   const questionPositionPrevSibling = questionPosition.next();
   $(questionPosition).insertAfter(questionPositionPrevSibling);
 });
-/* MOVE QUESTION UP and DOWN end-- */
-
-/* QUESTION ON CLICK CHANGE BACKGROUNND */
-$('.section-block').on('click', '.hoverQuestion', function () {
-  $(this)
-    .addClass('hoverQuestionClicked')
-    .siblings()
-    .removeClass('hoverQuestionClicked');
-  /* DEFINE IF IT A RADIO OR CHECKBOX */
-  if ($(this).find(':radio').length > 0) {
-    $('#singleAnswers').prop('checked', true);
-    $('#multibleAnswers').prop('checked', false);
-  }
-  if ($(this).find(':checkbox').length > 0) {
-    $('#multibleAnswers').prop('checked', true);
-    $('#singleAnswers').prop('checked', false);
-  }
-  /* questionHoverClicked class remove from all blocks when clicked on current block */
-  const x = $(this)
-    .parent()
-    .parent()
-    .parent()
-    .siblings()
-    .children()
-    .children()
-    .children();
-  x.removeClass('hoverQuestionClicked');
-  $('.choices span').text(choicesCurrentNum);
-});
-/* QUESTION ON CLICK CHANGE BACKGROUNND end-- */
-
-/* RADIO CHOICES */
-$('.choicesDecrease').on('click', function () {
-  $('.hoverQuestionClicked .card-text:last-child').remove();
-  $('.choices span').text(choicesCurrentNum);
-});
+/* PROJECTS\SURVEY: MOVE QUESTION UP and DOWN end-- */
+/* PROJECTS\SURVEY: QUESTION ON CLICK CHANGE BACKGROUNND */
+if (/edit_survey.html/.test(window.location.href)) {
+  $('.section-block')
+    .on('click', '.hoverQuestion', function () {
+      $(this)
+        .addClass('hoverQuestionClicked')
+        .siblings()
+        .removeClass('hoverQuestionClicked');
+      /* DEFINE IF IT A RADIO OR CHECKBOX */
+      if ($(this).find(':radio').length > 0) {
+        $('#singleAnswers').prop('checked', true);
+        $('#multibleAnswers').prop('checked', false);
+      }
+      if ($(this).find(':checkbox').length > 0) {
+        $('#multibleAnswers').prop('checked', true);
+        $('#singleAnswers').prop('checked', false);
+      }
+      /* questionHoverClicked class remove from all blocks when clicked on current block */
+      const x = $(this)
+        .parent()
+        .parent()
+        .parent()
+        .siblings()
+        .children()
+        .children()
+        .children();
+      x.removeClass('hoverQuestionClicked');
+      $('.choices span').text(choicesCurrentNum);
+    });
+}
+/* PROJECTS\SURVEY: QUESTION ON CLICK CHANGE BACKGROUNND end-- */
+/* PROJECTS\SURVEY: RADIO CHOICES */
+$('.choicesDecrease')
+  .on('click', function () {
+    $('.hoverQuestionClicked .card-text:last-child').remove();
+    $('.choices span').text(choicesCurrentNum);
+  });
 $('.choicesIncrease').on('click', function () {
   let choiceNum = choicesCurrentNum();
   const radioName = $('.hoverQuestionClicked input:radio').attr('name');
@@ -391,9 +384,8 @@ $('.choicesIncrease').on('click', function () {
   $('.choices span').text(choicesCurrentNum);
 });
 
-/* RADIO CHOICES end */
-
-/* CHANGE TO QUESTION CHECKBOX */
+/* PROJECTS\SURVEY: RADIO CHOICES end */
+/* PROJECTS\SURVEY: CHANGE TO QUESTION CHECKBOX */
 $('#multibleAnswers').on('click', function () {
   $('.hoverQuestionClicked input:radio').prop('checked', false);
   $('.hoverQuestionClicked input:radio').attr('type', 'checkbox');
@@ -402,24 +394,29 @@ $('#singleAnswers').on('click', function () {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:checkbox').attr('type', 'radio');
 });
-/* CHANGE TO QUESTION CHECKBOX end-- */
-
+/* PROJECTS\SURVEY: CHANGE TO QUESTION CHECKBOX end-- */
+/* PROJECTS\SURVEY: PREVIEW */
+if (/preview.html/.test(window.location.href)) {
+  const url = window.location.href;
+}
+/* PROJECTS\SURVEY: PREVIEW end--*/
 //---------------------------------------------
-/* DISTRIBUTE web copylick */
-$('#distribute__web-btn').on('click', function (e) {
-  e.preventDefault();
-  $('#distribute__web').select();
-  document.execCommand('copy');
-});
-/* DISTRIBUTE web copylick end */
+/* DISTRIBUTE: web copylick */
+$('#distribute__web-btn')
+  .on('click', function (e) {
+    e.preventDefault();
+    $('#distribute__web').select();
+    document.execCommand('copy');
+  });
+/* DISTRIBUTE: web copylick end */
 
-/* RESPONSES VIEW ON-CLICK  */
+/* RESPONSES: VIEW ON-CLICK  */
 $('.sport-survey').on('click', function () {
   $('.showResponse').toggleClass('d-none');
 });
-/* RESPONSES VIEW ON-CLICK end-- */
+/* RESPONSES: VIEW ON-CLICK end-- */
 
-/* REPORTS TOGGLE TEXTAREA ADD NOTE */
+/* REPORTS: TOGGLE TEXTAREA ADD NOTE */
 $('.reportSection').on('click', '.noteBTN', function () {
   $('.reportAddNote').toggleClass('d-none');
   $('.reportCloseNote').toggleClass('d-none');
@@ -446,9 +443,9 @@ $('.reportSection').on('change keyup keydown paste cut', '.note', function () {
   }
 });
 
-/* REPORTS TOGGLE TEXTAREA ADD NOTE end */
+/* REPORTS: TOGGLE TEXTAREA ADD NOTE end */
 
-/* REPORT ADD VISUAL */
+/* REPORTS: ADD VISUAL */
 $('.reportSection').on('click', '.btn-group .btn', function () {
   $(this).addClass('btn-group-active');
   $(this)
@@ -529,8 +526,8 @@ $('.chartSection').on('click', '.btn-danger', function () {
     .remove();
   $(this).remove();
 });
-/* REPORT ADD VISUAL end */
+/* REPORTS: ADD VISUAL end */
 
-/* LIBRARY */
+/* LIBRARY: */
 
-/* LIBRARY end */
+/* LIBRARY: end */
