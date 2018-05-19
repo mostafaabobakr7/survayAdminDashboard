@@ -1,12 +1,15 @@
 /* btn component */
 
-.btn {
+.btn-shadow {
   box-shadow: 0 0.7rem 1rem rgba(#000, 0.2);
   transform: scale(1.01);
   transition: all 0.3s ease-in-out;
   &:active {
     transform: scale(0.9);
   }
+}
+
+.btn {
   &:focus,
   &:active:focus,
   &.active:focus {
@@ -19,21 +22,21 @@
   .rightControls {
     .btn-group {
       .btn {
+        display: block;
         font-size: 1.7rem;
-        background-color: #fff;
         padding: 1rem 3rem;
-        box-shadow: none !important;
-        transform: scale(1) !important;
-        transition: all 0.3s ease-in-out;
+        background-color: #fff;
         &:hover {
           background-color: #e9e9e9;
-        }
-        &:active {
-          transform: scale(1) !important;
         }
       }
     }
   }
+}
+
+.reportAddVisual {
+  display: block;
+  margin: 0 auto;
 }
 
 /* btn component end--------------------- */
