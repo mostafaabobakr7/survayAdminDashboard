@@ -564,7 +564,10 @@ function chartDashboard(type, canvasID) {
       datasets: [
         {
           label: 'First dataset',
-          data: [0, 20, 40, 50]
+          data: [
+            0, 20, 40, 50
+          ],
+          backgroundColor: ['rgba(255, 99, 132, 0.8)', 'rgba(54, 162, 230, 0.8)', 'rgba(54, 162, 240, 0.8)', 'rgba(54, 162, 135, 0.8)']
         }
       ],
       labels: ['January', 'February', 'March', 'April']

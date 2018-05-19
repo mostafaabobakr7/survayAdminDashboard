@@ -265,6 +265,10 @@ body {
   line-height: 1.7;
   color: #222; }
 
+h1 {
+  font-weight: 700;
+  font-size: 5rem; }
+
 /* typography end----------------------- */
 /* utility margin padding */
 .u-text-center {
