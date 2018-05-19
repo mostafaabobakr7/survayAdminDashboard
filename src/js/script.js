@@ -131,8 +131,7 @@ $('.projects-list').on('click', '.card-body', function () {
   /* FOR GITHUB redirect only, else remove pathname paramater */
   if (window.location.host == 'mostafaabobakr7.github.io') {
     const path = ('survayAdminDashboard/edit_survey.html');
-    const newURL = `${window.location.protocol}//${window.location.host}/${path}`;
-    window.location = newURL;
+    window.location.pathname = path;
   } else {
     window.location.pathname = 'edit_survey.html';
   }
