@@ -403,14 +403,11 @@ $('.preview-mobile').on('click', 'span', function () {
 });
 
 // copy elements from edit_survey to preview-mobile;
-$('#previewBTN').on('click', function () {
-  const elements = $('.hoverQuestion').clone();
-  localStorage.setItem(elements);
-
-});
+$('#previewBTN').on('click', function () {});
 
 // remove unnecessary things when preview
 $(document).ready(function () {
+
   $('.preview-mobile *').removeAttr('contenteditable = "true"');
   $('.preview-mobile .questionMove')
     .next()
