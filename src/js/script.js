@@ -459,7 +459,14 @@ $('.reportSection').on('click', '.reportAddVisual', function () {});
 
 function chart(type) {
   const canvasClass = `class${new Date().getTime()}`;
-  const canvas = $(`<canvas class=${canvasClass} width="300" height="100"></canvas>`);
+  const canvas = $(`
+  <div class="responseControls text-right">
+    <button type="button" class="btn btn-danger px-3 mx-1" title="Delete">
+      <i class="fa fa-times"></i>
+    </button>
+    <canvas class=${canvasClass} width="300" height="100"></canvas>
+  </div>
+`);
   $('.chartSection').append(canvas);
   let ctx = document
     .querySelector(`.${canvasClass}`)
@@ -503,19 +510,24 @@ function chart(type) {
 if (/reports.html/.test(window.location.href)) {
   chart('bar');
 }
-const barBTN = $('#bar');
-const lineBTN = $('#line');
-const pieBTN = $('#pie');
-$('.reportAddVisual').on('click', function () {
-  if ($('#bar').hasClass('btn-group-active')) {
-    chart('bar');
-  }
-  if ($('#line').hasClass('btn-group-active')) {
-    chart('line');
-  }
-  if ($('#pie').hasClass('btn-group-active')) {
-    chart('pie');
-  }
+
+$('.reportAddVisual')
+  .on('click', function () {
+    if ($('#bar').hasClass('btn-group-active')) {
+      chart('bar');
+    }
+    if ($('#line').hasClass('btn-group-active')) {
+      chart('line');
+    }
+    if ($('#pie').hasClass('btn-group-active')) {
+      chart('pie');
+    }
+  });
+$('.chartSection').on('click', '.btn-danger', function () {
+  $(this)
+    .next('canvas')
+    .remove();
+  $(this).remove();
 });
 /* REPORT ADD VISUAL end */
 
