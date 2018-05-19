@@ -459,7 +459,7 @@ $('.reportSection').on('click', '.reportAddVisual', function () {});
 
 function chart(type) {
   const canvasClass = `class${new Date().getTime()}`;
-  const canvas = $(`<canvas class=${canvasClass} width="400" height="400"></canvas>`);
+  const canvas = $(`<canvas class=${canvasClass} width="300" height="100"></canvas>`);
   $('.chartSection').append(canvas);
   let ctx = document
     .querySelector(`.${canvasClass}`)
@@ -474,7 +474,7 @@ function chart(type) {
         {
           label: 'number of answers',
           data: [
-            1, 1,
+            1, 2,
           ],
           backgroundColor: [
             'rgba(255, 99, 132, 0.8)', 'rgba(54, 162, 235, 0.8)',
@@ -499,7 +499,24 @@ function chart(type) {
     },
   });
 }
-chart('bar');
+
+if (/reports.html/.test(window.location.href)) {
+  chart('bar');
+}
+const barBTN = $('#bar');
+const lineBTN = $('#line');
+const pieBTN = $('#pie');
+$('.reportAddVisual').on('click', function () {
+  if ($('#bar').hasClass('btn-group-active')) {
+    chart('bar');
+  }
+  if ($('#line').hasClass('btn-group-active')) {
+    chart('line');
+  }
+  if ($('#pie').hasClass('btn-group-active')) {
+    chart('pie');
+  }
+});
 /* REPORT ADD VISUAL end */
 
 /* LIBRARY */
