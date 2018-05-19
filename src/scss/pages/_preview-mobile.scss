@@ -7,13 +7,14 @@
       border-bottom: 1px solid #ccc;
       width: 100vh;
       input {
-        position: relative;
+        width: 0;
         padding: 3rem 0;
+        position: relative;
         border-radius: 5px;
         background-color: transparent;
         margin: 5px 0;
         &:hover {
-          background-color: #20e0d0;
+          background-color: transparent;
         }
         &:checked {
           background: transparent;
@@ -26,6 +27,7 @@
         }
       }
       .card-text span {
+        padding: 2rem 0;
         width: 90vh;
         @include respond(phone) {
           width: 40vh;
@@ -37,8 +39,6 @@
         position: absolute;
         left: 15px;
         border-radius: 5px;
-        padding: 2rem 0;
-        z-index: 100;
         background-color: #9faab7;
         &:hover {
           background: #20e0d0;

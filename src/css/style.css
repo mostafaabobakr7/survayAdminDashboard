@@ -1035,13 +1035,14 @@ main {
   border-bottom: 1px solid #ccc;
   width: 100vh; }
   .preview-mobile .preview-left .questionBlock input {
-    position: relative;
+    width: 0;
     padding: 3rem 0;
+    position: relative;
     border-radius: 5px;
     background-color: transparent;
     margin: 5px 0; }
     .preview-mobile .preview-left .questionBlock input:hover {
-      background-color: #20e0d0; }
+      background-color: transparent; }
     .preview-mobile .preview-left .questionBlock input:checked {
       background: transparent; }
     .preview-mobile .preview-left .questionBlock input:checked + span {
@@ -1049,6 +1050,7 @@ main {
     .preview-mobile .preview-left .questionBlock input:checked::before {
       content: ""; }
   .preview-mobile .preview-left .questionBlock .card-text span {
+    padding: 2rem 0;
     width: 90vh;
     cursor: pointer;
     font-size: 1.7rem;
@@ -1057,8 +1059,6 @@ main {
     position: absolute;
     left: 15px;
     border-radius: 5px;
-    padding: 2rem 0;
-    z-index: 100;
     background-color: #9faab7; }
     @media (max-width: 37.5em) {
       .preview-mobile .preview-left .questionBlock .card-text span {
