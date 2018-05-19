@@ -1028,11 +1028,6 @@ main {
 
 /* edit_survey section end- */
 /* PREVIEW */
-.previewHeader {
-  padding: 2.5rem 0;
-  background-color: #fff;
-  border-bottom: 1px solid #ccc; }
-
 .preview {
   background-color: #fff;
   min-height: 70vh; }
@@ -1040,7 +1035,7 @@ main {
     min-height: 70vh; }
     .preview-left iframe {
       width: 100%;
-      height: 90vh; }
+      min-height: 100vh; }
   .preview-right {
     min-height: 70vh;
     background-color: #4e5861; }
