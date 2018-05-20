@@ -1004,6 +1004,10 @@ main {
       .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionHeader {
         display: inline-block;
         padding: 0.1rem 0.3rem; }
+      .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody input[type="text"],
+      .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody textarea {
+        width: 50rem;
+        margin-bottom: 2rem; }
     .editSurveySection .leftContent .section-block .card-body .row:hover .addQuestionControls {
       display: -webkit-box;
       display: -webkit-flex;
@@ -1071,11 +1075,11 @@ main {
     .editSurveySection .rightControls .change-answers .answers > * {
       display: block;
       margin: 7px auto;
-      border-radius: 2px;
+      border-radius: 5px;
       width: 100%;
-      padding: 1.7rem;
+      padding: 1.6rem;
       text-align: center;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       position: relative; }
       .editSurveySection .rightControls .change-answers .answers > *:before {
         content: "";
@@ -1095,27 +1099,51 @@ main {
              -o-transform: translate(-50%, -50%);
                 transform: translate(-50%, -50%); }
       .editSurveySection .rightControls .change-answers .answers > *:checked:after {
-        color: #fff; }
-    .editSurveySection .rightControls .change-answers .answers #singleAnswers:after {
-      content: "Single choice"; }
-    .editSurveySection .rightControls .change-answers .answers #multibleAnswers:after {
-      content: "Multiple choices"; }
+        color: #fff;
+        font-weight: 700; }
+    .editSurveySection .rightControls .change-answers .answers #singleAnswers {
+      display: inline-block;
+      width: 47%;
+      font-size: 1.3rem; }
+      .editSurveySection .rightControls .change-answers .answers #singleAnswers:after {
+        content: "Single choice"; }
+    .editSurveySection .rightControls .change-answers .answers #multibleAnswers {
+      display: inline-block;
+      width: 51%;
+      font-size: 1.3rem; }
+      .editSurveySection .rightControls .change-answers .answers #multibleAnswers:after {
+        content: "Multiple choices"; }
     .editSurveySection .rightControls .change-answers .answers #dropDownOneAnswer:after {
       content: "Dropdown Single choice"; }
     .editSurveySection .rightControls .change-answers .answers #dropDownMultiAnswer:after {
       content: "Dropdown Multi choices"; }
-    .editSurveySection .rightControls .change-answers .answers #sliderAnswer:after {
-      content: "Slider"; }
-    .editSurveySection .rightControls .change-answers .answers #rankAnswer:after {
-      content: "Rank"; }
-    .editSurveySection .rightControls .change-answers .answers #matrixAnswer:after {
-      content: "Matrix"; }
+    .editSurveySection .rightControls .change-answers .answers #sliderAnswer {
+      display: inline-block;
+      width: 32.33333333333333%; }
+      .editSurveySection .rightControls .change-answers .answers #sliderAnswer:after {
+        content: "Slider"; }
+    .editSurveySection .rightControls .change-answers .answers #rankAnswer {
+      display: inline-block;
+      width: 32.33333333333333%; }
+      .editSurveySection .rightControls .change-answers .answers #rankAnswer:after {
+        content: "Rank"; }
+    .editSurveySection .rightControls .change-answers .answers #matrixAnswer {
+      display: inline-block;
+      width: 32.33333333333333%; }
+      .editSurveySection .rightControls .change-answers .answers #matrixAnswer:after {
+        content: "Matrix"; }
     .editSurveySection .rightControls .change-answers .answers #txtSingleLineAnswer:after {
       content: "Text Single Line"; }
-    .editSurveySection .rightControls .change-answers .answers #txtEssayAnswer:after {
-      content: "Text Essay"; }
-    .editSurveySection .rightControls .change-answers .answers #txtFormAnswer:after {
-      content: "Text Form"; }
+    .editSurveySection .rightControls .change-answers .answers #txtEssayAnswer {
+      display: inline-block;
+      width: 47%; }
+      .editSurveySection .rightControls .change-answers .answers #txtEssayAnswer:after {
+        content: "Text Essay"; }
+    .editSurveySection .rightControls .change-answers .answers #txtFormAnswer {
+      display: inline-block;
+      width: 51%; }
+      .editSurveySection .rightControls .change-answers .answers #txtFormAnswer:after {
+        content: "Text Form"; }
     .editSurveySection .rightControls .change-answers .answers #uploadImgAnswer:after {
       content: "Upload Image"; }
 

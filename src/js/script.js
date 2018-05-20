@@ -181,6 +181,11 @@ if (/edit_survey.html/.test(window.location)) {
 /* PROJECTS\SURVEY: ADD BLOCK function */
 $('.section-block').on('click', '#addBlock', () => {
   const block = $(`<div class="section-block-card">
+                        <div class="text-right">
+                          <button type="button" class="blockClose btn btn-danger px-3 mx-1" title="Delete">
+                            <i class="fa fa-times"></i>
+                          </button>
+                        </div>
                         <div class="card">
                           <div class="card-header" >
                             <h5 contenteditable="true">Default Question Block</h5>
@@ -224,7 +229,6 @@ $('.section-block').on('click', '#addBlock', () => {
                                 </div>
                                 <div class="addQuestionControls  justify-content-between">
                                   <i class="fa fa-plus-circle questionInserBefore" title="Insert Question Before"></i>
-                                  <i class="fa fa-minus-circle questionDelete" title="Delete Question"></i>
                                   <i class="fa fa-plus-circle questionInserAfter" title="Insert Question After"></i>
                                 </div>
                               </div>
@@ -237,6 +241,9 @@ $('.section-block').on('click', '#addBlock', () => {
                         </div>
                       </div>`);
   $('.section-block .col-12').append(block);
+});
+$('.section-block').on('click', '.blockClose', function () {
+  $(this).parent().parent().remove();
 });
 /* PROJECTS\SURVEY: ADD BLOCK function end--*/
 /* PROJECTS\SURVEY: ADD QUESTION RADIO */
@@ -411,7 +418,7 @@ $('.choicesIncrease').on('click', function () {
 });
 
 /* PROJECTS\SURVEY: RADIO CHOICES INC\DEC end */
-/* PROJECTS\SURVEY: CHANGE QUESTION-TYPE\ CHECKBOX */
+/* PROJECTS\SURVEY: CHANGE QUESTION */
 $('#multibleAnswers').on('click', function () {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:radio').prop('checked', false);
@@ -423,17 +430,19 @@ $('#multibleAnswers').on('click', function () {
             Multiple answers
           </h3>
         </div>
-        <div class="card-text mb-2">
-          <input type="checkbox" name=${checkName}>
-          <span contenteditable="true">Click to write Choice 1</span>
-        </div>
-        <div class="card-text mb-2">
-          <input type="checkbox" name=${checkName}>
-          <span contenteditable="true">Click to write Choice 2</span>
-        </div>
-        <div class="card-text mb-2">
-          <input type="checkbox" name=${checkName}>
-          <span contenteditable="true">Click to write Choice 3</span>
+        <div class="questionBody">
+          <div class="card-text mb-2">
+            <input type="checkbox" name=${checkName}>
+            <span contenteditable="true">Click to write Choice 1</span>
+          </div>
+          <div class="card-text mb-2">
+            <input type="checkbox" name=${checkName}>
+            <span contenteditable="true">Click to write Choice 2</span>
+          </div>
+          <div class="card-text mb-2">
+            <input type="checkbox" name=${checkName}>
+            <span contenteditable="true">Click to write Choice 3</span>
+          </div>
         </div>
       </div>`);
   $('.hoverQuestionClicked .questionBlock').replaceWith(multibleAnswers);
@@ -449,17 +458,19 @@ $('#singleAnswers').on('click', function () {
             Single answer
           </h3>
         </div>
-        <div class="card-text mb-2">
-          <input type="radio" name=${radioName}>
-          <span contenteditable="true">Click to write Choice 1</span>
-        </div>
-        <div class="card-text mb-2">
-          <input type="radio" name=${radioName}>
-          <span contenteditable="true">Click to write Choice 2</span>
-        </div>
-        <div class="card-text mb-2">
-          <input type="radio" name=${radioName}>
-          <span contenteditable="true">Click to write Choice 3</span>
+        <div class="questionBody">
+          <div class="card-text mb-2">
+            <input type="radio" name=${radioName}>
+            <span contenteditable="true">Click to write Choice 1</span>
+          </div>
+          <div class="card-text mb-2">
+            <input type="radio" name=${radioName}>
+            <span contenteditable="true">Click to write Choice 2</span>
+          </div>
+          <div class="card-text mb-2">
+            <input type="radio" name=${radioName}>
+            <span contenteditable="true">Click to write Choice 3</span>
+          </div>
         </div>
       </div>`);
   $('.hoverQuestionClicked .questionBlock').replaceWith(singleAnswers);
@@ -475,23 +486,220 @@ $('#dropDownOneAnswer').on('click', function () {
             Dropdown single answer
           </h3>
         </div>
-        <div class="card-text mb-2">
-          <input type="radio" name="radioName">
-          <span contenteditable="true">Click to write Choice 1</span>
-        </div>
-        <div class="card-text mb-2">
-          <input type="radio" name="radioName">
-          <span contenteditable="true">Click to write Choice 2</span>
-        </div>
-        <div class="card-text mb-2">
-          <input type="radio" name="radioName">
-          <span contenteditable="true">Click to write Choice 3</span>
+        <div class="questionBody">
+          <div class="card-text mb-2">
+            <input type="radio" name="radioName">
+            <span contenteditable="true">Click to write Choice 1</span>
+          </div>
+          <div class="card-text mb-2">
+            <input type="radio" name="radioName">
+            <span contenteditable="true">Click to write Choice 2</span>
+          </div>
+          <div class="card-text mb-2">
+            <input type="radio" name="radioName">
+            <span contenteditable="true">Click to write Choice 3</span>
+          </div>
         </div>
       </div>`);
   $('.hoverQuestionClicked .questionBlock').replaceWith(dropDownOneAnswer);
 });
+$('#dropDownMultiAnswer').on('click', function () {
+  $('.hoverQuestionClicked input:checkbox').prop('checked', false);
+  $('.hoverQuestionClicked input:radio').prop('checked', false);
+  const checkName = new Date().getTime();
+  const dropDownMultiAnswer = $(`
+      <div class="questionBlock">
+        <div class="questionHeader">
+          <h3 contenteditable="true" class="card-title mb-3">
+            Dropdown Multi answer
+          </h3>
+        </div>
+        <div class="questionBody">
+          <div class="card-text mb-2">
+            <input type="checkbox" name=${checkName}>
+            <span contenteditable="true">Click to write Choice 1</span>
+          </div>
+          <div class="card-text mb-2">
+            <input type="checkbox" name=${checkName}>
+            <span contenteditable="true">Click to write Choice 2</span>
+          </div>
+          <div class="card-text mb-2">
+            <input type="checkbox" name=${checkName}>
+            <span contenteditable="true">Click to write Choice 3</span>
+          </div>
+        </div>
+      </div>`);
+  $('.hoverQuestionClicked .questionBlock').replaceWith(dropDownMultiAnswer);
+});
+$('#sliderAnswer').on('click', function () {
+  $('.hoverQuestionClicked input:checkbox').prop('checked', false);
+  $('.hoverQuestionClicked input:radio').prop('checked', false);
+  const checkName = new Date().getTime();
+  const sliderAnswer = $(`
+      <div class="questionBlock">
+        <div class="questionHeader">
+          <h3 contenteditable="true" class="card-title mb-3">
+            Slider
+          </h3>
+        </div>
+        <div class="questionBody">
+          <div class="card-text mb-2">
+            <input type="checkbox" name=${checkName}>
+            <span contenteditable="true">Click to write Choice 1</span>
+          </div>
+          <div class="card-text mb-2">
+            <input type="checkbox" name=${checkName}>
+            <span contenteditable="true">Click to write Choice 2</span>
+          </div>
+          <div class="card-text mb-2">
+            <input type="checkbox" name=${checkName}>
+            <span contenteditable="true">Click to write Choice 3</span>
+          </div>
+        </div>
+      </div>`);
+  $('.hoverQuestionClicked .questionBlock').replaceWith(sliderAnswer);
+});
+$('#rankAnswer').on('click', function () {
+  $('.hoverQuestionClicked input:checkbox').prop('checked', false);
+  $('.hoverQuestionClicked input:radio').prop('checked', false);
+  const checkName = new Date().getTime();
+  const rankAnswer = $(`
+      <div class="questionBlock">
+        <div class="questionHeader">
+          <h3 contenteditable="true" class="card-title mb-3">
+            Rank
+          </h3>
+        </div>
+        <div class="questionBody">
+          <div class="card-text mb-2">
+            <input type="checkbox" name=${checkName}>
+            <span contenteditable="true">Click to write Choice 1</span>
+          </div>
+          <div class="card-text mb-2">
+            <input type="checkbox" name=${checkName}>
+            <span contenteditable="true">Click to write Choice 2</span>
+          </div>
+          <div class="card-text mb-2">
+            <input type="checkbox" name=${checkName}>
+            <span contenteditable="true">Click to write Choice 3</span>
+          </div>
+        </div>
+      </div>`);
+  $('.hoverQuestionClicked .questionBlock').replaceWith(rankAnswer);
+});
+$('#matrixAnswer').on('click', function () {
+  $('.hoverQuestionClicked input:checkbox').prop('checked', false);
+  $('.hoverQuestionClicked input:radio').prop('checked', false);
+  const checkName = new Date().getTime();
+  const matrixAnswer = $(`
+      <div class="questionBlock">
+        <div class="questionHeader">
+          <h3 contenteditable="true" class="card-title mb-3">
+            Matrix
+          </h3>
+        </div>
+        <div class="questionBody">
+          <div class="card-text mb-2">
+            <input type="checkbox" name=${checkName}>
+            <span contenteditable="true">Click to write Choice 1</span>
+          </div>
+          <div class="card-text mb-2">
+            <input type="checkbox" name=${checkName}>
+            <span contenteditable="true">Click to write Choice 2</span>
+          </div>
+          <div class="card-text mb-2">
+            <input type="checkbox" name=${checkName}>
+            <span contenteditable="true">Click to write Choice 3</span>
+          </div>
+        </div>
+      </div>`);
+  $('.hoverQuestionClicked .questionBlock').replaceWith(matrixAnswer);
+});
+$('#txtSingleLineAnswer').on('click', function () {
+  $('.hoverQuestionClicked input:checkbox').prop('checked', false);
+  $('.hoverQuestionClicked input:radio').prop('checked', false);
+  const txtSingleLineAnswer = $(`
+      <div class="questionBlock">
+        <div class="questionHeader">
+          <h3 contenteditable="true" class="card-title mb-3">
+            Text Single Line
+          </h3>
+        </div>
+        <div class="questionBody">
+          <input type="text" class="form-control">
+        </div>
+      </div>`);
+  $('.hoverQuestionClicked .questionBlock').replaceWith(txtSingleLineAnswer);
+});
+$('#txtEssayAnswer').on('click', function () {
+  $('.hoverQuestionClicked input:checkbox').prop('checked', false);
+  $('.hoverQuestionClicked input:radio').prop('checked', false);
+  const txtEssayAnswer = $(`
+      <div class="questionBlock">
+        <div class="questionHeader">
+          <h3 contenteditable="true" class="card-title mb-3">
+            Text Essay
+          </h3>
+        </div>
+        <div class="questionBody">
+          <textarea class="form-control"></textarea>
+        </div>
+      </div>`);
+  $('.hoverQuestionClicked .questionBlock').replaceWith(txtEssayAnswer);
+});
+$('#txtFormAnswer').on('click', function () {
+  $('.hoverQuestionClicked input:checkbox').prop('checked', false);
+  $('.hoverQuestionClicked input:radio').prop('checked', false);
+  const txtFormAnswer = $(`
+      <div class="questionBlock">
+        <div class="questionHeader">
+          <h3 contenteditable="true" class="card-title mb-3">
+            Text Form
+          </h3>
+        </div>
+        <div class="questionBody">
+          <form>
+            <div class="form-group row">
+              <label for="inputPassword" class="col-sm-2 col-md-3 " contenteditable="true">Password</label>
+              <div class="col-sm-10 col-md-9">
+                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>`);
+  $('.hoverQuestionClicked .questionBlock').replaceWith(txtFormAnswer);
+});
+$('#uploadImgAnswer').on('click', function () {
+  $('.hoverQuestionClicked input:checkbox').prop('checked', false);
+  $('.hoverQuestionClicked input:radio').prop('checked', false);
+  const checkName = new Date().getTime();
+  const uploadImgAnswer = $(`
+      <div class="questionBlock">
+        <div class="questionHeader">
+          <h3 contenteditable="true" class="card-title mb-3">
+            Upload Image
+          </h3>
+        </div>
+        <div class="questionBody">
+          <div class="card-text mb-2">
+            <input type="checkbox" name=${checkName}>
+            <span contenteditable="true">Click to write Choice 1</span>
+          </div>
+          <div class="card-text mb-2">
+            <input type="checkbox" name=${checkName}>
+            <span contenteditable="true">Click to write Choice 2</span>
+          </div>
+          <div class="card-text mb-2">
+            <input type="checkbox" name=${checkName}>
+            <span contenteditable="true">Click to write Choice 3</span>
+          </div>
+        </div>
+      </div>`);
+  $('.hoverQuestionClicked .questionBlock').replaceWith(uploadImgAnswer);
+});
 
-/* PROJECTS\SURVEY: CHANGE QUESTION-TYPE\ CHECKBOX end-- */
+/* PROJECTS\SURVEY: CHANGE QUESTION end-- */
 /* PROJECTS\SURVEY: PREVIEW */
 // when check span checkbox checked
 $('.preview-mobile').on('click', 'span', function () {

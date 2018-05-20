@@ -45,6 +45,13 @@
                 display: inline-block;
                 padding: 0.1rem 0.3rem;
               }
+              .questionBody {
+                input[type="text"],
+                textarea {
+                  width: 50rem;
+                  margin-bottom: 2rem;
+                }
+              }
             }
           }
           & .row:hover .addQuestionControls {
@@ -120,11 +127,11 @@
         &>* {
           display: block;
           margin: 7px auto;
-          border-radius: 2px;
+          border-radius: 5px;
           width: 100%;
-          padding: 1.7rem;
+          padding: 1.6rem;
           text-align: center;
-          font-size: 1.5rem;
+          font-size: 1.4rem;
           position: relative;
           &:before {
             content: "";
@@ -140,13 +147,24 @@
           }
           &:checked:after {
             color: #fff;
+            font-weight: 700;
           }
         }
-        #singleAnswers:after {
-          content: "Single choice";
+        #singleAnswers {
+          display: inline-block;
+          width: 47%;
+          font-size: 1.3rem;
+          &:after {
+            content: "Single choice";
+          }
         }
-        #multibleAnswers:after {
-          content: "Multiple choices";
+        #multibleAnswers {
+          display: inline-block;
+          width: 51%;
+          font-size: 1.3rem;
+          &:after {
+            content: "Multiple choices";
+          }
         }
         #dropDownOneAnswer:after {
           content: "Dropdown Single choice";
@@ -154,23 +172,43 @@
         #dropDownMultiAnswer:after {
           content: "Dropdown Multi choices";
         }
-        #sliderAnswer:after {
-          content: "Slider";
+        #sliderAnswer {
+          display: inline-block;
+          width: 32.33333333333333%;
+          &:after {
+            content: "Slider";
+          }
         }
-        #rankAnswer:after {
-          content: "Rank";
+        #rankAnswer {
+          display: inline-block;
+          width: 32.33333333333333%;
+          &:after {
+            content: "Rank";
+          }
         }
-        #matrixAnswer:after {
-          content: "Matrix";
+        #matrixAnswer {
+          display: inline-block;
+          width: 32.33333333333333%;
+          &:after {
+            content: "Matrix";
+          }
         }
         #txtSingleLineAnswer:after {
           content: "Text Single Line";
         }
-        #txtEssayAnswer:after {
-          content: "Text Essay";
+        #txtEssayAnswer {
+          display: inline-block;
+          width: 47%;
+          &:after {
+            content: "Text Essay";
+          }
         }
-        #txtFormAnswer:after {
-          content: "Text Form";
+        #txtFormAnswer {
+          display: inline-block;
+          width: 51%;
+          &:after {
+            content: "Text Form";
+          }
         }
         #uploadImgAnswer:after {
           content: "Upload Image";
