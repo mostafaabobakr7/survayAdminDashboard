@@ -261,7 +261,7 @@ input[type="radio"] {
 /* typography */
 body {
   font-family: "Nunito", Helvetica, sans-serif;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.7;
   color: #222; }
 
@@ -689,7 +689,7 @@ h1 {
   overflow: hidden; }
 
 .modal-body {
-  height: 40rem;
+  height: 25rem;
   position: relative; }
   .modal-body .container-fluid {
     padding-right: 0;
@@ -878,10 +878,14 @@ h1 {
 [contenteditable="true"] {
   padding: 0.2rem 0.3rem;
   border: 1px solid transparent; }
+  [contenteditable="true"]:hover {
+    background-color: aquamarine;
+    cursor: pointer; }
 
 .editable-focus {
-  background-color: #fff;
-  border: 1px solid blue; }
+  background-color: #fff !important;
+  border: 1px solid blue;
+  cursor: text !important; }
 
 /* editable end */
 /*@import component end-----------------------------*/

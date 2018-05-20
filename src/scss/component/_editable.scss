@@ -3,11 +3,16 @@
 [contenteditable="true"] {
   padding: 0.2rem 0.3rem;
   border: 1px solid transparent;
+  &:hover {
+    background-color: aquamarine;
+    cursor: pointer;
+  }
 }
 
 .editable-focus {
-  background-color: #fff;
+  background-color: #fff !important;
   border: 1px solid blue;
+  cursor: text !important;
 }
 
 /* editable end */

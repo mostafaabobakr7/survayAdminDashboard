@@ -35,8 +35,8 @@ $('#folderDropdown-menu .dropdown-item').each(function () {
 });
 /* PROJECTS: section-home-folders-dropdown end------ */
 /* PROJECTS: create project */
-$('#createProjectBTN').on('click', function (e) {
-  e.preventDefault();
+$('#createProjectBTN').on('click', function (ev) {
+  ev.preventDefault();
   const projectCreationName = $('#projectName').val();
   const d = new Date();
   const menuID = new Date().getTime();
@@ -46,7 +46,7 @@ $('#createProjectBTN').on('click', function (e) {
     year: 'numeric',
     hour: 'numeric',
     minute: 'numeric',
-    hour12: true
+    hour12: true,
   });
   const card = $(`        <div class="row py-3">
           <div class="col-md-12">
@@ -120,6 +120,11 @@ $('#createProjectBTN').on('click', function (e) {
           </div>
         </div>`);
   $('.projects-list .container-fluid').prepend(card);
+});
+$('#projectName').keypress(function (e) {
+  if (e.which == 13) {
+    $('#createProjectBTN').click();
+  }
 });
 /* PROJECTS: create project end----------*/
 /* PROJECTS: card (project) on click go to edit_survey */
@@ -225,6 +230,7 @@ $('.section-block').on('click', '#addBlock', () => {
 /* PROJECTS\SURVEY: ADD BLOCK function end--*/
 /* PROJECTS\SURVEY: ADD QUESTION RADIO */
 let num = 1;
+
 function addRadio(place, elementPlaceInDOM) {
   const radioName = new Date().getTime();
   const radioQuestion = $(`
@@ -362,7 +368,7 @@ if (/edit_survey.html/.test(window.location.href)) {
     });
 }
 /* PROJECTS\SURVEY: QUESTION ON CLICK CHANGE BACKGROUNND end-- */
-/* PROJECTS\SURVEY: RADIO CHOICES */
+/* PROJECTS\SURVEY: RADIO CHOICES INC\DEC */
 $('.choicesDecrease')
   .on('click', function () {
     $('.hoverQuestionClicked .card-text:last-child').remove();
@@ -389,8 +395,8 @@ $('.choicesIncrease').on('click', function () {
   $('.choices span').text(choicesCurrentNum);
 });
 
-/* PROJECTS\SURVEY: RADIO CHOICES end */
-/* PROJECTS\SURVEY: CHANGE TO QUESTION CHECKBOX */
+/* PROJECTS\SURVEY: RADIO CHOICES INC\DEC end */
+/* PROJECTS\SURVEY: CHANGE QUESTION-TYPE\ CHECKBOX */
 $('#multibleAnswers').on('click', function () {
   $('.hoverQuestionClicked input:radio').prop('checked', false);
   $('.hoverQuestionClicked input:radio').attr('type', 'checkbox');
@@ -399,7 +405,7 @@ $('#singleAnswers').on('click', function () {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:checkbox').attr('type', 'radio');
 });
-/* PROJECTS\SURVEY: CHANGE TO QUESTION CHECKBOX end-- */
+/* PROJECTS\SURVEY: CHANGE QUESTION-TYPE\ CHECKBOX end-- */
 /* PROJECTS\SURVEY: PREVIEW */
 // when check span checkbox checked
 $('.preview-mobile').on('click', 'span', function () {
@@ -442,12 +448,12 @@ $('.sport-survey').on('click', function () {
 if (/reports.html/.test(window.location)) {
   const quill = new Quill('.note', {
     modules: {
-      toolbar: true
+      toolbar: true,
     },
     placeholder: 'start typing....',
-    theme: 'snow'
+    theme: 'snow',
   });
-  $('.ql-toolbar').addClass('d-none')
+  $('.ql-toolbar').addClass('d-none');
 }
 $('.reportSection')
   .on('click', '.noteBTN', function () {
@@ -497,35 +503,31 @@ function chart(type) {
     type: `${type}`,
     data: {
       labels: [
-        'answer1', 'answer2'
+        'answer1', 'answer2',
       ],
-      datasets: [
-        {
-          label: 'number of answers',
-          data: [
-            1, 2
-          ],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.8)', 'rgba(54, 162, 235, 0.8)'
-          ],
-          borderColor: [
-            'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'
-          ],
-          borderWidth: 1
-        }
-      ]
+      datasets: [{
+        label: 'number of answers',
+        data: [
+          1, 2,
+        ],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.8)', 'rgba(54, 162, 235, 0.8)',
+        ],
+        borderColor: [
+          'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
+        ],
+        borderWidth: 1,
+      }],
     },
     options: {
       scales: {
-        yAxes: [
-          {
-            ticks: {
-              beginAtZero: true
-            }
-          }
-        ]
-      }
-    }
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+          },
+        }],
+      },
+    },
   });
 }
 
@@ -561,29 +563,25 @@ function chartDashboard(type, canvasID) {
   let chart = new Chart(ctx, {
     type: `${type}`,
     data: {
-      datasets: [
-        {
-          label: 'First dataset',
-          data: [
-            0, 20, 40, 50
-          ],
-          backgroundColor: ['rgba(255, 99, 132, 0.8)', 'rgba(54, 162, 230, 0.8)', 'rgba(54, 162, 240, 0.8)', 'rgba(54, 162, 135, 0.8)']
-        }
-      ],
-      labels: ['January', 'February', 'March', 'April']
+      datasets: [{
+        label: 'First dataset',
+        data: [
+          0, 20, 40, 50,
+        ],
+        backgroundColor: ['rgba(255, 99, 132, 0.8)', 'rgba(54, 162, 230, 0.8)', 'rgba(54, 162, 240, 0.8)', 'rgba(54, 162, 135, 0.8)'],
+      }],
+      labels: ['January', 'February', 'March', 'April'],
     },
     options: {
       scales: {
-        yAxes: [
-          {
-            ticks: {
-              suggestedMin: 1,
-              suggestedMax: 50
-            }
-          }
-        ]
-      }
-    }
+        yAxes: [{
+          ticks: {
+            suggestedMin: 1,
+            suggestedMax: 50,
+          },
+        }],
+      },
+    },
   });
 }
 if (/index.html/.test(window.location.href)) {
