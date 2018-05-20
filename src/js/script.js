@@ -175,7 +175,6 @@ if (/edit_survey.html/.test(window.location)) {
       $(this).focusout(function () {
         $(this).removeClass('editable-focus');
       });
-      document.execCommand('selectAll', false, null);
     });
 }
 /* PROJECTS\SURVEY: CONTENTEDITABLE on CLICK end--- */
@@ -208,17 +207,19 @@ $('.section-block').on('click', '#addBlock', () => {
                                       Click to write the question text
                                     </h3>
                                   </div>
-                                  <div class="card-text mb-2">
-                                    <input type="radio" name="question">
-                                    <span contenteditable="true">Click to write Choice 1</span>
-                                  </div>
-                                  <div class="card-text mb-2">
-                                    <input type="radio" name="question">
-                                    <span contenteditable="true">Click to write Choice 2</span>
-                                  </div>
-                                  <div class="card-text mb-2">
-                                    <input type="radio" name="question">
+                                  <div class="questionBody">
+                                    <div class="card-text mb-2">
+                                      <input type="radio" name="question">
+                                      <span contenteditable="true">Click to write Choice 1</span>
+                                    </div>
+                                    <div class="card-text mb-2">
+                                      <input type="radio" name="question">
+                                      <span contenteditable="true">Click to write Choice 2</span>
+                                    </div>
+                                    <div class="card-text mb-2">
+                                      <input type="radio" name="question">
                                     <span contenteditable="true">Click to write Choice 3</span>
+                                    </div>
                                   </div>
                                 </div>
                                 <div class="addQuestionControls  justify-content-between">
@@ -258,31 +259,33 @@ function addRadio(place, elementPlaceInDOM) {
           <h4 contenteditable="true">Q${num + 1}</h4>
         </div>
       </div> <div class = "col-11 d-flex justify-content-between" > <div class="questionBlock">
-        <div class="questionHeader" >
+        <div class="questionHeader">
           <h3 contenteditable="true" class="card-title  mb-3">
             Click to write the question text
           </h3>
         </div>
-        <div class="card-text mb-2">
-          <input type="radio" name=${radioName}>
-            <span contenteditable="true">Click to write Choice 1</span>
+        <div class="questionBody">
+          <div class="card-text mb-2">
+            <input type="radio" name=${radioName}>
+              <span contenteditable="true">Click to write Choice 1</span>
           </div>
           <div class="card-text mb-2">
             <input type="radio" name=${radioName}>
               <span contenteditable="true">Click to write Choice 2</span>
-            </div>
-            <div class="card-text mb-2">
-              <input type="radio" name=${radioName}>
-                <span contenteditable="true">Click to write Choice 3</span>
-              </div>
-            </div>
-            <div class="addQuestionControls justify-content-between">
-              <i class="fa fa-plus-circle questionInserBefore" title="Insert Question Before"></i>
-              <i class="fa fa-minus-circle questionDelete" title="Delete Question"></i>
-              <i class="fa fa-plus-circle questionInserAfter" title="Insert Question After"></i>
+          </div>
+          <div class="card-text mb-2">
+            <input type="radio" name=${radioName}>
+              <span contenteditable="true">Click to write Choice 3</span>
             </div>
           </div>
         </div>
+        <div class="addQuestionControls justify-content-between">
+          <i class="fa fa-plus-circle questionInserBefore" title="Insert Question Before"></i>
+          <i class="fa fa-minus-circle questionDelete" title="Delete Question"></i>
+          <i class="fa fa-plus-circle questionInserAfter" title="Insert Question After"></i>
+        </div>
+      </div>
+    </div>
 `);
 
   /* INSERT BEFORE QUESTION */
@@ -410,13 +413,84 @@ $('.choicesIncrease').on('click', function () {
 /* PROJECTS\SURVEY: RADIO CHOICES INC\DEC end */
 /* PROJECTS\SURVEY: CHANGE QUESTION-TYPE\ CHECKBOX */
 $('#multibleAnswers').on('click', function () {
+  $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:radio').prop('checked', false);
-  $('.hoverQuestionClicked input:radio').attr('type', 'checkbox');
+  const checkName = new Date().getTime();
+  const multibleAnswers = $(`
+      <div class="questionBlock">
+        <div class="questionHeader">
+          <h3 contenteditable="true" class="card-title mb-3">
+            Multiple answers
+          </h3>
+        </div>
+        <div class="card-text mb-2">
+          <input type="checkbox" name=${checkName}>
+          <span contenteditable="true">Click to write Choice 1</span>
+        </div>
+        <div class="card-text mb-2">
+          <input type="checkbox" name=${checkName}>
+          <span contenteditable="true">Click to write Choice 2</span>
+        </div>
+        <div class="card-text mb-2">
+          <input type="checkbox" name=${checkName}>
+          <span contenteditable="true">Click to write Choice 3</span>
+        </div>
+      </div>`);
+  $('.hoverQuestionClicked .questionBlock').replaceWith(multibleAnswers);
 });
 $('#singleAnswers').on('click', function () {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
-  $('.hoverQuestionClicked input:checkbox').attr('type', 'radio');
+  $('.hoverQuestionClicked input:radio').prop('checked', false);
+  const radioName = new Date().getTime();
+  const singleAnswers = $(`
+      <div class="questionBlock">
+        <div class="questionHeader">
+          <h3 contenteditable="true" class="card-title mb-3">
+            Single answer
+          </h3>
+        </div>
+        <div class="card-text mb-2">
+          <input type="radio" name=${radioName}>
+          <span contenteditable="true">Click to write Choice 1</span>
+        </div>
+        <div class="card-text mb-2">
+          <input type="radio" name=${radioName}>
+          <span contenteditable="true">Click to write Choice 2</span>
+        </div>
+        <div class="card-text mb-2">
+          <input type="radio" name=${radioName}>
+          <span contenteditable="true">Click to write Choice 3</span>
+        </div>
+      </div>`);
+  $('.hoverQuestionClicked .questionBlock').replaceWith(singleAnswers);
 });
+$('#dropDownOneAnswer').on('click', function () {
+  $('.hoverQuestionClicked input:checkbox').prop('checked', false);
+  $('.hoverQuestionClicked input:radio').prop('checked', false);
+  const radioName = new Date().getTime();
+  const dropDownOneAnswer = $(`
+      <div class="questionBlock">
+        <div class="questionHeader">
+          <h3 contenteditable="true" class="card-title mb-3">
+            Dropdown single answer
+          </h3>
+        </div>
+        <div class="card-text mb-2">
+          <input type="radio" name="radioName">
+          <span contenteditable="true">Click to write Choice 1</span>
+        </div>
+        <div class="card-text mb-2">
+          <input type="radio" name="radioName">
+          <span contenteditable="true">Click to write Choice 2</span>
+        </div>
+        <div class="card-text mb-2">
+          <input type="radio" name="radioName">
+          <span contenteditable="true">Click to write Choice 3</span>
+        </div>
+      </div>`);
+  $('.hoverQuestionClicked .questionBlock').replaceWith(dropDownOneAnswer);
+});
+
 /* PROJECTS\SURVEY: CHANGE QUESTION-TYPE\ CHECKBOX end-- */
 /* PROJECTS\SURVEY: PREVIEW */
 // when check span checkbox checked
