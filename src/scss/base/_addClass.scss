@@ -1,0 +1,55 @@
+/* addClass */
+
+.editable-focus {
+  background-color: #fff !important;
+  border: 1px solid blue;
+  cursor: text !important;
+}
+
+.dropDownClickBorder {
+  border: 1px solid #737373 !important;
+  color: $nav-main-color !important;
+}
+
+.btn-shadow {
+  box-shadow: 0 0.7rem 1rem rgba(#000, 0.2);
+  transform: scale(1.01);
+  transition: all 0.3s ease-in-out;
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+.visibilityHidden {
+  visibility: hidden !important;
+}
+
+.btn-group-active {
+  background-color: $nav-main-color !important;
+  color: #fff !important;
+}
+
+.menu__close {
+  left: -27rem;
+}
+
+.menu__folder {
+  margin-left: 27rem;
+}
+
+.outline-border {
+  padding: 1rem;
+  font-size: 1.3rem;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  &:hover {
+    color: #222;
+    border: 1px solid #737373;
+  }
+}
+
+.label-checked {
+  color: #20e0d0
+}
+
+/* addClass end */

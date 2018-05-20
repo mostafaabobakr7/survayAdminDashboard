@@ -119,7 +119,17 @@ $('#createProjectBTN').on('click', function (ev) {
             </div>
           </div>
         </div>`);
-  $('.projects-list .container-fluid').prepend(card);
+  if (projectCreationName) {
+    $('#projectName').removeClass('is-invalid');
+    $('.projects-list .container-fluid').prepend(card);
+    $('#create_project').modal('hide');
+  } else {
+    $('#projectName').addClass('is-invalid');
+  }
+});
+$('#projectName').on('change keyup paste', function () {
+  $(this).removeClass('is-invalid');
+  $(this).addClass('is-valid');
 });
 $('#projectName').keypress(function (e) {
   if (e.which == 13) {
@@ -371,8 +381,10 @@ if (/edit_survey.html/.test(window.location.href)) {
 /* PROJECTS\SURVEY: RADIO CHOICES INC\DEC */
 $('.choicesDecrease')
   .on('click', function () {
-    $('.hoverQuestionClicked .card-text:last-child').remove();
-    $('.choices span').text(choicesCurrentNum);
+    if ($('.choices span').text() !== '2') {
+      $('.hoverQuestionClicked .card-text:last-child').remove();
+      $('.choices span').text(choicesCurrentNum);
+    }
   });
 $('.choicesIncrease').on('click', function () {
   let choiceNum = choicesCurrentNum();
@@ -397,6 +409,14 @@ $('.choicesIncrease').on('click', function () {
 
 /* PROJECTS\SURVEY: RADIO CHOICES INC\DEC end */
 /* PROJECTS\SURVEY: CHANGE QUESTION-TYPE\ CHECKBOX */
+$('.answers input:radio').each(function () {
+  if ($('input:radio').prop('checked', true)) {
+    $('input:radio').closest('label').addClass('label-checked');
+    $('input:radio').closest('label').siblings().removeClass('label-checked');
+  } else {
+    $('input:radio').closest('label').removeClass('label-checked');
+  }
+});
 $('#multibleAnswers').on('click', function () {
   $('.hoverQuestionClicked input:radio').prop('checked', false);
   $('.hoverQuestionClicked input:radio').attr('type', 'checkbox');

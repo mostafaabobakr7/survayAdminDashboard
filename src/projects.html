@@ -245,7 +245,11 @@
                     <form>
                       <div class="form-group">
                         <label for="projectName">Project Name</label>
-                        <input type="text" class="form-control form-control-lg" id="projectName" aria-describedby="emailHelp" placeholder="Enter Project Name">
+                        <input type="text" class="form-control form-control-lg" id="projectName" aria-describedby="emailHelp" placeholder="Enter Project Name"
+                          required autocomplete="off">
+                        <div class="invalid-feedback">
+                          Please Enter project name
+                        </div>
                       </div>
                     </form>
                   </div>
@@ -256,7 +260,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary btn-lg" data-dismiss="modal" title="Cancel">Cancel</button>
-          <button id="createProjectBTN" type="button" class="btn btn-success btn-lg px-4 ml-3" data-dismiss="modal" title="Create a new Project">
+          <button id="createProjectBTN" type="button" class="btn btn-success btn-lg px-4 ml-3" title="Create a new Project">
             <i class="fa fa-plus pr-2"></i> Create Project</button>
         </div>
       </div>

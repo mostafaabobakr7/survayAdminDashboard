@@ -1,14 +1,5 @@
 /* btn component */
 
-.btn-shadow {
-  box-shadow: 0 0.7rem 1rem rgba(#000, 0.2);
-  transform: scale(1.01);
-  transition: all 0.3s ease-in-out;
-  &:active {
-    transform: scale(0.9);
-  }
-}
-
 .btn {
   &:focus,
   &:active:focus,

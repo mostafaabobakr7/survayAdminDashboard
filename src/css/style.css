@@ -242,12 +242,58 @@ input[type="checkbox"] {
     position: relative;
     z-index: 100; }
 
+input[type="checkbox"] {
+  border-radius: 2px; }
+
 input[type="radio"] {
   border-radius: 50%; }
   input[type="radio"]::after {
     border-radius: 50%; }
 
 /* radio and checkbox style end---- */
+/* Base end-------------------- */
+/* addClass */
+.editable-focus {
+  background-color: #fff !important;
+  border: 1px solid blue;
+  cursor: text !important; }
+
+.dropDownClickBorder {
+  border: 1px solid #737373 !important;
+  color: #007ac0 !important; }
+
+.btn-shadow {
+  -webkit-box-shadow: 0 0.7rem 1rem rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0.7rem 1rem rgba(0, 0, 0, 0.2);
+  -webkit-transform: scale(1.01);
+     -moz-transform: scale(1.01);
+      -ms-transform: scale(1.01);
+       -o-transform: scale(1.01);
+          transform: scale(1.01);
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out; }
+  .btn-shadow:active {
+    -webkit-transform: scale(0.9);
+       -moz-transform: scale(0.9);
+        -ms-transform: scale(0.9);
+         -o-transform: scale(0.9);
+            transform: scale(0.9); }
+
+.visibilityHidden {
+  visibility: hidden !important; }
+
+.btn-group-active {
+  background-color: #007ac0 !important;
+  color: #fff !important; }
+
+.menu__close {
+  left: -27rem; }
+
+.menu__folder {
+  margin-left: 27rem; }
+
 .outline-border {
   padding: 1rem;
   font-size: 1.3rem;
@@ -257,7 +303,10 @@ input[type="radio"] {
     color: #222;
     border: 1px solid #737373; }
 
-/* Base end-------------------- */
+.label-checked {
+  color: #20e0d0; }
+
+/* addClass end */
 /* typography */
 body {
   font-family: "Nunito", Helvetica, sans-serif;
@@ -582,25 +631,6 @@ h1 {
 /*@import layout folder end-----------------------------*/
 /*@import component */
 /* btn component */
-.btn-shadow {
-  -webkit-box-shadow: 0 0.7rem 1rem rgba(0, 0, 0, 0.2);
-          box-shadow: 0 0.7rem 1rem rgba(0, 0, 0, 0.2);
-  -webkit-transform: scale(1.01);
-     -moz-transform: scale(1.01);
-      -ms-transform: scale(1.01);
-       -o-transform: scale(1.01);
-          transform: scale(1.01);
-  -webkit-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out; }
-  .btn-shadow:active {
-    -webkit-transform: scale(0.9);
-       -moz-transform: scale(0.9);
-        -ms-transform: scale(0.9);
-         -o-transform: scale(0.9);
-            transform: scale(0.9); }
-
 .btn:focus, .btn:active:focus, .btn.active:focus {
   outline: none;
   -webkit-box-shadow: none;
@@ -829,10 +859,6 @@ h1 {
   .modal .tab-pane__research h5 {
     padding-left: 6px; }
 
-.dropDownClickBorder {
-  border: 1px solid #737373 !important;
-  color: #007ac0 !important; }
-
 .section-home-dropdown__link {
   padding: 1rem;
   font-size: 1.2rem;
@@ -882,21 +908,10 @@ h1 {
     background-color: aquamarine;
     cursor: pointer; }
 
-.editable-focus {
-  background-color: #fff !important;
-  border: 1px solid blue;
-  cursor: text !important; }
-
 /* editable end */
 /*@import component end-----------------------------*/
 /*@import PAGES folder */
 /* home */
-.menu__close {
-  left: -27rem; }
-
-.menu__folder {
-  margin-left: 27rem; }
-
 main {
   min-height: 85vh;
   overflow: hidden; }
@@ -959,54 +974,56 @@ main {
   overflow: hidden; }
   .editSurveySection .leftContent .projectNameEdit {
     color: #222; }
-  .editSurveySection .leftContent .section-block .card-body .hoverQuestion {
-    border-top: 1px solid transparent;
-    border-bottom: 1px solid transparent;
-    position: relative; }
-    .editSurveySection .leftContent .section-block .card-body .hoverQuestion:hover .questionMove {
-      display: block; }
-    .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove {
-      position: absolute;
-      top: 35%;
-      left: -30px;
-      background-color: #909090;
-      color: #fff;
-      border-radius: 10px;
-      width: 30px;
-      text-align: center;
-      overflow: hidden;
-      display: none; }
-      .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__up, .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__down {
-        cursor: pointer; }
-        .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__up:hover, .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__up:hover, .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__down:hover, .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__down:hover {
-          background-color: #222; }
-    .editSurveySection .leftContent .section-block .card-body .hoverQuestion .col-1 {
-      border-right: 1px solid #ccc; }
-    .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionHeader {
-      display: inline-block;
-      padding: 0.1rem 0.3rem; }
-  .editSurveySection .leftContent .section-block .card-body .row:hover .addQuestionControls {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex; }
-  .editSurveySection .leftContent .section-block .card-body .addQuestionControls {
-    display: none;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-       -moz-box-orient: vertical;
-       -moz-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column; }
-    .editSurveySection .leftContent .section-block .card-body .addQuestionControls i {
-      cursor: pointer;
-      font-size: 2.2rem; }
-    .editSurveySection .leftContent .section-block .card-body .addQuestionControls .fa-plus-circle {
-      color: green; }
-    .editSurveySection .leftContent .section-block .card-body .addQuestionControls .fa-minus-circle {
-      color: #cb0c0c; }
+  .editSurveySection .leftContent .section-block .card-body {
+    overflow: hidden; }
+    .editSurveySection .leftContent .section-block .card-body .hoverQuestion {
+      border-top: 1px solid transparent;
+      border-bottom: 1px solid transparent;
+      position: relative; }
+      .editSurveySection .leftContent .section-block .card-body .hoverQuestion:hover .questionMove {
+        display: block; }
+      .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove {
+        position: absolute;
+        top: 35%;
+        left: -30px;
+        background-color: #909090;
+        color: #fff;
+        border-radius: 10px;
+        width: 30px;
+        text-align: center;
+        overflow: hidden;
+        display: none; }
+        .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__up, .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__down {
+          cursor: pointer; }
+          .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__up:hover, .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__up:hover, .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__down:hover, .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__down:hover {
+            background-color: #222; }
+      .editSurveySection .leftContent .section-block .card-body .hoverQuestion .col-1 {
+        border-right: 1px solid #ccc; }
+      .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionHeader {
+        display: inline-block;
+        padding: 0.1rem 0.3rem; }
+    .editSurveySection .leftContent .section-block .card-body .row:hover .addQuestionControls {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: flex; }
+    .editSurveySection .leftContent .section-block .card-body .addQuestionControls {
+      display: none;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+         -moz-box-orient: vertical;
+         -moz-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column; }
+      .editSurveySection .leftContent .section-block .card-body .addQuestionControls i {
+        cursor: pointer;
+        font-size: 2.2rem; }
+      .editSurveySection .leftContent .section-block .card-body .addQuestionControls .fa-plus-circle {
+        color: green; }
+      .editSurveySection .leftContent .section-block .card-body .addQuestionControls .fa-minus-circle {
+        color: #cb0c0c; }
   .editSurveySection .leftContent .section-block .card-text span {
     font-size: 1.2rem; }
   .editSurveySection .hoverQuestionClicked {
@@ -1022,17 +1039,82 @@ main {
     .editSurveySection .rightControls p {
       font-size: 1.2rem; }
     .editSurveySection .rightControls .choices {
-      font-size: 1.6rem; }
+      font-size: 2.4rem; }
       .editSurveySection .rightControls .choices i {
-        cursor: pointer; }
+        cursor: pointer;
+        font-size: 3rem;
+        margin: 0 1rem; }
+        .editSurveySection .rightControls .choices i:active {
+          -webkit-transform: scale(0.9);
+             -moz-transform: scale(0.9);
+              -ms-transform: scale(0.9);
+               -o-transform: scale(0.9);
+                  transform: scale(0.9); }
       .editSurveySection .rightControls .choices i.fa-minus-circle {
         color: #cb0c0c; }
       .editSurveySection .rightControls .choices span {
-        color: #222; }
+        color: #222;
+        line-height: 1;
+        font-weight: 700;
+        -webkit-transition: none;
+        -o-transition: none;
+        -moz-transition: none;
+        transition: none; }
       .editSurveySection .rightControls .choices i.fa-plus-circle {
         color: green; }
-    .editSurveySection .rightControls .answers #multibleAnswers {
-      border-radius: 0; }
+    .editSurveySection .rightControls p {
+      padding: 0.4rem 0;
+      background-color: #222;
+      color: #fff;
+      text-align: center;
+      border-radius: 5px;
+      font-weight: 600;
+      font-size: 1.5rem; }
+    .editSurveySection .rightControls .change-answers .answers > * {
+      display: block;
+      margin: 7px auto;
+      border-radius: 2px;
+      width: 100%;
+      padding: 1.7rem;
+      text-align: center;
+      font-size: 1.5rem;
+      position: relative; }
+      .editSurveySection .rightControls .change-answers .answers > *:before {
+        content: ""; }
+      .editSurveySection .rightControls .change-answers .answers > *:after {
+        border-radius: 5px;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+           -moz-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+             -o-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%); }
+    .editSurveySection .rightControls .change-answers .answers #singleAnswers:after {
+      content: "Single choice"; }
+    .editSurveySection .rightControls .change-answers .answers #multibleAnswers:after {
+      content: "Multiple choices"; }
+    .editSurveySection .rightControls .change-answers .answers #dropDownOneAnswer:after {
+      content: "Dropdown Single choice"; }
+    .editSurveySection .rightControls .change-answers .answers #dropDownMultiAnswer:after {
+      content: "Dropdown Multi choices"; }
+    .editSurveySection .rightControls .change-answers .answers #sliderAnswer:after {
+      content: "Slider"; }
+    .editSurveySection .rightControls .change-answers .answers #rankAnswer:after {
+      content: "Rank"; }
+    .editSurveySection .rightControls .change-answers .answers #matrixAnswer:after {
+      content: "Matrix"; }
+    .editSurveySection .rightControls .change-answers .answers #txtSingleLineAnswer:after {
+      content: "Text Single Line"; }
+    .editSurveySection .rightControls .change-answers .answers #txtEssayAnswer:after {
+      content: "Text Essay"; }
+    .editSurveySection .rightControls .change-answers .answers #txtFormAnswer:after {
+      content: "Text Form"; }
+    .editSurveySection .rightControls .change-answers .answers #uploadImgAnswer:after {
+      content: "Upload Image"; }
 
 /* edit_survey section end- */
 /* preview-mobile */
@@ -1183,13 +1265,6 @@ main {
 /* REPORT */
 .reportSection .note {
   min-height: 8rem; }
-
-.reportSection .visibilityHidden {
-  visibility: hidden !important; }
-
-.reportSection .btn-group-active {
-  background-color: #007ac0 !important;
-  color: #fff !important; }
 
 /* REPORT end--*/
 /* library */

@@ -121,6 +121,10 @@ input[type="checkbox"] {
   }
 }
 
+input[type="checkbox"] {
+  border-radius: 2px;
+}
+
 input[type="radio"] {
   border-radius: 50%;
   &::after {
@@ -129,16 +133,5 @@ input[type="radio"] {
 }
 
 /* radio and checkbox style end---- */
-
-.outline-border {
-  padding: 1rem;
-  font-size: 1.3rem;
-  border-radius: 5px;
-  border: 1px solid transparent;
-  &:hover {
-    color: #222;
-    border: 1px solid #737373;
-  }
-}
 
 /* Base end-------------------- */
