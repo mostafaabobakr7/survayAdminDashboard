@@ -73,11 +73,6 @@
       }
     }
   }
-  .hoverQuestionClicked {
-    border-top: 1px solid #ccc !important;
-    border-bottom: 1px solid #ccc !important;
-    background-color: #f2f5f8;
-  }
   .rightControlsColor {
     background-color: #f2f5f8;
     border-left: 1px solid #ccc;
@@ -89,7 +84,7 @@
       font-size: 1.2rem;
     }
     .choices {
-      font-size: 2.4rem;
+      font-size: 2rem;
       i {
         cursor: pointer;
         font-size: 3rem;
@@ -133,12 +128,18 @@
           position: relative;
           &:before {
             content: "";
+            height: 0;
+            width: 0;
           }
           &:after {
+            color: #222;
             border-radius: 5px;
             width: 100%;
             height: 100%;
             @include center;
+          }
+          &:checked:after {
+            color: #fff;
           }
         }
         #singleAnswers:after {

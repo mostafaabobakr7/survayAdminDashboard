@@ -409,14 +409,6 @@ $('.choicesIncrease').on('click', function () {
 
 /* PROJECTS\SURVEY: RADIO CHOICES INC\DEC end */
 /* PROJECTS\SURVEY: CHANGE QUESTION-TYPE\ CHECKBOX */
-$('.answers input:radio').each(function () {
-  if ($('input:radio').prop('checked', true)) {
-    $('input:radio').closest('label').addClass('label-checked');
-    $('input:radio').closest('label').siblings().removeClass('label-checked');
-  } else {
-    $('input:radio').closest('label').removeClass('label-checked');
-  }
-});
 $('#multibleAnswers').on('click', function () {
   $('.hoverQuestionClicked input:radio').prop('checked', false);
   $('.hoverQuestionClicked input:radio').attr('type', 'checkbox');
