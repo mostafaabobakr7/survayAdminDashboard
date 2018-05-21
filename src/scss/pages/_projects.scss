@@ -1,8 +1,6 @@
 /* home */
 
 main {
-  min-height: 85vh;
-  overflow: hidden;
   .section-home {
     position: relative;
     &-folders {
@@ -17,7 +15,6 @@ main {
         z-index: 100;
         top: -3rem;
         width: 25rem;
-        height: 100rem;
         background-color: #fff;
         @include dropDownShadow;
         &-close {

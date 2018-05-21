@@ -42,7 +42,7 @@
             }
             .questionBlock {
               .questionHeader {
-                display: inline-block;
+                display: block;
                 padding: 0.1rem 0.3rem;
               }
               .questionBody {
@@ -50,6 +50,9 @@
                 textarea {
                   width: 50rem;
                   margin-bottom: 2rem;
+                }
+                form {
+                  width: 50rem;
                 }
               }
             }

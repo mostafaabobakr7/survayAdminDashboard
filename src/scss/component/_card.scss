@@ -4,7 +4,6 @@
   position: relative;
   .card {
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
     &:hover {
       @include dropDownShadow;
     }
@@ -37,9 +36,6 @@
   }
   .card-body-icon {
     cursor: pointer;
-    position: relative;
-    top: 5px;
-    right: 5px;
     text-align: center;
     font-size: 2rem;
     line-height: 40px;

@@ -85,7 +85,7 @@ $('#createProjectBTN').on('click', function (ev) {
                     </div>
                   </div>
                   <div class="col-md-1 d-flex justify-content-end">
-                    <div class="card-body-icon dropleft">
+                    <div class="card-body-icon dropdown dropleft">
                       <a href="#" id=${menuID} role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
                       </a>
@@ -243,7 +243,10 @@ $('.section-block').on('click', '#addBlock', () => {
   $('.section-block .col-12').append(block);
 });
 $('.section-block').on('click', '.blockClose', function () {
-  $(this).parent().parent().remove();
+  $(this)
+    .parent()
+    .parent()
+    .remove();
 });
 /* PROJECTS\SURVEY: ADD BLOCK function end--*/
 /* PROJECTS\SURVEY: ADD QUESTION RADIO */
@@ -642,7 +645,8 @@ $('#txtEssayAnswer').on('click', function () {
           </h3>
         </div>
         <div class="questionBody">
-          <textarea class="form-control"></textarea>
+
+          <textarea class="form-control" rows="5"></textarea>
         </div>
       </div>`);
   $('.hoverQuestionClicked .questionBlock').replaceWith(txtEssayAnswer);
@@ -659,10 +663,28 @@ $('#txtFormAnswer').on('click', function () {
         </div>
         <div class="questionBody">
           <form>
-            <div class="form-group row">
-              <label for="inputPassword" class="col-sm-2 col-md-3 " contenteditable="true">Password</label>
-              <div class="col-sm-10 col-md-9">
-                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+            <div class="form-group row text-right">
+              <label class="col-sm-2">Date:</label>
+              <div class="col-sm-10">
+                <input autocomplete="off" type="date" class="form-control w-25">
+              </div>
+            </div>
+            <div class="form-group row text-right">
+              <label class="col-sm-2">Phone:</label>
+              <div class="col-sm-10">
+                <input autocomplete="off" type="number" class="form-control w-50" placeholder="Phone Number...">
+              </div>
+            </div>
+            <div class="form-group row text-right">
+              <label class="col-sm-2">E-mail:</label>
+              <div class="col-sm-10">
+                <input autocomplete="off" type="email" class="form-control w-75" placeholder="E-mail...">
+              </div>
+            </div>
+            <div class="form-group row text-right">
+              <label class="col-sm-2">Password:</label>
+              <div class="col-sm-10">
+                <input autocomplete="off" type="password" class="form-control w-75" placeholder="Password" required>
               </div>
             </div>
           </form>
@@ -879,10 +901,6 @@ function chartDashboard(type, canvasID) {
   });
 }
 if (/index.html/.test(window.location.href)) {
-  chartDashboard('bar', 'Number-of-Users');
-  chartDashboard('pie', 'Number-of-Surveys');
-  chartDashboard('bar', 'Generated-Reports');
-  chartDashboard('line', 'Number-of-Responses');
-  chartDashboard('line', 'New-Survey-per-Month');
+  chartDashboard('bar', 'New-Survey-per-Month');
 }
 /* DASHBOARD: end */

@@ -262,7 +262,7 @@ input[type="radio"] {
 .hoverQuestionClicked {
   border-top: 1px solid #ccc !important;
   border-bottom: 1px solid #ccc !important;
-  background-color: #f2f5f8; }
+  background-color: #ebebeb; }
 
 .editable-focus {
   background-color: #fff !important;
@@ -318,16 +318,23 @@ body {
 
 h1 {
   font-weight: 700;
-  font-size: 5rem; }
+  font-size: 2.5rem; }
 
-.sectionDashboard h1 {
-  position: relative; }
-  .sectionDashboard h1:before {
+.sectionDashboard .card .card-body h1 {
+  font-weight: 700;
+  font-size: 4rem; }
+
+.sectionDashboard .card .card-body h2 {
+  font-weight: 700;
+  font-size: 2rem;
+  position: relative;
+  display: inline-block; }
+  .sectionDashboard .card .card-body h2:before {
     position: absolute;
-    bottom: 20px;
+    bottom: -4px;
     content: "";
     width: 50px;
-    border-top: 7px solid yellow; }
+    border-top: 4px solid yellow; }
 
 /* typography end----------------------- */
 /* utility margin padding */
@@ -655,11 +662,7 @@ h1 {
 .projects-list-container {
   position: relative; }
   .projects-list-container .card {
-    cursor: pointer;
-    -webkit-transition: all 0.2s ease-in-out;
-    -o-transition: all 0.2s ease-in-out;
-    -moz-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out; }
+    cursor: pointer; }
     .projects-list-container .card:hover {
       -webkit-box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
               box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
@@ -686,9 +689,6 @@ h1 {
           font-size: 1.3rem; }
   .projects-list-container .card-body-icon {
     cursor: pointer;
-    position: relative;
-    top: 5px;
-    right: 5px;
     text-align: center;
     font-size: 2rem;
     line-height: 40px;
@@ -914,61 +914,58 @@ h1 {
 /*@import component end-----------------------------*/
 /*@import PAGES folder */
 /* home */
-main {
-  min-height: 85vh;
-  overflow: hidden; }
-  main .section-home {
-    position: relative; }
-    main .section-home-folders__link {
-      font-size: 2rem; }
-      main .section-home-folders__link i {
-        font-size: 2.5rem; }
-    main .section-home-folders__menu {
-      position: absolute;
-      z-index: 100;
-      top: -3rem;
-      width: 25rem;
-      height: 100rem;
-      background-color: #fff;
-      -webkit-box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
-              box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
-      border: 1px solid #c6c6c6;
-      border-color: #000000;
-      border-color: rgba(0, 0, 0, 0.05);
-      border-radius: 4px; }
-      main .section-home-folders__menu-close {
-        position: relative; }
-        main .section-home-folders__menu-close i {
-          cursor: pointer;
-          position: absolute;
-          right: 0.9rem;
-          font-weight: normal; }
-          main .section-home-folders__menu-close i:hover {
-            color: red; }
-      main .section-home-folders__menu .nav-item {
-        padding-top: 1rem;
-        padding-bottom: 1rem; }
-        main .section-home-folders__menu .nav-item:nth-child(2) {
-          border-bottom: 1px solid #eee; }
-        main .section-home-folders__menu .nav-item .active {
-          font-weight: bold;
-          color: #007ac0;
-          background-color: #f9f9f9; }
-        main .section-home-folders__menu .nav-item:last-child a {
-          font-size: 1.1rem; }
-      main .section-home-folders__menu .nav-link {
-        font-size: 1.5rem; }
-  main .form-inline span {
-    position: relative; }
-    main .form-inline span:before {
-      content: "\f002";
-      font-family: FontAwesome;
-      font-size: 1.7rem;
-      position: absolute;
-      top: 1px;
-      left: 9px; }
-    main .form-inline span input {
-      padding-left: 3rem; }
+main .section-home {
+  position: relative; }
+  main .section-home-folders__link {
+    font-size: 2rem; }
+    main .section-home-folders__link i {
+      font-size: 2.5rem; }
+  main .section-home-folders__menu {
+    position: absolute;
+    z-index: 100;
+    top: -3rem;
+    width: 25rem;
+    background-color: #fff;
+    -webkit-box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
+    border: 1px solid #c6c6c6;
+    border-color: #000000;
+    border-color: rgba(0, 0, 0, 0.05);
+    border-radius: 4px; }
+    main .section-home-folders__menu-close {
+      position: relative; }
+      main .section-home-folders__menu-close i {
+        cursor: pointer;
+        position: absolute;
+        right: 0.9rem;
+        font-weight: normal; }
+        main .section-home-folders__menu-close i:hover {
+          color: red; }
+    main .section-home-folders__menu .nav-item {
+      padding-top: 1rem;
+      padding-bottom: 1rem; }
+      main .section-home-folders__menu .nav-item:nth-child(2) {
+        border-bottom: 1px solid #eee; }
+      main .section-home-folders__menu .nav-item .active {
+        font-weight: bold;
+        color: #007ac0;
+        background-color: #f9f9f9; }
+      main .section-home-folders__menu .nav-item:last-child a {
+        font-size: 1.1rem; }
+    main .section-home-folders__menu .nav-link {
+      font-size: 1.5rem; }
+
+main .form-inline span {
+  position: relative; }
+  main .form-inline span:before {
+    content: "\f002";
+    font-family: FontAwesome;
+    font-size: 1.7rem;
+    position: absolute;
+    top: 1px;
+    left: 9px; }
+  main .form-inline span input {
+    padding-left: 3rem; }
 
 /* home end----------------- */
 /* edit_survey section */
@@ -1002,12 +999,14 @@ main {
       .editSurveySection .leftContent .section-block .card-body .hoverQuestion .col-1 {
         border-right: 1px solid #ccc; }
       .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionHeader {
-        display: inline-block;
+        display: block;
         padding: 0.1rem 0.3rem; }
       .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody input[type="text"],
       .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody textarea {
         width: 50rem;
         margin-bottom: 2rem; }
+      .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody form {
+        width: 50rem; }
     .editSurveySection .leftContent .section-block .card-body .row:hover .addQuestionControls {
       display: -webkit-box;
       display: -webkit-flex;

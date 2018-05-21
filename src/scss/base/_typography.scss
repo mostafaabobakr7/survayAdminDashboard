@@ -9,18 +9,29 @@ body {
 
 h1 {
   font-weight: 700;
-  font-size: 5rem;
+  font-size: 2.5rem;
 }
 
 .sectionDashboard {
-  h1 {
-    position: relative;
-    &:before {
-      position: absolute;
-      bottom: 20px;
-      content: "";
-      width: 50px;
-      border-top: 7px solid yellow;
+  .card {
+    .card-body {
+      h1 {
+        font-weight: 700;
+        font-size: 4rem;
+      }
+      h2 {
+        font-weight: 700;
+        font-size: 2rem;
+        position: relative;
+        display: inline-block;
+        &:before {
+          position: absolute;
+          bottom: -4px;
+          content: "";
+          width: 50px;
+          border-top: 4px solid yellow;
+        }
+      }
     }
   }
 }
