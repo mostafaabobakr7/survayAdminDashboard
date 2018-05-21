@@ -1,43 +1,43 @@
 /* library */
 
-.librarySection {
-  .leftContent {
-    .dropzone {
-      cursor: pointer;
-      padding: 9rem 2rem;
-      background: white;
-      border-radius: 5px;
-      border: 2px dashed rgb(0, 135, 247);
-      border-image: none;
-      max-width: 100%;
-      margin-left: auto;
-      margin-right: auto;
-      font-size: 3rem;
-      i {
-        font-size: 8rem;
-      }
-      .dz-success-mark,
-      .dz-error-mark {
-        margin: 5px 10px;
-      }
-      .dz-success-mark {
-        & svg g path {
-          fill: green !important;
-        }
-        &:hover svg g path {
-          fill: #046404 !important;
-        }
-      }
-      .dz-error-mark {
-        & svg g path {
-          fill: red !important;
-        }
-        &:hover svg g path {
-          fill: #af0505 !important;
-        }
-      }
+.dropzone {
+  cursor: pointer;
+  padding: 9rem 2rem;
+  background: white;
+  border-radius: 5px;
+  border: 2px dashed rgb(0, 135, 247);
+  border-image: none;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 3rem;
+  i {
+    font-size: 8rem;
+  }
+  .dz-success-mark,
+  .dz-error-mark {
+    margin: 5px 10px;
+  }
+  .dz-success-mark {
+    & svg g path {
+      fill: green !important;
+    }
+    &:hover svg g path {
+      fill: #046404 !important;
     }
   }
+  .dz-error-mark {
+    & svg g path {
+      fill: red !important;
+    }
+    &:hover svg g path {
+      fill: #af0505 !important;
+    }
+  }
+}
+
+.librarySection {
+  .leftContent {}
   .rightControls {
     font-size: 1.9rem;
     .nav-link {

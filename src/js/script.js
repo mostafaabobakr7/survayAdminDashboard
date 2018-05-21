@@ -489,27 +489,21 @@ $('#dropDownOneAnswer').on('click', function () {
             Dropdown single answer
           </h3>
         </div>
-        <div class="questionBody">
-          <div class="card-text mb-2">
-            <input type="radio" name="radioName">
-            <span contenteditable="true">Click to write Choice 1</span>
-          </div>
-          <div class="card-text mb-2">
-            <input type="radio" name="radioName">
-            <span contenteditable="true">Click to write Choice 2</span>
-          </div>
-          <div class="card-text mb-2">
-            <input type="radio" name="radioName">
-            <span contenteditable="true">Click to write Choice 3</span>
-          </div>
+        <div class="questionBody py-4">
+          <select class="chosen">
+            <option value="option1">option1</option>
+            <option value="option2">option2</option>
+            <option value="option3">option3</option>
+            <option value="option4">option4</option>
+          </select>
         </div>
       </div>`);
   $('.hoverQuestionClicked .questionBlock').replaceWith(dropDownOneAnswer);
+  $('.chosen').chosen();
 });
 $('#dropDownMultiAnswer').on('click', function () {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:radio').prop('checked', false);
-  const checkName = new Date().getTime();
   const dropDownMultiAnswer = $(`
       <div class="questionBlock">
         <div class="questionHeader">
@@ -517,22 +511,17 @@ $('#dropDownMultiAnswer').on('click', function () {
             Dropdown Multi answer
           </h3>
         </div>
-        <div class="questionBody">
-          <div class="card-text mb-2">
-            <input type="checkbox" name=${checkName}>
-            <span contenteditable="true">Click to write Choice 1</span>
-          </div>
-          <div class="card-text mb-2">
-            <input type="checkbox" name=${checkName}>
-            <span contenteditable="true">Click to write Choice 2</span>
-          </div>
-          <div class="card-text mb-2">
-            <input type="checkbox" name=${checkName}>
-            <span contenteditable="true">Click to write Choice 3</span>
-          </div>
+        <div class="questionBody py-4">
+          <select multiple class ="chosen-select-multi">
+            <option value="option1">option1</option>
+            <option value="option2">option2</option>
+            <option value="option3">option3</option>
+            <option value="option4">option4</option>
+          </select>
         </div>
       </div>`);
   $('.hoverQuestionClicked .questionBlock').replaceWith(dropDownMultiAnswer);
+  $('.chosen-select-multi').chosen();
 });
 $('#sliderAnswer').on('click', function () {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
@@ -702,13 +691,17 @@ $('#uploadImgAnswer').on('click', function () {
             Upload Image
           </h3>
         </div>
-        <div class="questionBody">
-          <form action="../img/media/" class="dropzone" id="my-awesome-dropzone" enctype="multipart/form-data">
+        <div class="questionBody text-center">
+          <form action="../img/media/" class="dropzone" enctype="multipart/form-data">
             <i class="fa fa-upload"></i>
+            <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
           </form>
         </div>
       </div>`);
   $('.hoverQuestionClicked .questionBlock').replaceWith(uploadImgAnswer);
+  $('.dropzone').dropzone({
+    url: '/file/post',
+  });
 });
 
 /* PROJECTS\SURVEY: CHANGE QUESTION end-- */

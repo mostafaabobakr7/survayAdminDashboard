@@ -321,6 +321,9 @@ h1 {
   font-weight: 700;
   font-size: 2.5rem; }
 
+nav .nav-link {
+  font-weight: 600; }
+
 .sectionDashboard .card .card-body h1 {
   font-weight: 700;
   font-size: 4rem; }
@@ -1300,7 +1303,7 @@ main .form-inline span {
 
 /* REPORT end--*/
 /* library */
-.librarySection .leftContent .dropzone {
+.dropzone {
   cursor: pointer;
   padding: 9rem 2rem;
   background: white;
@@ -1314,18 +1317,18 @@ main .form-inline span {
   margin-left: auto;
   margin-right: auto;
   font-size: 3rem; }
-  .librarySection .leftContent .dropzone i {
+  .dropzone i {
     font-size: 8rem; }
-  .librarySection .leftContent .dropzone .dz-success-mark,
-  .librarySection .leftContent .dropzone .dz-error-mark {
+  .dropzone .dz-success-mark,
+  .dropzone .dz-error-mark {
     margin: 5px 10px; }
-  .librarySection .leftContent .dropzone .dz-success-mark svg g path {
+  .dropzone .dz-success-mark svg g path {
     fill: green !important; }
-  .librarySection .leftContent .dropzone .dz-success-mark:hover svg g path {
+  .dropzone .dz-success-mark:hover svg g path {
     fill: #046404 !important; }
-  .librarySection .leftContent .dropzone .dz-error-mark svg g path {
+  .dropzone .dz-error-mark svg g path {
     fill: red !important; }
-  .librarySection .leftContent .dropzone .dz-error-mark:hover svg g path {
+  .dropzone .dz-error-mark:hover svg g path {
     fill: #af0505 !important; }
 
 .librarySection .rightControls {
