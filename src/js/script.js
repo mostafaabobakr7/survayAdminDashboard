@@ -147,7 +147,7 @@ $('.projects-list').on('click', '.card-body', function () {
   if (window.location.host === 'mostafaabobakr7.github.io') {
     const path = ('survayAdminDashboard/edit_survey.html');
     window.location.pathname = path;
-  } else if (window.location.host === 'invadems.com') {
+  } else if (window.location.host === 'invadems.com' || window.location.host === 'www.invadems.com') {
     const path = ('projects/FreeMinds/edit_survey.html');
     window.location.pathname = path;
   } else {
@@ -695,7 +695,6 @@ $('#txtFormAnswer').on('click', function () {
 $('#uploadImgAnswer').on('click', function () {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:radio').prop('checked', false);
-  const checkName = new Date().getTime();
   const uploadImgAnswer = $(`
       <div class="questionBlock">
         <div class="questionHeader">
@@ -704,18 +703,9 @@ $('#uploadImgAnswer').on('click', function () {
           </h3>
         </div>
         <div class="questionBody">
-          <div class="card-text mb-2">
-            <input type="checkbox" name=${checkName}>
-            <span contenteditable="true">Click to write Choice 1</span>
-          </div>
-          <div class="card-text mb-2">
-            <input type="checkbox" name=${checkName}>
-            <span contenteditable="true">Click to write Choice 2</span>
-          </div>
-          <div class="card-text mb-2">
-            <input type="checkbox" name=${checkName}>
-            <span contenteditable="true">Click to write Choice 3</span>
-          </div>
+          <form action="../img/media/" class="dropzone" id="my-awesome-dropzone" enctype="multipart/form-data">
+            <i class="fa fa-upload"></i>
+          </form>
         </div>
       </div>`);
   $('.hoverQuestionClicked .questionBlock').replaceWith(uploadImgAnswer);
@@ -760,29 +750,24 @@ $('.sport-survey').on('click', function () {
 });
 /* RESPONSES: VIEW ON-CLICK end-- */
 
-/* REPORTS: TOGGLE TEXTAREA ADD NOTE */
+/* REPORTS: ADD NOTE */
 if (/reports.html/.test(window.location)) {
-  const quill = new Quill('.note', {
-    modules: {
-      toolbar: true,
-    },
-    placeholder: 'start typing....',
-    theme: 'snow',
+  $('.note').summernote({
+    height: 100,
   });
-  $('.ql-toolbar').addClass('d-none');
+  $('.note-editor').addClass('d-none');
 }
 $('.reportSection')
   .on('click', '.noteBTN', function () {
-    $('.ql-toolbar').toggleClass('d-none');
     $('.reportAddNote').toggleClass('d-none');
     $('.reportCloseNote').toggleClass('d-none');
-    $('.note').toggleClass('d-none');
-    if ($('.note').val()) {
+    $('.note-editor').toggleClass('d-none');
+    if ($('.note-editable').val()) {
       $('.noteValue').removeClass('visibilityHidden');
     }
   });
-$('.reportSection').on('change keyup keydown paste cut', '.note', function () {
-  $('.noteVal').html($('.ql-editor').html());
+$('.reportSection').on('change keypress keyup keydown paste cut', '.note-editable', function () {
+  $('.noteVal').html($('.note-editable').html());
   if ($('.noteVal').is(':empty')) {
     $('.noteValue').addClass('visibilityHidden');
   } else {
@@ -790,7 +775,7 @@ $('.reportSection').on('change keyup keydown paste cut', '.note', function () {
   }
 });
 
-/* REPORTS: TOGGLE TEXTAREA ADD NOTE end */
+/* REPORTS: ADD NOTE end */
 
 /* REPORTS: ADD VISUAL */
 $('.reportSection').on('click', '.btn-group .btn', function () {

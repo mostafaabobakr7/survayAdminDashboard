@@ -314,7 +314,8 @@ body {
   font-family: "Nunito", Helvetica, sans-serif;
   font-weight: 400;
   line-height: 1.7;
-  color: #222; }
+  color: #222;
+  font-size: 1.3rem; }
 
 h1 {
   font-weight: 700;
@@ -644,18 +645,6 @@ h1 {
   outline: none;
   -webkit-box-shadow: none;
           box-shadow: none; }
-
-.reportSection .rightControls .btn-group .btn {
-  display: block;
-  font-size: 1.7rem;
-  padding: 1rem 3rem;
-  background-color: #fff; }
-  .reportSection .rightControls .btn-group .btn:hover {
-    background-color: #e9e9e9; }
-
-.reportAddVisual {
-  display: block;
-  margin: 0 auto; }
 
 /* btn component end--------------------- */
 /* card component */
@@ -1079,6 +1068,7 @@ main .form-inline span {
       padding: 1.6rem;
       text-align: center;
       font-size: 1.4rem;
+      line-height: 2;
       position: relative; }
       .editSurveySection .rightControls .change-answers .answers > *:before {
         content: "";
@@ -1118,7 +1108,7 @@ main .form-inline span {
       content: "Dropdown Multi choices"; }
     .editSurveySection .rightControls .change-answers .answers #sliderAnswer {
       display: inline-block;
-      width: 32.33333333333333%; }
+      width: 30.33333333333333%; }
       .editSurveySection .rightControls .change-answers .answers #sliderAnswer:after {
         content: "Slider"; }
     .editSurveySection .rightControls .change-answers .answers #rankAnswer {
@@ -1128,7 +1118,7 @@ main .form-inline span {
         content: "Rank"; }
     .editSurveySection .rightControls .change-answers .answers #matrixAnswer {
       display: inline-block;
-      width: 32.33333333333333%; }
+      width: 33.33333333333333%; }
       .editSurveySection .rightControls .change-answers .answers #matrixAnswer:after {
         content: "Matrix"; }
     .editSurveySection .rightControls .change-answers .answers #txtSingleLineAnswer:after {
@@ -1293,8 +1283,20 @@ main .form-inline span {
   color: red; }
 
 /* REPORT */
-.reportSection .note {
-  min-height: 8rem; }
+.reportSection .note-editable {
+  cursor: text; }
+
+.reportSection .rightControls .btn-group .btn {
+  display: block;
+  font-size: 1.7rem;
+  padding: 0.5rem 2rem;
+  background-color: #fff; }
+  .reportSection .rightControls .btn-group .btn:hover {
+    background-color: #e9e9e9; }
+
+.reportAddVisual {
+  display: block;
+  margin: 0 auto; }
 
 /* REPORT end--*/
 /* library */

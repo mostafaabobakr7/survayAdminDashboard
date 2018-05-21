@@ -135,6 +135,7 @@
           padding: 1.6rem;
           text-align: center;
           font-size: 1.4rem;
+          line-height: 2;
           position: relative;
           &:before {
             content: "";
@@ -177,7 +178,7 @@
         }
         #sliderAnswer {
           display: inline-block;
-          width: 32.33333333333333%;
+          width: 30.33333333333333%;
           &:after {
             content: "Slider";
           }
@@ -191,7 +192,7 @@
         }
         #matrixAnswer {
           display: inline-block;
-          width: 32.33333333333333%;
+          width: 33.33333333333333%;
           &:after {
             content: "Matrix";
           }
