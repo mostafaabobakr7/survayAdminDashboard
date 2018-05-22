@@ -636,7 +636,7 @@ nav .nav-link {
 /* footer */
 .footer {
   overflow: hidden;
-  padding: 2rem;
+  padding: 1rem;
   border-top: 1px solid #a5a5a5;
   background: transparent; }
 
@@ -963,10 +963,10 @@ main .form-inline span {
 /* edit_survey section */
 .editSurveySection {
   overflow: hidden; }
-  .editSurveySection .leftContent .projectNameEdit {
-    color: #222; }
-  .editSurveySection .leftContent .section-block .card-body {
-    overflow: hidden; }
+  .editSurveySection .leftContent {
+    min-height: 95vh; }
+    .editSurveySection .leftContent .projectNameEdit {
+      color: #222; }
     .editSurveySection .leftContent .section-block .card-body .hoverQuestion {
       border-top: 1px solid transparent;
       border-bottom: 1px solid transparent;
@@ -993,12 +993,13 @@ main .form-inline span {
       .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionHeader {
         display: block;
         padding: 0.1rem 0.3rem; }
-      .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody input[type="text"],
-      .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody textarea {
-        width: 50rem;
-        margin-bottom: 2rem; }
-      .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody form {
+      .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody {
         width: 50rem; }
+        .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody > * {
+          width: 50rem !important; }
+        .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody input[type="text"],
+        .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody textarea {
+          margin-bottom: 2rem; }
     .editSurveySection .leftContent .section-block .card-body .row:hover .addQuestionControls {
       display: -webkit-box;
       display: -webkit-flex;
@@ -1021,31 +1022,41 @@ main .form-inline span {
         color: green; }
       .editSurveySection .leftContent .section-block .card-body .addQuestionControls .fa-minus-circle {
         color: #cb0c0c; }
-  .editSurveySection .leftContent .section-block .card-text span {
-    font-size: 1.2rem; }
+    .editSurveySection .leftContent .section-block .card-text span {
+      font-size: 1.2rem; }
   .editSurveySection .rightControlsColor {
     background-color: #f2f5f8;
-    border-left: 1px solid #ccc; }
+    border-left: 1px solid #ccc;
+    position: relative; }
   .editSurveySection .rightControls {
     overflow: hidden;
     min-height: 100vh; }
-    .editSurveySection .rightControls p {
-      font-size: 1.2rem; }
-    .editSurveySection .rightControls .choices {
+    .editSurveySection .rightControls-container p {
+      padding: 0.3rem 0.2rem;
+      background-color: #222;
+      color: #fff;
+      text-align: center;
+      border-radius: 4px;
+      font-weight: 500;
+      font-size: 1.6rem; }
+      @media (min-width: 1500px) {
+        .editSurveySection .rightControls-container p {
+          font-size: 2rem; } }
+    .editSurveySection .rightControls-container .choices {
       font-size: 2rem; }
-      .editSurveySection .rightControls .choices i {
+      .editSurveySection .rightControls-container .choices i {
         cursor: pointer;
         font-size: 3rem;
         margin: 0 1rem; }
-        .editSurveySection .rightControls .choices i:active {
+        .editSurveySection .rightControls-container .choices i:active {
           -webkit-transform: scale(0.9);
              -moz-transform: scale(0.9);
               -ms-transform: scale(0.9);
                -o-transform: scale(0.9);
                   transform: scale(0.9); }
-      .editSurveySection .rightControls .choices i.fa-minus-circle {
+      .editSurveySection .rightControls-container .choices i.fa-minus-circle {
         color: #cb0c0c; }
-      .editSurveySection .rightControls .choices span {
+      .editSurveySection .rightControls-container .choices span {
         color: #222;
         line-height: 1;
         font-weight: 700;
@@ -1053,17 +1064,9 @@ main .form-inline span {
         -o-transition: none;
         -moz-transition: none;
         transition: none; }
-      .editSurveySection .rightControls .choices i.fa-plus-circle {
+      .editSurveySection .rightControls-container .choices i.fa-plus-circle {
         color: green; }
-    .editSurveySection .rightControls p {
-      padding: 0.4rem 0;
-      background-color: #222;
-      color: #fff;
-      text-align: center;
-      border-radius: 5px;
-      font-weight: 600;
-      font-size: 1.5rem; }
-    .editSurveySection .rightControls .change-answers .answers > * {
+    .editSurveySection .rightControls-container .change-answers .answers > * {
       display: block;
       margin: 7px auto;
       border-radius: 5px;
@@ -1073,11 +1076,11 @@ main .form-inline span {
       font-size: 1.4rem;
       line-height: 2;
       position: relative; }
-      .editSurveySection .rightControls .change-answers .answers > *:before {
+      .editSurveySection .rightControls-container .change-answers .answers > *:before {
         content: "";
         height: 0;
         width: 0; }
-      .editSurveySection .rightControls .change-answers .answers > *:after {
+      .editSurveySection .rightControls-container .change-answers .answers > *:after {
         color: #222;
         border-radius: 5px;
         width: 100%;
@@ -1090,53 +1093,53 @@ main .form-inline span {
             -ms-transform: translate(-50%, -50%);
              -o-transform: translate(-50%, -50%);
                 transform: translate(-50%, -50%); }
-      .editSurveySection .rightControls .change-answers .answers > *:checked:after {
+      .editSurveySection .rightControls-container .change-answers .answers > *:checked:after {
         color: #fff;
         font-weight: 700; }
-    .editSurveySection .rightControls .change-answers .answers #singleAnswers {
+    .editSurveySection .rightControls-container .change-answers .answers #singleAnswers {
       display: inline-block;
       width: 47%;
       font-size: 1.3rem; }
-      .editSurveySection .rightControls .change-answers .answers #singleAnswers:after {
+      .editSurveySection .rightControls-container .change-answers .answers #singleAnswers:after {
         content: "Single choice"; }
-    .editSurveySection .rightControls .change-answers .answers #multibleAnswers {
+    .editSurveySection .rightControls-container .change-answers .answers #multibleAnswers {
       display: inline-block;
       width: 51%;
       font-size: 1.3rem; }
-      .editSurveySection .rightControls .change-answers .answers #multibleAnswers:after {
-        content: "Multiple choices"; }
-    .editSurveySection .rightControls .change-answers .answers #dropDownOneAnswer:after {
+      .editSurveySection .rightControls-container .change-answers .answers #multibleAnswers:after {
+        content: "Multiple"; }
+    .editSurveySection .rightControls-container .change-answers .answers #dropDownOneAnswer:after {
       content: "Dropdown Single choice"; }
-    .editSurveySection .rightControls .change-answers .answers #dropDownMultiAnswer:after {
+    .editSurveySection .rightControls-container .change-answers .answers #dropDownMultiAnswer:after {
       content: "Dropdown Multi choices"; }
-    .editSurveySection .rightControls .change-answers .answers #sliderAnswer {
+    .editSurveySection .rightControls-container .change-answers .answers #sliderAnswer {
       display: inline-block;
       width: 30.33333333333333%; }
-      .editSurveySection .rightControls .change-answers .answers #sliderAnswer:after {
+      .editSurveySection .rightControls-container .change-answers .answers #sliderAnswer:after {
         content: "Slider"; }
-    .editSurveySection .rightControls .change-answers .answers #rankAnswer {
+    .editSurveySection .rightControls-container .change-answers .answers #rankAnswer {
       display: inline-block;
       width: 32.33333333333333%; }
-      .editSurveySection .rightControls .change-answers .answers #rankAnswer:after {
+      .editSurveySection .rightControls-container .change-answers .answers #rankAnswer:after {
         content: "Rank"; }
-    .editSurveySection .rightControls .change-answers .answers #matrixAnswer {
+    .editSurveySection .rightControls-container .change-answers .answers #matrixAnswer {
       display: inline-block;
       width: 33.33333333333333%; }
-      .editSurveySection .rightControls .change-answers .answers #matrixAnswer:after {
+      .editSurveySection .rightControls-container .change-answers .answers #matrixAnswer:after {
         content: "Matrix"; }
-    .editSurveySection .rightControls .change-answers .answers #txtSingleLineAnswer:after {
+    .editSurveySection .rightControls-container .change-answers .answers #txtSingleLineAnswer:after {
       content: "Text Single Line"; }
-    .editSurveySection .rightControls .change-answers .answers #txtEssayAnswer {
+    .editSurveySection .rightControls-container .change-answers .answers #txtEssayAnswer {
       display: inline-block;
       width: 47%; }
-      .editSurveySection .rightControls .change-answers .answers #txtEssayAnswer:after {
+      .editSurveySection .rightControls-container .change-answers .answers #txtEssayAnswer:after {
         content: "Text Essay"; }
-    .editSurveySection .rightControls .change-answers .answers #txtFormAnswer {
+    .editSurveySection .rightControls-container .change-answers .answers #txtFormAnswer {
       display: inline-block;
       width: 51%; }
-      .editSurveySection .rightControls .change-answers .answers #txtFormAnswer:after {
+      .editSurveySection .rightControls-container .change-answers .answers #txtFormAnswer:after {
         content: "Text Form"; }
-    .editSurveySection .rightControls .change-answers .answers #uploadImgAnswer:after {
+    .editSurveySection .rightControls-container .change-answers .answers #uploadImgAnswer:after {
       content: "Upload Image"; }
 
 /* edit_survey section end- */
@@ -1316,8 +1319,24 @@ main .form-inline span {
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
-  font-size: 3rem; }
-  .dropzone i {
+  font-size: 3rem;
+  position: relative; }
+  .dropzone:hover:after {
+    color: #007ac0; }
+  .dropzone::after {
+    position: absolute;
+    position: absolute;
+    top: -10%;
+    left: 50%;
+    -webkit-transform: translate(-50%, 10%);
+       -moz-transform: translate(-50%, 10%);
+        -ms-transform: translate(-50%, 10%);
+         -o-transform: translate(-50%, 10%);
+            transform: translate(-50%, 10%);
+    content: "\f093";
+    font-family: FontAwesome;
+    width: 15rem;
+    height: 15rem;
     font-size: 8rem; }
   .dropzone .dz-success-mark,
   .dropzone .dz-error-mark {

@@ -3,7 +3,6 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip();
 });
 /* Enable tooltips everywhere end */
-
 /* PROJECTS: section-home-folders__menu */
 $('#folder__link').on('click', function () {
   $(this)
@@ -103,7 +102,7 @@ $('#createProjectBTN').on('click', function (ev) {
                         <a class="dropdown-item">
                           <i class="fa fa-sign-out"></i>Preview Survey</a>
                         <a class="dropdown-item">
-                          <i class="fa fa-paper-plane"></i>Distribute Survey</a>
+                          <i class="fa fa-paper-plane"></i>PROJECTS\DISTRIBUTE Survey</a>
                         <a class="dropdown-item">
                           <i class="fa fa-comment"></i>Responses</a>
                         <a class="dropdown-item">
@@ -164,8 +163,12 @@ $(document).ready(() => {
   }
 });
 /* PROJECTS: get the clicked PROJECT name from localstorage end--*/
+
+
 /* PROJECTS\SURVEY: CONTENTEDITABLE on CLICK */
 if (/edit_survey.html/.test(window.location)) {
+  // PROJECTS\SURVEY: STICKY RIGHT CONTROLS
+  $('.rightControls').sticky();
   $(document)
     .on('click', '[contenteditable="true"]', function () {
       $(document)
@@ -368,14 +371,60 @@ if (/edit_survey.html/.test(window.location.href)) {
         .addClass('hoverQuestionClicked')
         .siblings()
         .removeClass('hoverQuestionClicked');
-      /* DEFINE IF IT A RADIO OR CHECKBOX */
+      /* DEFINE IF IT A RADIO */
       if ($(this).find(':radio').length > 0) {
         $('#singleAnswers').prop('checked', true);
-        $('#multibleAnswers').prop('checked', false);
+        $('#singleAnswers').siblings().prop('checked', false);
       }
+      /* DEFINE IF IT A CHECKBOX */
       if ($(this).find(':checkbox').length > 0) {
         $('#multibleAnswers').prop('checked', true);
-        $('#singleAnswers').prop('checked', false);
+        $('#multibleAnswers').siblings().prop('checked', false);
+      }
+      /* DEFINE IF IT A DROPDOWN SINGLE */
+      if ($(this).find('.chosen').length > 0) {
+        $('#dropDownOneAnswer').prop('checked', true);
+        $('#dropDownOneAnswer').siblings().prop('checked', false);
+      }
+      /* DEFINE IF IT A DROPDOWN MULTIPLE */
+      if ($(this).find('.chosen-select-multi').length > 0) {
+        $('#dropDownMultiAnswer').prop('checked', true);
+        $('#dropDownMultiAnswer').siblings().prop('checked', false);
+      }
+      /* DEFINE IF IT A DROPDOWN SLIDER */
+      if ($(this).find('.slider').length > 0) {
+        $('#sliderAnswer').prop('checked', true);
+        $('#sliderAnswer').siblings().prop('checked', false);
+      }
+      /* DEFINE IF IT A DROPDOWN RANK */
+      if ($(this).find('.rank').length > 0) {
+        $('#rankAnswer').prop('checked', true);
+        $('#rankAnswer').siblings().prop('checked', false);
+      }
+      /* DEFINE IF IT A DROPDOWN MATRIX */
+      if ($(this).find('.matrix').length > 0) {
+        $('#matrixAnswer').prop('checked', true);
+        $('#matrixAnswer').siblings().prop('checked', false);
+      }
+      /* DEFINE IF IT A DROPDOWN TXT SINGLE LINE */
+      if ($(this).find('.txtSingleLine').length > 0) {
+        $('#txtSingleLineAnswer').prop('checked', true);
+        $('#txtSingleLineAnswer').siblings().prop('checked', false);
+      }
+      /* DEFINE IF IT A DROPDOWN TXT txtEssayAnswer */
+      if ($(this).find('.txtEssayAnswer').length > 0) {
+        $('#txtEssayAnswer').prop('checked', true);
+        $('#txtEssayAnswer').siblings().prop('checked', false);
+      }
+      /* DEFINE IF IT A DROPDOWN TXT txtFormAnswer */
+      if ($(this).find('.txtFormAnswer').length > 0) {
+        $('#txtFormAnswer').prop('checked', true);
+        $('#txtFormAnswer').siblings().prop('checked', false);
+      }
+      /* DEFINE IF IT A DROPDOWN TXT uploadImgAnswer */
+      if ($(this).find('.uploadImgAnswer').length > 0) {
+        $('#uploadImgAnswer').prop('checked', true);
+        $('#uploadImgAnswer').siblings().prop('checked', false);
       }
       /* questionHoverClicked class remove from all blocks when clicked on current block */
       const x = $(this)
@@ -419,37 +468,8 @@ $('.choicesIncrease').on('click', function () {
   }
   $('.choices span').text(choicesCurrentNum);
 });
-
 /* PROJECTS\SURVEY: RADIO CHOICES INC\DEC end */
 /* PROJECTS\SURVEY: CHANGE QUESTION */
-$('#multibleAnswers').on('click', function () {
-  $('.hoverQuestionClicked input:checkbox').prop('checked', false);
-  $('.hoverQuestionClicked input:radio').prop('checked', false);
-  const checkName = new Date().getTime();
-  const multibleAnswers = $(`
-      <div class="questionBlock">
-        <div class="questionHeader">
-          <h3 contenteditable="true" class="card-title mb-3">
-            Multiple answers
-          </h3>
-        </div>
-        <div class="questionBody">
-          <div class="card-text mb-2">
-            <input type="checkbox" name=${checkName}>
-            <span contenteditable="true">Click to write Choice 1</span>
-          </div>
-          <div class="card-text mb-2">
-            <input type="checkbox" name=${checkName}>
-            <span contenteditable="true">Click to write Choice 2</span>
-          </div>
-          <div class="card-text mb-2">
-            <input type="checkbox" name=${checkName}>
-            <span contenteditable="true">Click to write Choice 3</span>
-          </div>
-        </div>
-      </div>`);
-  $('.hoverQuestionClicked .questionBlock').replaceWith(multibleAnswers);
-});
 $('#singleAnswers').on('click', function () {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:radio').prop('checked', false);
@@ -477,6 +497,34 @@ $('#singleAnswers').on('click', function () {
         </div>
       </div>`);
   $('.hoverQuestionClicked .questionBlock').replaceWith(singleAnswers);
+});
+$('#multibleAnswers').on('click', function () {
+  $('.hoverQuestionClicked input:checkbox').prop('checked', false);
+  $('.hoverQuestionClicked input:radio').prop('checked', false);
+  const checkName = new Date().getTime();
+  const multibleAnswers = $(`
+      <div class="questionBlock">
+        <div class="questionHeader">
+          <h3 contenteditable="true" class="card-title mb-3">
+            Multiple answers
+          </h3>
+        </div>
+        <div class="questionBody">
+          <div class="card-text mb-2">
+            <input type="checkbox" name=${checkName}>
+            <span contenteditable="true">Click to write Choice 1</span>
+          </div>
+          <div class="card-text mb-2">
+            <input type="checkbox" name=${checkName}>
+            <span contenteditable="true">Click to write Choice 2</span>
+          </div>
+          <div class="card-text mb-2">
+            <input type="checkbox" name=${checkName}>
+            <span contenteditable="true">Click to write Choice 3</span>
+          </div>
+        </div>
+      </div>`);
+  $('.hoverQuestionClicked .questionBlock').replaceWith(multibleAnswers);
 });
 $('#dropDownOneAnswer').on('click', function () {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
@@ -534,7 +582,7 @@ $('#sliderAnswer').on('click', function () {
             Slider
           </h3>
         </div>
-        <div class="questionBody">
+        <div class="questionBody slider">
           <div class="card-text mb-2">
             <input type="checkbox" name=${checkName}>
             <span contenteditable="true">Click to write Choice 1</span>
@@ -562,7 +610,7 @@ $('#rankAnswer').on('click', function () {
             Rank
           </h3>
         </div>
-        <div class="questionBody">
+        <div class="questionBody rank">
           <div class="card-text mb-2">
             <input type="checkbox" name=${checkName}>
             <span contenteditable="true">Click to write Choice 1</span>
@@ -590,7 +638,7 @@ $('#matrixAnswer').on('click', function () {
             Matrix
           </h3>
         </div>
-        <div class="questionBody">
+        <div class="questionBody matrix">
           <div class="card-text mb-2">
             <input type="checkbox" name=${checkName}>
             <span contenteditable="true">Click to write Choice 1</span>
@@ -617,7 +665,7 @@ $('#txtSingleLineAnswer').on('click', function () {
             Text Single Line
           </h3>
         </div>
-        <div class="questionBody">
+        <div class="questionBody txtSingleLine">
           <input type="text" class="form-control">
         </div>
       </div>`);
@@ -628,13 +676,12 @@ $('#txtEssayAnswer').on('click', function () {
   $('.hoverQuestionClicked input:radio').prop('checked', false);
   const txtEssayAnswer = $(`
       <div class="questionBlock">
-        <div class="questionHeader">
+        <div class="questionHeader ">
           <h3 contenteditable="true" class="card-title mb-3">
             Text Essay
           </h3>
         </div>
-        <div class="questionBody">
-
+        <div class="questionBody txtEssayAnswer">
           <textarea class="form-control" rows="5"></textarea>
         </div>
       </div>`);
@@ -650,7 +697,7 @@ $('#txtFormAnswer').on('click', function () {
             Text Form
           </h3>
         </div>
-        <div class="questionBody">
+        <div class="questionBody txtFormAnswer">
           <form>
             <div class="form-group row text-right">
               <label class="col-sm-2">Date:</label>
@@ -684,6 +731,7 @@ $('#txtFormAnswer').on('click', function () {
 $('#uploadImgAnswer').on('click', function () {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:radio').prop('checked', false);
+  const className = `class${new Date().getTime()}`;
   const uploadImgAnswer = $(`
       <div class="questionBlock">
         <div class="questionHeader">
@@ -691,15 +739,14 @@ $('#uploadImgAnswer').on('click', function () {
             Upload Image
           </h3>
         </div>
-        <div class="questionBody text-center">
-          <form action="../img/media/" class="dropzone" enctype="multipart/form-data">
-            <i class="fa fa-upload"></i>
+        <div class="questionBody text-center uploadImgAnswer">
+          <form action="../img/media/" class='dropzone ${className}' enctype="multipart/form-data">
             <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
           </form>
         </div>
       </div>`);
   $('.hoverQuestionClicked .questionBlock').replaceWith(uploadImgAnswer);
-  $('.dropzone').dropzone({
+  $(`.${className}`).dropzone({
     url: '/file/post',
   });
 });
@@ -729,21 +776,21 @@ $(document).ready(function () {
 /* PROJECTS\SURVEY: PREVIEW end--*/
 
 //---------------------------------------------
-/* DISTRIBUTE: web copylick */
+/* PROJECTS\DISTRIBUTE: web copylick */
 $('#distribute__web-btn').on('click', function (e) {
   e.preventDefault();
   $('#distribute__web').select();
   document.execCommand('copy');
 });
-/* DISTRIBUTE: web copylick end */
+/* PROJECTS\DISTRIBUTE: web copylick end */
 
-/* RESPONSES: VIEW ON-CLICK  */
+/* PROJECTS\RESPONSES: VIEW ON-CLICK  */
 $('.sport-survey').on('click', function () {
   $('.showResponse').toggleClass('d-none');
 });
-/* RESPONSES: VIEW ON-CLICK end-- */
+/* PROJECTS\RESPONSES: VIEW ON-CLICK end-- */
 
-/* REPORTS: ADD NOTE */
+/* PROJECTS\REPORTS: ADD NOTE */
 if (/reports.html/.test(window.location)) {
   $('.note').summernote({
     height: 100,
@@ -768,9 +815,9 @@ $('.reportSection').on('change keypress keyup keydown paste cut', '.note-editabl
   }
 });
 
-/* REPORTS: ADD NOTE end */
+/* PROJECTS\REPORTS: ADD NOTE end */
 
-/* REPORTS: ADD VISUAL */
+/* PROJECTS\REPORTS: ADD VISUAL */
 $('.reportSection').on('click', '.btn-group .btn', function () {
   $(this).addClass('btn-group-active');
   $(this)
@@ -847,7 +894,7 @@ $('.chartSection').on('click', '.btn-danger', function () {
     .remove();
   $(this).remove();
 });
-/* REPORTS: ADD VISUAL end */
+/* PROJECTS\REPORTS: ADD VISUAL end */
 
 /* DASHBOARD: */
 function chartDashboard(type, canvasID) {
