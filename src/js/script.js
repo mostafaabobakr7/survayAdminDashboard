@@ -641,17 +641,11 @@ $('#sliderAnswer').on('click', function () {
   $('.hoverQuestionClicked .questionBlock').replaceWith(sliderAnswer);
 });
 $('.section-block').on('change input', '.range-slider__range', function () {
-  const range = $('.range-slider__range');
   const value = $('.range-slider__value');
-
   $(this).next(value).html(this.value);
 });
 
-
 $('#rankAnswer').on('click', function () {
-  $('.hoverQuestionClicked input:checkbox').prop('checked', false);
-  $('.hoverQuestionClicked input:radio').prop('checked', false);
-  const checkName = new Date().getTime();
   const rankAnswer = $(`
       <div class="questionBlock">
         <div class="questionHeader">
@@ -660,21 +654,36 @@ $('#rankAnswer').on('click', function () {
           </h3>
         </div>
         <div class="questionBody rank">
-          <div class="card-text mb-2">
-            <input type="checkbox" name=${checkName}>
-            <span contenteditable="true">Click to write Choice 1</span>
+          <div class="rank__body">
+            <span class="rank__body-text contenteditable" contenteditable="true">text1</span>
+            <span class="rank__body-rank">1</span>
           </div>
-          <div class="card-text mb-2">
-            <input type="checkbox" name=${checkName}>
-            <span contenteditable="true">Click to write Choice 2</span>
+          <div class="rank__body">
+            <span class="rank__body-text contenteditable" contenteditable="true">text2</span>
+            <span class="rank__body-rank">2</span>
           </div>
-          <div class="card-text mb-2">
-            <input type="checkbox" name=${checkName}>
-            <span contenteditable="true">Click to write Choice 3</span>
+          <div class="rank__body">
+            <span class="rank__body-text contenteditable" contenteditable="true">text3</span>
+            <span class="rank__body-rank">3</span>
           </div>
         </div>
       </div>`);
   $('.hoverQuestionClicked .questionBlock').replaceWith(rankAnswer);
+  $('.rank').sortable({
+    cancel: '.contenteditable'
+  });
+});
+$('.rank').sortable({
+  cancel: '.contenteditable'
+});
+$('.section-block').on('sortstop', '.rank', function () {
+  $(this).find('.rank__body-rank').each(function (i) {
+    $(this).text(i + 1);
+  });
+});
+$('.section-block').on('click', '.rank__body-rank', function () {
+  $(this).focus();
+  console.log(this)
 });
 $('#matrixAnswer').on('click', function () {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);

@@ -1,0 +1,31 @@
+/* RANK */
+
+.rank {
+  &__body {
+    cursor: move;
+    @include clearFix;
+    padding: 8px 0;
+    margin: 5px 0;
+    &:not(:last-child) {
+      border-bottom: 1px solid #ccc;
+    }
+    &:hover {
+      background-color: #d1e1ed;
+    }
+    &-text {}
+    &-rank {
+      float: right;
+      right: 4px;
+      top: 6px;
+      padding: 4px 8px;
+      color: white;
+      background-color: #a5a5a5;
+      border-radius: 3px;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1;
+    }
+  }
+}
+
+/* RANK END */
