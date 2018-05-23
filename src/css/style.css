@@ -983,6 +983,34 @@ input[type=range]::-moz-range-thumb input[type=range]::-moz-range-track {
     border-bottom: 7px solid transparent; }
 
 /* slider end */
+/* RANK */
+.rank__body {
+  cursor: move;
+  padding: 8px 0;
+  margin: 5px 0; }
+  .rank__body::after {
+    content: "";
+    display: table;
+    clear: both; }
+  .rank__body:not(:last-child) {
+    border-bottom: 1px solid #ccc; }
+  .rank__body:hover {
+    background-color: #d1e1ed; }
+  .rank__body-rank {
+    float: right;
+    right: 4px;
+    top: 6px;
+    padding: 4px 8px;
+    color: white;
+    background-color: #a5a5a5;
+    border-radius: 3px;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1; }
+
+/* RANK END */
+/* MATRIX */
+/* MATRIX end */
 /*@import component end-----------------------------*/
 /*@import PAGES folder */
 /* home */
@@ -1075,12 +1103,12 @@ main .form-inline span {
         padding: 0.1rem 0.3rem; }
       .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody {
         width: 50rem; }
-        @media (max-width: 767px) {
+        @media (max-width: 575px) {
           .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody {
             width: 33rem !important; } }
         .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody > * {
           width: 50rem !important; }
-          @media (max-width: 767px) {
+          @media (max-width: 575px) {
             .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody > * {
               width: 33rem !important; } }
         .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody input[type="text"],

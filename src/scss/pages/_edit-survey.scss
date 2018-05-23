@@ -47,12 +47,12 @@
               }
               .questionBody {
                 width: 50rem;
-                @media (max-width: 767px) {
+                @media (max-width: 575px) {
                   width: 33rem !important;
                 }
                 &>* {
                   width: 50rem !important;
-                  @media (max-width: 767px) {
+                  @media (max-width: 575px) {
                     width: 33rem !important;
                   }
                 }
