@@ -50,7 +50,7 @@
                 @media (max-width: 575px) {
                   width: 33rem !important;
                 }
-                &>* {
+                &>*:not(.matrix) {
                   width: 50rem !important;
                   @media (max-width: 575px) {
                     width: 33rem !important;

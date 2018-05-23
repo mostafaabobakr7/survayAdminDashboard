@@ -527,8 +527,6 @@ $('#multibleAnswers').on('click', function () {
   $('.hoverQuestionClicked .questionBlock').replaceWith(multibleAnswers);
 });
 $('#dropDownOneAnswer').on('click', function () {
-  $('.hoverQuestionClicked input:checkbox').prop('checked', false);
-  $('.hoverQuestionClicked input:radio').prop('checked', false);
   const dropDownOneAnswer = $(`
       <div class="questionBlock">
         <div class="questionHeader">
@@ -568,8 +566,6 @@ $('.section-block').on('keyup change paste copy cut', '.dropdownOneEdit p', func
   });
 });
 $('#dropDownMultiAnswer').on('click', function () {
-  $('.hoverQuestionClicked input:checkbox').prop('checked', false);
-  $('.hoverQuestionClicked input:radio').prop('checked', false);
   const dropDownMultiAnswer = $(`
       <div class="questionBlock">
         <div class="questionHeader">
@@ -670,12 +666,10 @@ $('#rankAnswer').on('click', function () {
       </div>`);
   $('.hoverQuestionClicked .questionBlock').replaceWith(rankAnswer);
   $('.rank').sortable({
-    cancel: '.contenteditable'
+    cancel: '.contenteditable',
   });
 });
-$('.rank').sortable({
-  cancel: '.contenteditable'
-});
+
 $('.section-block').on('sortstop', '.rank', function () {
   $(this).find('.rank__body-rank').each(function (i) {
     $(this).text(i + 1);
@@ -683,12 +677,12 @@ $('.section-block').on('sortstop', '.rank', function () {
 });
 $('.section-block').on('click', '.rank__body-rank', function () {
   $(this).focus();
-  console.log(this)
+  console.log(this);
 });
 $('#matrixAnswer').on('click', function () {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:radio').prop('checked', false);
-  const checkName = new Date().getTime();
+  let radioName = new Date().getTime();
   const matrixAnswer = $(`
       <div class="questionBlock">
         <div class="questionHeader">
@@ -697,18 +691,54 @@ $('#matrixAnswer').on('click', function () {
           </h3>
         </div>
         <div class="questionBody matrix">
-          <div class="card-text mb-2">
-            <input type="checkbox" name=${checkName}>
-            <span contenteditable="true">Click to write Choice 1</span>
-          </div>
-          <div class="card-text mb-2">
-            <input type="checkbox" name=${checkName}>
-            <span contenteditable="true">Click to write Choice 2</span>
-          </div>
-          <div class="card-text mb-2">
-            <input type="checkbox" name=${checkName}>
-            <span contenteditable="true">Click to write Choice 3</span>
-          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col" contenteditable="true">scalePoint1</th>
+                <th scope="col" contenteditable="true">scalePoint2</th>
+                <th scope="col" contenteditable="true">scalePoint3</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" contenteditable="true">statement1</th>
+                <td>
+                  <input class="matrix" type="radio" name=${radioName}>
+                </td>
+                <td>
+                  <input class="matrix" type="radio" name=${radioName}>
+                </td>
+                <td>
+                  <input class="matrix" type="radio" name=${radioName}>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row" contenteditable="true">statement2</th>
+                <td>
+                  <input class="matrix" type="radio" name=${radioName + 1}>
+                </td>
+                <td>
+                  <input class="matrix" type="radio" name=${radioName + 1}>
+                </td>
+                <td>
+                  <input class="matrix" type="radio" name=${radioName + 1}>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row" contenteditable="true">statement3</th>
+                <td>
+                  <input class="matrix" type="radio" name=${radioName + 2}>
+                </td>
+                <td>
+                  <input class="matrix" type="radio" name=${radioName + 2}>
+                </td>
+                <td>
+                  <input class="matrix" type="radio" name=${radioName + 2}>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>`);
   $('.hoverQuestionClicked .questionBlock').replaceWith(matrixAnswer);

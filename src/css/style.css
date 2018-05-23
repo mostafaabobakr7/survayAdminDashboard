@@ -1106,10 +1106,10 @@ main .form-inline span {
         @media (max-width: 575px) {
           .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody {
             width: 33rem !important; } }
-        .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody > * {
+        .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody > *:not(.matrix) {
           width: 50rem !important; }
           @media (max-width: 575px) {
-            .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody > * {
+            .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody > *:not(.matrix) {
               width: 33rem !important; } }
         .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody input[type="text"],
         .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody textarea {
