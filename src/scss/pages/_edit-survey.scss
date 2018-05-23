@@ -47,8 +47,14 @@
               }
               .questionBody {
                 width: 50rem;
+                @media (max-width: 767px) {
+                  width: 33rem !important;
+                }
                 &>* {
                   width: 50rem !important;
+                  @media (max-width: 767px) {
+                    width: 33rem !important;
+                  }
                 }
                 input[type="text"],
                 textarea {

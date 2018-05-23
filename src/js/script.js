@@ -529,7 +529,6 @@ $('#multibleAnswers').on('click', function () {
 $('#dropDownOneAnswer').on('click', function () {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:radio').prop('checked', false);
-  const radioName = new Date().getTime();
   const dropDownOneAnswer = $(`
       <div class="questionBlock">
         <div class="questionHeader">
@@ -544,10 +543,29 @@ $('#dropDownOneAnswer').on('click', function () {
             <option value="option3">option3</option>
             <option value="option4">option4</option>
           </select>
+          <div class="dropdownOneEdit mt-3">
+            <p contenteditable="true">option1</p>
+            <p contenteditable="true">option2</p>
+            <p contenteditable="true">option3</p>
+            <p contenteditable="true">option4</p>
+          </div>
         </div>
       </div>`);
   $('.hoverQuestionClicked .questionBlock').replaceWith(dropDownOneAnswer);
-  $('.chosen').chosen();
+  $('.chosen').chosen({
+    disable_search_threshold: 10,
+  });
+});
+$('.section-block').on('keyup change paste copy cut', '.dropdownOneEdit p', function () {
+  $(this).parent().siblings().chosen('destroy');
+  const index = $(this).index();
+  const option = $(this).parent().siblings().children()
+    .eq(index);
+  let val = $(this).text();
+  option.val(val).text(val);
+  $('.chosen').chosen({
+    disable_search_threshold: 10,
+  });
 });
 $('#dropDownMultiAnswer').on('click', function () {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
@@ -566,15 +584,33 @@ $('#dropDownMultiAnswer').on('click', function () {
             <option value="option3">option3</option>
             <option value="option4">option4</option>
           </select>
+          <div class="dropdownMultiEdit mt-3">
+            <p contenteditable="true">option1</p>
+            <p contenteditable="true">option2</p>
+            <p contenteditable="true">option3</p>
+            <p contenteditable="true">option4</p>
+          </div>
         </div>
       </div>`);
   $('.hoverQuestionClicked .questionBlock').replaceWith(dropDownMultiAnswer);
-  $('.chosen-select-multi').chosen();
+  $('.chosen-select-multi').chosen({
+    disable_search_threshold: 10,
+  });
+});
+$('.section-block').on('keyup change paste copy cut', '.dropdownMultiEdit p', function () {
+  $(this).parent().siblings().chosen('destroy');
+  const index = $(this).index();
+  const option = $(this).parent().siblings().children()
+    .eq(index);
+  let val = $(this).text();
+  option.val(val).text(val);
+  $('.chosen-select-multi').chosen({
+    disable_search_threshold: 10,
+  });
 });
 $('#sliderAnswer').on('click', function () {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:radio').prop('checked', false);
-  const checkName = new Date().getTime();
   const sliderAnswer = $(`
       <div class="questionBlock">
         <div class="questionHeader">
@@ -583,22 +619,35 @@ $('#sliderAnswer').on('click', function () {
           </h3>
         </div>
         <div class="questionBody slider">
-          <div class="card-text mb-2">
-            <input type="checkbox" name=${checkName}>
-            <span contenteditable="true">Click to write Choice 1</span>
+          <p class="m-0 p-0" contenteditable="true">slider1</p>
+
+          <div class="range-slider d-flex py-2">
+            <input class="range-slider__range" type="range" name="slider" min="0" max="100" value="0">
+            <span class="range-slider__value">0</span>
           </div>
-          <div class="card-text mb-2">
-            <input type="checkbox" name=${checkName}>
-            <span contenteditable="true">Click to write Choice 2</span>
+          <p class="m-0 p-0" contenteditable="true">slider2</p>
+
+          <div class="range-slider d-flex py-2">
+            <input class="range-slider__range" type="range" name="slider" min="0" max="100" value="0">
+            <span class="range-slider__value">0</span>
           </div>
-          <div class="card-text mb-2">
-            <input type="checkbox" name=${checkName}>
-            <span contenteditable="true">Click to write Choice 3</span>
+          <p class="m-0 p-0" contenteditable="true">slider3</p>
+          <div class="range-slider d-flex py-2">
+            <input class="range-slider__range" type="range" name="slider" min="0" max="100" value="0">
+            <span class="range-slider__value">0</span>
           </div>
         </div>
       </div>`);
   $('.hoverQuestionClicked .questionBlock').replaceWith(sliderAnswer);
 });
+$('.section-block').on('change input', '.range-slider__range', function () {
+  const range = $('.range-slider__range');
+  const value = $('.range-slider__value');
+
+  $(this).next(value).html(this.value);
+});
+
+
 $('#rankAnswer').on('click', function () {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:radio').prop('checked', false);
@@ -752,7 +801,7 @@ $('#uploadImgAnswer').on('click', function () {
 });
 
 /* PROJECTS\SURVEY: CHANGE QUESTION end-- */
-/* PROJECTS\SURVEY: PREVIEW */
+/* PROJECTS\PREVIEW:  */
 // when check span checkbox checked
 $('.preview-mobile').on('click', 'span', function () {
   $(this)
@@ -772,9 +821,10 @@ $(document).ready(function () {
   $('.preview-mobile .hoverQuestionClicked').remove();
   $('.preview-mobile .questionMove').remove();
   $('.preview-mobile .addQuestionControls').remove();
+  $('.preview-mobile .dropdownOneEdit').remove();
+  $('.preview-mobile .dropdownMultiEdit').remove();
 });
-/* PROJECTS\SURVEY: PREVIEW end--*/
-
+/* PROJECTS\PREVIEW:  end--*/
 //---------------------------------------------
 /* PROJECTS\DISTRIBUTE: web copylick */
 $('#distribute__web-btn').on('click', function (e) {
