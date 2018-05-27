@@ -920,7 +920,7 @@ $('#txtFormAnswer').on('click', function () {
             <div class="form-group row text-right">
               <label class="col-sm-2">Phone:</label>
               <div class="col-sm-10">
-                <input autocomplete="off" type="number" class="form-control w-50" placeholder="Phone Number...">
+                <input autocomplete="off" type="tel" class="form-control w-50" placeholder="Phone Number...">
               </div>
             </div>
             <div class="form-group row text-right">
