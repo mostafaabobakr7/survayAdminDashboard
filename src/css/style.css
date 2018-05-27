@@ -1156,45 +1156,21 @@ main .form-inline span {
       @media (min-width: 1500px) {
         .editSurveySection .rightControls-container p {
           font-size: 2rem; } }
-    .editSurveySection .rightControls-container .choices {
-      font-size: 2rem; }
-      .editSurveySection .rightControls-container .choices i {
-        cursor: pointer;
-        font-size: 3rem;
-        margin: 0 1rem; }
-        .editSurveySection .rightControls-container .choices i:active {
-          -webkit-transform: scale(0.9);
-             -moz-transform: scale(0.9);
-              -ms-transform: scale(0.9);
-               -o-transform: scale(0.9);
-                  transform: scale(0.9); }
-      .editSurveySection .rightControls-container .choices i.fa-minus-circle {
-        color: #cb0c0c; }
-      .editSurveySection .rightControls-container .choices span {
-        color: #222;
-        line-height: 1;
-        font-weight: 700;
-        -webkit-transition: none;
-        -o-transition: none;
-        -moz-transition: none;
-        transition: none; }
-      .editSurveySection .rightControls-container .choices i.fa-plus-circle {
-        color: green; }
-    .editSurveySection .rightControls-container .change-answers .answers > * {
+    .editSurveySection .rightControls .change-answers .answers > * {
       display: block;
       margin: 7px auto;
       border-radius: 5px;
       width: 100%;
-      padding: 1.6rem;
+      padding: 1.3rem 0;
       text-align: center;
       font-size: 1.4rem;
       line-height: 2;
       position: relative; }
-      .editSurveySection .rightControls-container .change-answers .answers > *:before {
+      .editSurveySection .rightControls .change-answers .answers > *:before {
         content: "";
         height: 0;
         width: 0; }
-      .editSurveySection .rightControls-container .change-answers .answers > *:after {
+      .editSurveySection .rightControls .change-answers .answers > *:after {
         color: #222;
         border-radius: 5px;
         width: 100%;
@@ -1207,54 +1183,78 @@ main .form-inline span {
             -ms-transform: translate(-50%, -50%);
              -o-transform: translate(-50%, -50%);
                 transform: translate(-50%, -50%); }
-      .editSurveySection .rightControls-container .change-answers .answers > *:checked:after {
+      .editSurveySection .rightControls .change-answers .answers > *:checked:after {
         color: #fff;
         font-weight: 700; }
-    .editSurveySection .rightControls-container .change-answers .answers #singleAnswers {
+    .editSurveySection .rightControls .change-answers .answers #singleAnswers {
       display: inline-block;
       width: 47%;
       font-size: 1.3rem; }
-      .editSurveySection .rightControls-container .change-answers .answers #singleAnswers:after {
+      .editSurveySection .rightControls .change-answers .answers #singleAnswers:after {
         content: "Single choice"; }
-    .editSurveySection .rightControls-container .change-answers .answers #multibleAnswers {
+    .editSurveySection .rightControls .change-answers .answers #multibleAnswers {
       display: inline-block;
       width: 51%;
       font-size: 1.3rem; }
-      .editSurveySection .rightControls-container .change-answers .answers #multibleAnswers:after {
+      .editSurveySection .rightControls .change-answers .answers #multibleAnswers:after {
         content: "Multiple"; }
-    .editSurveySection .rightControls-container .change-answers .answers #dropDownOneAnswer:after {
+    .editSurveySection .rightControls .change-answers .answers #dropDownOneAnswer:after {
       content: "Dropdown Single choice"; }
-    .editSurveySection .rightControls-container .change-answers .answers #dropDownMultiAnswer:after {
+    .editSurveySection .rightControls .change-answers .answers #dropDownMultiAnswer:after {
       content: "Dropdown Multi choices"; }
-    .editSurveySection .rightControls-container .change-answers .answers #sliderAnswer {
+    .editSurveySection .rightControls .change-answers .answers #sliderAnswer {
       display: inline-block;
       width: 30.33333333333333%; }
-      .editSurveySection .rightControls-container .change-answers .answers #sliderAnswer:after {
+      .editSurveySection .rightControls .change-answers .answers #sliderAnswer:after {
         content: "Slider"; }
-    .editSurveySection .rightControls-container .change-answers .answers #rankAnswer {
+    .editSurveySection .rightControls .change-answers .answers #rankAnswer {
       display: inline-block;
       width: 32.33333333333333%; }
-      .editSurveySection .rightControls-container .change-answers .answers #rankAnswer:after {
+      .editSurveySection .rightControls .change-answers .answers #rankAnswer:after {
         content: "Rank"; }
-    .editSurveySection .rightControls-container .change-answers .answers #matrixAnswer {
+    .editSurveySection .rightControls .change-answers .answers #matrixAnswer {
       display: inline-block;
       width: 33.33333333333333%; }
-      .editSurveySection .rightControls-container .change-answers .answers #matrixAnswer:after {
+      .editSurveySection .rightControls .change-answers .answers #matrixAnswer:after {
         content: "Matrix"; }
-    .editSurveySection .rightControls-container .change-answers .answers #txtSingleLineAnswer:after {
+    .editSurveySection .rightControls .change-answers .answers #txtSingleLineAnswer:after {
       content: "Text Single Line"; }
-    .editSurveySection .rightControls-container .change-answers .answers #txtEssayAnswer {
+    .editSurveySection .rightControls .change-answers .answers #txtEssayAnswer {
       display: inline-block;
       width: 47%; }
-      .editSurveySection .rightControls-container .change-answers .answers #txtEssayAnswer:after {
+      .editSurveySection .rightControls .change-answers .answers #txtEssayAnswer:after {
         content: "Text Essay"; }
-    .editSurveySection .rightControls-container .change-answers .answers #txtFormAnswer {
+    .editSurveySection .rightControls .change-answers .answers #txtFormAnswer {
       display: inline-block;
       width: 51%; }
-      .editSurveySection .rightControls-container .change-answers .answers #txtFormAnswer:after {
+      .editSurveySection .rightControls .change-answers .answers #txtFormAnswer:after {
         content: "Text Form"; }
-    .editSurveySection .rightControls-container .change-answers .answers #uploadImgAnswer:after {
+    .editSurveySection .rightControls .change-answers .answers #uploadImgAnswer:after {
       content: "Upload Image"; }
+    .editSurveySection .rightControls .change-choices {
+      font-size: 2rem; }
+      .editSurveySection .rightControls .change-choices i {
+        cursor: pointer;
+        font-size: 3rem;
+        margin: 0 1rem; }
+        .editSurveySection .rightControls .change-choices i:active {
+          -webkit-transform: scale(0.9);
+             -moz-transform: scale(0.9);
+              -ms-transform: scale(0.9);
+               -o-transform: scale(0.9);
+                  transform: scale(0.9); }
+      .editSurveySection .rightControls .change-choices i.fa-minus-circle {
+        color: #cb0c0c; }
+      .editSurveySection .rightControls .change-choices span {
+        color: #222;
+        line-height: 1;
+        font-weight: 700;
+        -webkit-transition: none;
+        -o-transition: none;
+        -moz-transition: none;
+        transition: none; }
+      .editSurveySection .rightControls .change-choices i.fa-plus-circle {
+        color: green; }
 
 /* edit_survey section end- */
 /* preview-mobile */

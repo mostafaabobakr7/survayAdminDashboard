@@ -157,86 +157,6 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="row py-3 hoverQuestion">
-                              <div class="questionMove">
-                                <div class="questionMove__up py-2">
-                                  <i class="fa fa-arrow-up"></i>
-                                </div>
-                                <div class="questionMove__down py-2">
-                                  <i class="fa fa-arrow-down"></i>
-                                </div>
-                              </div>
-                              <div class="col-1">
-                                <div class="questionNumber">
-                                  <h4 contenteditable="true">Q2</h4>
-                                </div>
-                              </div>
-                              <div class="col-11 d-flex justify-content-between">
-                                <div class="questionBlock">
-                                  <div class="questionHeader">
-                                    <h3 contenteditable="true" class="card-title  mb-3">
-                                      Matrix table
-                                    </h3>
-                                  </div>
-                                  <div class="questionBody matrix">
-                                    <table class="table">
-                                      <thead>
-                                        <tr>
-                                          <th scope="col"></th>
-                                          <th scope="col" contenteditable="true">scalePoint1</th>
-                                          <th scope="col" contenteditable="true">scalePoint2</th>
-                                          <th scope="col" contenteditable="true">scalePoint3</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <tr>
-                                          <th scope="row" contenteditable="true">statement1</th>
-                                          <td>
-                                            <input class="matrix" type="radio" name="matrix">
-                                          </td>
-                                          <td>
-                                            <input class="matrix" type="radio" name="matrix">
-                                          </td>
-                                          <td>
-                                            <input class="matrix" type="radio" name="matrix">
-                                          </td>
-                                        </tr>
-                                        <tr>
-                                          <th scope="row" contenteditable="true">statement2</th>
-                                          <td>
-                                            <input class="matrix" type="radio" name="matrix2">
-                                          </td>
-                                          <td>
-                                            <input class="matrix" type="radio" name="matrix2">
-                                          </td>
-                                          <td>
-                                            <input class="matrix" type="radio" name="matrix2">
-                                          </td>
-                                        </tr>
-                                        <tr>
-                                          <th scope="row" contenteditable="true">statement3</th>
-                                          <td>
-                                            <input class="matrix" type="radio" name="matrix3">
-                                          </td>
-                                          <td>
-                                            <input class="matrix" type="radio" name="matrix3">
-                                          </td>
-                                          <td>
-                                            <input class="matrix" type="radio" name="matrix3">
-                                          </td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-
-                                  </div>
-                                </div>
-                                <div class="addQuestionControls justify-content-between">
-                                  <i class="fa fa-plus-circle questionInserBefore" title="Insert Question Before"></i>
-                                  <i class="fa fa-plus-circle questionInserAfter" title="Insert Question After"></i>
-                                </div>
-                              </div>
-                            </div>
-
                           </div>
                         </div>
                         <div class="text-center py-4">
@@ -258,17 +178,9 @@
                 <!-- change question type -->
                 <!--<div class="change-question-type py-2">
                 </div> -->
-                <div class="change-choices pt-2 pb-1">
-                  <p class="m-0">Choices</p>
-                  <div class="choices text-center py-1">
-                    <i class="fa fa-minus-circle choicesDecrease"></i>
-                    <span>3</span>
-                    <i class="fa fa-plus-circle choicesIncrease"></i>
-                  </div>
-                </div>
-                <div class="change-answers py-3">
+                <div class="change-answers">
                   <p>CHANGE QUESTION TYPE</p>
-                  <div class="answers py-2">
+                  <div class="answers">
                     <input type="radio" autocomplete="off" name="answers" id="singleAnswers" checked>
                     <input type="radio" autocomplete="off" name="answers" id="multibleAnswers">
                     <input type="radio" autocomplete="off" name="answers" id="dropDownOneAnswer">
@@ -280,6 +192,21 @@
                     <input type="radio" autocomplete="off" name="answers" id="txtEssayAnswer">
                     <input type="radio" autocomplete="off" name="answers" id="txtFormAnswer" title="date, password, phone number, e-mail">
                     <input type="radio" autocomplete="off" name="answers" id="uploadImgAnswer">
+                  </div>
+                </div>
+                <div class="change-choices">
+                  <p class="m-0">Choices</p>
+                  <div class="choices text-center py-1">
+                    <small class="d-none statementSmall">statement</small>
+                    <i class="fa fa-minus-circle choicesDecrease"></i>
+                    <span>3</span>
+                    <i class="fa fa-plus-circle choicesIncrease"></i>
+                  </div>
+                  <div class="scalePoint text-center py-2 d-none ">
+                    <small>scale Point</small>
+                    <i class="fa fa-minus-circle scalePointDecrease"></i>
+                    <span class="scalePointSpan">3</span>
+                    <i class="fa fa-plus-circle scalePointIncrease"></i>
                   </div>
                 </div>
               </div>
@@ -295,12 +222,6 @@
   <!-- footer -->
   <footer class="footer"></footer>
   <!-- footer end -->
-
-  <!-- Modal -->
-
-  <!-- Modal end->
-
-
 
   <!-- ........................................ -->
   <script src="./js/jquery-3.3.1.slim.min.js"></script>

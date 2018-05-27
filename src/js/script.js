@@ -342,8 +342,40 @@ $('.section-block').on('click', '.questionDelete', function () {
 /* PROJECTS\SURVEY: ADD QUESTION RADIO end-- */
 /* PROJECTS\SURVEY: MOVE QUESTION UP and DOWN */
 function choicesCurrentNum() {
-  return $('.hoverQuestionClicked .card-text').length;
+  let size;
+  if ($('.hoverQuestionClicked').find('.card-text').length > 0) {
+    size = $('.hoverQuestionClicked .card-text').length;
+  }
+  if ($('.hoverQuestionClicked').find('.chosen').length > 0) {
+    size = $('.hoverQuestionClicked .chosen option').length;
+  }
+  if ($('.hoverQuestionClicked').find('.chosen-select-multi').length > 0) {
+    size = $('.hoverQuestionClicked .chosen-select-multi option').length;
+  }
+  if ($('.hoverQuestionClicked').find('.range-slider').length > 0) {
+    size = $('.hoverQuestionClicked .range-slider').length;
+  }
+  if ($('.hoverQuestionClicked').find('.rank__body').length > 0) {
+    size = $('.hoverQuestionClicked .rank__body').length;
+  }
+  // count statements
+  if ($('.hoverQuestionClicked').find('.matrix').length > 0) {
+    size = $('.hoverQuestionClicked .matrix tbody tr').length;
+  }
+  return size;
 }
+$('input[type=radio][name=answers]').on('change', function () {
+  $('.choices span').text(choicesCurrentNum);
+  if ($('.hoverQuestionClicked').find('.matrix').length > 0) {
+    $('.statementSmall').removeClass('d-none');
+    $('.scalePoint').removeClass('d-none');
+    const scalePointHeadCount = $('thead tr th').length - 1;
+    $('.scalePointSpan').text(scalePointHeadCount);
+  } else {
+    $('.statementSmall').addClass('d-none');
+    $('.scalePoint').addClass('d-none');
+  }
+});
 $('.section-block')
   .on('click', '.questionMove__up', function () {
     // <div .row></div>
@@ -363,7 +395,7 @@ $('.section-block').on('click', '.questionMove__down', function () {
   $(questionPosition).insertAfter(questionPositionPrevSibling);
 });
 /* PROJECTS\SURVEY: MOVE QUESTION UP and DOWN end-- */
-/* PROJECTS\SURVEY: QUESTION ON CLICK CHANGE BACKGROUNND */
+/* PROJECTS\SURVEY: QUESTION ON CLICK CHANGE TYPE */
 if (/edit_survey.html/.test(window.location.href)) {
   $('.section-block')
     .on('click', '.hoverQuestion', function () {
@@ -439,14 +471,37 @@ if (/edit_survey.html/.test(window.location.href)) {
       $('.choices span').text(choicesCurrentNum);
     });
 }
-/* PROJECTS\SURVEY: QUESTION ON CLICK CHANGE BACKGROUNND end-- */
+/* PROJECTS\SURVEY: QUESTION ON CLICK CHANGE TYPE end-- */
 /* PROJECTS\SURVEY: RADIO CHOICES INC\DEC */
 $('.choicesDecrease')
   .on('click', function () {
-    if ($('.choices span').text() !== '2') {
-      $('.hoverQuestionClicked .card-text:last-child').remove();
-      $('.choices span').text(choicesCurrentNum);
+    const spanNum = $('.choices span').html();
+    if (spanNum !== '2') {
+      if ($('.hoverQuestionClicked').find('.card-text').length > 0) {
+        $('.hoverQuestionClicked .card-text:last-child').remove();
+      }
+      if ($('.hoverQuestionClicked').find('.chosen').length > 0) {
+        $('.hoverQuestionClicked .chosen option:last').remove();
+        $('.hoverQuestionClicked .dropdownOneEdit p:last-child').remove();
+        $('.chosen').val('').trigger('chosen:updated');
+      }
+      if ($('.hoverQuestionClicked').find('.chosen-select-multi').length > 0) {
+        $('.hoverQuestionClicked .chosen-select-multi option:last').remove();
+        $('.hoverQuestionClicked .dropdownMultiEdit p:last-child').remove();
+        $('.chosen-select-multi').val('').trigger('chosen:updated');
+      }
+      if ($('.hoverQuestionClicked').find('.slider').length > 0) {
+        $('.slider .range-slider:last-child').prev().remove();
+        $('.slider .range-slider:last-child').remove();
+      }
+      if ($('.hoverQuestionClicked').find('.rank').length > 0) {
+        $('.rank .rank__body:last-child').remove();
+      }
+      if ($('.hoverQuestionClicked').find('.matrix').length > 0) {
+        $('.matrix tbody tr:last-child').remove();
+      }
     }
+    $('.choices span').text(choicesCurrentNum);
   });
 $('.choicesIncrease').on('click', function () {
   let choiceNum = choicesCurrentNum();
@@ -460,13 +515,87 @@ $('.choicesIncrease').on('click', function () {
                                     <input type="checkbox" name="question">
                                     <span contenteditable="true">Click to write Choice ${choiceNum + 1}</span>
                                   </div>`);
+  const choiceSlider = $(`<p class="m-0 p-0" contenteditable="true">slider${choiceNum + 1}</p>
+          <div class="range-slider d-flex py-2">
+            <input class="range-slider__range" type="range" name="slider" min="0" max="100" value="0">
+            <span class="range-slider__value">0</span>
+          </div>`);
+  const choiceRank = $(`<div class="rank__body">
+            <span class="rank__body-text contenteditable" contenteditable="true">text${choiceNum + 1}</span>
+            <span class="rank__body-rank">${choiceNum + 1}</span>
+          </div>`);
+  const choiceDropdown = $(`<option value="option${choiceNum + 1}">option${choiceNum + 1}</option>`);
+  const choiceDropdownEdit = $(`<p contenteditable="true">option${choiceNum + 1}</p>`);
+
   if ($('.hoverQuestionClicked').find(':radio').length > 0) {
     choiceRadio.insertAfter($('.hoverQuestionClicked .card-text:last-child'));
   }
   if ($('.hoverQuestionClicked').find(':checkbox').length > 0) {
     choiceCheckbox.insertAfter($('.hoverQuestionClicked .card-text:last-child'));
   }
+  if ($('.hoverQuestionClicked').find('.chosen').length > 0) {
+    $('.chosen').append(choiceDropdown);
+    $('.chosen').val('').trigger('chosen:updated');
+  }
+  if ($('.hoverQuestionClicked').find('.chosen').length > 0) {
+    $('.dropdownOneEdit').append(choiceDropdownEdit);
+  }
+  if ($('.hoverQuestionClicked').find('.chosen-select-multi').length > 0) {
+    $('.chosen-select-multi').append(choiceDropdown);
+    $('.chosen-select-multi').val('').trigger('chosen:updated');
+  }
+  if ($('.hoverQuestionClicked').find('.chosen-select-multi').length > 0) {
+    $('.dropdownMultiEdit').append(choiceDropdownEdit);
+  }
+  if ($('.hoverQuestionClicked').find('.slider').length > 0) {
+    $('.slider').append(choiceSlider);
+  }
+  if ($('.hoverQuestionClicked').find('.rank').length > 0) {
+    $('.rank').append(choiceRank);
+  }
+
+  if ($('.hoverQuestionClicked').find('.matrix').length > 0) {
+    if (choicesCurrentNum() !== 10) {
+      let matrixName = new Date().getTime();
+      const choiceMatrixStatement = $('.statement:last').clone();
+      $('.statement:last').find('input').attr('name', matrixName);
+      $('.matrix tbody').append(choiceMatrixStatement);
+      $('.statement:last th').text(`statement${choicesCurrentNum()}`);
+    }
+  }
+
   $('.choices span').text(choicesCurrentNum);
+});
+
+function scalePointHeadCounts() {
+  const scalePointHead = $('thead tr th').length - 1;
+  return scalePointHead;
+}
+$('.scalePointDecrease').on('click', function () {
+  const scalePointHeadCount = scalePointHeadCounts();
+  if (scalePointHeadCount !== 2) {
+    $('thead th:last-child').remove();
+    $('.hoverQuestionClicked .statement').each(function () {
+      $(this).find('td:last-child').remove();
+    });
+  }
+  $('.scalePointSpan').text(scalePointHeadCount);
+});
+
+$('.scalePointIncrease').on('click', function () {
+  const scalePointHeadCount = scalePointHeadCounts();
+  const scalePointHead = $(`<th scope="col" contenteditable="true">scalePoint${scalePointHeadCount + 1}</th>`);
+  if (scalePointHeadCount !== 10) {
+    $('thead tr').append(scalePointHead);
+    $('.scalePointSpan').text(scalePointHeadCount + 1);
+    $('.hoverQuestionClicked .statement').each(function () {
+      const radioName = $(this).find('td:last input').attr('name');
+      const choiceScalePoint = $(`<td>
+                      <input class="matrix" type="radio" name=${radioName}>
+                    </td>`);
+      $(this).append(choiceScalePoint);
+    });
+  }
 });
 /* PROJECTS\SURVEY: RADIO CHOICES INC\DEC end */
 /* PROJECTS\SURVEY: CHANGE QUESTION */
@@ -616,13 +745,11 @@ $('#sliderAnswer').on('click', function () {
         </div>
         <div class="questionBody slider">
           <p class="m-0 p-0" contenteditable="true">slider1</p>
-
           <div class="range-slider d-flex py-2">
             <input class="range-slider__range" type="range" name="slider" min="0" max="100" value="0">
             <span class="range-slider__value">0</span>
           </div>
           <p class="m-0 p-0" contenteditable="true">slider2</p>
-
           <div class="range-slider d-flex py-2">
             <input class="range-slider__range" type="range" name="slider" min="0" max="100" value="0">
             <span class="range-slider__value">0</span>
@@ -640,7 +767,6 @@ $('.section-block').on('change input', '.range-slider__range', function () {
   const value = $('.range-slider__value');
   $(this).next(value).html(this.value);
 });
-
 $('#rankAnswer').on('click', function () {
   const rankAnswer = $(`
       <div class="questionBlock">
@@ -669,7 +795,6 @@ $('#rankAnswer').on('click', function () {
     cancel: '.contenteditable',
   });
 });
-
 $('.section-block').on('sortstop', '.rank', function () {
   $(this).find('.rank__body-rank').each(function (i) {
     $(this).text(i + 1);
@@ -677,7 +802,6 @@ $('.section-block').on('sortstop', '.rank', function () {
 });
 $('.section-block').on('click', '.rank__body-rank', function () {
   $(this).focus();
-  console.log(this);
 });
 $('#matrixAnswer').on('click', function () {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
@@ -701,7 +825,7 @@ $('#matrixAnswer').on('click', function () {
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr class="statement">
                 <th scope="row" contenteditable="true">statement1</th>
                 <td>
                   <input class="matrix" type="radio" name=${radioName}>
@@ -713,7 +837,7 @@ $('#matrixAnswer').on('click', function () {
                   <input class="matrix" type="radio" name=${radioName}>
                 </td>
               </tr>
-              <tr>
+              <tr class="statement">
                 <th scope="row" contenteditable="true">statement2</th>
                 <td>
                   <input class="matrix" type="radio" name=${radioName + 1}>
@@ -725,7 +849,7 @@ $('#matrixAnswer').on('click', function () {
                   <input class="matrix" type="radio" name=${radioName + 1}>
                 </td>
               </tr>
-              <tr>
+              <tr class="statement">
                 <th scope="row" contenteditable="true">statement3</th>
                 <td>
                   <input class="matrix" type="radio" name=${radioName + 2}>
@@ -987,34 +1111,34 @@ $('.chartSection').on('click', '.btn-danger', function () {
 
 /* DASHBOARD: */
 function chartDashboard(type, canvasID) {
-  let ctx = document
-    .querySelector(`#${canvasID}`)
-    .getContext('2d');
-  let chart = new Chart(ctx, {
-    type: `${type}`,
-    data: {
-      datasets: [{
-        label: 'First dataset',
-        data: [
-          0, 20, 40, 50,
-        ],
-        backgroundColor: ['rgba(255, 99, 132, 0.8)', 'rgba(54, 162, 230, 0.8)', 'rgba(54, 162, 240, 0.8)', 'rgba(54, 162, 135, 0.8)'],
-      }],
-      labels: ['January', 'February', 'March', 'April'],
-    },
-    options: {
-      scales: {
-        yAxes: [{
-          ticks: {
-            suggestedMin: 1,
-            suggestedMax: 50,
-          },
+  if (/index.html/.test(window.location.href)) {
+    let ctx = document
+      .querySelector(`#${canvasID}`)
+      .getContext('2d');
+    let chart = new Chart(ctx, {
+      type: `${type}`,
+      data: {
+        datasets: [{
+          label: 'First dataset',
+          data: [
+            0, 20, 40, 50,
+          ],
+          backgroundColor: ['rgba(255, 99, 132, 0.8)', 'rgba(54, 162, 230, 0.8)', 'rgba(54, 162, 240, 0.8)', 'rgba(54, 162, 135, 0.8)'],
         }],
+        labels: ['January', 'February', 'March', 'April'],
       },
-    },
-  });
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              suggestedMin: 1,
+              suggestedMax: 50,
+            },
+          }],
+        },
+      },
+    });
+  }
 }
-if (/index.html/.test(window.location.href)) {
-  chartDashboard('bar', 'New-Survey-per-Month');
-}
+chartDashboard('bar', 'New-Survey-per-Month');
 /* DASHBOARD: end */
