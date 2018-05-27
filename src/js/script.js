@@ -73,12 +73,7 @@ $('#createProjectBTN').on('click', function (ev) {
                               <h2>1</h2>
                               <h6>Questions</h6>
                             </div>
-                            <div class="card-body__details-languages ">
-                              <h2>0</h2>
-                              <h6>Languages</h6>
-                            </div>
                           </div>
-
                         </div>
                       </div>
                     </div>
@@ -1117,7 +1112,7 @@ $('.chartSection').on('click', '.btn-danger', function () {
 
 /* DASHBOARD: */
 function chartDashboard(type, canvasID) {
-  if (/index.html/.test(window.location.href)) {
+  if (/index.html/.test(window.location.href) || window.location.pathname === '/projects/FreeMinds/' || window.location.host === 'freeminds.com') {
     let ctx = document
       .querySelector(`#${canvasID}`)
       .getContext('2d');
