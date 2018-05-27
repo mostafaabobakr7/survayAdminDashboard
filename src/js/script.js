@@ -923,6 +923,12 @@ $('#txtFormAnswer').on('click', function () {
                 <input autocomplete="off" type="tel" class="form-control w-50" placeholder="Phone Number...">
               </div>
             </div>
+            <div class="form-group row text-right ">
+              <label class="col-sm-2 my-0">Name:</label>
+              <div class="col-sm-10">
+                <input autocomplete="off" type="text" class="my-0 form-control w-75" placeholder="Name...">
+              </div>
+            </div>
             <div class="form-group row text-right">
               <label class="col-sm-2">E-mail:</label>
               <div class="col-sm-10">
