@@ -1112,7 +1112,7 @@ $('.chartSection').on('click', '.btn-danger', function () {
 
 /* DASHBOARD: */
 function chartDashboard(type, canvasID) {
-  if (/index.html/.test(window.location.href) || window.location.pathname === '/projects/FreeMinds/' || window.location.host === 'freeminds.com') {
+  if (/index.html/.test(window.location.href) || window.location.pathname === '/projects/FreeMinds/' || window.location.host === 'freeminds.com' || window.location.host === 'freeminds-mena.net') {
     let ctx = document
       .querySelector(`#${canvasID}`)
       .getContext('2d');

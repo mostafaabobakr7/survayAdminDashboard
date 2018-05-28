@@ -13,6 +13,7 @@
     "chart.js": "^2.7.2",
     "chosen-js": "^1.8.5",
     "ckeditor": "^4.9.2",
+    "fine-uploader": "^5.16.2",
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
     "medium-editor": "^5.23.3",
