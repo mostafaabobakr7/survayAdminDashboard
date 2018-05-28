@@ -126,7 +126,8 @@ $('#projectName').on('change keyup paste', function () {
   $(this).addClass('is-valid');
 });
 $('#projectName').keypress(function (e) {
-  if (e.which == 13) {
+  if (e.which === 13) {
+    e.preventDefault();
     $('#createProjectBTN').click();
   }
 });
@@ -262,37 +263,41 @@ function addRadio(place, elementPlaceInDOM) {
           <i class="fa fa-arrow-down"></i>
         </div>
       </div>
-      <div class="col-1">
+      <div class="col-1 questionNumberContainer">
         <div class="questionNumber">
           <h4 contenteditable="true">Q${num + 1}</h4>
         </div>
-      </div> <div class = "col-11 d-flex justify-content-between" > <div class="questionBlock">
-        <div class="questionHeader">
-          <h3 contenteditable="true" class="card-title  mb-3">
-            Click to write the question text
-          </h3>
-        </div>
-        <div class="questionBody">
-          <div class="card-text mb-2">
-            <input type="radio" name=${radioName}>
-              <span contenteditable="true">Click to write Choice 1</span>
+      </div>
+      <div class = "col-10" >
+        <div class="questionBlock">
+          <div class="questionHeader">
+            <h3 contenteditable="true" class="card-title  mb-3">
+              Click to write the question text
+            </h3>
           </div>
-          <div class="card-text mb-2">
-            <input type="radio" name=${radioName}>
-              <span contenteditable="true">Click to write Choice 2</span>
-          </div>
-          <div class="card-text mb-2">
-            <input type="radio" name=${radioName}>
-              <span contenteditable="true">Click to write Choice 3</span>
+          <div class="questionBody singleMulti">
+            <div class="card-text mb-2 alignVertical">
+              <input type="radio" name=${radioName}>
+                <span contenteditable="true">Click to write Choice 1</span>
+            </div>
+            <div class="card-text mb-2 alignVertical">
+              <input type="radio" name=${radioName}>
+                <span contenteditable="true">Click to write Choice 2</span>
+            </div>
+            <div class="card-text mb-2 alignVertical">
+              <input type="radio" name=${radioName}>
+                <span contenteditable="true">Click to write Choice 3</span>
             </div>
           </div>
         </div>
-        <div class="addQuestionControls justify-content-between">
-          <i class="fa fa-plus-circle questionInserBefore" title="Insert Question Before"></i>
-          <i class="fa fa-minus-circle questionDelete" title="Delete Question"></i>
-          <i class="fa fa-plus-circle questionInserAfter" title="Insert Question After"></i>
         </div>
-      </div>
+        <div class="col-1 d-flex justify-content-end">
+          <div class="addQuestionControls justify-content-between">
+            <i class="fa fa-plus-circle questionInserBefore" title="Insert Question Before"></i>
+            <i class="fa fa-minus-circle questionDelete" title="Delete Question"></i>
+            <i class="fa fa-plus-circle questionInserAfter" title="Insert Question After"></i>
+          </div>
+        </div>
     </div>
 `);
 
@@ -336,6 +341,26 @@ $('.section-block').on('click', '.questionDelete', function () {
 });
 /* PROJECTS\SURVEY: ADD QUESTION RADIO end-- */
 /* PROJECTS\SURVEY: MOVE QUESTION UP and DOWN */
+$('.section-block')
+  .on('click', '.questionMove__up', function () {
+    // <div .row></div>
+    const questionPosition = $(this)
+      .parent()
+      .parent();
+    // get upper sibling
+    const questionPositionPrevSibling = questionPosition.prev();
+    $(questionPosition).insertBefore(questionPositionPrevSibling);
+  });
+
+$('.section-block').on('click', '.questionMove__down', function () {
+  const questionPosition = $(this)
+    .parent()
+    .parent();
+  const questionPositionPrevSibling = questionPosition.next();
+  $(questionPosition).insertAfter(questionPositionPrevSibling);
+});
+/* PROJECTS\SURVEY: MOVE QUESTION UP and DOWN end-- */
+/* PROJECTS\SURVEY: QUESTION ON CLICK CHANGE TYPE */
 function choicesCurrentNum() {
   let size;
   if ($('.hoverQuestionClicked').find('.card-text').length > 0) {
@@ -364,33 +389,20 @@ $('input[type=radio][name=answers]').on('change', function () {
   if ($('.hoverQuestionClicked').find('.matrix').length > 0) {
     $('.statementSmall').removeClass('d-none');
     $('.scalePoint').removeClass('d-none');
+    $('.choiceAlign').addClass('d-none');
     const scalePointHeadCount = $('thead tr th').length - 1;
     $('.scalePointSpan').text(scalePointHeadCount);
   } else {
     $('.statementSmall').addClass('d-none');
     $('.scalePoint').addClass('d-none');
   }
+  if ($('.hoverQuestionClicked').find('.singleMulti').length > 0) {
+    $('.choiceAlign').removeClass('d-none');
+  } else {
+    $('.choiceAlign').addClass('d-none');
+  }
 });
-$('.section-block')
-  .on('click', '.questionMove__up', function () {
-    // <div .row></div>
-    const questionPosition = $(this)
-      .parent()
-      .parent();
-    // get upper sibling
-    const questionPositionPrevSibling = questionPosition.prev();
-    $(questionPosition).insertBefore(questionPositionPrevSibling);
-  });
 
-$('.section-block').on('click', '.questionMove__down', function () {
-  const questionPosition = $(this)
-    .parent()
-    .parent();
-  const questionPositionPrevSibling = questionPosition.next();
-  $(questionPosition).insertAfter(questionPositionPrevSibling);
-});
-/* PROJECTS\SURVEY: MOVE QUESTION UP and DOWN end-- */
-/* PROJECTS\SURVEY: QUESTION ON CLICK CHANGE TYPE */
 if (/edit_survey.html/.test(window.location.href)) {
   $('.section-block')
     .on('click', '.hoverQuestion', function () {
@@ -398,60 +410,102 @@ if (/edit_survey.html/.test(window.location.href)) {
         .addClass('hoverQuestionClicked')
         .siblings()
         .removeClass('hoverQuestionClicked');
+      /* CHECK IF HORIZONTAL OR VERTICAL */
+      if ($(this).find('.alignVertical').length > 0) {
+        $('#vertical').prop('checked', true);
+        $('#horizontal').prop('checked', false);
+      }
+      if ($(this).find('.alignHorizontal').length > 0) {
+        $('#horizontal').prop('checked', true);
+        $('#vertical').prop('checked', false);
+      }
       /* DEFINE IF IT A RADIO */
       if ($(this).find(':radio').length > 0) {
         $('#singleAnswers').prop('checked', true);
         $('#singleAnswers').siblings().prop('checked', false);
+        $('.choiceAlign').removeClass('d-none');
+        $('.statementSmall').addClass('d-none');
+        $('.scalePoint').addClass('d-none');
       }
       /* DEFINE IF IT A CHECKBOX */
       if ($(this).find(':checkbox').length > 0) {
         $('#multibleAnswers').prop('checked', true);
         $('#multibleAnswers').siblings().prop('checked', false);
+        $('.choiceAlign').removeClass('d-none');
+        $('.statementSmall').addClass('d-none');
+        $('.scalePoint').addClass('d-none');
       }
       /* DEFINE IF IT A DROPDOWN SINGLE */
       if ($(this).find('.chosen').length > 0) {
         $('#dropDownOneAnswer').prop('checked', true);
         $('#dropDownOneAnswer').siblings().prop('checked', false);
+        $('.choiceAlign').addClass('d-none');
+        $('.statementSmall').addClass('d-none');
+        $('.scalePoint').addClass('d-none');
       }
       /* DEFINE IF IT A DROPDOWN MULTIPLE */
       if ($(this).find('.chosen-select-multi').length > 0) {
         $('#dropDownMultiAnswer').prop('checked', true);
         $('#dropDownMultiAnswer').siblings().prop('checked', false);
+        $('.choiceAlign').addClass('d-none');
+        $('.statementSmall').addClass('d-none');
+        $('.scalePoint').addClass('d-none');
       }
-      /* DEFINE IF IT A DROPDOWN SLIDER */
+      /* DEFINE IF IT A SLIDER */
       if ($(this).find('.slider').length > 0) {
         $('#sliderAnswer').prop('checked', true);
         $('#sliderAnswer').siblings().prop('checked', false);
+        $('.choiceAlign').addClass('d-none');
+        $('.statementSmall').addClass('d-none');
+        $('.scalePoint').addClass('d-none');
       }
-      /* DEFINE IF IT A DROPDOWN RANK */
+      /* DEFINE IF IT A RANK */
       if ($(this).find('.rank').length > 0) {
         $('#rankAnswer').prop('checked', true);
         $('#rankAnswer').siblings().prop('checked', false);
+        $('.choiceAlign').addClass('d-none');
+        $('.statementSmall').addClass('d-none');
+        $('.scalePoint').addClass('d-none');
       }
-      /* DEFINE IF IT A DROPDOWN MATRIX */
+      /* DEFINE IF IT A MATRIX */
       if ($(this).find('.matrix').length > 0) {
         $('#matrixAnswer').prop('checked', true);
         $('#matrixAnswer').siblings().prop('checked', false);
+        $('.choiceAlign').addClass('d-none');
+        $('.statementSmall').removeClass('d-none');
+        $('.scalePoint').removeClass('d-none');
       }
-      /* DEFINE IF IT A DROPDOWN TXT SINGLE LINE */
+      /* DEFINE IF IT A TXT SINGLE LINE */
       if ($(this).find('.txtSingleLine').length > 0) {
         $('#txtSingleLineAnswer').prop('checked', true);
         $('#txtSingleLineAnswer').siblings().prop('checked', false);
+        $('.choiceAlign').addClass('d-none');
+        $('.statementSmall').addClass('d-none');
+        $('.scalePoint').addClass('d-none');
       }
-      /* DEFINE IF IT A DROPDOWN TXT txtEssayAnswer */
+      /* DEFINE IF IT A TXT txtEssayAnswer */
       if ($(this).find('.txtEssayAnswer').length > 0) {
         $('#txtEssayAnswer').prop('checked', true);
         $('#txtEssayAnswer').siblings().prop('checked', false);
+        $('.choiceAlign').addClass('d-none');
+        $('.statementSmall').addClass('d-none');
+        $('.scalePoint').addClass('d-none');
       }
-      /* DEFINE IF IT A DROPDOWN TXT txtFormAnswer */
+      /* DEFINE IF IT A TXT txtFormAnswer */
       if ($(this).find('.txtFormAnswer').length > 0) {
         $('#txtFormAnswer').prop('checked', true);
         $('#txtFormAnswer').siblings().prop('checked', false);
+        $('.choiceAlign').addClass('d-none');
+        $('.statementSmall').addClass('d-none');
+        $('.scalePoint').addClass('d-none');
       }
-      /* DEFINE IF IT A DROPDOWN TXT uploadImgAnswer */
+      /* DEFINE IF IT A TXT uploadImgAnswer */
       if ($(this).find('.uploadImgAnswer').length > 0) {
         $('#uploadImgAnswer').prop('checked', true);
         $('#uploadImgAnswer').siblings().prop('checked', false);
+        $('.choiceAlign').addClass('d-none');
+        $('.statementSmall').addClass('d-none');
+        $('.scalePoint').addClass('d-none');
       }
       /* questionHoverClicked class remove from all blocks when clicked on current block */
       const x = $(this)
@@ -502,11 +556,11 @@ $('.choicesIncrease').on('click', function () {
   let choiceNum = choicesCurrentNum();
   const radioName = $('.hoverQuestionClicked input:radio').attr('name');
 
-  const choiceRadio = $(`<div class="card-text mb-2">
+  const choiceRadio = $(`<div class="card-text mb-2 alignVertical">
                                     <input type="radio" name="${radioName}">
                                     <span contenteditable="true">Click to write Choice ${choiceNum + 1}</span>
                                   </div>`);
-  const choiceCheckbox = $(`<div class="card-text mb-2">
+  const choiceCheckbox = $(`<div class="card-text mb-2 alignVertical">
                                     <input type="checkbox" name="question">
                                     <span contenteditable="true">Click to write Choice ${choiceNum + 1}</span>
                                   </div>`);
@@ -605,16 +659,16 @@ $('#singleAnswers').on('click', function () {
             Single answer
           </h3>
         </div>
-        <div class="questionBody">
-          <div class="card-text mb-2">
+        <div class="questionBody singleMulti">
+          <div class = "card-text mb-2 alignVertical">
             <input type="radio" name=${radioName}>
             <span contenteditable="true">Click to write Choice 1</span>
           </div>
-          <div class="card-text mb-2">
+          <div class="card-text mb-2 alignVertical">
             <input type="radio" name=${radioName}>
             <span contenteditable="true">Click to write Choice 2</span>
           </div>
-          <div class="card-text mb-2">
+          <div class="card-text mb-2 alignVertical">
             <input type="radio" name=${radioName}>
             <span contenteditable="true">Click to write Choice 3</span>
           </div>
@@ -633,16 +687,16 @@ $('#multibleAnswers').on('click', function () {
             Multiple answers
           </h3>
         </div>
-        <div class="questionBody">
-          <div class="card-text mb-2">
+        <div class="questionBody singleMulti">
+          <div class="card-text mb-2 alignVertical">
             <input type="checkbox" name=${checkName}>
             <span contenteditable="true">Click to write Choice 1</span>
           </div>
-          <div class="card-text mb-2">
+          <div class="card-text mb-2 alignVertical">
             <input type="checkbox" name=${checkName}>
             <span contenteditable="true">Click to write Choice 2</span>
           </div>
-          <div class="card-text mb-2">
+          <div class="card-text mb-2 alignVertical">
             <input type="checkbox" name=${checkName}>
             <span contenteditable="true">Click to write Choice 3</span>
           </div>
@@ -650,6 +704,58 @@ $('#multibleAnswers').on('click', function () {
       </div>`);
   $('.hoverQuestionClicked .questionBlock').replaceWith(multibleAnswers);
 });
+$('#vertical').on('click', function () {
+  if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0) {
+    const qsTitle = $('.hoverQuestionClicked .questionHeader .card-title').html();
+    const trTwo = $('.hoverQuestionClicked .alignHorizontal input');
+    const trOne = $('.hoverQuestionClicked .alignHorizontal span');
+    const alignH = $(`
+    <div class="questionBlock">
+      <div class="questionHeader">
+        <h3 contenteditable="true" class="card-title mb-3">
+          Vertical
+        </h3>
+      </div>
+      <div class="questionBody">
+      </div>
+    </div>
+    `);
+    $('.hoverQuestionClicked .questionBlock').replaceWith(alignH);
+    $('.hoverQuestionClicked .questionHeader .card-title').html(qsTitle);
+    trTwo.appendTo('.hoverQuestionClicked .questionBody').wrap('<div class="card-text mb-2 alignVertical"></div>');
+    trOne.each(function (i) {
+      $('.hoverQuestionClicked .alignVertical').eq(i).append($(this));
+    });
+  }
+});
+
+$('#horizontal').on('click', function () {
+  if ($('.hoverQuestionClicked').find('.alignVertical').length > 0) {
+    const qsTitle = $('.hoverQuestionClicked .questionHeader .card-title').html();
+    const trOne = $('.hoverQuestionClicked .alignVertical span');
+    const trTwo = $('.hoverQuestionClicked .alignVertical input');
+    const alignV = $(`
+    <div class="questionBlock">
+      <div class="questionHeader">
+        <h3 contenteditable="true" class="card-title mb-3"></h3>
+      </div>
+      <div class="questionBody">
+        <table class="table alignHorizontal">
+          <tbody>
+            <tr class="upperHead"></tr>
+            <tr class="lowerHead text-center"></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    `);
+    $('.hoverQuestionClicked .questionBlock').replaceWith(alignV);
+    $('.hoverQuestionClicked .questionHeader .card-title').html(qsTitle);
+    trOne.appendTo('.hoverQuestionClicked .alignHorizontal .upperHead').wrap('<th></th>');
+    trTwo.appendTo('.hoverQuestionClicked .alignHorizontal .lowerHead').wrap('<th></th>');
+  }
+});
+
 $('#dropDownOneAnswer').on('click', function () {
   const dropDownOneAnswer = $(`
       <div class="questionBlock">
@@ -1120,11 +1226,15 @@ function chartDashboard(type, canvasID) {
       type: `${type}`,
       data: {
         datasets: [{
-          label: 'First dataset',
+          label: 'Survey Per Month',
           data: [
-            0, 20, 40, 50,
+            10, 20, 40, 50,
           ],
           backgroundColor: ['rgba(255, 99, 132, 0.8)', 'rgba(54, 162, 230, 0.8)', 'rgba(54, 162, 240, 0.8)', 'rgba(54, 162, 135, 0.8)'],
+          borderWidth: 1,
+          borderColor: '#777',
+          hoverBorderWidth: 3,
+          hoverBorderColor: '#000',
         }],
         labels: ['January', 'February', 'March', 'April'],
       },

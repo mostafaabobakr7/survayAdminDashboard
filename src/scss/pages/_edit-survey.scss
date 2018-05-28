@@ -37,7 +37,7 @@
                 }
               }
             }
-            .col-1 {
+            .questionNumberContainer {
               border-right: 1px solid #ccc;
             }
             .questionBlock {
@@ -115,7 +115,7 @@
       .answers {
         &>* {
           display: block;
-          margin: 7px auto;
+          margin: 5px auto;
           border-radius: 5px;
           width: 100%;
           padding: 1.3rem 0;
@@ -226,6 +226,14 @@
       }
       i.fa-plus-circle {
         color: green;
+      }
+    }
+    .choiceAlign {
+      label {
+        cursor: pointer;
+        font-size: 1.5rem;
+        font-weight: 600;
+        display: inline-block;
       }
     }
   }
