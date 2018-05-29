@@ -389,7 +389,7 @@ function scalePointHeadCounts() {
   let scalePointHead = $('.hoverQuestionClicked .matrix thead tr th').length - 1;
   return scalePointHead;
 }
-$('input[type=radio][name=answers]').on('change', function () {
+$('input[type=radio][name=answers]').on('change click', function () {
   $('.choices span').text(choicesCurrentNum);
   if ($('.hoverQuestionClicked').find('.matrix').length > 0) {
     $('.statementSmall').removeClass('d-none');
@@ -400,11 +400,21 @@ $('input[type=radio][name=answers]').on('change', function () {
     $('.statementSmall').addClass('d-none');
     $('.scalePoint').addClass('d-none');
   }
-  if ($('.hoverQuestionClicked').find('.singleMulti').length > 0) {
-    $('.choiceAlign').removeClass('d-none');
-  } else {
-    $('.choiceAlign').addClass('d-none');
-  }
+  setTimeout(function () {
+    if ($('.hoverQuestionClicked').find('.singleMulti').length > 0) {
+      $('.choiceAlign').removeClass('d-none');
+      if ($('.hoverQuestionClicked').find('.alignVertical').length > 0) {
+        $('#vertical').prop('checked', true);
+        $('#horizontal').prop('checked', false);
+      }
+      if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0) {
+        $('#horizontal').prop('checked', true);
+        $('#vertical').prop('checked', false);
+      }
+    } else {
+      $('.choiceAlign').addClass('d-none');
+    }
+  }, 100);
 });
 
 if (/edit_survey.html/.test(window.location.href)) {
@@ -415,13 +425,16 @@ if (/edit_survey.html/.test(window.location.href)) {
         .siblings()
         .removeClass('hoverQuestionClicked');
       /* CHECK IF HORIZONTAL OR VERTICAL */
-      if ($(this).find('.alignVertical').length > 0) {
-        $('#vertical').prop('checked', true);
-        $('#horizontal').prop('checked', false);
-      }
-      if ($(this).find('.alignHorizontal').length > 0) {
-        $('#horizontal').prop('checked', true);
-        $('#vertical').prop('checked', false);
+      if ($('.hoverQuestionClicked').find('.singleMulti').length > 0) {
+        $('.choiceAlign').removeClass('d-none');
+        if ($('.hoverQuestionClicked .singleMulti').find('.alignVertical').length > 0) {
+          $('#vertical').prop('checked', true);
+          $('#horizontal').prop('checked', false);
+        }
+        if ($('.hoverQuestionClicked .singleMulti').find('.alignHorizontal').length > 0) {
+          $('#horizontal').prop('checked', true);
+          $('#vertical').prop('checked', false);
+        }
       }
       /* DEFINE IF IT A RADIO */
       if ($(this).find(':radio').length > 0) {
@@ -719,7 +732,7 @@ $('#vertical').on('click', function () {
           Vertical
         </h3>
       </div>
-      <div class="questionBody">
+      <div class="questionBody singleMulti">
       </div>
     </div>
     `);
@@ -742,7 +755,7 @@ $('#horizontal').on('click', function () {
       <div class="questionHeader">
         <h3 contenteditable="true" class="card-title mb-3"></h3>
       </div>
-      <div class="questionBody">
+      <div class="questionBody singleMulti">
         <table class="table alignHorizontal">
           <tbody>
             <tr class="upperHead"></tr>
