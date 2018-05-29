@@ -575,13 +575,14 @@ $('.choicesDecrease')
 $('.choicesIncrease').on('click', function () {
   let choiceNum = choicesCurrentNum();
   const radioName = $('.hoverQuestionClicked input:radio').attr('name');
+  const checkName = $('.hoverQuestionClicked input:checkbox').attr('name');
 
   const choiceRadio = $(`<div class="card-text mb-2 alignVertical">
                                     <input type="radio" name="${radioName}">
                                     <span contenteditable="true">Click to write Choice ${choiceNum + 1}</span>
                                   </div>`);
   const choiceCheckbox = $(`<div class="card-text mb-2 alignVertical">
-                                    <input type="checkbox" name="question">
+                                    <input type="checkbox" name=${checkName}>
                                     <span contenteditable="true">Click to write Choice ${choiceNum + 1}</span>
                                   </div>`);
   const choiceSlider = $(`<p class="m-0 p-0" contenteditable="true">slider${choiceNum + 1}</p>
