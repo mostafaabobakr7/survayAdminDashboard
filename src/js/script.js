@@ -384,14 +384,18 @@ function choicesCurrentNum() {
   }
   return size;
 }
+
+function scalePointHeadCounts() {
+  let scalePointHead = $('.hoverQuestionClicked .matrix thead tr th').length - 1;
+  return scalePointHead;
+}
 $('input[type=radio][name=answers]').on('change', function () {
   $('.choices span').text(choicesCurrentNum);
   if ($('.hoverQuestionClicked').find('.matrix').length > 0) {
     $('.statementSmall').removeClass('d-none');
     $('.scalePoint').removeClass('d-none');
     $('.choiceAlign').addClass('d-none');
-    const scalePointHeadCount = $('thead tr th').length - 1;
-    $('.scalePointSpan').text(scalePointHeadCount);
+    $('.scalePointSpan').text(scalePointHeadCounts());
   } else {
     $('.statementSmall').addClass('d-none');
     $('.scalePoint').addClass('d-none');
@@ -474,6 +478,8 @@ if (/edit_survey.html/.test(window.location.href)) {
         $('.choiceAlign').addClass('d-none');
         $('.statementSmall').removeClass('d-none');
         $('.scalePoint').removeClass('d-none');
+        $('.scalePointSpan').text(scalePointHeadCounts());
+        console.log(scalePointHeadCounts());
       }
       /* DEFINE IF IT A TXT SINGLE LINE */
       if ($(this).find('.txtSingleLine').length > 0) {
@@ -547,7 +553,8 @@ $('.choicesDecrease')
         $('.rank .rank__body:last-child').remove();
       }
       if ($('.hoverQuestionClicked').find('.matrix').length > 0) {
-        $('.matrix tbody tr:last-child').remove();
+        $('.hoverQuestionClicked .matrix tbody tr:last-child').remove();
+        $('.scalePointSpan').text(scalePointHeadCounts());
       }
     }
     $('.choices span').text(choicesCurrentNum);
@@ -607,42 +614,38 @@ $('.choicesIncrease').on('click', function () {
     if (choicesCurrentNum() !== 10) {
       let matrixName = new Date().getTime();
       const choiceMatrixStatement = $('.statement:last').clone();
-      $('.statement:last').find('input').attr('name', matrixName);
-      $('.matrix tbody').append(choiceMatrixStatement);
-      $('.statement:last th').text(`statement${choicesCurrentNum()}`);
+      $('.hoverQuestionClicked .statement:last').find('input').attr('name', matrixName);
+      $('.hoverQuestionClicked .matrix tbody').append(choiceMatrixStatement);
+      $('.hoverQuestionClicked .statement:last th').text(`statement${choicesCurrentNum()}`);
     }
   }
 
   $('.choices span').text(choicesCurrentNum);
 });
 
-function scalePointHeadCounts() {
-  const scalePointHead = $('thead tr th').length - 1;
-  return scalePointHead;
-}
 $('.scalePointDecrease').on('click', function () {
-  const scalePointHeadCount = scalePointHeadCounts();
+  let scalePointHeadCount = scalePointHeadCounts();
   if (scalePointHeadCount !== 2) {
-    $('thead th:last-child').remove();
+    $('.hoverQuestionClicked thead th:last-child').remove();
     $('.hoverQuestionClicked .statement').each(function () {
       $(this).find('td:last-child').remove();
     });
   }
-  $('.scalePointSpan').text(scalePointHeadCount);
+  $('.scalePointSpan').text(scalePointHeadCounts());
 });
 
 $('.scalePointIncrease').on('click', function () {
-  const scalePointHeadCount = scalePointHeadCounts();
+  let scalePointHeadCount = scalePointHeadCounts();
   const scalePointHead = $(`<th scope="col" contenteditable="true">scalePoint${scalePointHeadCount + 1}</th>`);
   if (scalePointHeadCount !== 10) {
-    $('thead tr').append(scalePointHead);
-    $('.scalePointSpan').text(scalePointHeadCount + 1);
+    $('.hoverQuestionClicked thead tr').append(scalePointHead);
     $('.hoverQuestionClicked .statement').each(function () {
       const radioName = $(this).find('td:last input').attr('name');
       const choiceScalePoint = $(`<td>
                       <input class="matrix" type="radio" name=${radioName}>
                     </td>`);
       $(this).append(choiceScalePoint);
+      $('.scalePointSpan').text(scalePointHeadCounts());
     });
   }
 });
