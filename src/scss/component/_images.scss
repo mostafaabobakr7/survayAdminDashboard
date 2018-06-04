@@ -1,0 +1,26 @@
+/* images */
+
+picture {
+  display: inline-block;
+  position: relative;
+  img {
+    &:hover {
+      box-shadow: 0 5px 15px rgba(0, 0, 0, .7);
+    }
+    &:hover+i {
+      color: red;
+    }
+  }
+  i.fa-times {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    font-size: 1.9rem;
+    color: transparent;
+    &:hover {
+      color: red;
+    }
+  }
+}
+
+/* images end--- */

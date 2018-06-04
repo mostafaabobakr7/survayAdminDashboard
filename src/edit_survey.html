@@ -117,7 +117,7 @@
           <div class="col-xl-10">
             <section class="leftContent pt-5 pl-3">
               <div class="mb-5">
-                <h3 class="projectNameEdit" contenteditable="true"></h3>
+                <h3 class="projectNameEdit"></h3>
               </div>
               <section class="section-block">
                 <div class="container-fluid">
@@ -209,6 +209,7 @@
                       <input type="radio" autocomplete="off" name="answers" id="uploadImgAnswer">
                     </div>
                   </div>
+
                   <div class="change-choices">
                     <p class="m-0">Choices</p>
                     <div class="choices text-center py-1">
@@ -232,6 +233,7 @@
                       </label>
                     </div>
                   </div>
+
                 </div>
                 <!-- change question type end -->
               </section>
@@ -245,7 +247,23 @@
   <!-- footer -->
   <footer class="footer"></footer>
   <!-- footer end -->
-
+  <!-- modal -->
+  <div class="modalAddImg">
+    <div id="addImgModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Choose image from Media Library</h2>
+          </div>
+          <div id="addImgModalBody" class="modal-body py-5"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary btn-lg" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- modal end -->
   <!-- ........................................ -->
   <script src="./js/jquery-3.3.1.slim.min.js"></script>
   <script src="./js/bootstrap.bundle.min.js"></script>

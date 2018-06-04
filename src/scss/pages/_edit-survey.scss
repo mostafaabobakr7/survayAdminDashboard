@@ -9,6 +9,9 @@
     }
     .section-block {
       .card {
+        &-header {
+          display: flex;
+        }
         &-body {
           .hoverQuestion {
             border-top: 1px solid transparent;
@@ -42,7 +45,7 @@
             }
             .questionBlock {
               .questionHeader {
-                display: block;
+                display: flex;
                 padding: 0.1rem 0.3rem;
               }
               .questionBody {
@@ -95,16 +98,16 @@
     position: relative;
   }
   .rightControls {
-    overflow: hidden;
     min-height: 100vh;
     &-container {
       p {
+        cursor: default;
         padding: 0.3rem 0.2rem;
         background-color: #222;
         color: #fff;
         text-align: center;
         border-radius: 4px;
-        font-weight: 500;
+        font-weight: 600;
         font-size: 1.6rem;
         @media(min-width: 1500px) {
           font-size: 2rem;

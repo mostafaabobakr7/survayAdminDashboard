@@ -162,21 +162,58 @@ $(document).ready(() => {
 
 
 /* PROJECTS\SURVEY: CONTENTEDITABLE on CLICK */
+function getEdit() {
+  const content = $('.editable-focus');
+  return content;
+}
 if (/edit_survey.html/.test(window.location)) {
   // PROJECTS\SURVEY: STICKY RIGHT CONTROLS
   $('.rightControls').sticky();
-  $(document)
-    .on('click', '[contenteditable="true"]', function () {
-      $(document)
-        .find('[contenteditable="true"]')
-        .removeClass('editable-focus');
-      $(this).addClass('editable-focus');
-      $(this).focusout(function () {
-        $(this).removeClass('editable-focus');
-      });
-    });
+  // PROJECTS\SURVEY: STICKY RIGHT CONTROLS end----
+  const addImg = $(`<i class="fa fa-picture-o addImgIcon" title="add image"></i>`);
+  $(document).on('click', '[contenteditable="true"]', function () {
+    $(document)
+      .find('[contenteditable="true"]')
+      .removeClass('editable-focus');
+    $(this).addClass('editable-focus');
+    addImg.insertAfter(this);
+
+    /*     $(this).focusout(function () {
+          $(this).removeClass('editable-focus');
+          setTimeout(() => {
+            $(this).next().remove();
+          }, 200)
+        }); */
+  });
+  $(document).on('click', '.addImgIcon', function () {
+    $('#addImgModal').modal('toggle');
+  });
 }
+$('#addImgModal').on('click', 'picture', function () {
+  const contentTxt = getEdit();
+  $(this).find('.removeImgIcon').removeClass('d-none');
+  const imgCopy = $(this).clone();
+  contentTxt.next().remove();
+  contentTxt.addClass('d-none');
+  imgCopy.insertAfter(contentTxt);
+  $('#addImgModal').modal('hide');
+
+  $('.hoverQuestionClicked').on('click', '.removeImgIcon', function () {
+    const parent = $(this).parent();
+    parent.prev().removeClass('d-none');
+    parent.remove();
+  });
+});
+
 /* PROJECTS\SURVEY: CONTENTEDITABLE on CLICK end--- */
+
+/* PROJECTS\SURVEY: ADD LIBRARY IMAGES TO MODAL  */
+$('#addImgModalBody').load('library.html .libraryImages');
+$('#addImgModal').on('shown.bs.modal hidden.bs.modal', function () {
+  $(this).find('.removeImgIcon').addClass('d-none');
+});
+/* PROJECTS\SURVEY: ADD LIBRARY IMAGES TO MODAL end */
+
 /* PROJECTS\SURVEY: ADD BLOCK function */
 $('.section-block').on('click', '#addBlock', () => {
   const block = $(`<div class="section-block-card">
@@ -492,7 +529,6 @@ if (/edit_survey.html/.test(window.location.href)) {
         $('.statementSmall').removeClass('d-none');
         $('.scalePoint').removeClass('d-none');
         $('.scalePointSpan').text(scalePointHeadCounts());
-        console.log(scalePointHeadCounts());
       }
       /* DEFINE IF IT A TXT SINGLE LINE */
       if ($(this).find('.txtSingleLine').length > 0) {
@@ -544,7 +580,7 @@ if (/edit_survey.html/.test(window.location.href)) {
 $('.choicesDecrease')
   .on('click', function () {
     const spanNum = $('.choices span').html();
-    if (spanNum !== '2') {
+    if (spanNum !== '1') {
       if ($('.hoverQuestionClicked').find('.card-text').length > 0) {
         $('.hoverQuestionClicked .card-text:last-child').remove();
       }
@@ -597,10 +633,10 @@ $('.choicesIncrease').on('click', function () {
   const choiceDropdown = $(`<option value="option${choiceNum + 1}">option${choiceNum + 1}</option>`);
   const choiceDropdownEdit = $(`<p contenteditable="true">option${choiceNum + 1}</p>`);
 
-  if ($('.hoverQuestionClicked').find(':radio').length > 0) {
+  if ($('.hoverQuestionClicked .alignVertical').find(':radio').length > 0) {
     choiceRadio.insertAfter($('.hoverQuestionClicked .card-text:last-child'));
   }
-  if ($('.hoverQuestionClicked').find(':checkbox').length > 0) {
+  if ($('.hoverQuestionClicked .alignVertical').find(':checkbox').length > 0) {
     choiceCheckbox.insertAfter($('.hoverQuestionClicked .card-text:last-child'));
   }
   if ($('.hoverQuestionClicked').find('.chosen').length > 0) {
@@ -633,13 +669,12 @@ $('.choicesIncrease').on('click', function () {
       $('.hoverQuestionClicked .statement:last th').text(`statement${choicesCurrentNum()}`);
     }
   }
-
   $('.choices span').text(choicesCurrentNum);
 });
 
 $('.scalePointDecrease').on('click', function () {
   let scalePointHeadCount = scalePointHeadCounts();
-  if (scalePointHeadCount !== 2) {
+  if (scalePointHeadCount !== 1) {
     $('.hoverQuestionClicked thead th:last-child').remove();
     $('.hoverQuestionClicked .statement').each(function () {
       $(this).find('td:last-child').remove();
@@ -647,7 +682,6 @@ $('.scalePointDecrease').on('click', function () {
   }
   $('.scalePointSpan').text(scalePointHeadCounts());
 });
-
 $('.scalePointIncrease').on('click', function () {
   let scalePointHeadCount = scalePointHeadCounts();
   const scalePointHead = $(`<th scope="col" contenteditable="true">scalePoint${scalePointHeadCount + 1}</th>`);
@@ -1110,6 +1144,7 @@ $(document).ready(function () {
   $('.preview-mobile .addQuestionControls').remove();
   $('.preview-mobile .dropdownOneEdit').remove();
   $('.preview-mobile .dropdownMultiEdit').remove();
+  $('.preview-mobile .addImgIcon').remove();
 });
 /* PROJECTS\PREVIEW:  end--*/
 //---------------------------------------------

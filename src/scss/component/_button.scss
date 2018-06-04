@@ -9,4 +9,12 @@
   }
 }
 
+.addImgIcon {
+  cursor: pointer;
+  font-size: 2rem;
+  &:hover {
+    color: $nav-main-color;
+  }
+}
+
 /* btn component end--------------------- */

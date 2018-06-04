@@ -265,6 +265,7 @@ input[type="radio"] {
   background-color: #ebebeb; }
 
 .editable-focus {
+  position: relative;
   background-color: #fff !important;
   border: 1px solid blue !important;
   cursor: text !important; }
@@ -649,6 +650,12 @@ nav .nav-link {
   -webkit-box-shadow: none;
           box-shadow: none; }
 
+.addImgIcon {
+  cursor: pointer;
+  font-size: 2rem; }
+  .addImgIcon:hover {
+    color: #007ac0; }
+
 /* btn component end--------------------- */
 /* card component */
 .projects-list-container {
@@ -700,25 +707,26 @@ nav .nav-link {
 /* card component end----------------- */
 /* form */
 /* form end------------------------ */
-.modal-dialog {
+/* modal */
+.modalProject .modal-dialog {
   -webkit-transform: translate(-50%, 90px) !important;
      -moz-transform: translate(-50%, 90px) !important;
       -ms-transform: translate(-50%, 90px) !important;
        -o-transform: translate(-50%, 90px) !important;
           transform: translate(-50%, 90px) !important; }
 
-.modal-content {
+.modalProject .modal-content {
   background-color: #f2f2f2;
   width: 70rem;
   overflow: hidden; }
 
-.modal-body {
+.modalProject .modal-body {
   height: 25rem;
   position: relative; }
-  .modal-body .container-fluid {
+  .modalProject .modal-body .container-fluid {
     padding-right: 0;
     padding-left: 0; }
-  .modal-body .list-group {
+  .modalProject .modal-body .list-group {
     position: absolute;
     z-index: 100;
     top: -15px;
@@ -732,7 +740,7 @@ nav .nav-link {
     border-color: #000000;
     border-color: rgba(0, 0, 0, 0.05);
     border-radius: 4px; }
-    .modal-body .list-group .active {
+    .modalProject .modal-body .list-group .active {
       background-color: #fff;
       color: #000;
       -webkit-box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.3);
@@ -742,7 +750,7 @@ nav .nav-link {
       border-color: rgba(0, 0, 0, 0.05);
       border-radius: 4px;
       position: relative; }
-      .modal-body .list-group .active:after {
+      .modalProject .modal-body .list-group .active:after {
         content: "";
         display: inline;
         position: absolute;
@@ -760,29 +768,29 @@ nav .nav-link {
             -ms-transform: rotate(-45deg);
              -o-transform: rotate(-45deg);
                 transform: rotate(-45deg); }
-    .modal-body .list-group-item {
+    .modalProject .modal-body .list-group-item {
       background-color: #f2f2f2;
       border-radius: 0px !important;
       border: 0px !important;
       padding: 1rem;
       border: none;
       font-size: 1.1rem; }
-      .modal-body .list-group-item:nth-child(1) {
+      .modalProject .modal-body .list-group-item:nth-child(1) {
         margin-top: 3rem; }
-      .modal-body .list-group-item span {
+      .modalProject .modal-body .list-group-item span {
         padding-right: 1rem; }
 
-.modal-footer {
+.modalProject .modal-footer {
   border-top: 1px solid #eee; }
 
-.modal .tab-content .list-Research {
+.modalProject .modal .tab-content .list-Research {
   position: relative; }
-  .modal .tab-content .list-Research span {
+  .modalProject .modal .tab-content .list-Research span {
     display: inline-block; }
-    .modal .tab-content .list-Research span:hover i {
+    .modalProject .modal .tab-content .list-Research span:hover i {
       border: 1px solid #000;
       cursor: pointer; }
-    .modal .tab-content .list-Research span i {
+    .modalProject .modal .tab-content .list-Research span i {
       border: 1px solid transparent;
       border-radius: 5px;
       padding: 0 2rem;
@@ -791,34 +799,34 @@ nav .nav-link {
       -moz-transition: all 0.2s ease;
       transition: all 0.2s ease;
       font-size: 2.5rem; }
-  .modal .tab-content .list-Research .tab-pane__research {
+  .modalProject .modal .tab-content .list-Research .tab-pane__research {
     margin: 1rem 0;
     display: block; }
-    .modal .tab-content .list-Research .tab-pane__research-text {
+    .modalProject .modal .tab-content .list-Research .tab-pane__research-text {
       position: absolute;
       top: 5.5rem;
       left: 12rem; }
-      .modal .tab-content .list-Research .tab-pane__research-text h5 {
+      .modalProject .modal .tab-content .list-Research .tab-pane__research-text h5 {
         font-size: 1.7rem;
         color: #484848; }
-      .modal .tab-content .list-Research .tab-pane__research-text p {
+      .modalProject .modal .tab-content .list-Research .tab-pane__research-text p {
         font-size: 1.2rem; }
 
-.modal .tab-pane a:hover .tab-pane__research {
+.modalProject .modal .tab-pane a:hover .tab-pane__research {
   -webkit-transform: scale(1.03);
      -moz-transform: scale(1.03);
       -ms-transform: scale(1.03);
        -o-transform: scale(1.03);
           transform: scale(1.03); }
 
-.modal .tab-pane a:active .tab-pane__research {
+.modalProject .modal .tab-pane a:active .tab-pane__research {
   -webkit-transform: scale(0.9);
      -moz-transform: scale(0.9);
       -ms-transform: scale(0.9);
        -o-transform: scale(0.9);
           transform: scale(0.9); }
 
-.modal .tab-pane__research {
+.modalProject .modal .tab-pane__research {
   -webkit-box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
           box-shadow: 0 0.4rem 2.4rem -0.4rem rgba(0, 0, 0, 0.5);
   border: 1px solid #c6c6c6;
@@ -830,7 +838,7 @@ nav .nav-link {
   display: inline-block;
   background-color: #fff;
   border: 1px solid #d7d7d7; }
-  .modal .tab-pane__research-head {
+  .modalProject .modal .tab-pane__research-head {
     width: 100%;
     height: 10rem;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#4d5f69), to(#000));
@@ -839,7 +847,7 @@ nav .nav-link {
     background-image: -o-linear-gradient(#4d5f69, #000);
     background-image: linear-gradient(#4d5f69, #000);
     position: relative; }
-    .modal .tab-pane__research-head i {
+    .modalProject .modal .tab-pane__research-head i {
       color: #fff;
       font-size: 3rem;
       position: absolute;
@@ -850,9 +858,29 @@ nav .nav-link {
           -ms-transform: translate(-50%, -50%);
            -o-transform: translate(-50%, -50%);
               transform: translate(-50%, -50%); }
-  .modal .tab-pane__research h5 {
+  .modalProject .modal .tab-pane__research h5 {
     padding-left: 6px; }
 
+.modalAddImg img {
+  cursor: pointer; }
+  .modalAddImg img:hover {
+    -webkit-transform: scale(1.03);
+       -moz-transform: scale(1.03);
+        -ms-transform: scale(1.03);
+         -o-transform: scale(1.03);
+            transform: scale(1.03);
+    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7); }
+    .modalAddImg img:hover:active {
+      -webkit-transform: scale(1);
+         -moz-transform: scale(1);
+          -ms-transform: scale(1);
+           -o-transform: scale(1);
+              transform: scale(1);
+      -webkit-box-shadow: 0 5px 7px rgba(0, 0, 0, 0.5);
+              box-shadow: 0 5px 7px rgba(0, 0, 0, 0.5); }
+
+/* modal end */
 .section-home-dropdown__link {
   padding: 1rem;
   font-size: 1.2rem;
@@ -1011,6 +1039,25 @@ input[type=range]::-moz-range-thumb input[type=range]::-moz-range-track {
 /* RANK END */
 /* MATRIX */
 /* MATRIX end */
+/* images */
+picture {
+  display: inline-block;
+  position: relative; }
+  picture img:hover {
+    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7); }
+  picture img:hover + i {
+    color: red; }
+  picture i.fa-times {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    font-size: 1.9rem;
+    color: transparent; }
+    picture i.fa-times:hover {
+      color: red; }
+
+/* images end--- */
 /*@import component end-----------------------------*/
 /*@import PAGES folder */
 /* home */
@@ -1075,6 +1122,12 @@ main .form-inline span {
     min-height: 95vh; }
     .editSurveySection .leftContent .projectNameEdit {
       color: #222; }
+    .editSurveySection .leftContent .section-block .card-header {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: flex; }
     .editSurveySection .leftContent .section-block .card-body .hoverQuestion {
       border-top: 1px solid transparent;
       border-bottom: 1px solid transparent;
@@ -1099,7 +1152,11 @@ main .form-inline span {
       .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionNumberContainer {
         border-right: 1px solid #ccc; }
       .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionHeader {
-        display: block;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: flex;
         padding: 0.1rem 0.3rem; }
       .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody {
         width: 50rem; }
@@ -1143,15 +1200,15 @@ main .form-inline span {
     border-left: 1px solid #ccc;
     position: relative; }
   .editSurveySection .rightControls {
-    overflow: hidden;
     min-height: 100vh; }
     .editSurveySection .rightControls-container p {
+      cursor: default;
       padding: 0.3rem 0.2rem;
       background-color: #222;
       color: #fff;
       text-align: center;
       border-radius: 4px;
-      font-weight: 500;
+      font-weight: 600;
       font-size: 1.6rem; }
       @media (min-width: 1500px) {
         .editSurveySection .rightControls-container p {

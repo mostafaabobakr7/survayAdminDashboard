@@ -1,132 +1,152 @@
-.modal {
-  &-dialog {
-    transform: translate(-50%, 90px) !important;
-  }
-  &-content {
-    background-color: #f2f2f2;
-    width: 70rem;
-    overflow: hidden;
-  }
-  &-body {
-    height: 25rem;
-    position: relative;
-    .container-fluid {
-      padding-right: 0;
-      padding-left: 0;
+/* modal */
+
+.modalProject {
+  .modal {
+    &-dialog {
+      transform: translate(-50%, 90px) !important;
     }
-    .list-group {
-      position: absolute;
-      z-index: 100;
-      top: -15px;
-      left: 0;
-      height: 300rem;
-      width: 22rem;
-      border-right: 1px solid #ccc;
-      @include dropDownShadow(0.3);
-      .active {
-        background-color: #fff;
-        color: #000;
-        @include dropDownShadow(0.3);
-        position: relative;
-        &:after {
-          content: "";
-          display: inline;
-          position: absolute;
-          z-index: 100000;
-          left: 21rem;
-          top: 15px;
-          border-bottom: 8.5px solid #fff;
-          border-right: 8.5px solid #fff;
-          border-top: 8.5px solid transparent;
-          border-left: 8.5px solid transparent;
-          box-shadow: 3px 3px 6px -1px rgba(0, 0, 0, .16);
-          transform: rotate(-45deg);
-        }
-      }
-      &-item {
-        background-color: #f2f2f2;
-        border-radius: 0px !important;
-        border: 0px !important;
-        &:nth-child(1) {
-          margin-top: 3rem;
-        }
-        padding: 1rem;
-        border: none;
-        font-size: 1.1rem;
-        span {
-          padding-right: 1rem;
-        }
-      }
+    &-content {
+      background-color: #f2f2f2;
+      width: 70rem;
+      overflow: hidden;
     }
-  }
-  &-footer {
-    border-top: 1px solid #eee;
-  }
-  .tab-content {
-    .list-Research {
+    &-body {
+      height: 25rem;
       position: relative;
-      span {
-        display: inline-block;
-        &:hover i {
-          border: 1px solid #000;
-          cursor: pointer;
-        }
-        i {
-          border: 1px solid transparent;
-          border-radius: 5px;
-          padding: 0 2rem;
-          transition: all 0.2s ease;
-          font-size: 2.5rem;
-        }
+      .container-fluid {
+        padding-right: 0;
+        padding-left: 0;
       }
-      .tab-pane__research {
-        margin: 1rem 0;
-        display: block;
-        &-text {
-          position: absolute;
-          top: 5.5rem;
-          left: 12rem;
-          h5 {
-            font-size: 1.7rem;
-            color: #484848;
+      .list-group {
+        position: absolute;
+        z-index: 100;
+        top: -15px;
+        left: 0;
+        height: 300rem;
+        width: 22rem;
+        border-right: 1px solid #ccc;
+        @include dropDownShadow(0.3);
+        .active {
+          background-color: #fff;
+          color: #000;
+          @include dropDownShadow(0.3);
+          position: relative;
+          &:after {
+            content: "";
+            display: inline;
+            position: absolute;
+            z-index: 100000;
+            left: 21rem;
+            top: 15px;
+            border-bottom: 8.5px solid #fff;
+            border-right: 8.5px solid #fff;
+            border-top: 8.5px solid transparent;
+            border-left: 8.5px solid transparent;
+            box-shadow: 3px 3px 6px -1px rgba(0, 0, 0, .16);
+            transform: rotate(-45deg);
           }
-          p {
-            font-size: 1.2rem;
+        }
+        &-item {
+          background-color: #f2f2f2;
+          border-radius: 0px !important;
+          border: 0px !important;
+          &:nth-child(1) {
+            margin-top: 3rem;
+          }
+          padding: 1rem;
+          border: none;
+          font-size: 1.1rem;
+          span {
+            padding-right: 1rem;
           }
         }
       }
     }
-  }
-  .tab-pane {
-    a {
-      &:hover .tab-pane__research {
-        transform: scale(1.03);
-      }
-      &:active .tab-pane__research {
-        transform: scale(0.9);
-      }
+    &-footer {
+      border-top: 1px solid #eee;
     }
-    &__research {
-      @include dropDownShadow;
-      width: 10rem;
-      margin: 1rem;
-      display: inline-block;
-      background-color: #fff;
-      border: 1px solid #d7d7d7;
-      &-head {
-        width: 100%;
-        height: 10rem;
-        background-image: linear-gradient(#4d5f69, #000);
+    .tab-content {
+      .list-Research {
         position: relative;
-        i {
-          color: #fff;
-          font-size: 3rem;
-          @include center;
+        span {
+          display: inline-block;
+          &:hover i {
+            border: 1px solid #000;
+            cursor: pointer;
+          }
+          i {
+            border: 1px solid transparent;
+            border-radius: 5px;
+            padding: 0 2rem;
+            transition: all 0.2s ease;
+            font-size: 2.5rem;
+          }
+        }
+        .tab-pane__research {
+          margin: 1rem 0;
+          display: block;
+          &-text {
+            position: absolute;
+            top: 5.5rem;
+            left: 12rem;
+            h5 {
+              font-size: 1.7rem;
+              color: #484848;
+            }
+            p {
+              font-size: 1.2rem;
+            }
+          }
         }
       }
-      h5 {
-        padding-left: 6px;
+    }
+    .tab-pane {
+      a {
+        &:hover .tab-pane__research {
+          transform: scale(1.03);
+        }
+        &:active .tab-pane__research {
+          transform: scale(0.9);
+        }
+      }
+      &__research {
+        @include dropDownShadow;
+        width: 10rem;
+        margin: 1rem;
+        display: inline-block;
+        background-color: #fff;
+        border: 1px solid #d7d7d7;
+        &-head {
+          width: 100%;
+          height: 10rem;
+          background-image: linear-gradient(#4d5f69, #000);
+          position: relative;
+          i {
+            color: #fff;
+            font-size: 3rem;
+            @include center;
+          }
+        }
+        h5 {
+          padding-left: 6px;
+        }
       }
     }
   }
 }
+
+.modalAddImg {
+  img {
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.03);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, .7);
+      &:active {
+        transform: scale(1);
+        box-shadow: 0 5px 7px rgba(0, 0, 0, .5);
+      }
+    }
+  }
+}
+
+/* modal end */
