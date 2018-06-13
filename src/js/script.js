@@ -162,10 +162,6 @@ $(document).ready(() => {
 
 
 /* PROJECTS\SURVEY: CONTENTEDITABLE on CLICK */
-function getEdit() {
-  const content = $('.editable-focus');
-  return content;
-}
 if (/edit_survey.html/.test(window.location)) {
   // PROJECTS\SURVEY: STICKY RIGHT CONTROLS
   $('.rightControls').sticky();
@@ -176,32 +172,42 @@ if (/edit_survey.html/.test(window.location)) {
       .find('[contenteditable="true"]')
       .removeClass('editable-focus');
     $(this).addClass('editable-focus');
-    addImg.insertAfter(this);
-
+    if (!$(this).parent('.dropdownOneEdit').length > 0 && !$(this).parent('.dropdownMultiEdit').length > 0 && !$(this).parents('.matrix').length > 0) {
+      addImg.insertAfter(this);
+    }
+    if ($(this).find('picture').length > 0) {
+      addImg.remove();
+    }
     /*     $(this).focusout(function () {
-          $(this).removeClass('editable-focus');
           setTimeout(() => {
+            $(this).removeClass('editable-focus');
             $(this).next().remove();
-          }, 200)
+          }, 200);
         }); */
   });
   $(document).on('click', '.addImgIcon', function () {
     $('#addImgModal').modal('toggle');
   });
 }
+
+
+function getEdit() {
+  const content = $('.editable-focus');
+  return content;
+}
 $('#addImgModal').on('click', 'picture', function () {
   const contentTxt = getEdit();
   $(this).find('.removeImgIcon').removeClass('d-none');
   const imgCopy = $(this).clone();
-  contentTxt.next().remove();
-  contentTxt.addClass('d-none');
-  imgCopy.insertAfter(contentTxt);
+  $('.addImgIcon').remove();
+  contentTxt.append(imgCopy);
+  contentTxt.css('display', 'inline-grid');
   $('#addImgModal').modal('hide');
 
   $('.hoverQuestionClicked').on('click', '.removeImgIcon', function () {
-    const parent = $(this).parent();
-    parent.prev().removeClass('d-none');
-    parent.remove();
+    const picture = $(this).parent();
+    picture.parent().removeAttr('style');
+    picture.remove();
   });
 });
 
@@ -400,11 +406,17 @@ $('.section-block').on('click', '.questionMove__down', function () {
 /* PROJECTS\SURVEY: QUESTION ON CLICK CHANGE TYPE */
 function choicesCurrentNum() {
   let size;
-  if ($('.hoverQuestionClicked').find('.card-text').length > 0) {
+  if ($('.hoverQuestionClicked').find('.alignVertical').length > 0) {
     size = $('.hoverQuestionClicked .card-text').length;
+  }
+  if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0) {
+    size = $('.hoverQuestionClicked .upperHead td').length;
   }
   if ($('.hoverQuestionClicked').find('.chosen').length > 0) {
     size = $('.hoverQuestionClicked .chosen option').length;
+  }
+  if ($('.hoverQuestionClicked').find('.dropdownListChosen').length > 0) {
+    size = $('.hoverQuestionClicked .dropdownListChosen:first option').length;
   }
   if ($('.hoverQuestionClicked').find('.chosen-select-multi').length > 0) {
     size = $('.hoverQuestionClicked .chosen-select-multi option').length;
@@ -412,22 +424,50 @@ function choicesCurrentNum() {
   if ($('.hoverQuestionClicked').find('.range-slider').length > 0) {
     size = $('.hoverQuestionClicked .range-slider').length;
   }
+  if ($('.hoverQuestionClicked').find('.stars-slider').length > 0) {
+    size = $('.hoverQuestionClicked .stars-slider').length;
+  }
   if ($('.hoverQuestionClicked').find('.rank__body').length > 0) {
     size = $('.hoverQuestionClicked .rank__body').length;
   }
   // count statements
   if ($('.hoverQuestionClicked').find('.matrix').length > 0) {
-    size = $('.hoverQuestionClicked .matrix tbody tr').length;
+    if ($('.hoverQuestionClicked .matrixLikert tbody tr:last th').text() !== 'Total') {
+      size = $('.hoverQuestionClicked .matrix tbody tr').length;
+    } else {
+      size = $('.hoverQuestionClicked .matrix tbody tr').length - 1;
+    }
   }
   return size;
 }
 
 function scalePointHeadCounts() {
-  let scalePointHead = $('.hoverQuestionClicked .matrix thead tr th').length - 1;
+  let scalePointHead;
+  if ($('.hoverQuestionClicked').find('.matrixLikert').length > 0) {
+    if ($('.hoverQuestionClicked .matrixLikert thead tr th:last').text() !== 'Total') {
+      scalePointHead = $('.hoverQuestionClicked .matrix thead tr th').length - 1;
+    } else {
+      scalePointHead = $('.hoverQuestionClicked .matrix thead tr th').length - 2;
+    }
+  }
+  if ($('.hoverQuestionClicked').find('.matrixBipolar').length > 0) {
+    scalePointHead = $('.hoverQuestionClicked .statement:last td').length;
+  }
+  if ($('.hoverQuestionClicked').find('.dropdownListChosen').length > 0) {
+    scalePointHead = $('.hoverQuestionClicked .dropdownListChosen:first option').length;
+  }
+  if ($('.hoverQuestionClicked').find('.matrixProfile').length > 0) {
+    scalePointHead = $('.hoverQuestionClicked .matrixProfile tr:first td').length;
+  }
   return scalePointHead;
 }
 $('input[type=radio][name=answers]').on('change click', function () {
   $('.choices span').text(choicesCurrentNum);
+  if ($('.hoverQuestionClicked').find('.slider').length > 0) {
+    $('.sliderType').removeClass('d-none');
+  } else {
+    $('.sliderType').addClass('d-none');
+  }
   if ($('.hoverQuestionClicked').find('.matrix').length > 0) {
     $('.statementSmall').removeClass('d-none');
     $('.scalePoint').removeClass('d-none');
@@ -473,6 +513,9 @@ if (/edit_survey.html/.test(window.location.href)) {
           $('#vertical').prop('checked', false);
         }
       }
+      if ($('.hoverQuestionClicked').find('.slider').length > 0) {
+        $('.sliderType').removeClass('d-none');
+      }
       /* DEFINE IF IT A RADIO */
       if ($(this).find(':radio').length > 0) {
         $('#singleAnswers').prop('checked', true);
@@ -480,6 +523,7 @@ if (/edit_survey.html/.test(window.location.href)) {
         $('.choiceAlign').removeClass('d-none');
         $('.statementSmall').addClass('d-none');
         $('.scalePoint').addClass('d-none');
+        $('.sliderType').addClass('d-none');
       }
       /* DEFINE IF IT A CHECKBOX */
       if ($(this).find(':checkbox').length > 0) {
@@ -488,6 +532,7 @@ if (/edit_survey.html/.test(window.location.href)) {
         $('.choiceAlign').removeClass('d-none');
         $('.statementSmall').addClass('d-none');
         $('.scalePoint').addClass('d-none');
+        $('.sliderType').addClass('d-none');
       }
       /* DEFINE IF IT A DROPDOWN SINGLE */
       if ($(this).find('.chosen').length > 0) {
@@ -496,6 +541,7 @@ if (/edit_survey.html/.test(window.location.href)) {
         $('.choiceAlign').addClass('d-none');
         $('.statementSmall').addClass('d-none');
         $('.scalePoint').addClass('d-none');
+        $('.sliderType').addClass('d-none');
       }
       /* DEFINE IF IT A DROPDOWN MULTIPLE */
       if ($(this).find('.chosen-select-multi').length > 0) {
@@ -504,6 +550,7 @@ if (/edit_survey.html/.test(window.location.href)) {
         $('.choiceAlign').addClass('d-none');
         $('.statementSmall').addClass('d-none');
         $('.scalePoint').addClass('d-none');
+        $('.sliderType').addClass('d-none');
       }
       /* DEFINE IF IT A SLIDER */
       if ($(this).find('.slider').length > 0) {
@@ -512,6 +559,7 @@ if (/edit_survey.html/.test(window.location.href)) {
         $('.choiceAlign').addClass('d-none');
         $('.statementSmall').addClass('d-none');
         $('.scalePoint').addClass('d-none');
+        $('.sliderType').removeClass('d-none');
       }
       /* DEFINE IF IT A RANK */
       if ($(this).find('.rank').length > 0) {
@@ -520,6 +568,7 @@ if (/edit_survey.html/.test(window.location.href)) {
         $('.choiceAlign').addClass('d-none');
         $('.statementSmall').addClass('d-none');
         $('.scalePoint').addClass('d-none');
+        $('.sliderType').addClass('d-none');
       }
       /* DEFINE IF IT A MATRIX */
       if ($(this).find('.matrix').length > 0) {
@@ -537,6 +586,7 @@ if (/edit_survey.html/.test(window.location.href)) {
         $('.choiceAlign').addClass('d-none');
         $('.statementSmall').addClass('d-none');
         $('.scalePoint').addClass('d-none');
+        $('.sliderType').addClass('d-none');
       }
       /* DEFINE IF IT A TXT txtEssayAnswer */
       if ($(this).find('.txtEssayAnswer').length > 0) {
@@ -545,6 +595,7 @@ if (/edit_survey.html/.test(window.location.href)) {
         $('.choiceAlign').addClass('d-none');
         $('.statementSmall').addClass('d-none');
         $('.scalePoint').addClass('d-none');
+        $('.sliderType').addClass('d-none');
       }
       /* DEFINE IF IT A TXT txtFormAnswer */
       if ($(this).find('.txtFormAnswer').length > 0) {
@@ -553,6 +604,7 @@ if (/edit_survey.html/.test(window.location.href)) {
         $('.choiceAlign').addClass('d-none');
         $('.statementSmall').addClass('d-none');
         $('.scalePoint').addClass('d-none');
+        $('.sliderType').addClass('d-none');
       }
       /* DEFINE IF IT A TXT uploadImgAnswer */
       if ($(this).find('.uploadImgAnswer').length > 0) {
@@ -561,6 +613,7 @@ if (/edit_survey.html/.test(window.location.href)) {
         $('.choiceAlign').addClass('d-none');
         $('.statementSmall').addClass('d-none');
         $('.scalePoint').addClass('d-none');
+        $('.sliderType').addClass('d-none');
       }
       /* questionHoverClicked class remove from all blocks when clicked on current block */
       const x = $(this)
@@ -577,50 +630,66 @@ if (/edit_survey.html/.test(window.location.href)) {
 }
 /* PROJECTS\SURVEY: QUESTION ON CLICK CHANGE TYPE end-- */
 /* PROJECTS\SURVEY: RADIO CHOICES INC\DEC */
-$('.choicesDecrease')
-  .on('click', function () {
-    const spanNum = $('.choices span').html();
-    if (spanNum !== '1') {
-      if ($('.hoverQuestionClicked').find('.card-text').length > 0) {
-        $('.hoverQuestionClicked .card-text:last-child').remove();
-      }
-      if ($('.hoverQuestionClicked').find('.chosen').length > 0) {
-        $('.hoverQuestionClicked .chosen option:last').remove();
-        $('.hoverQuestionClicked .dropdownOneEdit p:last-child').remove();
-        $('.chosen').val('').trigger('chosen:updated');
-      }
-      if ($('.hoverQuestionClicked').find('.chosen-select-multi').length > 0) {
-        $('.hoverQuestionClicked .chosen-select-multi option:last').remove();
-        $('.hoverQuestionClicked .dropdownMultiEdit p:last-child').remove();
-        $('.chosen-select-multi').val('').trigger('chosen:updated');
-      }
-      if ($('.hoverQuestionClicked').find('.slider').length > 0) {
-        $('.slider .range-slider:last-child').prev().remove();
-        $('.slider .range-slider:last-child').remove();
-      }
-      if ($('.hoverQuestionClicked').find('.rank').length > 0) {
-        $('.rank .rank__body:last-child').remove();
-      }
-      if ($('.hoverQuestionClicked').find('.matrix').length > 0) {
+function choicesDecrease() {
+  const spanNum = $('.choices span').html();
+  if (spanNum !== '1') {
+    if ($('.hoverQuestionClicked').find('.alignVertical').length > 0) {
+      $('.hoverQuestionClicked .alignVertical:last-child').remove();
+    }
+    if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0) {
+      $('.hoverQuestionClicked .upperHead td:last').remove();
+      $('.hoverQuestionClicked .lowerHead td:last').remove();
+    }
+    if ($('.hoverQuestionClicked').find('.chosen').length > 0) {
+      $('.hoverQuestionClicked .chosen option:last').remove();
+      $('.hoverQuestionClicked .dropdownOneEdit p:last-child').remove();
+      $('.chosen').val('').trigger('chosen:updated');
+    }
+    if ($('.hoverQuestionClicked').find('.chosen-select-multi').length > 0) {
+      $('.hoverQuestionClicked .chosen-select-multi option:last').remove();
+      $('.hoverQuestionClicked .dropdownMultiEdit p:last-child').remove();
+      $('.chosen-select-multi').val('').trigger('chosen:updated');
+    }
+    if ($('.hoverQuestionClicked').find('.range-slider').length > 0) {
+      $('.slider .range-slider:last-child').prev().remove();
+      $('.slider .range-slider:last-child').remove();
+    }
+    if ($('.hoverQuestionClicked').find('.stars-slider').length > 0) {
+      $('.slider .stars-slider:last-child').remove();
+    }
+    if ($('.hoverQuestionClicked').find('.rank').length > 0) {
+      $('.rank .rank__body:last-child').remove();
+    }
+    if ($('.hoverQuestionClicked').find('.matrixLikert').length > 0) {
+      if ($('.hoverQuestionClicked .matrix tbody tr:last th').text() !== 'Total') {
         $('.hoverQuestionClicked .matrix tbody tr:last-child').remove();
+        $('.scalePointSpan').text(scalePointHeadCounts());
+      } else {
+        $('.hoverQuestionClicked .matrix tbody tr').eq(-2).remove();
         $('.scalePointSpan').text(scalePointHeadCounts());
       }
     }
-    $('.choices span').text(choicesCurrentNum);
-  });
-$('.choicesIncrease').on('click', function () {
-  let choiceNum = choicesCurrentNum();
-  const radioName = $('.hoverQuestionClicked input:radio').attr('name');
-  const checkName = $('.hoverQuestionClicked input:checkbox').attr('name');
+    if ($('.hoverQuestionClicked').find('.matrixProfile').length > 0) {
+      if ($('.hoverQuestionClicked .matrix tbody tr:last th').text() !== 'Total') {
+        $('.hoverQuestionClicked .matrixProfile tr:last').remove();
+      }
+    }
+    if ($('.hoverQuestionClicked').find('.matrixBipolar').length > 0 ||
+      $('.hoverQuestionClicked').find('.matrixMaxDiff').length > 0) {
+      if ($('.hoverQuestionClicked .matrix tbody tr:last th').text() !== 'Total') {
+        $('.hoverQuestionClicked .matrix tbody .statement:last').remove();
+      }
+    }
 
-  const choiceRadio = $(`<div class="card-text mb-2 alignVertical">
-                                    <input type="radio" name="${radioName}">
-                                    <span contenteditable="true">Click to write Choice ${choiceNum + 1}</span>
-                                  </div>`);
-  const choiceCheckbox = $(`<div class="card-text mb-2 alignVertical">
-                                    <input type="checkbox" name=${checkName}>
-                                    <span contenteditable="true">Click to write Choice ${choiceNum + 1}</span>
-                                  </div>`);
+    if ($('.hoverQuestionClicked').find('.matrixDropdownStatement').length > 0) {
+      $('.hoverQuestionClicked .matrixDropdownStatement:last').remove();
+    }
+  }
+  $('.choices span').text(choicesCurrentNum);
+}
+
+function choicesIncrease() {
+  let choiceNum = choicesCurrentNum();
   const choiceSlider = $(`<p class="m-0 p-0" contenteditable="true">slider${choiceNum + 1}</p>
           <div class="range-slider d-flex py-2">
             <input class="range-slider__range" type="range" name="slider" min="0" max="100" value="0">
@@ -633,77 +702,241 @@ $('.choicesIncrease').on('click', function () {
   const choiceDropdown = $(`<option value="option${choiceNum + 1}">option${choiceNum + 1}</option>`);
   const choiceDropdownEdit = $(`<p contenteditable="true">option${choiceNum + 1}</p>`);
 
-  if ($('.hoverQuestionClicked .alignVertical').find(':radio').length > 0) {
-    choiceRadio.insertAfter($('.hoverQuestionClicked .card-text:last-child'));
-  }
-  if ($('.hoverQuestionClicked .alignVertical').find(':checkbox').length > 0) {
-    choiceCheckbox.insertAfter($('.hoverQuestionClicked .card-text:last-child'));
-  }
-  if ($('.hoverQuestionClicked').find('.chosen').length > 0) {
-    $('.chosen').append(choiceDropdown);
-    $('.chosen').val('').trigger('chosen:updated');
-  }
-  if ($('.hoverQuestionClicked').find('.chosen').length > 0) {
-    $('.dropdownOneEdit').append(choiceDropdownEdit);
-  }
-  if ($('.hoverQuestionClicked').find('.chosen-select-multi').length > 0) {
-    $('.chosen-select-multi').append(choiceDropdown);
-    $('.chosen-select-multi').val('').trigger('chosen:updated');
-  }
-  if ($('.hoverQuestionClicked').find('.chosen-select-multi').length > 0) {
-    $('.dropdownMultiEdit').append(choiceDropdownEdit);
-  }
-  if ($('.hoverQuestionClicked').find('.slider').length > 0) {
-    $('.slider').append(choiceSlider);
-  }
-  if ($('.hoverQuestionClicked').find('.rank').length > 0) {
-    $('.rank').append(choiceRank);
-  }
+  if (choiceNum !== 10) {
+    if ($('.hoverQuestionClicked').find('.alignVertical').length > 0) {
+      const inc = $('.hoverQuestionClicked .alignVertical:last-child').clone();
+      inc.insertAfter('.hoverQuestionClicked .alignVertical:last-child');
+      $('.hoverQuestionClicked .alignVertical:last-child span').text(`Click to write Choice ${choiceNum + 1}`);
+    }
+    if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0) {
+      const tUpper = $('.upperHead td:last').clone();
+      tUpper.insertAfter('.upperHead td:last');
+      $('.upperHead td:last span').text(`Click to write Choice ${choiceNum + 1}`);
+      const tLower = $('.lowerHead td:last').clone();
+      tLower.insertAfter('.lowerHead td:last');
+    }
+    if ($('.hoverQuestionClicked').find('.alignColumn').length > 0) {
 
-  if ($('.hoverQuestionClicked').find('.matrix').length > 0) {
-    if (choicesCurrentNum() !== 10) {
-      let matrixName = new Date().getTime();
-      const choiceMatrixStatement = $('.statement:last').clone();
-      $('.hoverQuestionClicked .statement:last').find('input').attr('name', matrixName);
-      $('.hoverQuestionClicked .matrix tbody').append(choiceMatrixStatement);
-      $('.hoverQuestionClicked .statement:last th').text(`statement${choicesCurrentNum()}`);
+    }
+
+    if ($('.hoverQuestionClicked').find('.chosen').length > 0) {
+      $('.dropdownOneEdit').append(choiceDropdownEdit);
+      $('.chosen').append(choiceDropdown);
+      $('.chosen').val('').trigger('chosen:updated');
+    }
+
+    if ($('.hoverQuestionClicked').find('.chosen-select-multi').length > 0) {
+      $('.dropdownMultiEdit').append(choiceDropdownEdit);
+      $('.chosen-select-multi').append(choiceDropdown);
+      $('.chosen-select-multi').val('').trigger('chosen:updated');
+    }
+
+    if ($('.hoverQuestionClicked .slider').find('.range-slider').length > 0) {
+      $('.slider').append(choiceSlider);
+    }
+    if ($('.hoverQuestionClicked .slider').find('.stars-slider').length > 0) {
+      const star = $('.hoverQuestionClicked .stars-slider:last').clone();
+      star.insertAfter('.hoverQuestionClicked .stars-slider:last');
+      $('.stars-slider:last span').text(`rate${choiceNum + 1}`);
+    }
+    if ($('.hoverQuestionClicked').find('.rank').length > 0) {
+      $('.rank').append(choiceRank);
     }
   }
-  $('.choices span').text(choicesCurrentNum);
-});
 
-$('.scalePointDecrease').on('click', function () {
-  let scalePointHeadCount = scalePointHeadCounts();
-  if (scalePointHeadCount !== 1) {
-    $('.hoverQuestionClicked thead th:last-child').remove();
-    $('.hoverQuestionClicked .statement').each(function () {
-      $(this).find('td:last-child').remove();
+  if ($('.hoverQuestionClicked').find('.matrixLikert').length > 0) {
+    let matrixName = new Date().getTime();
+    if (choicesCurrentNum() !== 10) {
+      if ($('.hoverQuestionClicked .matrix tbody tr:last th').text() !== 'Total') {
+        const choiceMatrixStatement = $('.hoverQuestionClicked .statement:last').clone();
+        $('.hoverQuestionClicked .matrix tbody').append(choiceMatrixStatement);
+        $('.hoverQuestionClicked .statement:last').find('input').attr('name', matrixName);
+        $('.hoverQuestionClicked .statement:last th').text(`statement${choicesCurrentNum()}`);
+      } else {
+        const choiceMatrixStatement = $('.hoverQuestionClicked .statement').eq(-2).clone();
+        $('.hoverQuestionClicked .matrix tbody .statement:last').before(choiceMatrixStatement);
+        $('.hoverQuestionClicked .statement th').eq(-2).text(`statement${choicesCurrentNum()}`);
+      }
+    }
+  }
+  if ($('.hoverQuestionClicked').find('.matrixProfile').length > 0) {
+    if (choicesCurrentNum() !== 10) {
+      if ($('.hoverQuestionClicked .matrix tbody tr:last th').text() !== 'Total') {
+        const clone = $('.hoverQuestionClicked .matrixProfile tr:last').clone();
+        const newName = Number($('.hoverQuestionClicked .matrixProfile tr:last td:last input').prop('name')) + 1;
+        clone.insertAfter('.hoverQuestionClicked .matrixProfile tr:last');
+        $('.hoverQuestionClicked .matrixProfile tr:last th').text(`statement${choiceNum + 1}`);
+        $('.hoverQuestionClicked .matrixProfile tr:last td input').prop('name', newName);
+      }
+    }
+  }
+
+  if ($('.hoverQuestionClicked').find('.matrixBipolar').length > 0) {
+    let matrixName = new Date().getTime();
+    if (choicesCurrentNum() !== 10) {
+      if ($('.hoverQuestionClicked .matrix tbody tr:last th').text() !== 'Total') {
+        const choiceMatrixStatement = $('.hoverQuestionClicked .statement:last').clone();
+        $('.hoverQuestionClicked .matrix tbody').append(choiceMatrixStatement);
+        $('.hoverQuestionClicked .statement:last').find('input').attr('name', matrixName);
+        $('.hoverQuestionClicked .statement:last th:first').text(`statement${choicesCurrentNum()}`);
+      }
+    }
+  }
+
+  if ($('.hoverQuestionClicked').find('.matrixMaxDiff').length > 0) {
+    let matrixName = new Date().getTime();
+    if (choicesCurrentNum() !== 10) {
+      if ($('.hoverQuestionClicked .matrix tbody tr:last th').text() !== 'Total') {
+        const choiceMatrixStatement = $('.hoverQuestionClicked .statement:last').clone();
+        $('.hoverQuestionClicked .matrix tbody').append(choiceMatrixStatement);
+        $('.hoverQuestionClicked .statement:last').find('input').attr('name', matrixName);
+        $('.hoverQuestionClicked .statement:last td').eq(1).text(`statement${choicesCurrentNum()}`);
+      }
+    }
+  }
+  if ($('.hoverQuestionClicked').find('.dropdownListChosen').length > 0) {
+    $('.matrixDropdownStatement .addImgIcon').remove();
+    $('.hoverQuestionClicked .matrixDropdownStatement:last').clone().insertAfter('.hoverQuestionClicked .matrixDropdownStatement:last');
+    $('.hoverQuestionClicked .matrixDropdownStatement:last th').text(`statement${choicesCurrentNum()}`);
+    $('.hoverQuestionClicked .matrixDropdownStatement:last .chosen-container').remove();
+    $('.dropdownListChosen').chosen({
+      disable_search_threshold: 10,
+      width: '60%',
     });
+  }
+  $('.choices span').text(choicesCurrentNum);
+}
+
+$('.choicesDecrease').on('click', choicesDecrease);
+$('.choicesIncrease').on('click', choicesIncrease);
+
+function scalePointDecrease() {
+  if ($('.hoverQuestionClicked ').find('.matrixLikert').length > 0) {
+    let scalePointHeadCount = scalePointHeadCounts();
+    if (scalePointHeadCount !== 2) {
+      if ($('.hoverQuestionClicked .matrixLikert thead tr th:last').text() !== 'Total') {
+        $('.hoverQuestionClicked thead th:last-child').remove();
+        $('.hoverQuestionClicked .statement').each(function () {
+          $(this).find('td:last-child').remove();
+        });
+      } else {
+
+        $('.hoverQuestionClicked thead th').eq(-2).remove();
+        $('.hoverQuestionClicked .statement').each(function () {
+          $(this).find('td').eq(-2).remove();
+        });
+      }
+    }
+  }
+  if ($('.hoverQuestionClicked ').find('.matrixBipolar').length > 0) {
+    if ($('.hoverQuestionClicked .matrixLikert thead tr th:last').text() !== 'Total') {
+      let scalePointHeadCount = scalePointHeadCounts();
+      if (scalePointHeadCount !== 2) {
+        $('.hoverQuestionClicked .statement').each(function () {
+          $(this).find('td:last').remove();
+        });
+      }
+    }
+  }
+  if ($('.hoverQuestionClicked').find('.matrixProfile').length > 0) {
+    if ($('.hoverQuestionClicked .matrixLikert thead tr th:last').text() !== 'Total') {
+      let scalePointHeadCount = scalePointHeadCounts();
+      if (scalePointHeadCount !== 2) {
+        $('.hoverQuestionClicked .matrixProfile tr').each(function () {
+          $(this).find('td:last').remove();
+        });
+      }
+    }
+  }
+  if ($('.hoverQuestionClicked').find('.dropdownListChosen').length > 0) {
+    let scalePointHeadCount = scalePointHeadCounts();
+    if (scalePointHeadCount !== 2) {
+      $('.hoverQuestionClicked .dropdownOneEdit').each(function () {
+        $(this).find(':last-child').remove();
+      });
+      $('.hoverQuestionClicked .dropdownListChosen').each(function () {
+        $(this).find(':last-child').remove();
+      });
+      $('.hoverQuestionClicked .dropdownListChosen').val('').trigger('chosen:updated');
+    }
   }
   $('.scalePointSpan').text(scalePointHeadCounts());
-});
-$('.scalePointIncrease').on('click', function () {
-  let scalePointHeadCount = scalePointHeadCounts();
-  const scalePointHead = $(`<th scope="col" contenteditable="true">scalePoint${scalePointHeadCount + 1}</th>`);
-  if (scalePointHeadCount !== 10) {
-    $('.hoverQuestionClicked thead tr').append(scalePointHead);
-    $('.hoverQuestionClicked .statement').each(function () {
-      const radioName = $(this).find('td:last input').attr('name');
-      const choiceScalePoint = $(`<td>
-                      <input class="matrix" type="radio" name=${radioName}>
-                    </td>`);
-      $(this).append(choiceScalePoint);
-      $('.scalePointSpan').text(scalePointHeadCounts());
-    });
+}
+
+function scalePointIncrease() {
+  if ($('.hoverQuestionClicked').find('.matrixLikert').length > 0) {
+    let scalePointHeadCount = scalePointHeadCounts();
+    if (scalePointHeadCount !== 10) {
+      const scalePointHead = $(`<th scope="col" contenteditable="true">scalePoint${scalePointHeadCount + 1}</th>`);
+      if ($('.hoverQuestionClicked .matrixLikert thead tr th:last').text() !== 'Total') {
+        $('.hoverQuestionClicked thead tr').append(scalePointHead);
+        $('.hoverQuestionClicked .statement').each(function () {
+          const lasttd = $(this).find('td:last').clone();
+          $(this).append(lasttd);
+        });
+      } else {
+        $('.hoverQuestionClicked thead tr th:last').before(scalePointHead);
+        $('.hoverQuestionClicked .statement').each(function () {
+          const lasttd = $(this).find('td').eq(-2).clone();
+          $(this).append(lasttd);
+        });
+      }
+    }
   }
-});
+  if ($('.hoverQuestionClicked ').find('.matrixBipolar').length > 0) {
+    if ($('.hoverQuestionClicked .matrixLikert thead tr th:last').text() !== 'Total') {
+      let scalePointHeadCount = scalePointHeadCounts();
+      if (scalePointHeadCount !== 10) {
+        $('.hoverQuestionClicked .statement').each(function () {
+          const inc = $(this).find('td:last').clone();
+          inc.insertAfter($(this).find('td:last'));
+        });
+      }
+    }
+  }
+
+  if ($('.hoverQuestionClicked').find('.matrixProfile').length > 0) {
+    if ($('.hoverQuestionClicked .matrixLikert thead tr th:last').text() !== 'Total') {
+      let scalePointHeadCount = scalePointHeadCounts();
+      if (scalePointHeadCount !== 10) {
+        $('.hoverQuestionClicked .matrixProfile tr').each(function () {
+          const inc = $(this).find('td:last').clone();
+          inc.insertAfter($(this).find('td:last'));
+          $(this).find('td:last label').text(`scalePoint${scalePointHeadCount + 1}`);
+        });
+      }
+    }
+  }
+  if ($('.hoverQuestionClicked').find('.dropdownListChosen').length > 0) {
+    let choiceNum = scalePointHeadCounts();
+    if (choiceNum !== 10) {
+      $('.hoverQuestionClicked .dropdownOneEdit').each(function () {
+        const clone = $(this).find(':last-child').clone();
+        $(this).append(clone);
+        $(this).find(':last-child').text(`option${choiceNum + 1}`).removeClass('editable-focus');
+      });
+      $('.hoverQuestionClicked .dropdownListChosen').each(function () {
+        const clone = $(this).find(':last-child').clone();
+        $(this).append(clone);
+        $(this).find(':last-child').text(`option${choiceNum + 1}`);
+      });
+      $('.hoverQuestionClicked .dropdownListChosen').val('').trigger('chosen:updated');
+    }
+  }
+  $('.scalePointSpan').text(scalePointHeadCounts());
+}
+
+$('.scalePointDecrease').on('click', scalePointDecrease);
+$('.scalePointIncrease').on('click', scalePointIncrease);
 /* PROJECTS\SURVEY: RADIO CHOICES INC\DEC end */
 /* PROJECTS\SURVEY: CHANGE QUESTION */
-$('#singleAnswers').on('click', function () {
+
+// singleAnswers
+function singleAnswers() {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:radio').prop('checked', false);
   const radioName = new Date().getTime();
-  const singleAnswers = $(`
+  const singleAnswer = $(`
       <div class="questionBlock">
         <div class="questionHeader">
           <h3 contenteditable="true" class="card-title mb-3">
@@ -725,13 +958,16 @@ $('#singleAnswers').on('click', function () {
           </div>
         </div>
       </div>`);
-  $('.hoverQuestionClicked .questionBlock').replaceWith(singleAnswers);
-});
-$('#multibleAnswers').on('click', function () {
+  $('.hoverQuestionClicked .questionBlock').replaceWith(singleAnswer);
+}
+$('#singleAnswers').on('click', singleAnswers);
+
+// multibleAnswers
+function multibleAnswers() {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:radio').prop('checked', false);
   const checkName = new Date().getTime();
-  const multibleAnswers = $(`
+  const multibleAnswer = $(`
       <div class="questionBlock">
         <div class="questionHeader">
           <h3 contenteditable="true" class="card-title mb-3">
@@ -753,14 +989,15 @@ $('#multibleAnswers').on('click', function () {
           </div>
         </div>
       </div>`);
-  $('.hoverQuestionClicked .questionBlock').replaceWith(multibleAnswers);
-});
-$('#vertical').on('click', function () {
-  if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0) {
+  $('.hoverQuestionClicked .questionBlock').replaceWith(multibleAnswer);
+}
+$('#multibleAnswers').on('click', multibleAnswers);
+// align Ver, Hor, Col
+function alignV() {
+  if ($('.hoverQuestionClicked').find('.alignColumn').length > 0) {
     const qsTitle = $('.hoverQuestionClicked .questionHeader .card-title').html();
-    const trTwo = $('.hoverQuestionClicked .alignHorizontal input');
-    const trOne = $('.hoverQuestionClicked .alignHorizontal span');
-    const alignH = $(`
+    const tr = $('.hoverQuestionClicked div.alignColumn').removeClass('alignColumn').addClass('alignVertical');
+    const alignHor = $(`
     <div class="questionBlock">
       <div class="questionHeader">
         <h3 contenteditable="true" class="card-title mb-3">
@@ -771,42 +1008,95 @@ $('#vertical').on('click', function () {
       </div>
     </div>
     `);
-    $('.hoverQuestionClicked .questionBlock').replaceWith(alignH);
+    $('.hoverQuestionClicked .questionBlock').replaceWith(alignHor);
+    $('.hoverQuestionClicked .questionHeader .card-title').html(qsTitle);
+    tr.appendTo('.hoverQuestionClicked .questionBody');
+  }
+  if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0) {
+    const qsTitle = $('.hoverQuestionClicked .questionHeader .card-title').html();
+    const trTwo = $('.hoverQuestionClicked .alignHorizontal input');
+    const trOne = $('.hoverQuestionClicked .alignHorizontal span');
+    const alignVer = $(`
+    <div class="questionBlock">
+      <div class="questionHeader">
+        <h3 contenteditable="true" class="card-title mb-3">
+          Vertical
+        </h3>
+      </div>
+      <div class="questionBody singleMulti">
+      </div>
+    </div>
+    `);
+    $('.hoverQuestionClicked .questionBlock').replaceWith(alignVer);
     $('.hoverQuestionClicked .questionHeader .card-title').html(qsTitle);
     trTwo.appendTo('.hoverQuestionClicked .questionBody').wrap('<div class="card-text mb-2 alignVertical"></div>');
     trOne.each(function (i) {
       $('.hoverQuestionClicked .alignVertical').eq(i).append($(this));
     });
   }
-});
+}
 
-$('#horizontal').on('click', function () {
+function alignH() {
+  if ($('.hoverQuestionClicked').find('.alignColumn').length > 0) {
+    alignV();
+  }
   if ($('.hoverQuestionClicked').find('.alignVertical').length > 0) {
     const qsTitle = $('.hoverQuestionClicked .questionHeader .card-title').html();
-    const trOne = $('.hoverQuestionClicked .alignVertical span');
     const trTwo = $('.hoverQuestionClicked .alignVertical input');
-    const alignV = $(`
+    const trOne = $('.hoverQuestionClicked .alignVertical span');
+    const alignHor = $(`
     <div class="questionBlock">
-      <div class="questionHeader">
+    <div class="questionHeader">
         <h3 contenteditable="true" class="card-title mb-3"></h3>
-      </div>
-      <div class="questionBody singleMulti">
-        <table class="table alignHorizontal">
-          <tbody>
-            <tr class="upperHead"></tr>
+        </div>
+        <div class="questionBody singleMulti">
+        <table class=" alignHorizontal">
+        <tbody>
+            <tr class="upperHead text-center"></tr>
             <tr class="lowerHead text-center"></tr>
-          </tbody>
+            </tbody>
         </table>
-      </div>
+        </div>
     </div>
     `);
-    $('.hoverQuestionClicked .questionBlock').replaceWith(alignV);
+    $('.hoverQuestionClicked .questionBlock').replaceWith(alignHor);
     $('.hoverQuestionClicked .questionHeader .card-title').html(qsTitle);
-    trOne.appendTo('.hoverQuestionClicked .alignHorizontal .upperHead').wrap('<th></th>');
-    trTwo.appendTo('.hoverQuestionClicked .alignHorizontal .lowerHead').wrap('<th></th>');
+    trOne.appendTo('.hoverQuestionClicked .alignHorizontal .upperHead').wrap('<td></td>');
+    trTwo.appendTo('.hoverQuestionClicked .alignHorizontal .lowerHead').wrap('<td></td>');
   }
-});
+}
 
+function alignC() {
+  if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0) {
+    alignV();
+  }
+  if ($('.hoverQuestionClicked').find('.alignVertical').length > 0) {
+    const qsTitle = $('.hoverQuestionClicked .questionHeader .card-title').html();
+    const tr = $('.hoverQuestionClicked .alignVertical').removeClass('alignVertical').addClass('alignColumn');
+    const alignCol = $(`
+    <div class="questionBlock">
+      <div class="questionHeader">
+      <h3 contenteditable="true" class="card-title mb-3"></h3>
+      </div>
+      <div class="questionBody singleMulti">
+      <table class="alignColumn">
+          <tbody>
+          <tr class="upperHead"></tr>
+          </tbody>
+        </table>
+        </div>
+        </div>
+        `);
+    $('.hoverQuestionClicked .questionBlock').replaceWith(alignCol);
+    $('.hoverQuestionClicked .questionHeader .card-title').html(qsTitle);
+    tr.appendTo('.hoverQuestionClicked .alignColumn .upperHead').wrap('<td></td>');
+  }
+}
+$('#vertical').on('click', alignV);
+$('#horizontal').on('click', alignH);
+$('#column').on('click', alignC);
+
+// dropDownOneAnswer
 $('#dropDownOneAnswer').on('click', function () {
   const dropDownOneAnswer = $(`
       <div class="questionBlock">
@@ -822,7 +1112,7 @@ $('#dropDownOneAnswer').on('click', function () {
             <option value="option3">option3</option>
             <option value="option4">option4</option>
           </select>
-          <div class="dropdownOneEdit mt-3">
+          <div class="dropdownOneEdit d-flex mt-2">
             <p contenteditable="true">option1</p>
             <p contenteditable="true">option2</p>
             <p contenteditable="true">option3</p>
@@ -833,6 +1123,7 @@ $('#dropDownOneAnswer').on('click', function () {
   $('.hoverQuestionClicked .questionBlock').replaceWith(dropDownOneAnswer);
   $('.chosen').chosen({
     disable_search_threshold: 10,
+    width: '60%',
   });
 });
 $('.section-block').on('keyup change paste copy cut', '.dropdownOneEdit p', function () {
@@ -844,8 +1135,15 @@ $('.section-block').on('keyup change paste copy cut', '.dropdownOneEdit p', func
   option.val(val).text(val);
   $('.chosen').chosen({
     disable_search_threshold: 10,
+    width: '60%',
+  });
+  $('.dropdownListChosen').chosen({
+    disable_search_threshold: 10,
+    width: '60%',
   });
 });
+
+// dropDownMultiAnswer
 $('#dropDownMultiAnswer').on('click', function () {
   const dropDownMultiAnswer = $(`
       <div class="questionBlock">
@@ -861,7 +1159,7 @@ $('#dropDownMultiAnswer').on('click', function () {
             <option value="option3">option3</option>
             <option value="option4">option4</option>
           </select>
-          <div class="dropdownMultiEdit mt-3">
+          <div class="dropdownMultiEdit d-flex mt-2">
             <p contenteditable="true">option1</p>
             <p contenteditable="true">option2</p>
             <p contenteditable="true">option3</p>
@@ -872,6 +1170,7 @@ $('#dropDownMultiAnswer').on('click', function () {
   $('.hoverQuestionClicked .questionBlock').replaceWith(dropDownMultiAnswer);
   $('.chosen-select-multi').chosen({
     disable_search_threshold: 10,
+    width: '60%',
   });
 });
 $('.section-block').on('keyup change paste copy cut', '.dropdownMultiEdit p', function () {
@@ -883,9 +1182,14 @@ $('.section-block').on('keyup change paste copy cut', '.dropdownMultiEdit p', fu
   option.val(val).text(val);
   $('.chosen-select-multi').chosen({
     disable_search_threshold: 10,
+    width: '60%',
   });
 });
-$('#sliderAnswer').on('click', function () {
+
+// sliderAnswer
+$('#sliderAnswer, #slider').on('click', function () {
+  $('#slider').prop('checked', true);
+  $('.choices span').text('3');
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:radio').prop('checked', false);
   const sliderAnswer = $(`
@@ -919,6 +1223,120 @@ $('.section-block').on('change input', '.range-slider__range', function () {
   const value = $('.range-slider__value');
   $(this).next(value).html(this.value);
 });
+$('#stars').on('click', function () {
+  $('#stars').prop('checked', true);
+  $('.choices span').text('3');
+  const stars = $(`
+  <div class="questionBlock">
+    <div class="questionHeader">
+      <h3 contenteditable="true" class="card-title mb-3">
+        Slider
+      </h3>
+    </div>
+    <div class="questionBody slider">
+      <div class='stars-slider d-flex'>
+        <span contenteditable="true">rate1</span>
+        <ul class='stars'>
+          <li class='star' title='Poor' data-value='1'>
+            <i class='fa fa-star fa-fw'></i>
+          </li>
+          <li class='star' title='Fair' data-value='2'>
+            <i class='fa fa-star fa-fw'></i>
+          </li>
+          <li class='star' title='Good' data-value='3'>
+            <i class='fa fa-star fa-fw'></i>
+          </li>
+          <li class='star' title='Excellent' data-value='4'>
+            <i class='fa fa-star fa-fw'></i>
+          </li>
+          <li class='star' title='WOW!!!' data-value='5'>
+            <i class='fa fa-star fa-fw'></i>
+          </li>
+        </ul>
+      </div>
+      <div class='stars-slider d-flex'>
+        <span contenteditable="true">rate2</span>
+        <ul class='stars'>
+          <li class='star' title='Poor' data-value='1'>
+            <i class='fa fa-star fa-fw'></i>
+          </li>
+          <li class='star' title='Fair' data-value='2'>
+            <i class='fa fa-star fa-fw'></i>
+          </li>
+          <li class='star' title='Good' data-value='3'>
+            <i class='fa fa-star fa-fw'></i>
+          </li>
+          <li class='star' title='Excellent' data-value='4'>
+            <i class='fa fa-star fa-fw'></i>
+          </li>
+          <li class='star' title='WOW!!!' data-value='5'>
+            <i class='fa fa-star fa-fw'></i>
+          </li>
+        </ul>
+      </div>
+      <div class='stars-slider d-flex'>
+        <span contenteditable="true">rate3</span>
+        <ul class='stars'>
+          <li class='star' title='Poor' data-value='1'>
+            <i class='fa fa-star fa-fw'></i>
+          </li>
+          <li class='star' title='Fair' data-value='2'>
+            <i class='fa fa-star fa-fw'></i>
+          </li>
+          <li class='star' title='Good' data-value='3'>
+            <i class='fa fa-star fa-fw'></i>
+          </li>
+          <li class='star' title='Excellent' data-value='4'>
+            <i class='fa fa-star fa-fw'></i>
+          </li>
+          <li class='star' title='WOW!!!' data-value='5'>
+            <i class='fa fa-star fa-fw'></i>
+          </li>
+        </ul>
+      </div>
+    </div>`);
+  $('.hoverQuestionClicked .questionBlock').replaceWith(stars);
+});
+// sliderSTARS functionality
+/* 1. Visualizing things on Hover - See next part for action on click */
+$('.hoverQuestionClicked').on('mouseover', '.stars li', function () {
+  $(this).each(function () {
+    let onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+
+    // Now highlight all the stars that's not after the current hovered star
+    $(this).parent().children('li.star').each(function (e) {
+      if (e < onStar) {
+        $(this).addClass('hover');
+      } else {
+        $(this).removeClass('hover');
+      }
+    });
+  });
+}).on('mouseout', '.stars li', function () {
+  $(this).each(function () {
+    $(this).parent().children('li.star').each(function (e) {
+      $(this).removeClass('hover');
+    });
+  });
+});
+
+/* 2. Action to perform on click */
+$('.hoverQuestionClicked').on('click', '.stars li', function () {
+  $(this).each(function () {
+    let onStar = parseInt($(this).data('value'), 10); // The star currently selected
+    let stars = $(this).parent().children('li.star');
+
+    for (let i = 0; i < stars.length; i++) {
+      $(stars[i]).removeClass('selected');
+    }
+    for (let i = 0; i < onStar; i++) {
+      $(stars[i]).addClass('selected');
+    }
+  });
+});
+
+
+// rankAnswer
 $('#rankAnswer').on('click', function () {
   const rankAnswer = $(`
       <div class="questionBlock">
@@ -955,7 +1373,19 @@ $('.section-block').on('sortstop', '.rank', function () {
 $('.section-block').on('click', '.rank__body-rank', function () {
   $(this).focus();
 });
-$('#matrixAnswer').on('click', function () {
+
+// matrixAnswer
+function matrixRadio() {
+  $('.hoverQuestionClicked .statement input').prop('checked', false);
+  $('.hoverQuestionClicked .statement input').prop('type', 'radio');
+}
+
+function matrixCheck() {
+  $('.hoverQuestionClicked .statement input').prop('checked', false);
+  $('.hoverQuestionClicked .statement input').prop('type', 'checkbox');
+}
+
+function matrixLikert() {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:radio').prop('checked', false);
   let radioName = new Date().getTime();
@@ -967,7 +1397,7 @@ $('#matrixAnswer').on('click', function () {
           </h3>
         </div>
         <div class="questionBody matrix">
-          <table class="table">
+          <table class="matrixLikert">
             <thead>
               <tr>
                 <th scope="col"></th>
@@ -977,7 +1407,7 @@ $('#matrixAnswer').on('click', function () {
               </tr>
             </thead>
             <tbody>
-              <tr class="statement">
+              <tr class="statement text-center">
                 <th scope="row" contenteditable="true">statement1</th>
                 <td>
                   <input class="matrix" type="radio" name=${radioName}>
@@ -989,7 +1419,7 @@ $('#matrixAnswer').on('click', function () {
                   <input class="matrix" type="radio" name=${radioName}>
                 </td>
               </tr>
-              <tr class="statement">
+              <tr class="statement text-center">
                 <th scope="row" contenteditable="true">statement2</th>
                 <td>
                   <input class="matrix" type="radio" name=${radioName + 1}>
@@ -1001,7 +1431,7 @@ $('#matrixAnswer').on('click', function () {
                   <input class="matrix" type="radio" name=${radioName + 1}>
                 </td>
               </tr>
-              <tr class="statement">
+              <tr class="statement text-center">
                 <th scope="row" contenteditable="true">statement3</th>
                 <td>
                   <input class="matrix" type="radio" name=${radioName + 2}>
@@ -1018,11 +1448,355 @@ $('#matrixAnswer').on('click', function () {
         </div>
       </div>`);
   $('.hoverQuestionClicked .questionBlock').replaceWith(matrixAnswer);
-});
-$('#txtSingleLineAnswer').on('click', function () {
+  $('#matrixRadio').prop('checked', true);
+  $('#matrixLikert').prop('checked', true);
+  $('.choices span').text('3');
+  $('.scalePointSpan').text('3');
+}
+
+function matrixProfile() {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:radio').prop('checked', false);
-  const txtSingleLineAnswer = $(`
+  let radioName = new Date().getTime();
+  const matrixAnswer = $(`
+      <div class="questionBlock">
+        <div class="questionHeader">
+          <h3 contenteditable="true" class="card-title mb-3">
+            Matrix
+          </h3>
+        </div>
+        <div class="questionBody matrix">
+          <table class="matrixProfile">
+            <tbody>
+              <tr class="statement ">
+                <th scope="row" contenteditable="true">statement1</th>
+                <td>
+                  <label contenteditable="true">scalePoint1</label>
+                  <input class="matrix" type="radio" name=${radioName}>
+                </td>
+                <td>
+                  <label contenteditable="true">scalePoint2</label>
+                  <input class="matrix" type="radio" name=${radioName}>
+                </td>
+                <td>
+                  <label contenteditable="true">scalePoint3</label>
+                  <input class="matrix" type="radio" name=${radioName}>
+                </td>
+              </tr>
+              <tr class="statement ">
+                <th scope="row" contenteditable="true">statement2</th>
+                <td>
+                  <label contenteditable="true">scalePoint1</label>
+                  <input class="matrix" type="radio" name=${radioName + 1}>
+                </td>
+                <td>
+                  <label contenteditable="true">scalePoint2</label>
+                  <input class="matrix" type="radio" name=${radioName + 1}>
+                </td>
+                <td>
+                  <label contenteditable="true">scalePoint3</label>
+                  <input class="matrix" type="radio" name=${radioName + 1}>
+                </td>
+              </tr>
+              <tr class="statement ">
+                <th scope="row" contenteditable="true">statement3</th>
+                <td>
+                  <label contenteditable="true">scalePoint1</label>
+                  <input class="matrix" type="radio" name=${radioName + 2}>
+                </td>
+                <td>
+                  <label contenteditable="true">scalePoint2</label>
+                  <input class="matrix" type="radio" name=${radioName + 2}>
+                </td>
+                <td>
+                  <label contenteditable="true">scalePoint3</label>
+                  <input class="matrix" type="radio" name=${radioName + 2}>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>`);
+  $('.hoverQuestionClicked .questionBlock').replaceWith(matrixAnswer);
+  $('#matrixRadio').prop('checked', true);
+  $('#matrixProfile').prop('checked', true);
+  $('.choices span').text('3');
+  $('.scalePointSpan').text('3');
+}
+
+function matrixMaxDiff() {
+  $('.hoverQuestionClicked input:checkbox').prop('checked', false);
+  $('.hoverQuestionClicked input:radio').prop('checked', false);
+  let radioName = new Date().getTime();
+  const matrixAnswer = $(`
+      <div class="questionBlock">
+        <div class="questionHeader">
+          <h3 contenteditable="true" class="card-title mb-3">
+            Matrix
+          </h3>
+        </div>
+        <div class="questionBody matrix">
+          <table class="matrixMaxDiff">
+            <thead>
+              <tr class="statement">
+                <th scope="row" contenteditable="true">Point1</th>
+                <th scope="row"></th>
+                <th scope="row" contenteditable="true">Point2</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="statement text-center">
+                <td>
+                  <input class="matrix" type="radio" name=${radioName}>
+                </td>
+                <td contenteditable="true">statement1</td>
+                <td>
+                  <input class="matrix" type="radio" name=${radioName}>
+                </td>
+              </tr>
+              <tr class="statement text-center">
+                <td>
+                  <input class="matrix" type="radio" name=${radioName +1}>
+                </td>
+                <td contenteditable="true">statement2</td>
+                <td>
+                  <input class="matrix" type="radio" name=${radioName +1}>
+                </td>
+              </tr>
+              <tr class="statement text-center">
+                <td>
+                  <input class="matrix" type="radio" name=${radioName + 2}>
+                </td>
+                <td contenteditable="true">statement3</td>
+                <td>
+                  <input class="matrix" type="radio" name=${radioName + 2}>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>`);
+  $('.hoverQuestionClicked .questionBlock').replaceWith(matrixAnswer);
+  $('#matrixRadio').prop('checked', true);
+  $('#matrixMaxDiff').prop('checked', true);
+  $('.choices span').text('3');
+  $('.scalePointSpan').text('3');
+}
+
+function matrixBipolar() {
+  $('.hoverQuestionClicked input:checkbox').prop('checked', false);
+  $('.hoverQuestionClicked input:radio').prop('checked', false);
+  const radioName = $('.hoverQuestionClicked .statement input').prop('name');
+  const matrixAnswer = $(`
+      <div class="questionBlock">
+        <div class="questionHeader">
+          <h3 contenteditable="true" class="card-title mb-3">
+            Matrix
+          </h3>
+        </div>
+        <div class="questionBody matrix">
+          <table class="matrixBipolar">
+            <tbody>
+              <tr class="statement">
+                <th scope="row" contenteditable="true">statement1</th>
+                <td>
+                  <input class="matrix" type="radio" name=${radioName}>
+                </td>
+                <td>
+                  <input class="matrix" type="radio" name=${radioName}>
+                </td>
+                <td>
+                  <input class="matrix" type="radio" name=${radioName}>
+                </td>
+                <th scope="row" contenteditable="true">right</th>
+              </tr>
+              <tr class="statement">
+                <th scope="row" contenteditable="true">statement2</th>
+                <td>
+                  <input class="matrix" type="radio" name=${radioName}>
+                </td>
+                <td>
+                  <input class="matrix" type="radio" name=${radioName}>
+                </td>
+                <td>
+                  <input class="matrix" type="radio" name=${radioName}>
+                </td>
+                <th scope="row" contenteditable="true">right</th>
+              </tr>
+              <tr class="statement">
+                <th scope="row" contenteditable="true">statement3</th>
+                <td>
+                  <input class="matrix" type="radio" name=${radioName}>
+                </td>
+                <td>
+                  <input class="matrix" type="radio" name=${radioName}>
+                </td>
+                <td>
+                  <input class="matrix" type="radio" name=${radioName}>
+                </td>
+                <th scope="row" contenteditable="true">right</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>`);
+  $('.hoverQuestionClicked .questionBlock').replaceWith(matrixAnswer);
+  $('#matrixRadio').prop('checked', true);
+  $('#matrixBipolar').prop('checked', true);
+  $('.choices span').text('3');
+  $('.scalePointSpan').text('3');
+}
+
+function matrixTxtL() {
+  $('.hoverQuestionClicked .statement input').prop('checked', false);
+  $('.hoverQuestionClicked .statement input').prop('type', 'text')
+    .addClass('form-control w-75')
+    .removeClass('w-50 w-25')
+    .removeAttr('name');
+}
+
+function matrixTxtM() {
+  $('.hoverQuestionClicked .statement input').prop('checked', false);
+  $('.hoverQuestionClicked .statement input').prop('type', 'text')
+    .addClass('form-control w-50')
+    .removeClass('w-75 w-25')
+    .removeAttr('name');
+}
+
+function matrixTxtS() {
+  $('.hoverQuestionClicked .statement input').prop('checked', false);
+  $('.hoverQuestionClicked .statement input').prop('type', 'text')
+    .addClass('form-control w-25')
+    .removeClass('w-75 w-50')
+    .removeAttr('name');
+}
+
+function matrixSumSt() {
+  matrixLikert();
+  matrixTxtM();
+  $('#matrixSumSt').prop('checked', true);
+  choicesIncrease();
+  $('.hoverQuestionClicked .matrix tbody tr:last th')
+    .text('Total')
+    .prop('contenteditable', false);
+  $('.hoverQuestionClicked .matrix tbody tr:last').addClass('sumTotalStatement');
+  $('.choices span').text('3');
+  $('.scalePointSpan').text('3');
+}
+
+function matrixSumSp() {
+  matrixLikert();
+  matrixTxtM();
+  $('#matrixSumSp').prop('checked', true);
+  scalePointIncrease();
+  $('.hoverQuestionClicked .matrix thead tr th:last')
+    .text('Total')
+    .prop('contenteditable', false);
+  $('.choices span').text('3');
+  $('.scalePointSpan').text('3');
+  $('.hoverQuestionClicked .matrix').addClass('sumTotalScalepoint');
+}
+
+function matrixDropdown() {
+  $('.hoverQuestionClicked .matrix .statement input').prop('checked', false);
+  $('.hoverQuestionClicked .matrix thead').remove();
+  const dropdownList = $(`
+  <table>
+    <tbody>
+      <tr class="matrixDropdownStatement">
+        <th scope="row" contenteditable="true">statement1</th>
+        <td>
+          <select class="dropdownListChosen">
+            <option value="option1">option1</option>
+            <option value="option2">option2</option>
+            <option value="option3">option3</option>
+            <option value="option4">option4</option>
+          </select>
+          <div class="dropdownOneEdit d-flex mt-2">
+            <p contenteditable="true">option1</p>
+            <p contenteditable="true">option2</p>
+            <p contenteditable="true">option3</p>
+            <p contenteditable="true">option4</p>
+          </div>
+        </td>
+      </tr>
+      <tr class="matrixDropdownStatement">
+        <th scope="row" contenteditable="true">statement2</th>
+        <td>
+          <select class="dropdownListChosen">
+            <option value="option1">option1</option>
+            <option value="option2">option2</option>
+            <option value="option3">option3</option>
+            <option value="option4">option4</option>
+          </select>
+          <div class="dropdownOneEdit d-flex mt-2">
+            <p contenteditable="true">option1</p>
+            <p contenteditable="true">option2</p>
+            <p contenteditable="true">option3</p>
+            <p contenteditable="true">option4</p>
+          </div>
+        </td>
+      </tr>
+      <tr class="matrixDropdownStatement">
+        <th scope="row" contenteditable="true">statement3</th>
+        <td>
+          <select class="dropdownListChosen">
+            <option value="option1">option1</option>
+            <option value="option2">option2</option>
+            <option value="option3">option3</option>
+            <option value="option4">option4</option>
+          </select>
+          <div class="dropdownOneEdit d-flex mt-2">
+            <p contenteditable="true">option1</p>
+            <p contenteditable="true">option2</p>
+            <p contenteditable="true">option3</p>
+            <p contenteditable="true">option4</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  `);
+  $('.hoverQuestionClicked .matrix table').replaceWith(dropdownList);
+  $('.dropdownListChosen').chosen({
+    disable_search_threshold: 10,
+    width: '60%',
+  });
+  $('.choices span').text(3);
+  $('.scalePointSpan').text(4);
+}
+
+$('#matrixAnswer, #matrixLikert').on('click', matrixLikert);
+$('#matrixProfile').on('change', matrixProfile);
+$('#matrixBipolar').on('change', matrixBipolar);
+$('#matrixMaxDiff').on('change', matrixMaxDiff);
+$('#matrixRadio').on('change', matrixRadio);
+$('#matrixCheck').on('change', matrixCheck);
+$('#matrixTxtL').on('change', matrixTxtL);
+$('#matrixTxtM').on('change', matrixTxtM);
+$('#matrixTxtS').on('change', matrixTxtS);
+$('#matrixSumSt').on('change', matrixSumSt);
+$('#matrixSumSp').on('change', matrixSumSp);
+$('#matrixDropdownList').on('change', matrixDropdown);
+
+
+// Allow Bootstrap dropdown menus to have forms/checkboxes inside,
+// and when clicking on a dropdown item, the menu doesn't disappear.
+$(document).on('click', '.dropdown-menu.dropdown-menu-form', function (e) {
+  e.stopPropagation();
+});
+// Bootstrap popover
+$(function () {
+  $('[data-toggle="popover"]').popover({
+    trigger: 'hover',
+
+  });
+});
+// txtSingleLineAnswer
+function txtSingleLineAnswer() {
+  $('.hoverQuestionClicked input:checkbox').prop('checked', false);
+  $('.hoverQuestionClicked input:radio').prop('checked', false);
+  const txtSingleLine = $(`
       <div class="questionBlock">
         <div class="questionHeader">
           <h3 contenteditable="true" class="card-title mb-3">
@@ -1033,12 +1807,15 @@ $('#txtSingleLineAnswer').on('click', function () {
           <input type="text" class="form-control">
         </div>
       </div>`);
-  $('.hoverQuestionClicked .questionBlock').replaceWith(txtSingleLineAnswer);
-});
-$('#txtEssayAnswer').on('click', function () {
+  $('.hoverQuestionClicked .questionBlock').replaceWith(txtSingleLine);
+}
+$('#txtSingleLineAnswer').on('click', txtSingleLineAnswer);
+
+// txtEssayAnswer
+function txtEssayAnswer() {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:radio').prop('checked', false);
-  const txtEssayAnswer = $(`
+  const txtEssay = $(`
       <div class="questionBlock">
         <div class="questionHeader ">
           <h3 contenteditable="true" class="card-title mb-3">
@@ -1049,12 +1826,15 @@ $('#txtEssayAnswer').on('click', function () {
           <textarea class="form-control" rows="5"></textarea>
         </div>
       </div>`);
-  $('.hoverQuestionClicked .questionBlock').replaceWith(txtEssayAnswer);
-});
-$('#txtFormAnswer').on('click', function () {
+  $('.hoverQuestionClicked .questionBlock').replaceWith(txtEssay);
+}
+$('#txtEssayAnswer').on('click', txtEssayAnswer);
+
+// txtFormAnswer
+function txtFormAnswer() {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:radio').prop('checked', false);
-  const txtFormAnswer = $(`
+  const txtForm = $(`
       <div class="questionBlock">
         <div class="questionHeader">
           <h3 contenteditable="true" class="card-title mb-3">
@@ -1096,13 +1876,16 @@ $('#txtFormAnswer').on('click', function () {
           </form>
         </div>
       </div>`);
-  $('.hoverQuestionClicked .questionBlock').replaceWith(txtFormAnswer);
-});
-$('#uploadImgAnswer').on('click', function () {
+  $('.hoverQuestionClicked .questionBlock').replaceWith(txtForm);
+}
+$('#txtFormAnswer').on('click', txtFormAnswer);
+
+// uploadImgAnswer
+function uploadImgAnswer() {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:radio').prop('checked', false);
   const className = `class${new Date().getTime()}`;
-  const uploadImgAnswer = $(`
+  const uploadImg = $(`
       <div class="questionBlock">
         <div class="questionHeader">
           <h3 contenteditable="true" class="card-title mb-3">
@@ -1115,11 +1898,12 @@ $('#uploadImgAnswer').on('click', function () {
           </form>
         </div>
       </div>`);
-  $('.hoverQuestionClicked .questionBlock').replaceWith(uploadImgAnswer);
+  $('.hoverQuestionClicked .questionBlock').replaceWith(uploadImg);
   $(`.${className}`).dropzone({
     url: '/file/post',
   });
-});
+}
+$('#uploadImgAnswer').on('click', uploadImgAnswer);
 
 /* PROJECTS\SURVEY: CHANGE QUESTION end-- */
 /* PROJECTS\PREVIEW:  */

@@ -1,0 +1,29 @@
+/* stars */
+
+.stars-slider ul {
+  list-style-type: none;
+  padding: 0;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+.stars-slider ul>li.star {
+  display: inline-block;
+}
+
+.stars-slider ul>li.star>i.fa {
+  cursor: pointer;
+  font-size: 2.5em;
+  color: #ccc;
+}
+
+.stars-slider ul>li.star.hover>i.fa {
+  color: #FFCC36;
+}
+
+.stars-slider ul>li.star.selected>i.fa {
+  color: #FF912C;
+}
+
+/* stars end */

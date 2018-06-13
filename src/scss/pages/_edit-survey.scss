@@ -49,17 +49,22 @@
                 padding: 0.1rem 0.3rem;
               }
               .questionBody {
-                width: 50rem;
+                overflow-x: auto !important;
+                overflow-y: hidden;
+                white-space: nowrap;
+                &>* {
+                  margin-bottom: 5px;
+                }
                 @media (max-width: 575px) {
                   width: 33rem !important;
                 }
                 &>*:not(.matrix) {
-                  width: 50rem !important;
                   @media (max-width: 575px) {
                     width: 33rem !important;
                   }
                 }
-                input[type="text"],
+                .txtSingleLine input[type="text"],
+                .txtFormAnswer input[type="text"],
                 textarea {
                   margin-bottom: 2rem;
                 }
@@ -99,6 +104,17 @@
   }
   .rightControls {
     min-height: 100vh;
+    label {
+      cursor: pointer;
+      font-size: 1.5rem;
+      font-weight: 600;
+      display: inline-block;
+    }
+    .matrixType {
+      label {
+        display: block;
+      }
+    }
     &-container {
       p {
         cursor: default;
@@ -229,14 +245,6 @@
       }
       i.fa-plus-circle {
         color: green;
-      }
-    }
-    .choiceAlign {
-      label {
-        cursor: pointer;
-        font-size: 1.5rem;
-        font-weight: 600;
-        display: inline-block;
       }
     }
   }

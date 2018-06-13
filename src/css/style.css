@@ -185,72 +185,11 @@ img {
   -ms-user-select: none;
   user-select: none; }
 
-/* radio and checkbox style */
-label {
-  display: block;
-  line-height: 20px;
-  font-size: 1.2rem; }
+table {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content; }
 
-input[type="radio"],
-input[type="checkbox"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  -o-appearance: none;
-  appearance: none;
-  position: relative;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 20px;
-  width: 20px;
-  -webkit-transition: all 0.15s ease-out 0s;
-  -o-transition: all 0.15s ease-out 0s;
-  -moz-transition: all 0.15s ease-out 0s;
-  transition: all 0.15s ease-out 0s;
-  background: #cbd1d8;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  margin-right: 0.5rem;
-  outline: none;
-  position: relative;
-  z-index: 1000; }
-  input[type="radio"]:hover,
-  input[type="checkbox"]:hover {
-    background: #9faab7; }
-  input[type="radio"]:checked,
-  input[type="checkbox"]:checked {
-    background: #20e0d0; }
-  input[type="radio"]:checked::before,
-  input[type="checkbox"]:checked::before {
-    content: '✔';
-    height: 20px;
-    width: 20px;
-    display: inline-block;
-    position: absolute;
-    text-align: center;
-    font-size: 15px;
-    line-height: 20px; }
-  input[type="radio"]:checked::after,
-  input[type="checkbox"]:checked::after {
-    background: #20e0d0;
-    content: '';
-    display: block;
-    position: relative;
-    z-index: 100; }
-
-input[type="checkbox"] {
-  border-radius: 2px; }
-
-input[type="radio"] {
-  border-radius: 50%; }
-  input[type="radio"]::after {
-    border-radius: 50%; }
-
-/* radio and checkbox style end---- */
 /* Base end-------------------- */
 /* addClass */
 .menu__close {
@@ -308,6 +247,23 @@ input[type="radio"] {
   .outline-border:hover {
     color: #222;
     border: 1px solid #737373; }
+
+.popover-body {
+  padding: 1.3rem;
+  font-size: 1.7rem; }
+
+.popover-header {
+  padding: 0.4rem 1.3rem;
+  font-size: 2rem; }
+
+.sumTotalStatement > * {
+  border-top: 2px solid #ccc;
+  padding-top: 7px; }
+
+.sumTotalScalepoint thead tr th:last-child,
+.sumTotalScalepoint tr td:last-child {
+  border-left: 2px solid #ccc;
+  padding-left: 7px; }
 
 /* addClass end */
 /* typography */
@@ -644,6 +600,72 @@ nav .nav-link {
 /* /footer end-------------------------------------- */
 /*@import layout folder end-----------------------------*/
 /*@import component */
+/* radio and checkbox style */
+label {
+  display: block;
+  line-height: 20px;
+  font-size: 1.2rem; }
+
+input[type="radio"],
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  position: relative;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  -webkit-transition: all 0.15s ease-out 0s;
+  -o-transition: all 0.15s ease-out 0s;
+  -moz-transition: all 0.15s ease-out 0s;
+  transition: all 0.15s ease-out 0s;
+  background: #cbd1d8;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 0.5rem;
+  outline: none;
+  position: relative;
+  z-index: 1000; }
+  input[type="radio"]:hover,
+  input[type="checkbox"]:hover {
+    background: #9faab7; }
+  input[type="radio"]:checked,
+  input[type="checkbox"]:checked {
+    background: #20e0d0; }
+  input[type="radio"]:checked::before,
+  input[type="checkbox"]:checked::before {
+    content: '✔';
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    position: absolute;
+    text-align: center;
+    font-size: 15px;
+    line-height: 20px; }
+  input[type="radio"]:checked::after,
+  input[type="checkbox"]:checked::after {
+    background: #20e0d0;
+    content: '';
+    display: block;
+    position: relative;
+    z-index: 100; }
+
+input[type="checkbox"] {
+  border-radius: 2px; }
+
+input[type="radio"] {
+  border-radius: 50%; }
+  input[type="radio"]::after {
+    border-radius: 50%; }
+
+/* radio and checkbox style end---- */
 /* btn component */
 .btn:focus, .btn:active:focus, .btn.active:focus {
   outline: none;
@@ -1038,6 +1060,9 @@ input[type=range]::-moz-range-thumb input[type=range]::-moz-range-track {
 
 /* RANK END */
 /* MATRIX */
+.matrix .matrixLikert tbody tr:nth-last-child(2) > * {
+  padding-bottom: 2px; }
+
 /* MATRIX end */
 /* images */
 picture {
@@ -1046,18 +1071,43 @@ picture {
   picture img:hover {
     -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7); }
-  picture img:hover + i {
+  picture img:hover + .removeImgIcon {
     color: red; }
-  picture i.fa-times {
+  picture .removeImgIcon {
     cursor: pointer;
     position: absolute;
     right: 10px;
-    font-size: 1.9rem;
+    font-size: 1.9rem !important;
+    font-weight: bold;
     color: transparent; }
-    picture i.fa-times:hover {
+    picture .removeImgIcon:hover {
       color: red; }
 
 /* images end--- */
+/* stars */
+.stars-slider ul {
+  list-style-type: none;
+  padding: 0;
+  -ms-user-select: none;
+      user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none; }
+
+.stars-slider ul > li.star {
+  display: inline-block; }
+
+.stars-slider ul > li.star > i.fa {
+  cursor: pointer;
+  font-size: 2.5em;
+  color: #ccc; }
+
+.stars-slider ul > li.star.hover > i.fa {
+  color: #FFCC36; }
+
+.stars-slider ul > li.star.selected > i.fa {
+  color: #FF912C; }
+
+/* stars end */
 /*@import component end-----------------------------*/
 /*@import PAGES folder */
 /* home */
@@ -1159,16 +1209,19 @@ main .form-inline span {
         display: flex;
         padding: 0.1rem 0.3rem; }
       .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody {
-        width: 50rem; }
+        overflow-x: auto !important;
+        overflow-y: hidden;
+        white-space: nowrap; }
+        .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody > * {
+          margin-bottom: 5px; }
         @media (max-width: 575px) {
           .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody {
             width: 33rem !important; } }
-        .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody > *:not(.matrix) {
-          width: 50rem !important; }
-          @media (max-width: 575px) {
-            .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody > *:not(.matrix) {
-              width: 33rem !important; } }
-        .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody input[type="text"],
+        @media (max-width: 575px) {
+          .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody > *:not(.matrix) {
+            width: 33rem !important; } }
+        .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody .txtSingleLine input[type="text"],
+        .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody .txtFormAnswer input[type="text"],
         .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody textarea {
           margin-bottom: 2rem; }
     .editSurveySection .leftContent .section-block .card-body .row:hover .addQuestionControls {
@@ -1201,6 +1254,13 @@ main .form-inline span {
     position: relative; }
   .editSurveySection .rightControls {
     min-height: 100vh; }
+    .editSurveySection .rightControls label {
+      cursor: pointer;
+      font-size: 1.5rem;
+      font-weight: 600;
+      display: inline-block; }
+    .editSurveySection .rightControls .matrixType label {
+      display: block; }
     .editSurveySection .rightControls-container p {
       cursor: default;
       padding: 0.3rem 0.2rem;
@@ -1312,11 +1372,6 @@ main .form-inline span {
         transition: none; }
       .editSurveySection .rightControls .change-choices i.fa-plus-circle {
         color: green; }
-    .editSurveySection .rightControls .choiceAlign label {
-      cursor: pointer;
-      font-size: 1.5rem;
-      font-weight: 600;
-      display: inline-block; }
 
 /* edit_survey section end- */
 /* preview-mobile */

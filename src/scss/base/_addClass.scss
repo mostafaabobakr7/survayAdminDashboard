@@ -55,4 +55,27 @@
   }
 }
 
+.popover-body {
+  padding: 1.3rem;
+  font-size: 1.7rem;
+}
+
+.popover-header {
+  padding: 0.4rem 1.3rem;
+  font-size: 2rem;
+}
+
+.sumTotalStatement>* {
+  border-top: 2px solid #ccc;
+  padding-top: 7px;
+}
+
+.sumTotalScalepoint {
+  thead tr th:last-child,
+  tr td:last-child {
+    border-left: 2px solid #ccc;
+    padding-left: 7px;
+  }
+}
+
 /* addClass end */
