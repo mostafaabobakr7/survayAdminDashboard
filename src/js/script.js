@@ -1956,18 +1956,19 @@ $(document).ready(previewRemovals);
 /* PROJECTS\PREVIEW:  end--*/
 //---------------------------------------------
 /* PROJECTS\DISTRIBUTE: web copylick */
-function copyLink(e) {
+function distributeCopyLink(e) {
   e.preventDefault();
   $('#distribute__web').select();
   document.execCommand('copy');
 }
-$('#distribute__web-btn').on('click', copyLink);
+$('#distribute__web-btn').on('click', distributeCopyLink);
 /* PROJECTS\DISTRIBUTE: web copylick end */
 
 /* PROJECTS\RESPONSES: VIEW ON-CLICK  */
-$('.sport-survey').on('click', function () {
+function showResponseOnClick() {
   $('.showResponse').toggleClass('d-none');
-});
+}
+$('.sport-survey').on('click', showResponseOnClick);
 /* PROJECTS\RESPONSES: VIEW ON-CLICK end-- */
 
 /* PROJECTS\REPORTS: ADD NOTE */
@@ -1977,35 +1978,32 @@ if (/reports.html/.test(window.location)) {
   });
   $('.note-editor').addClass('d-none');
 }
-$('.reportSection')
-  .on('click', '.noteBTN', function () {
-    $('.reportAddNote').toggleClass('d-none');
-    $('.reportCloseNote').toggleClass('d-none');
-    $('.note-editor').toggleClass('d-none');
-    if ($('.note-editable').val()) {
-      $('.noteValue').removeClass('visibilityHidden');
-    }
-  });
-$('.reportSection').on('change keypress keyup keydown paste cut', '.note-editable', function () {
+
+function reportNoteBTN() {
+  $('.reportAddNote').toggleClass('d-none');
+  $('.reportCloseNote').toggleClass('d-none');
+  $('.note-editor').toggleClass('d-none');
+  if ($('.note-editable').val()) {
+    $('.noteValue').removeClass('visibilityHidden');
+  }
+}
+
+function reportNoteEditable() {
   $('.noteVal').html($('.note-editable').html());
   if ($('.noteVal').is(':empty')) {
     $('.noteValue').addClass('visibilityHidden');
   } else {
     $('.noteValue').removeClass('visibilityHidden');
   }
-});
+}
+
+$('.reportSection')
+  .on('click', '.noteBTN', reportNoteBTN)
+  .on('change keypress keyup keydown paste cut', '.note-editable', reportNoteEditable);
 
 /* PROJECTS\REPORTS: ADD NOTE end */
 
 /* PROJECTS\REPORTS: ADD VISUAL */
-$('.reportSection').on('click', '.btn-group .btn', function () {
-  $(this).addClass('btn-group-active');
-  $(this)
-    .siblings()
-    .removeClass('btn-group-active');
-});
-$('.reportSection').on('click', '.reportAddVisual', function () {});
-
 function chart(type) {
   const canvasClass = `class${new Date().getTime()}`;
   const canvas = $(`
@@ -2052,28 +2050,37 @@ function chart(type) {
   });
 }
 
-if (/reports.html/.test(window.location.href)) {
-  chart('bar');
+function reportBtnChangeOnClick() {
+  $(this).addClass('btn-group-active');
+  $(this)
+    .siblings()
+    .removeClass('btn-group-active');
 }
 
-$('.reportAddVisual')
-  .on('click', function () {
-    if ($('#bar').hasClass('btn-group-active')) {
-      chart('bar');
-    }
-    if ($('#line').hasClass('btn-group-active')) {
-      chart('line');
-    }
-    if ($('#pie').hasClass('btn-group-active')) {
-      chart('pie');
-    }
-  });
-$('.chartSection').on('click', '.btn-danger', function () {
+function reportAddVisual() {
+  if ($('#bar').hasClass('btn-group-active')) {
+    chart('bar');
+  }
+  if ($('#line').hasClass('btn-group-active')) {
+    chart('line');
+  }
+  if ($('#pie').hasClass('btn-group-active')) {
+    chart('pie');
+  }
+}
+
+function reportRemoveVisual() {
   $(this)
     .next('canvas')
     .remove();
   $(this).remove();
-});
+}
+if (/reports.html/.test(window.location.href)) {
+  chart('bar');
+  $('.reportSection').on('click', '.btn-group .btn', reportBtnChangeOnClick);
+  $('.reportAddVisual').on('click', reportAddVisual);
+  $('.chartSection').on('click', '.btn-danger', reportRemoveVisual);
+}
 /* PROJECTS\REPORTS: ADD VISUAL end */
 
 /* DASHBOARD: */
