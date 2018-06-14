@@ -1,8 +1,21 @@
+// Allow Bootstrap dropdown menus to have forms/checkboxes inside,
+// and when clicking on a dropdown item, the menu doesn't disappear.
+$(document).on('click', '.dropdown-menu.dropdown-menu-form', function (e) {
+  e.stopPropagation();
+});
+// Bootstrap popover
+$(function () {
+  $('[data-toggle="popover"]').popover({
+    trigger: 'hover',
+
+  });
+});
 /* Enable tooltips everywhere */
 $(function () {
   $('[data-toggle="tooltip"]').tooltip();
 });
 /* Enable tooltips everywhere end */
+
 /* PROJECTS: section-home-folders__menu */
 $('#folder__link').on('click', function () {
   $(this)
@@ -34,7 +47,7 @@ $('#folderDropdown-menu .dropdown-item').each(function () {
 });
 /* PROJECTS: section-home-folders-dropdown end------ */
 /* PROJECTS: create project */
-$('#createProjectBTN').on('click', function (ev) {
+function createProjectBTN(ev) {
   ev.preventDefault();
   const projectCreationName = $('#projectName').val();
   const d = new Date();
@@ -120,17 +133,19 @@ $('#createProjectBTN').on('click', function (ev) {
   } else {
     $('#projectName').addClass('is-invalid');
   }
-});
-$('#projectName').on('change keyup paste', function () {
-  $(this).removeClass('is-invalid');
-  $(this).addClass('is-valid');
-});
+}
+$('#createProjectBTN').on('click', createProjectBTN);
 $('#projectName').keypress(function (e) {
   if (e.which === 13) {
     e.preventDefault();
     $('#createProjectBTN').click();
   }
 });
+$('#projectName').on('change keyup paste', function () {
+  $(this).removeClass('is-invalid');
+  $(this).addClass('is-valid');
+});
+
 /* PROJECTS: create project end----------*/
 /* PROJECTS: card (project) on click go to edit_survey */
 $('.projects-list').on('click', '.card-body', function () {
@@ -221,7 +236,7 @@ $('#addImgModal').on('shown.bs.modal hidden.bs.modal', function () {
 /* PROJECTS\SURVEY: ADD LIBRARY IMAGES TO MODAL end */
 
 /* PROJECTS\SURVEY: ADD BLOCK function */
-$('.section-block').on('click', '#addBlock', () => {
+function addBlock() {
   const block = $(`<div class="section-block-card">
                         <div class="text-right">
                           <button type="button" class="blockClose btn btn-danger px-3 mx-1" title="Delete">
@@ -283,13 +298,16 @@ $('.section-block').on('click', '#addBlock', () => {
                         </div>
                       </div>`);
   $('.section-block .col-12').append(block);
-});
-$('.section-block').on('click', '.blockClose', function () {
+}
+
+function removeBlock() {
   $(this)
     .parent()
     .parent()
     .remove();
-});
+}
+$('.section-block').on('click', '#addBlock', addBlock);
+$('.section-block').on('click', '.blockClose', removeBlock);
 /* PROJECTS\SURVEY: ADD BLOCK function end--*/
 /* PROJECTS\SURVEY: ADD QUESTION RADIO */
 let num = 1;
@@ -354,17 +372,18 @@ function addRadio(place, elementPlaceInDOM) {
   }
   ++num;
 }
-$('.section-block')
-  .on('click', '.questionInserBefore', function () {
-    /* GET CARD_BODY of the CLICKED ICON to insert BEFORE IT */
-    const elBefore = $(this)
-      .parent()
-      .parent()
-      .parent();
-    /* elBefore = <div class="row py-3"> */
-    addRadio('BEFORE', elBefore);
-  });
-$('.section-block').on('click', '.questionInserAfter', function () {
+
+function questionInserBefore() {
+  /* GET CARD_BODY of the CLICKED ICON to insert BEFORE IT */
+  const elBefore = $(this)
+    .parent()
+    .parent()
+    .parent();
+  /* elBefore = <div class="row py-3"> */
+  addRadio('BEFORE', elBefore);
+}
+
+function questionInserAfter() {
   /* GET CARD_BODY of the CLICKED ICON to insert AFTER IT */
   const elAfter = $(this)
     .parent()
@@ -372,8 +391,9 @@ $('.section-block').on('click', '.questionInserAfter', function () {
     .parent();
   /* elAfter = <div class="row py-3"> */
   addRadio('AFTER', elAfter);
-});
-$('.section-block').on('click', '.questionDelete', function () {
+}
+
+function questionDelete() {
   /* GET CARD_BODY of the CLICKED ICON to insert AFTER IT */
   /* elementDelete = <div class="row py-3"> */
   $(this)
@@ -381,27 +401,31 @@ $('.section-block').on('click', '.questionDelete', function () {
     .parent()
     .parent()
     .remove();
-});
+}
+$('.section-block').on('click', '.questionInserBefore', questionInserBefore);
+$('.section-block').on('click', '.questionInserAfter', questionInserAfter);
+$('.section-block').on('click', '.questionDelete', questionDelete);
 /* PROJECTS\SURVEY: ADD QUESTION RADIO end-- */
 /* PROJECTS\SURVEY: MOVE QUESTION UP and DOWN */
-$('.section-block')
-  .on('click', '.questionMove__up', function () {
-    // <div .row></div>
-    const questionPosition = $(this)
-      .parent()
-      .parent();
-    // get upper sibling
-    const questionPositionPrevSibling = questionPosition.prev();
-    $(questionPosition).insertBefore(questionPositionPrevSibling);
-  });
+function questionMoveUp() {
+  // <div .row></div>
+  const questionPosition = $(this)
+    .parent()
+    .parent();
+  // get upper sibling
+  const questionPositionPrevSibling = questionPosition.prev();
+  $(questionPosition).insertBefore(questionPositionPrevSibling);
+}
 
-$('.section-block').on('click', '.questionMove__down', function () {
+function questionMoveDown() {
   const questionPosition = $(this)
     .parent()
     .parent();
   const questionPositionPrevSibling = questionPosition.next();
   $(questionPosition).insertAfter(questionPositionPrevSibling);
-});
+}
+$('.section-block').on('click', '.questionMove__up', questionMoveUp);
+$('.section-block').on('click', '.questionMove__down', questionMoveDown);
 /* PROJECTS\SURVEY: MOVE QUESTION UP and DOWN end-- */
 /* PROJECTS\SURVEY: QUESTION ON CLICK CHANGE TYPE */
 function choicesCurrentNum() {
@@ -410,6 +434,9 @@ function choicesCurrentNum() {
     size = $('.hoverQuestionClicked .card-text').length;
   }
   if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0) {
+    size = $('.hoverQuestionClicked .upperHead td').length;
+  }
+  if ($('.hoverQuestionClicked').find('.alignColumn').length > 0) {
     size = $('.hoverQuestionClicked .upperHead td').length;
   }
   if ($('.hoverQuestionClicked').find('.chosen').length > 0) {
@@ -461,7 +488,140 @@ function scalePointHeadCounts() {
   }
   return scalePointHead;
 }
-$('input[type=radio][name=answers]').on('change click', function () {
+
+function hoverQuestionClicked() {
+  $(this)
+    .addClass('hoverQuestionClicked')
+    .siblings()
+    .removeClass('hoverQuestionClicked');
+  /* CHECK IF HORIZONTAL OR VERTICAL */
+  if ($('.hoverQuestionClicked').find('.singleMulti').length > 0) {
+    $('.choiceAlign').removeClass('d-none');
+    if ($('.hoverQuestionClicked .singleMulti').find('.alignVertical').length > 0) {
+      $('#vertical').prop('checked', true);
+      $('#horizontal').prop('checked', false);
+    }
+    if ($('.hoverQuestionClicked .singleMulti').find('.alignHorizontal').length > 0) {
+      $('#horizontal').prop('checked', true);
+      $('#vertical').prop('checked', false);
+    }
+  }
+  if ($('.hoverQuestionClicked').find('.slider').length > 0) {
+    $('.sliderType').removeClass('d-none');
+  }
+  /* DEFINE IF IT A RADIO */
+  if ($(this).find(':radio').length > 0) {
+    $('#singleAnswers').prop('checked', true);
+    $('#singleAnswers').siblings().prop('checked', false);
+    $('.choiceAlign').removeClass('d-none');
+    $('.statementSmall').addClass('d-none');
+    $('.scalePoint').addClass('d-none');
+    $('.sliderType').addClass('d-none');
+  }
+  /* DEFINE IF IT A CHECKBOX */
+  if ($(this).find(':checkbox').length > 0) {
+    $('#multibleAnswers').prop('checked', true);
+    $('#multibleAnswers').siblings().prop('checked', false);
+    $('.choiceAlign').removeClass('d-none');
+    $('.statementSmall').addClass('d-none');
+    $('.scalePoint').addClass('d-none');
+    $('.sliderType').addClass('d-none');
+  }
+  /* DEFINE IF IT A DROPDOWN SINGLE */
+  if ($(this).find('.chosen').length > 0) {
+    $('#dropDownOneAnswer').prop('checked', true);
+    $('#dropDownOneAnswer').siblings().prop('checked', false);
+    $('.choiceAlign').addClass('d-none');
+    $('.statementSmall').addClass('d-none');
+    $('.scalePoint').addClass('d-none');
+    $('.sliderType').addClass('d-none');
+  }
+  /* DEFINE IF IT A DROPDOWN MULTIPLE */
+  if ($(this).find('.chosen-select-multi').length > 0) {
+    $('#dropDownMultiAnswer').prop('checked', true);
+    $('#dropDownMultiAnswer').siblings().prop('checked', false);
+    $('.choiceAlign').addClass('d-none');
+    $('.statementSmall').addClass('d-none');
+    $('.scalePoint').addClass('d-none');
+    $('.sliderType').addClass('d-none');
+  }
+  /* DEFINE IF IT A SLIDER */
+  if ($(this).find('.slider').length > 0) {
+    $('#sliderAnswer').prop('checked', true);
+    $('#sliderAnswer').siblings().prop('checked', false);
+    $('.choiceAlign').addClass('d-none');
+    $('.statementSmall').addClass('d-none');
+    $('.scalePoint').addClass('d-none');
+    $('.sliderType').removeClass('d-none');
+  }
+  /* DEFINE IF IT A RANK */
+  if ($(this).find('.rank').length > 0) {
+    $('#rankAnswer').prop('checked', true);
+    $('#rankAnswer').siblings().prop('checked', false);
+    $('.choiceAlign').addClass('d-none');
+    $('.statementSmall').addClass('d-none');
+    $('.scalePoint').addClass('d-none');
+    $('.sliderType').addClass('d-none');
+  }
+  /* DEFINE IF IT A MATRIX */
+  if ($(this).find('.matrix').length > 0) {
+    $('#matrixAnswer').prop('checked', true);
+    $('#matrixAnswer').siblings().prop('checked', false);
+    $('.choiceAlign').addClass('d-none');
+    $('.statementSmall').removeClass('d-none');
+    $('.scalePoint').removeClass('d-none');
+    $('.scalePointSpan').text(scalePointHeadCounts());
+  }
+  /* DEFINE IF IT A TXT SINGLE LINE */
+  if ($(this).find('.txtSingleLine').length > 0) {
+    $('#txtSingleLineAnswer').prop('checked', true);
+    $('#txtSingleLineAnswer').siblings().prop('checked', false);
+    $('.choiceAlign').addClass('d-none');
+    $('.statementSmall').addClass('d-none');
+    $('.scalePoint').addClass('d-none');
+    $('.sliderType').addClass('d-none');
+  }
+  /* DEFINE IF IT A TXT txtEssayAnswer */
+  if ($(this).find('.txtEssayAnswer').length > 0) {
+    $('#txtEssayAnswer').prop('checked', true);
+    $('#txtEssayAnswer').siblings().prop('checked', false);
+    $('.choiceAlign').addClass('d-none');
+    $('.statementSmall').addClass('d-none');
+    $('.scalePoint').addClass('d-none');
+    $('.sliderType').addClass('d-none');
+  }
+  /* DEFINE IF IT A TXT txtFormAnswer */
+  if ($(this).find('.txtFormAnswer').length > 0) {
+    $('#txtFormAnswer').prop('checked', true);
+    $('#txtFormAnswer').siblings().prop('checked', false);
+    $('.choiceAlign').addClass('d-none');
+    $('.statementSmall').addClass('d-none');
+    $('.scalePoint').addClass('d-none');
+    $('.sliderType').addClass('d-none');
+  }
+  /* DEFINE IF IT A TXT uploadImgAnswer */
+  if ($(this).find('.uploadImgAnswer').length > 0) {
+    $('#uploadImgAnswer').prop('checked', true);
+    $('#uploadImgAnswer').siblings().prop('checked', false);
+    $('.choiceAlign').addClass('d-none');
+    $('.statementSmall').addClass('d-none');
+    $('.scalePoint').addClass('d-none');
+    $('.sliderType').addClass('d-none');
+  }
+  /* questionHoverClicked class remove from all blocks when clicked on current block */
+  const x = $(this)
+    .parent()
+    .parent()
+    .parent()
+    .siblings()
+    .children()
+    .children()
+    .children();
+  x.removeClass('hoverQuestionClicked');
+  $('.choices span').text(choicesCurrentNum);
+}
+
+function onQuestionTypeChange() {
   $('.choices span').text(choicesCurrentNum);
   if ($('.hoverQuestionClicked').find('.slider').length > 0) {
     $('.sliderType').removeClass('d-none');
@@ -492,144 +652,15 @@ $('input[type=radio][name=answers]').on('change click', function () {
       $('.choiceAlign').addClass('d-none');
     }
   }, 100);
-});
+}
 
 if (/edit_survey.html/.test(window.location.href)) {
-  $('.section-block')
-    .on('click', '.hoverQuestion', function () {
-      $(this)
-        .addClass('hoverQuestionClicked')
-        .siblings()
-        .removeClass('hoverQuestionClicked');
-      /* CHECK IF HORIZONTAL OR VERTICAL */
-      if ($('.hoverQuestionClicked').find('.singleMulti').length > 0) {
-        $('.choiceAlign').removeClass('d-none');
-        if ($('.hoverQuestionClicked .singleMulti').find('.alignVertical').length > 0) {
-          $('#vertical').prop('checked', true);
-          $('#horizontal').prop('checked', false);
-        }
-        if ($('.hoverQuestionClicked .singleMulti').find('.alignHorizontal').length > 0) {
-          $('#horizontal').prop('checked', true);
-          $('#vertical').prop('checked', false);
-        }
-      }
-      if ($('.hoverQuestionClicked').find('.slider').length > 0) {
-        $('.sliderType').removeClass('d-none');
-      }
-      /* DEFINE IF IT A RADIO */
-      if ($(this).find(':radio').length > 0) {
-        $('#singleAnswers').prop('checked', true);
-        $('#singleAnswers').siblings().prop('checked', false);
-        $('.choiceAlign').removeClass('d-none');
-        $('.statementSmall').addClass('d-none');
-        $('.scalePoint').addClass('d-none');
-        $('.sliderType').addClass('d-none');
-      }
-      /* DEFINE IF IT A CHECKBOX */
-      if ($(this).find(':checkbox').length > 0) {
-        $('#multibleAnswers').prop('checked', true);
-        $('#multibleAnswers').siblings().prop('checked', false);
-        $('.choiceAlign').removeClass('d-none');
-        $('.statementSmall').addClass('d-none');
-        $('.scalePoint').addClass('d-none');
-        $('.sliderType').addClass('d-none');
-      }
-      /* DEFINE IF IT A DROPDOWN SINGLE */
-      if ($(this).find('.chosen').length > 0) {
-        $('#dropDownOneAnswer').prop('checked', true);
-        $('#dropDownOneAnswer').siblings().prop('checked', false);
-        $('.choiceAlign').addClass('d-none');
-        $('.statementSmall').addClass('d-none');
-        $('.scalePoint').addClass('d-none');
-        $('.sliderType').addClass('d-none');
-      }
-      /* DEFINE IF IT A DROPDOWN MULTIPLE */
-      if ($(this).find('.chosen-select-multi').length > 0) {
-        $('#dropDownMultiAnswer').prop('checked', true);
-        $('#dropDownMultiAnswer').siblings().prop('checked', false);
-        $('.choiceAlign').addClass('d-none');
-        $('.statementSmall').addClass('d-none');
-        $('.scalePoint').addClass('d-none');
-        $('.sliderType').addClass('d-none');
-      }
-      /* DEFINE IF IT A SLIDER */
-      if ($(this).find('.slider').length > 0) {
-        $('#sliderAnswer').prop('checked', true);
-        $('#sliderAnswer').siblings().prop('checked', false);
-        $('.choiceAlign').addClass('d-none');
-        $('.statementSmall').addClass('d-none');
-        $('.scalePoint').addClass('d-none');
-        $('.sliderType').removeClass('d-none');
-      }
-      /* DEFINE IF IT A RANK */
-      if ($(this).find('.rank').length > 0) {
-        $('#rankAnswer').prop('checked', true);
-        $('#rankAnswer').siblings().prop('checked', false);
-        $('.choiceAlign').addClass('d-none');
-        $('.statementSmall').addClass('d-none');
-        $('.scalePoint').addClass('d-none');
-        $('.sliderType').addClass('d-none');
-      }
-      /* DEFINE IF IT A MATRIX */
-      if ($(this).find('.matrix').length > 0) {
-        $('#matrixAnswer').prop('checked', true);
-        $('#matrixAnswer').siblings().prop('checked', false);
-        $('.choiceAlign').addClass('d-none');
-        $('.statementSmall').removeClass('d-none');
-        $('.scalePoint').removeClass('d-none');
-        $('.scalePointSpan').text(scalePointHeadCounts());
-      }
-      /* DEFINE IF IT A TXT SINGLE LINE */
-      if ($(this).find('.txtSingleLine').length > 0) {
-        $('#txtSingleLineAnswer').prop('checked', true);
-        $('#txtSingleLineAnswer').siblings().prop('checked', false);
-        $('.choiceAlign').addClass('d-none');
-        $('.statementSmall').addClass('d-none');
-        $('.scalePoint').addClass('d-none');
-        $('.sliderType').addClass('d-none');
-      }
-      /* DEFINE IF IT A TXT txtEssayAnswer */
-      if ($(this).find('.txtEssayAnswer').length > 0) {
-        $('#txtEssayAnswer').prop('checked', true);
-        $('#txtEssayAnswer').siblings().prop('checked', false);
-        $('.choiceAlign').addClass('d-none');
-        $('.statementSmall').addClass('d-none');
-        $('.scalePoint').addClass('d-none');
-        $('.sliderType').addClass('d-none');
-      }
-      /* DEFINE IF IT A TXT txtFormAnswer */
-      if ($(this).find('.txtFormAnswer').length > 0) {
-        $('#txtFormAnswer').prop('checked', true);
-        $('#txtFormAnswer').siblings().prop('checked', false);
-        $('.choiceAlign').addClass('d-none');
-        $('.statementSmall').addClass('d-none');
-        $('.scalePoint').addClass('d-none');
-        $('.sliderType').addClass('d-none');
-      }
-      /* DEFINE IF IT A TXT uploadImgAnswer */
-      if ($(this).find('.uploadImgAnswer').length > 0) {
-        $('#uploadImgAnswer').prop('checked', true);
-        $('#uploadImgAnswer').siblings().prop('checked', false);
-        $('.choiceAlign').addClass('d-none');
-        $('.statementSmall').addClass('d-none');
-        $('.scalePoint').addClass('d-none');
-        $('.sliderType').addClass('d-none');
-      }
-      /* questionHoverClicked class remove from all blocks when clicked on current block */
-      const x = $(this)
-        .parent()
-        .parent()
-        .parent()
-        .siblings()
-        .children()
-        .children()
-        .children();
-      x.removeClass('hoverQuestionClicked');
-      $('.choices span').text(choicesCurrentNum);
-    });
+  $('.section-block').on('click', '.hoverQuestion', hoverQuestionClicked);
+  $('input[type=radio][name=answers]').on('change click', onQuestionTypeChange);
 }
 /* PROJECTS\SURVEY: QUESTION ON CLICK CHANGE TYPE end-- */
-/* PROJECTS\SURVEY: RADIO CHOICES INC\DEC */
+/* PROJECTS\SURVEY: INC\DEC */
+
 function choicesDecrease() {
   const spanNum = $('.choices span').html();
   if (spanNum !== '1') {
@@ -640,25 +671,28 @@ function choicesDecrease() {
       $('.hoverQuestionClicked .upperHead td:last').remove();
       $('.hoverQuestionClicked .lowerHead td:last').remove();
     }
+    if ($('.hoverQuestionClicked').find('.alignColumn').length > 0) {
+      $('.hoverQuestionClicked .upperHead td:last').remove();
+    }
     if ($('.hoverQuestionClicked').find('.chosen').length > 0) {
       $('.hoverQuestionClicked .chosen option:last').remove();
       $('.hoverQuestionClicked .dropdownOneEdit p:last-child').remove();
-      $('.chosen').val('').trigger('chosen:updated');
+      $('.hoverQuestionClicked .chosen').val('').trigger('chosen:updated');
     }
     if ($('.hoverQuestionClicked').find('.chosen-select-multi').length > 0) {
       $('.hoverQuestionClicked .chosen-select-multi option:last').remove();
       $('.hoverQuestionClicked .dropdownMultiEdit p:last-child').remove();
-      $('.chosen-select-multi').val('').trigger('chosen:updated');
+      $('.hoverQuestionClicked .chosen-select-multi').val('').trigger('chosen:updated');
     }
     if ($('.hoverQuestionClicked').find('.range-slider').length > 0) {
-      $('.slider .range-slider:last-child').prev().remove();
-      $('.slider .range-slider:last-child').remove();
+      $('.hoverQuestionClicked .slider .range-slider:last-child').prev().remove();
+      $('.hoverQuestionClicked .slider .range-slider:last-child').remove();
     }
     if ($('.hoverQuestionClicked').find('.stars-slider').length > 0) {
-      $('.slider .stars-slider:last-child').remove();
+      $('.hoverQuestionClicked .slider .stars-slider:last-child').remove();
     }
     if ($('.hoverQuestionClicked').find('.rank').length > 0) {
-      $('.rank .rank__body:last-child').remove();
+      $('.hoverQuestionClicked .rank .rank__body:last-child').remove();
     }
     if ($('.hoverQuestionClicked').find('.matrixLikert').length > 0) {
       if ($('.hoverQuestionClicked .matrix tbody tr:last th').text() !== 'Total') {
@@ -690,18 +724,6 @@ function choicesDecrease() {
 
 function choicesIncrease() {
   let choiceNum = choicesCurrentNum();
-  const choiceSlider = $(`<p class="m-0 p-0" contenteditable="true">slider${choiceNum + 1}</p>
-          <div class="range-slider d-flex py-2">
-            <input class="range-slider__range" type="range" name="slider" min="0" max="100" value="0">
-            <span class="range-slider__value">0</span>
-          </div>`);
-  const choiceRank = $(`<div class="rank__body">
-            <span class="rank__body-text contenteditable" contenteditable="true">text${choiceNum + 1}</span>
-            <span class="rank__body-rank">${choiceNum + 1}</span>
-          </div>`);
-  const choiceDropdown = $(`<option value="option${choiceNum + 1}">option${choiceNum + 1}</option>`);
-  const choiceDropdownEdit = $(`<p contenteditable="true">option${choiceNum + 1}</p>`);
-
   if (choiceNum !== 10) {
     if ($('.hoverQuestionClicked').find('.alignVertical').length > 0) {
       const inc = $('.hoverQuestionClicked .alignVertical:last-child').clone();
@@ -716,31 +738,40 @@ function choicesIncrease() {
       tLower.insertAfter('.lowerHead td:last');
     }
     if ($('.hoverQuestionClicked').find('.alignColumn').length > 0) {
-
+      const alignColumn = $('.hoverQuestionClicked tbody tr td:last').clone();
+      $('.hoverQuestionClicked tbody tr').append(alignColumn);
+      $('.hoverQuestionClicked tbody tr td:last span').text(`Click to write Choice ${choiceNum + 1}`);
     }
-
+    const choiceDropdown = $(`<option value="option${choiceNum + 1}">option${choiceNum + 1}</option>`);
+    const choiceDropdownEdit = $(`<p contenteditable="true">option${choiceNum + 1}</p>`);
     if ($('.hoverQuestionClicked').find('.chosen').length > 0) {
-      $('.dropdownOneEdit').append(choiceDropdownEdit);
-      $('.chosen').append(choiceDropdown);
-      $('.chosen').val('').trigger('chosen:updated');
+      $('.hoverQuestionClicked .dropdownOneEdit').append(choiceDropdownEdit);
+      $('.hoverQuestionClicked .chosen').append(choiceDropdown);
+      $('.hoverQuestionClicked .chosen').val('').trigger('chosen:updated');
     }
 
     if ($('.hoverQuestionClicked').find('.chosen-select-multi').length > 0) {
-      $('.dropdownMultiEdit').append(choiceDropdownEdit);
-      $('.chosen-select-multi').append(choiceDropdown);
-      $('.chosen-select-multi').val('').trigger('chosen:updated');
+      $('.hoverQuestionClicked .dropdownMultiEdit').append(choiceDropdownEdit);
+      $('.hoverQuestionClicked .chosen-select-multi').append(choiceDropdown);
+      $('.hoverQuestionClicked .chosen-select-multi').val('').trigger('chosen:updated');
     }
 
     if ($('.hoverQuestionClicked .slider').find('.range-slider').length > 0) {
-      $('.slider').append(choiceSlider);
+      const sliderTxt = $('.hoverQuestionClicked .slider p:last').clone();
+      const sliderDiv = $('.hoverQuestionClicked .slider .range-slider:last').clone();
+      $('.hoverQuestionClicked .slider').append(sliderTxt).append(sliderDiv);
+      $('.hoverQuestionClicked .slider p:last').text(`slider${choiceNum + 1}`);
     }
     if ($('.hoverQuestionClicked .slider').find('.stars-slider').length > 0) {
       const star = $('.hoverQuestionClicked .stars-slider:last').clone();
       star.insertAfter('.hoverQuestionClicked .stars-slider:last');
-      $('.stars-slider:last span').text(`rate${choiceNum + 1}`);
+      $('.hoverQuestionClicked .stars-slider:last span').text(`rate${choiceNum + 1}`);
     }
     if ($('.hoverQuestionClicked').find('.rank').length > 0) {
-      $('.rank').append(choiceRank);
+      const rank = $('.hoverQuestionClicked .rank .rank__body:last').clone();
+      $('.hoverQuestionClicked .rank').append(rank);
+      $('.hoverQuestionClicked .rank .rank__body:last .rank__body-text').text(`text${choiceNum + 1}`);
+      $('.hoverQuestionClicked .rank .rank__body:last .rank__body-rank').text(`${choiceNum + 1}`);
     }
   }
 
@@ -806,9 +837,6 @@ function choicesIncrease() {
   }
   $('.choices span').text(choicesCurrentNum);
 }
-
-$('.choicesDecrease').on('click', choicesDecrease);
-$('.choicesIncrease').on('click', choicesIncrease);
 
 function scalePointDecrease() {
   if ($('.hoverQuestionClicked ').find('.matrixLikert').length > 0) {
@@ -926,72 +954,55 @@ function scalePointIncrease() {
   $('.scalePointSpan').text(scalePointHeadCounts());
 }
 
+$('.choicesDecrease').on('click', choicesDecrease);
+$('.choicesIncrease').on('click', choicesIncrease);
 $('.scalePointDecrease').on('click', scalePointDecrease);
 $('.scalePointIncrease').on('click', scalePointIncrease);
-/* PROJECTS\SURVEY: RADIO CHOICES INC\DEC end */
+/* PROJECTS\SURVEY: INC\DEC end */
 /* PROJECTS\SURVEY: CHANGE QUESTION */
 
 // singleAnswers
 function singleAnswers() {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:radio').prop('checked', false);
-  const radioName = new Date().getTime();
-  const singleAnswer = $(`
-      <div class="questionBlock">
-        <div class="questionHeader">
-          <h3 contenteditable="true" class="card-title mb-3">
-            Single answer
-          </h3>
-        </div>
-        <div class="questionBody singleMulti">
-          <div class = "card-text mb-2 alignVertical">
-            <input type="radio" name=${radioName}>
-            <span contenteditable="true">Click to write Choice 1</span>
+  if ($('.hoverQuestionClicked input').prop('type') === 'checkbox') {
+    $('.hoverQuestionClicked .singleMulti input').prop('type', 'radio');
+  } else {
+    const radioName = new Date().getTime();
+    const singleAnswer = $(`
+        <div class="questionBlock">
+          <div class="questionHeader">
+            <h3 contenteditable="true" class="card-title mb-3">
+              Single answer
+            </h3>
           </div>
-          <div class="card-text mb-2 alignVertical">
-            <input type="radio" name=${radioName}>
-            <span contenteditable="true">Click to write Choice 2</span>
+          <div class="questionBody singleMulti">
+            <div class = "card-text mb-2 alignVertical">
+              <input type="radio" name=${radioName}>
+              <span contenteditable="true">Click to write Choice 1</span>
+            </div>
+            <div class="card-text mb-2 alignVertical">
+              <input type="radio" name=${radioName}>
+              <span contenteditable="true">Click to write Choice 2</span>
+            </div>
+            <div class="card-text mb-2 alignVertical">
+              <input type="radio" name=${radioName}>
+              <span contenteditable="true">Click to write Choice 3</span>
+            </div>
           </div>
-          <div class="card-text mb-2 alignVertical">
-            <input type="radio" name=${radioName}>
-            <span contenteditable="true">Click to write Choice 3</span>
-          </div>
-        </div>
-      </div>`);
-  $('.hoverQuestionClicked .questionBlock').replaceWith(singleAnswer);
+        </div>`);
+    $('.hoverQuestionClicked .questionBlock').replaceWith(singleAnswer);
+  }
 }
-$('#singleAnswers').on('click', singleAnswers);
-
 // multibleAnswers
 function multibleAnswers() {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:radio').prop('checked', false);
-  const checkName = new Date().getTime();
-  const multibleAnswer = $(`
-      <div class="questionBlock">
-        <div class="questionHeader">
-          <h3 contenteditable="true" class="card-title mb-3">
-            Multiple answers
-          </h3>
-        </div>
-        <div class="questionBody singleMulti">
-          <div class="card-text mb-2 alignVertical">
-            <input type="checkbox" name=${checkName}>
-            <span contenteditable="true">Click to write Choice 1</span>
-          </div>
-          <div class="card-text mb-2 alignVertical">
-            <input type="checkbox" name=${checkName}>
-            <span contenteditable="true">Click to write Choice 2</span>
-          </div>
-          <div class="card-text mb-2 alignVertical">
-            <input type="checkbox" name=${checkName}>
-            <span contenteditable="true">Click to write Choice 3</span>
-          </div>
-        </div>
-      </div>`);
-  $('.hoverQuestionClicked .questionBlock').replaceWith(multibleAnswer);
+  if ($('.hoverQuestionClicked .singleMulti input').prop('type') !== 'radio') {
+    singleAnswers();
+  }
+  $('.hoverQuestionClicked .singleMulti input').prop('type', 'checkbox');
 }
-$('#multibleAnswers').on('click', multibleAnswers);
 // align Ver, Hor, Col
 function alignV() {
   if ($('.hoverQuestionClicked').find('.alignColumn').length > 0) {
@@ -1092,13 +1103,16 @@ function alignC() {
     tr.appendTo('.hoverQuestionClicked .alignColumn .upperHead').wrap('<td></td>');
   }
 }
+
+$('#singleAnswers').on('click', singleAnswers);
+$('#multibleAnswers').on('click', multibleAnswers);
 $('#vertical').on('click', alignV);
 $('#horizontal').on('click', alignH);
 $('#column').on('click', alignC);
 
 // dropDownOneAnswer
-$('#dropDownOneAnswer').on('click', function () {
-  const dropDownOneAnswer = $(`
+function dropDownOneAnswer() {
+  const dropDownOne = $(`
       <div class="questionBlock">
         <div class="questionHeader">
           <h3 contenteditable="true" class="card-title mb-3">
@@ -1120,13 +1134,14 @@ $('#dropDownOneAnswer').on('click', function () {
           </div>
         </div>
       </div>`);
-  $('.hoverQuestionClicked .questionBlock').replaceWith(dropDownOneAnswer);
+  $('.hoverQuestionClicked .questionBlock').replaceWith(dropDownOne);
   $('.chosen').chosen({
     disable_search_threshold: 10,
     width: '60%',
   });
-});
-$('.section-block').on('keyup change paste copy cut', '.dropdownOneEdit p', function () {
+}
+
+function dropdownOneEdit() {
   $(this).parent().siblings().chosen('destroy');
   const index = $(this).index();
   const option = $(this).parent().siblings().children()
@@ -1141,11 +1156,13 @@ $('.section-block').on('keyup change paste copy cut', '.dropdownOneEdit p', func
     disable_search_threshold: 10,
     width: '60%',
   });
-});
+}
+$('#dropDownOneAnswer').on('click', dropDownOneAnswer);
+$('.section-block').on('keyup change paste copy cut', '.dropdownOneEdit p', dropdownOneEdit);
 
 // dropDownMultiAnswer
-$('#dropDownMultiAnswer').on('click', function () {
-  const dropDownMultiAnswer = $(`
+function dropDownMultiAnswer() {
+  const dropDownMulti = $(`
       <div class="questionBlock">
         <div class="questionHeader">
           <h3 contenteditable="true" class="card-title mb-3">
@@ -1167,13 +1184,14 @@ $('#dropDownMultiAnswer').on('click', function () {
           </div>
         </div>
       </div>`);
-  $('.hoverQuestionClicked .questionBlock').replaceWith(dropDownMultiAnswer);
+  $('.hoverQuestionClicked .questionBlock').replaceWith(dropDownMulti);
   $('.chosen-select-multi').chosen({
     disable_search_threshold: 10,
     width: '60%',
   });
-});
-$('.section-block').on('keyup change paste copy cut', '.dropdownMultiEdit p', function () {
+}
+
+function dropdownMultiEdit() {
   $(this).parent().siblings().chosen('destroy');
   const index = $(this).index();
   const option = $(this).parent().siblings().children()
@@ -1184,10 +1202,12 @@ $('.section-block').on('keyup change paste copy cut', '.dropdownMultiEdit p', fu
     disable_search_threshold: 10,
     width: '60%',
   });
-});
+}
+$('#dropDownMultiAnswer').on('click', dropDownMultiAnswer);
+$('.section-block').on('keyup change paste copy cut', '.dropdownMultiEdit p', dropdownMultiEdit);
 
 // sliderAnswer
-$('#sliderAnswer, #slider').on('click', function () {
+function slider() {
   $('#slider').prop('checked', true);
   $('.choices span').text('3');
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
@@ -1218,12 +1238,14 @@ $('#sliderAnswer, #slider').on('click', function () {
         </div>
       </div>`);
   $('.hoverQuestionClicked .questionBlock').replaceWith(sliderAnswer);
-});
-$('.section-block').on('change input', '.range-slider__range', function () {
+}
+
+function sliderValue() {
   const value = $('.range-slider__value');
   $(this).next(value).html(this.value);
-});
-$('#stars').on('click', function () {
+}
+
+function sliderStars() {
   $('#stars').prop('checked', true);
   $('.choices span').text('3');
   const stars = $(`
@@ -1296,10 +1318,15 @@ $('#stars').on('click', function () {
       </div>
     </div>`);
   $('.hoverQuestionClicked .questionBlock').replaceWith(stars);
-});
+}
+
+$('#sliderAnswer, #slider').on('click', slider);
+$('.section-block').on('change input', '.range-slider__range', sliderValue);
+$('#stars').on('click', sliderStars);
+
 // sliderSTARS functionality
 /* 1. Visualizing things on Hover - See next part for action on click */
-$('.hoverQuestionClicked').on('mouseover', '.stars li', function () {
+function starsMouseOver() {
   $(this).each(function () {
     let onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
 
@@ -1312,16 +1339,17 @@ $('.hoverQuestionClicked').on('mouseover', '.stars li', function () {
       }
     });
   });
-}).on('mouseout', '.stars li', function () {
+}
+
+function starsMouseOut() {
   $(this).each(function () {
     $(this).parent().children('li.star').each(function (e) {
       $(this).removeClass('hover');
     });
   });
-});
+}
 
-/* 2. Action to perform on click */
-$('.hoverQuestionClicked').on('click', '.stars li', function () {
+function starsClick() {
   $(this).each(function () {
     let onStar = parseInt($(this).data('value'), 10); // The star currently selected
     let stars = $(this).parent().children('li.star');
@@ -1333,12 +1361,15 @@ $('.hoverQuestionClicked').on('click', '.stars li', function () {
       $(stars[i]).addClass('selected');
     }
   });
-});
-
+}
+$(document)
+  .on('mouseover', '.stars li', starsMouseOver)
+  .on('mouseout', '.stars li', starsMouseOut)
+  .on('click', '.stars li', starsClick);
 
 // rankAnswer
-$('#rankAnswer').on('click', function () {
-  const rankAnswer = $(`
+function rankAnswer() {
+  const rank = $(`
       <div class="questionBlock">
         <div class="questionHeader">
           <h3 contenteditable="true" class="card-title mb-3">
@@ -1360,19 +1391,24 @@ $('#rankAnswer').on('click', function () {
           </div>
         </div>
       </div>`);
-  $('.hoverQuestionClicked .questionBlock').replaceWith(rankAnswer);
+  $('.hoverQuestionClicked .questionBlock').replaceWith(rank);
   $('.rank').sortable({
     cancel: '.contenteditable',
   });
-});
-$('.section-block').on('sortstop', '.rank', function () {
+}
+
+function rankAfterSort() {
   $(this).find('.rank__body-rank').each(function (i) {
     $(this).text(i + 1);
   });
-});
-$('.section-block').on('click', '.rank__body-rank', function () {
-  $(this).focus();
-});
+}
+
+$('#rankAnswer').on('click', rankAnswer);
+$(document)
+  .on('sortstop', '.rank', rankAfterSort)
+  .on('click', '.rank__body-rank', function () {
+    $(this).focus();
+  });
 
 // matrixAnswer
 function matrixRadio() {
@@ -1779,19 +1815,6 @@ $('#matrixSumSt').on('change', matrixSumSt);
 $('#matrixSumSp').on('change', matrixSumSp);
 $('#matrixDropdownList').on('change', matrixDropdown);
 
-
-// Allow Bootstrap dropdown menus to have forms/checkboxes inside,
-// and when clicking on a dropdown item, the menu doesn't disappear.
-$(document).on('click', '.dropdown-menu.dropdown-menu-form', function (e) {
-  e.stopPropagation();
-});
-// Bootstrap popover
-$(function () {
-  $('[data-toggle="popover"]').popover({
-    trigger: 'hover',
-
-  });
-});
 // txtSingleLineAnswer
 function txtSingleLineAnswer() {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
@@ -1908,17 +1931,13 @@ $('#uploadImgAnswer').on('click', uploadImgAnswer);
 /* PROJECTS\SURVEY: CHANGE QUESTION end-- */
 /* PROJECTS\PREVIEW:  */
 // when check span checkbox checked
-$('.preview-mobile').on('click', 'span', function () {
+function preview() {
   $(this)
     .prev()
     .prop('checked', 'checked');
-});
-
-// copy elements from edit_survey to preview-mobile;
-/* $('#previewBTN').on('click', function () {}); */
-
+}
 // remove unnecessary things when preview
-$(document).ready(function () {
+function previewRemovals() {
   $('.preview-mobile *').removeAttr('contenteditable = "true"');
   $('.preview-mobile .questionMove')
     .next()
@@ -1929,15 +1948,22 @@ $(document).ready(function () {
   $('.preview-mobile .dropdownOneEdit').remove();
   $('.preview-mobile .dropdownMultiEdit').remove();
   $('.preview-mobile .addImgIcon').remove();
-});
+}
+$('.preview-mobile').on('click', 'span', preview);
+$(document).ready(previewRemovals);
+// copy elements from edit_survey to preview-mobile;
+/* $('#previewBTN').on('click', function () {}); */
+
+
 /* PROJECTS\PREVIEW:  end--*/
 //---------------------------------------------
 /* PROJECTS\DISTRIBUTE: web copylick */
-$('#distribute__web-btn').on('click', function (e) {
+function copyLink(e) {
   e.preventDefault();
   $('#distribute__web').select();
   document.execCommand('copy');
-});
+}
+$('#distribute__web-btn').on('click', copyLink);
 /* PROJECTS\DISTRIBUTE: web copylick end */
 
 /* PROJECTS\RESPONSES: VIEW ON-CLICK  */
