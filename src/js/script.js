@@ -1930,7 +1930,9 @@ $('#uploadImgAnswer').on('click', uploadImgAnswer);
 
 /* PROJECTS\SURVEY: CHANGE QUESTION end-- */
 /* PROJECTS\PREVIEW:  */
-// when check span checkbox checked
+
+// copy elements from edit_survey to preview-mobile;
+/* $('#previewBTN').on('click', function () {}); */
 function preview() {
   $(this)
     .prev()
@@ -1951,10 +1953,6 @@ function previewRemovals() {
 }
 $('.preview-mobile').on('click', 'span', preview);
 $(document).ready(previewRemovals);
-// copy elements from edit_survey to preview-mobile;
-/* $('#previewBTN').on('click', function () {}); */
-
-
 /* PROJECTS\PREVIEW:  end--*/
 //---------------------------------------------
 /* PROJECTS\DISTRIBUTE: web copylick */

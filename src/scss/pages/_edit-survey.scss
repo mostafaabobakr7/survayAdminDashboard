@@ -50,7 +50,7 @@
               }
               .questionBody {
                 overflow-x: auto !important;
-                overflow-y: hidden;
+                overflow-y: auto !important;
                 white-space: nowrap;
                 &>* {
                   margin-bottom: 5px;

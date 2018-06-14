@@ -1210,7 +1210,7 @@ main .form-inline span {
         padding: 0.1rem 0.3rem; }
       .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody {
         overflow-x: auto !important;
-        overflow-y: hidden;
+        overflow-y: auto !important;
         white-space: nowrap; }
         .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionBlock .questionBody > * {
           margin-bottom: 5px; }
