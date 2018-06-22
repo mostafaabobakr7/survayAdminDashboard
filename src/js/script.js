@@ -1,20 +1,21 @@
+/* GENERAL */
 // Allow Bootstrap dropdown menus to have forms/checkboxes inside,
 // and when clicking on a dropdown item, the menu doesn't disappear.
 $(document).on('click', '.dropdown-menu.dropdown-menu-form', function (e) {
   e.stopPropagation();
 });
-// Bootstrap popover
+// Bootstrap popover on hover
 $(function () {
   $('[data-toggle="popover"]').popover({
     trigger: 'hover',
 
   });
 });
-/* Enable tooltips everywhere */
+// Enable Bootstrap tooltips everywhere
 $(function () {
   $('[data-toggle="tooltip"]').tooltip();
 });
-/* Enable tooltips everywhere end */
+/* GENERAL end */
 
 /* PROJECTS: section-home-folders__menu */
 $('#folder__link').on('click', function () {
@@ -148,7 +149,7 @@ $('#projectName').on('change keyup paste', function () {
 
 /* PROJECTS: create project end----------*/
 /* PROJECTS: card (project) on click go to edit_survey */
-$('.projects-list').on('click', '.card-body', function () {
+function onClickGoToEditSurvey() {
   const projectCreationName = $(this)
     .find('.projectName')
     .html();
@@ -163,7 +164,8 @@ $('.projects-list').on('click', '.card-body', function () {
   } else {
     window.location.pathname = 'edit_survey.html';
   }
-});
+}
+$('.projects-list').on('click', '.card-body', onClickGoToEditSurvey);
 /* PROJECTS: card (project) on click go to edit_survey end--- */
 /* PROJECTS: get the clicked PROJECT name from localstorage */
 $(document).ready(() => {
@@ -176,64 +178,7 @@ $(document).ready(() => {
 /* PROJECTS: get the clicked PROJECT name from localstorage end--*/
 
 
-/* PROJECTS\SURVEY: CONTENTEDITABLE on CLICK */
-if (/edit_survey.html/.test(window.location)) {
-  // PROJECTS\SURVEY: STICKY RIGHT CONTROLS
-  $('.rightControls').sticky();
-  // PROJECTS\SURVEY: STICKY RIGHT CONTROLS end----
-  const addImg = $(`<i class="fa fa-picture-o addImgIcon" title="add image"></i>`);
-  $(document).on('click', '[contenteditable="true"]', function () {
-    $(document)
-      .find('[contenteditable="true"]')
-      .removeClass('editable-focus');
-    $(this).addClass('editable-focus');
-    if (!$(this).parent('.dropdownOneEdit').length > 0 && !$(this).parent('.dropdownMultiEdit').length > 0 && !$(this).parents('.matrix').length > 0) {
-      addImg.insertAfter(this);
-    }
-    if ($(this).find('picture').length > 0) {
-      addImg.remove();
-    }
-    /*     $(this).focusout(function () {
-          setTimeout(() => {
-            $(this).removeClass('editable-focus');
-            $(this).next().remove();
-          }, 200);
-        }); */
-  });
-  $(document).on('click', '.addImgIcon', function () {
-    $('#addImgModal').modal('toggle');
-  });
-}
 
-
-function getEdit() {
-  const content = $('.editable-focus');
-  return content;
-}
-$('#addImgModal').on('click', 'picture', function () {
-  const contentTxt = getEdit();
-  $(this).find('.removeImgIcon').removeClass('d-none');
-  const imgCopy = $(this).clone();
-  $('.addImgIcon').remove();
-  contentTxt.append(imgCopy);
-  contentTxt.css('display', 'inline-grid');
-  $('#addImgModal').modal('hide');
-
-  $('.hoverQuestionClicked').on('click', '.removeImgIcon', function () {
-    const picture = $(this).parent();
-    picture.parent().removeAttr('style');
-    picture.remove();
-  });
-});
-
-/* PROJECTS\SURVEY: CONTENTEDITABLE on CLICK end--- */
-
-/* PROJECTS\SURVEY: ADD LIBRARY IMAGES TO MODAL  */
-$('#addImgModalBody').load('library.html .libraryImages');
-$('#addImgModal').on('shown.bs.modal hidden.bs.modal', function () {
-  $(this).find('.removeImgIcon').addClass('d-none');
-});
-/* PROJECTS\SURVEY: ADD LIBRARY IMAGES TO MODAL end */
 
 /* PROJECTS\SURVEY: ADD BLOCK function */
 function addBlock() {
@@ -306,8 +251,9 @@ function removeBlock() {
     .parent()
     .remove();
 }
-$('.section-block').on('click', '#addBlock', addBlock);
-$('.section-block').on('click', '.blockClose', removeBlock);
+$('.section-block')
+  .on('click', '#addBlock', addBlock)
+  .on('click', '.blockClose', removeBlock);
 /* PROJECTS\SURVEY: ADD BLOCK function end--*/
 /* PROJECTS\SURVEY: ADD QUESTION RADIO */
 let num = 1;
@@ -402,9 +348,10 @@ function questionDelete() {
     .parent()
     .remove();
 }
-$('.section-block').on('click', '.questionInserBefore', questionInserBefore);
-$('.section-block').on('click', '.questionInserAfter', questionInserAfter);
-$('.section-block').on('click', '.questionDelete', questionDelete);
+$('.section-block')
+  .on('click', '.questionInserBefore', questionInserBefore)
+  .on('click', '.questionInserAfter', questionInserAfter)
+  .on('click', '.questionDelete', questionDelete);
 /* PROJECTS\SURVEY: ADD QUESTION RADIO end-- */
 /* PROJECTS\SURVEY: MOVE QUESTION UP and DOWN */
 function questionMoveUp() {
@@ -424,10 +371,13 @@ function questionMoveDown() {
   const questionPositionPrevSibling = questionPosition.next();
   $(questionPosition).insertAfter(questionPositionPrevSibling);
 }
-$('.section-block').on('click', '.questionMove__up', questionMoveUp);
-$('.section-block').on('click', '.questionMove__down', questionMoveDown);
+$('.section-block')
+  .on('click', '.questionMove__up', questionMoveUp)
+  .on('click', '.questionMove__down', questionMoveDown);
 /* PROJECTS\SURVEY: MOVE QUESTION UP and DOWN end-- */
-/* PROJECTS\SURVEY: QUESTION ON CLICK CHANGE TYPE */
+
+
+/* PROJECTS\SURVEY: INC\DEC */
 function choicesCurrentNum() {
   let size;
   if ($('.hoverQuestionClicked').find('.alignVertical').length > 0) {
@@ -457,7 +407,13 @@ function choicesCurrentNum() {
   if ($('.hoverQuestionClicked').find('.rank__body').length > 0) {
     size = $('.hoverQuestionClicked .rank__body').length;
   }
-  // count statements
+  if ($('.hoverQuestionClicked').find('.rankRadio').length > 0) {
+    size = $('.hoverQuestionClicked .rankRadio tr').length - 1;
+  }
+  if ($('.hoverQuestionClicked').find('.rankTxtBox').length > 0) {
+    size = $('.hoverQuestionClicked .rankTxtBox li').length;
+  }
+
   if ($('.hoverQuestionClicked').find('.matrix').length > 0) {
     if ($('.hoverQuestionClicked .matrixLikert tbody tr:last th').text() !== 'Total') {
       size = $('.hoverQuestionClicked .matrix tbody tr').length;
@@ -470,6 +426,9 @@ function choicesCurrentNum() {
 
 function scalePointHeadCounts() {
   let scalePointHead;
+  if ($('.hoverQuestionClicked').find('.rankRadio').length > 0) {
+    scalePointHead = $('.hoverQuestionClicked .rankRadio thead tr th').length - 1;
+  }
   if ($('.hoverQuestionClicked').find('.matrixLikert').length > 0) {
     if ($('.hoverQuestionClicked .matrixLikert thead tr th:last').text() !== 'Total') {
       scalePointHead = $('.hoverQuestionClicked .matrix thead tr th').length - 1;
@@ -489,179 +448,11 @@ function scalePointHeadCounts() {
   return scalePointHead;
 }
 
-function hoverQuestionClicked() {
-  $(this)
-    .addClass('hoverQuestionClicked')
-    .siblings()
-    .removeClass('hoverQuestionClicked');
-  /* CHECK IF HORIZONTAL OR VERTICAL */
-  if ($('.hoverQuestionClicked').find('.singleMulti').length > 0) {
-    $('.choiceAlign').removeClass('d-none');
-    if ($('.hoverQuestionClicked .singleMulti').find('.alignVertical').length > 0) {
-      $('#vertical').prop('checked', true);
-      $('#horizontal').prop('checked', false);
-    }
-    if ($('.hoverQuestionClicked .singleMulti').find('.alignHorizontal').length > 0) {
-      $('#horizontal').prop('checked', true);
-      $('#vertical').prop('checked', false);
-    }
-  }
-  if ($('.hoverQuestionClicked').find('.slider').length > 0) {
-    $('.sliderType').removeClass('d-none');
-  }
-  /* DEFINE IF IT A RADIO */
-  if ($(this).find(':radio').length > 0) {
-    $('#singleAnswers').prop('checked', true);
-    $('#singleAnswers').siblings().prop('checked', false);
-    $('.choiceAlign').removeClass('d-none');
-    $('.statementSmall').addClass('d-none');
-    $('.scalePoint').addClass('d-none');
-    $('.sliderType').addClass('d-none');
-  }
-  /* DEFINE IF IT A CHECKBOX */
-  if ($(this).find(':checkbox').length > 0) {
-    $('#multibleAnswers').prop('checked', true);
-    $('#multibleAnswers').siblings().prop('checked', false);
-    $('.choiceAlign').removeClass('d-none');
-    $('.statementSmall').addClass('d-none');
-    $('.scalePoint').addClass('d-none');
-    $('.sliderType').addClass('d-none');
-  }
-  /* DEFINE IF IT A DROPDOWN SINGLE */
-  if ($(this).find('.chosen').length > 0) {
-    $('#dropDownOneAnswer').prop('checked', true);
-    $('#dropDownOneAnswer').siblings().prop('checked', false);
-    $('.choiceAlign').addClass('d-none');
-    $('.statementSmall').addClass('d-none');
-    $('.scalePoint').addClass('d-none');
-    $('.sliderType').addClass('d-none');
-  }
-  /* DEFINE IF IT A DROPDOWN MULTIPLE */
-  if ($(this).find('.chosen-select-multi').length > 0) {
-    $('#dropDownMultiAnswer').prop('checked', true);
-    $('#dropDownMultiAnswer').siblings().prop('checked', false);
-    $('.choiceAlign').addClass('d-none');
-    $('.statementSmall').addClass('d-none');
-    $('.scalePoint').addClass('d-none');
-    $('.sliderType').addClass('d-none');
-  }
-  /* DEFINE IF IT A SLIDER */
-  if ($(this).find('.slider').length > 0) {
-    $('#sliderAnswer').prop('checked', true);
-    $('#sliderAnswer').siblings().prop('checked', false);
-    $('.choiceAlign').addClass('d-none');
-    $('.statementSmall').addClass('d-none');
-    $('.scalePoint').addClass('d-none');
-    $('.sliderType').removeClass('d-none');
-  }
-  /* DEFINE IF IT A RANK */
-  if ($(this).find('.rank').length > 0) {
-    $('#rankAnswer').prop('checked', true);
-    $('#rankAnswer').siblings().prop('checked', false);
-    $('.choiceAlign').addClass('d-none');
-    $('.statementSmall').addClass('d-none');
-    $('.scalePoint').addClass('d-none');
-    $('.sliderType').addClass('d-none');
-  }
-  /* DEFINE IF IT A MATRIX */
-  if ($(this).find('.matrix').length > 0) {
-    $('#matrixAnswer').prop('checked', true);
-    $('#matrixAnswer').siblings().prop('checked', false);
-    $('.choiceAlign').addClass('d-none');
-    $('.statementSmall').removeClass('d-none');
-    $('.scalePoint').removeClass('d-none');
-    $('.scalePointSpan').text(scalePointHeadCounts());
-  }
-  /* DEFINE IF IT A TXT SINGLE LINE */
-  if ($(this).find('.txtSingleLine').length > 0) {
-    $('#txtSingleLineAnswer').prop('checked', true);
-    $('#txtSingleLineAnswer').siblings().prop('checked', false);
-    $('.choiceAlign').addClass('d-none');
-    $('.statementSmall').addClass('d-none');
-    $('.scalePoint').addClass('d-none');
-    $('.sliderType').addClass('d-none');
-  }
-  /* DEFINE IF IT A TXT txtEssayAnswer */
-  if ($(this).find('.txtEssayAnswer').length > 0) {
-    $('#txtEssayAnswer').prop('checked', true);
-    $('#txtEssayAnswer').siblings().prop('checked', false);
-    $('.choiceAlign').addClass('d-none');
-    $('.statementSmall').addClass('d-none');
-    $('.scalePoint').addClass('d-none');
-    $('.sliderType').addClass('d-none');
-  }
-  /* DEFINE IF IT A TXT txtFormAnswer */
-  if ($(this).find('.txtFormAnswer').length > 0) {
-    $('#txtFormAnswer').prop('checked', true);
-    $('#txtFormAnswer').siblings().prop('checked', false);
-    $('.choiceAlign').addClass('d-none');
-    $('.statementSmall').addClass('d-none');
-    $('.scalePoint').addClass('d-none');
-    $('.sliderType').addClass('d-none');
-  }
-  /* DEFINE IF IT A TXT uploadImgAnswer */
-  if ($(this).find('.uploadImgAnswer').length > 0) {
-    $('#uploadImgAnswer').prop('checked', true);
-    $('#uploadImgAnswer').siblings().prop('checked', false);
-    $('.choiceAlign').addClass('d-none');
-    $('.statementSmall').addClass('d-none');
-    $('.scalePoint').addClass('d-none');
-    $('.sliderType').addClass('d-none');
-  }
-  /* questionHoverClicked class remove from all blocks when clicked on current block */
-  const x = $(this)
-    .parent()
-    .parent()
-    .parent()
-    .siblings()
-    .children()
-    .children()
-    .children();
-  x.removeClass('hoverQuestionClicked');
-  $('.choices span').text(choicesCurrentNum);
-}
-
-function onQuestionTypeChange() {
-  $('.choices span').text(choicesCurrentNum);
-  if ($('.hoverQuestionClicked').find('.slider').length > 0) {
-    $('.sliderType').removeClass('d-none');
-  } else {
-    $('.sliderType').addClass('d-none');
-  }
-  if ($('.hoverQuestionClicked').find('.matrix').length > 0) {
-    $('.statementSmall').removeClass('d-none');
-    $('.scalePoint').removeClass('d-none');
-    $('.choiceAlign').addClass('d-none');
-    $('.scalePointSpan').text(scalePointHeadCounts());
-  } else {
-    $('.statementSmall').addClass('d-none');
-    $('.scalePoint').addClass('d-none');
-  }
-  setTimeout(function () {
-    if ($('.hoverQuestionClicked').find('.singleMulti').length > 0) {
-      $('.choiceAlign').removeClass('d-none');
-      if ($('.hoverQuestionClicked').find('.alignVertical').length > 0) {
-        $('#vertical').prop('checked', true);
-        $('#horizontal').prop('checked', false);
-      }
-      if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0) {
-        $('#horizontal').prop('checked', true);
-        $('#vertical').prop('checked', false);
-      }
-    } else {
-      $('.choiceAlign').addClass('d-none');
-    }
-  }, 100);
-}
-
-if (/edit_survey.html/.test(window.location.href)) {
-  $('.section-block').on('click', '.hoverQuestion', hoverQuestionClicked);
-  $('input[type=radio][name=answers]').on('change click', onQuestionTypeChange);
-}
-/* PROJECTS\SURVEY: QUESTION ON CLICK CHANGE TYPE end-- */
-/* PROJECTS\SURVEY: INC\DEC */
-
 function choicesDecrease() {
+  $('.hoverQuestionClicked').find('.editable-focus').removeClass('editable-focus');
+  $('.hoverQuestionClicked').find('.addImgIcon').remove();
+  $('.hoverQuestionClicked input').prop('checked', false);
+
   const spanNum = $('.choices span').html();
   if (spanNum !== '1') {
     if ($('.hoverQuestionClicked').find('.alignVertical').length > 0) {
@@ -694,6 +485,12 @@ function choicesDecrease() {
     if ($('.hoverQuestionClicked').find('.rank').length > 0) {
       $('.hoverQuestionClicked .rank .rank__body:last-child').remove();
     }
+    if ($('.hoverQuestionClicked').find('.rankRadio').length > 0) {
+      $('.hoverQuestionClicked .rankRadio tr:last').remove();
+    }
+    if ($('.hoverQuestionClicked').find('.rankTxtBox').length > 0) {
+      $('.hoverQuestionClicked .rankTxtBox ul li:last').remove();
+    }
     if ($('.hoverQuestionClicked').find('.matrixLikert').length > 0) {
       if ($('.hoverQuestionClicked .matrix tbody tr:last th').text() !== 'Total') {
         $('.hoverQuestionClicked .matrix tbody tr:last-child').remove();
@@ -723,6 +520,10 @@ function choicesDecrease() {
 }
 
 function choicesIncrease() {
+  $('.hoverQuestionClicked').find('.editable-focus').removeClass('editable-focus');
+  $('.hoverQuestionClicked').find('.addImgIcon').remove();
+  $('.hoverQuestionClicked input').prop('checked', false);
+
   let choiceNum = choicesCurrentNum();
   if (choiceNum !== 10) {
     if ($('.hoverQuestionClicked').find('.alignVertical').length > 0) {
@@ -772,6 +573,19 @@ function choicesIncrease() {
       $('.hoverQuestionClicked .rank').append(rank);
       $('.hoverQuestionClicked .rank .rank__body:last .rank__body-text').text(`text${choiceNum + 1}`);
       $('.hoverQuestionClicked .rank .rank__body:last .rank__body-rank').text(`${choiceNum + 1}`);
+    }
+    if ($('.hoverQuestionClicked').find('.rankRadio').length > 0) {
+      let matrixName = new Date().getTime();
+      const rank = $('.hoverQuestionClicked .rankRadio tr:last').clone();
+      $('.hoverQuestionClicked .rankRadio tbody').append(rank);
+      $('.hoverQuestionClicked .rankRadio tr:last th').text(`Click to write Choice ${choiceNum + 1}`);
+      $('.hoverQuestionClicked .rankRadio tr:last td input').attr('name', matrixName);
+    }
+    if ($('.hoverQuestionClicked').find('.rankTxtBox').length > 0) {
+      let matrixName = new Date().getTime();
+      const rank = $('.hoverQuestionClicked .rankTxtBox ul li:last').clone();
+      $('.hoverQuestionClicked .rankTxtBox ul').append(rank);
+      $('.hoverQuestionClicked .rankTxtBox ul li:last span').text(`Click to edit choice${choiceNum + 1}`);
     }
   }
 
@@ -839,6 +653,19 @@ function choicesIncrease() {
 }
 
 function scalePointDecrease() {
+  $('.hoverQuestionClicked').find('.editable-focus').removeClass('editable-focus');
+  $('.hoverQuestionClicked').find('.addImgIcon').remove();
+  $('.hoverQuestionClicked input').prop('checked', false);
+
+  if ($('.hoverQuestionClicked ').find('.rankRadio').length > 0) {
+    let scalePointHeadCount = scalePointHeadCounts();
+    if (scalePointHeadCount !== 2) {
+      $('.hoverQuestionClicked thead th:last-child').remove();
+      $('.hoverQuestionClicked .rankRadio tbody tr').each(function () {
+        $(this).find('td:last-child').remove();
+      });
+    }
+  }
   if ($('.hoverQuestionClicked ').find('.matrixLikert').length > 0) {
     let scalePointHeadCount = scalePointHeadCounts();
     if (scalePointHeadCount !== 2) {
@@ -848,7 +675,6 @@ function scalePointDecrease() {
           $(this).find('td:last-child').remove();
         });
       } else {
-
         $('.hoverQuestionClicked thead th').eq(-2).remove();
         $('.hoverQuestionClicked .statement').each(function () {
           $(this).find('td').eq(-2).remove();
@@ -892,6 +718,22 @@ function scalePointDecrease() {
 }
 
 function scalePointIncrease() {
+  $('.hoverQuestionClicked').find('.editable-focus').removeClass('editable-focus');
+  $('.hoverQuestionClicked').find('.addImgIcon').remove();
+  $('.hoverQuestionClicked input').prop('checked', false);
+
+  if ($('.hoverQuestionClicked').find('.rankRadio').length > 0) {
+    let scalePointHeadCount = scalePointHeadCounts();
+    if (scalePointHeadCount !== 10) {
+      const scalePointHead = $(`<th>${scalePointHeadCount +1}</th>`);
+      $('.hoverQuestionClicked thead tr').append(scalePointHead);
+      $('.hoverQuestionClicked .rankRadio tbody tr').each(function () {
+        const lasttd = $(this).find('td:last').clone();
+        $(this).append(lasttd);
+      });
+
+    }
+  }
   if ($('.hoverQuestionClicked').find('.matrixLikert').length > 0) {
     let scalePointHeadCount = scalePointHeadCounts();
     if (scalePointHeadCount !== 10) {
@@ -953,14 +795,234 @@ function scalePointIncrease() {
   }
   $('.scalePointSpan').text(scalePointHeadCounts());
 }
-
 $('.choicesDecrease').on('click', choicesDecrease);
 $('.choicesIncrease').on('click', choicesIncrease);
 $('.scalePointDecrease').on('click', scalePointDecrease);
 $('.scalePointIncrease').on('click', scalePointIncrease);
 /* PROJECTS\SURVEY: INC\DEC end */
-/* PROJECTS\SURVEY: CHANGE QUESTION */
+/* PROJECTS\SURVEY: QUESTION, CONTENTEDITABLE ON CLICK */
+function hoverQuestionClicked() {
+  $(this)
+    .addClass('hoverQuestionClicked')
+    .siblings()
+    .removeClass('hoverQuestionClicked');
 
+  if ($('.hoverQuestionClicked').find('.singleMulti').length > 0) {
+    $('.choiceAlign').removeClass('d-none');
+    if ($('.hoverQuestionClicked .singleMulti').find('.alignVertical').length > 0) {
+      $('#vertical').prop('checked', true);
+      $('#horizontal').prop('checked', false);
+    }
+    if ($('.hoverQuestionClicked .singleMulti').find('.alignHorizontal').length > 0) {
+      $('#horizontal').prop('checked', true);
+      $('#vertical').prop('checked', false);
+    }
+  }
+  if ($('.hoverQuestionClicked').find('.slider').length > 0) {
+    $('.sliderType').removeClass('d-none');
+  }
+  if ($(this).find(':radio').length > 0) {
+    $('#singleAnswers').prop('checked', true);
+    $('#singleAnswers').siblings().prop('checked', false);
+    $('.choiceAlign').removeClass('d-none');
+    $('.scalePoint').addClass('d-none');
+    $('.sliderType').addClass('d-none');
+  }
+  if ($(this).find(':checkbox').length > 0) {
+    $('#multibleAnswers').prop('checked', true);
+    $('#multibleAnswers').siblings().prop('checked', false);
+    $('.choiceAlign').removeClass('d-none');
+    $('.scalePoint').addClass('d-none');
+    $('.sliderType').addClass('d-none');
+  }
+  if ($(this).find('.chosen').length > 0) {
+    $('#dropDownOneAnswer').prop('checked', true);
+    $('#dropDownOneAnswer').siblings().prop('checked', false);
+    $('.choiceAlign').addClass('d-none');
+    $('.scalePoint').addClass('d-none');
+    $('.sliderType').addClass('d-none');
+  }
+  if ($(this).find('.chosen-select-multi').length > 0) {
+    $('#dropDownMultiAnswer').prop('checked', true);
+    $('#dropDownMultiAnswer').siblings().prop('checked', false);
+    $('.choiceAlign').addClass('d-none');
+    $('.scalePoint').addClass('d-none');
+    $('.sliderType').addClass('d-none');
+  }
+  if ($(this).find('.slider').length > 0) {
+    $('#sliderAnswer').prop('checked', true);
+    $('#sliderAnswer').siblings().prop('checked', false);
+    $('.choiceAlign').addClass('d-none');
+    $('.scalePoint').addClass('d-none');
+    $('.sliderType').removeClass('d-none');
+  }
+  if ($(this).find('.rank').length > 0) {
+    $('#rankAnswer').prop('checked', true);
+    $('#rankAnswer').siblings().prop('checked', false);
+    $('.choiceAlign').addClass('d-none');
+    $('.scalePoint').removeClass('d-none');
+    $('.sliderType').addClass('d-none');
+  }
+  if ($(this).find('.matrix').length > 0) {
+    $('#matrixAnswer').prop('checked', true);
+    $('#matrixAnswer').siblings().prop('checked', false);
+    $('.choiceAlign').addClass('d-none');
+    $('.scalePoint').removeClass('d-none');
+    $('.scalePointSpan').text(scalePointHeadCounts());
+  }
+  if ($(this).find('.txtSingleLine').length > 0) {
+    $('#txtSingleLineAnswer').prop('checked', true);
+    $('#txtSingleLineAnswer').siblings().prop('checked', false);
+    $('.choiceAlign').addClass('d-none');
+    $('.scalePoint').addClass('d-none');
+    $('.sliderType').addClass('d-none');
+  }
+  if ($(this).find('.txtEssayAnswer').length > 0) {
+    $('#txtEssayAnswer').prop('checked', true);
+    $('#txtEssayAnswer').siblings().prop('checked', false);
+    $('.choiceAlign').addClass('d-none');
+    $('.scalePoint').addClass('d-none');
+    $('.sliderType').addClass('d-none');
+  }
+  if ($(this).find('.txtFormAnswer').length > 0) {
+    $('#txtFormAnswer').prop('checked', true);
+    $('#txtFormAnswer').siblings().prop('checked', false);
+    $('.choiceAlign').addClass('d-none');
+    $('.scalePoint').addClass('d-none');
+    $('.sliderType').addClass('d-none');
+  }
+  if ($(this).find('.uploadImgAnswer').length > 0) {
+    $('#uploadImgAnswer').prop('checked', true);
+    $('#uploadImgAnswer').siblings().prop('checked', false);
+    $('.choiceAlign').addClass('d-none');
+    $('.scalePoint').addClass('d-none');
+    $('.sliderType').addClass('d-none');
+  }
+  /* questionHoverClicked class remove from all blocks when clicked on current block */
+  const x = $(this)
+    .parent()
+    .parent()
+    .parent()
+    .siblings()
+    .children()
+    .children()
+    .children();
+  x.removeClass('hoverQuestionClicked');
+  $('.choices span').text(choicesCurrentNum);
+}
+
+function onQuestionTypeChange() {
+  $('.choices span').text(choicesCurrentNum);
+  if ($('.hoverQuestionClicked').find('.slider').length > 0) {
+    $('.sliderType').removeClass('d-none');
+  } else {
+    $('.sliderType').addClass('d-none');
+  }
+  if ($('.hoverQuestionClicked').find('.rank').length > 0) {
+    $('.rankType').removeClass('d-none');
+  } else {
+    $('.rankType').addClass('d-none');
+  }
+  if ($('.hoverQuestionClicked').find('.matrix').length > 0) {
+    $('.choiceAlign').addClass('d-none');
+    $('.scalePointSpan').text(scalePointHeadCounts());
+    $('.matrixAnswerType').removeClass('d-none');
+    $('.matrixType').removeClass('d-none');
+  } else {
+    $('.matrixType').addClass('d-none');
+    $('.matrixAnswerType').addClass('d-none');
+  }
+  if ($('.hoverQuestionClicked').find('.matrix').length > 0 || $('.hoverQuestionClicked').find('.rank').length > 0) {
+    $('.scalePoint').removeClass('d-none');
+  } else {
+    $('.scalePoint').addClass('d-none');
+  }
+  setTimeout(function () {
+    if ($('.hoverQuestionClicked').find('.singleMulti').length > 0) {
+      $('.choiceAlign').removeClass('d-none');
+      if ($('.hoverQuestionClicked').find('.alignVertical').length > 0) {
+        $('#vertical').prop('checked', true);
+        $('#horizontal').prop('checked', false);
+      }
+      if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0) {
+        $('#horizontal').prop('checked', true);
+        $('#vertical').prop('checked', false);
+      }
+    } else {
+      $('.choiceAlign').addClass('d-none');
+    }
+  }, 100);
+}
+
+function contentEditClicked() {
+  const addImg = $(`<i class="fa fa-picture-o addImgIcon" title="add image"></i>`);
+  $(document)
+    .find('[contenteditable="true"]')
+    .removeClass('editable-focus')
+    .next('.addImgIcon')
+    .remove();
+  $(this).addClass('editable-focus');
+
+  if ($(this).next() !== addImg && !$(this).parent('.dropdownOneEdit').length > 0 && !$(this).parent('.dropdownMultiEdit').length > 0 && !$(this).parents('.matrix').length > 0 && !$(this).parents('.rankRadio').length > 0) {
+    addImg.insertAfter(this);
+  }
+  if ($(this).find('picture').length > 0) {
+    addImg.remove();
+  }
+  /*     $(this).focusout(function () {
+        setTimeout(() => {
+          $(this).removeClass('editable-focus');
+          $(this).next().remove();
+        }, 200);
+      }); */
+}
+
+function addImgModalToggle() {
+  $('#addImgModal').modal('toggle');
+}
+
+function getEdit() {
+  const content = $('.editable-focus');
+  return content;
+}
+
+function addImgFromModal() {
+  const contentTxt = getEdit();
+  $(this).find('.removeImgIcon').removeClass('d-none');
+  const imgCopy = $(this).clone();
+  $('.addImgIcon').remove();
+  contentTxt.append(imgCopy);
+  contentTxt.css('display', 'inline-grid');
+  $('#addImgModal').modal('hide');
+}
+
+function removeImg() {
+  const picture = $(this).parent();
+  picture.parent().removeAttr('style');
+  picture.remove();
+}
+if (/edit_survey.html/.test(window.location.href)) {
+  $('.rightControls').sticky();
+  $('.section-block').on('click', '.hoverQuestion', hoverQuestionClicked);
+  $('input[type=radio][name=answers]').on('change click', onQuestionTypeChange);
+  $(document)
+    .on('click', '[contenteditable="true"]', contentEditClicked)
+    .on('click', '.addImgIcon', addImgModalToggle);
+  $('#addImgModal').on('click', 'picture', addImgFromModal);
+  $('.hoverQuestionClicked').on('click', '.removeImgIcon', removeImg);
+}
+
+/* PROJECTS\SURVEY: QUESTION, CONTENTEDITABLE ON CLICK end-- */
+
+/* PROJECTS\SURVEY: ADD LIBRARY IMAGES TO MODAL  */
+$('#addImgModalBody').load('library.html .libraryImages');
+$('#addImgModal').on('shown.bs.modal hidden.bs.modal', function () {
+  $(this).find('.removeImgIcon').addClass('d-none');
+});
+/* PROJECTS\SURVEY: ADD LIBRARY IMAGES TO MODAL end */
+
+
+/* PROJECTS\SURVEY: CHANGE QUESTION */
 // singleAnswers
 function singleAnswers() {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
@@ -1368,7 +1430,7 @@ $(document)
   .on('click', '.stars li', starsClick);
 
 // rankAnswer
-function rankAnswer() {
+function rankDragAndDrop() {
   const rank = $(`
       <div class="questionBlock">
         <div class="questionHeader">
@@ -1395,20 +1457,143 @@ function rankAnswer() {
   $('.rank').sortable({
     cancel: '.contenteditable',
   });
+  $('#rankDragAndDrop').prop('checked', true);
 }
 
-function rankAfterSort() {
+function rankDragAndDropNumbers() {
   $(this).find('.rank__body-rank').each(function (i) {
     $(this).text(i + 1);
   });
 }
 
-$('#rankAnswer').on('click', rankAnswer);
+function rankRadio() {
+  const radioName = new Date().getTime();
+  const rank = $(`
+  <div class="questionBlock">
+    <div class="questionHeader">
+      <h3 contenteditable="true" class="card-title mb-3">
+        Rank Radio
+      </h3>
+    </div>
+    <div class="questionBody rank rankRadio">
+      <table>
+        <thead>
+          <tr class="text-center">
+            <th></th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th contenteditable="true" class="mr-4">Click to write Choice 1</th>
+            <td><input type="radio" name=${radioName}></td>
+            <td><input type="radio" name=${radioName}></td>
+            <td><input type="radio" name=${radioName}></td>
+          </tr>
+          <tr>
+            <th contenteditable="true" class="mr-4">Click to write Choice 2</th>
+            <td><input type="radio" name=${radioName +1}></td>
+            <td><input type="radio" name=${radioName +1}></td>
+            <td><input type="radio" name=${radioName +1}></td>
+          </tr>
+          <tr>
+            <th contenteditable="true" class="mr-4">Click to write Choice 3</th>
+            <td><input type="radio" name=${radioName+2}></td>
+            <td><input type="radio" name=${radioName+2}></td>
+            <td><input type="radio" name=${radioName+2}></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>`);
+  $('.hoverQuestionClicked .questionBlock').replaceWith(rank);
+  $('#rankRadio').prop('checked', true);
+}
+
+function rankRadioColumn() {
+  const clickedIndex = $(this).index() - 1;
+  $('.hoverQuestionClicked .rankRadio tr').each(function () {
+    const clickedColumnInputs = $(this).find('td').eq(clickedIndex).children();
+    clickedColumnInputs.prop('checked', false);
+  });
+  $(this).children().prop('checked', true);
+}
+
+function rankTxtBoxH() {
+  const rank = $(`
+  <div class="questionBlock">
+    <div class="questionHeader">
+      <h3 contenteditable="true" class="card-title mb-3">
+        Rank Radio
+      </h3>
+    </div>
+    <div class="questionBody rank rankTxtBox">
+      <ul class="d-flex flex-wrap">
+        <li class="d-flex mx-2">
+          <input type="text" class="form-control mr-2" style="width:50px">
+          <span contenteditable="true">Click to edit choice1</span>
+        </li>
+        <li class="d-flex mx-2">
+          <input type="text" class="form-control mr-2" style="width:50px">
+          <span contenteditable="true">Click to edit choice2</span>
+        </li>
+        <li class="d-flex mx-2">
+          <input type="text" class="form-control mr-2" style="width:50px">
+          <span contenteditable="true">Click to edit choice3</span>
+        </li>
+      </ul>
+    </div>
+  </div>`);
+  if ($('.hoverQuestionClicked .rankBoxV').length > 0) {
+    $('.hoverQuestionClicked .rankTxtBox ul').addClass('d-flex');
+  } else {
+    $('.hoverQuestionClicked .questionBlock').replaceWith(rank);
+
+  }
+  $('#rankTxtBoxH').prop('checked', true);
+}
+
+function rankTxtBoxV() {
+  // if its a txtBoxH
+  $('.hoverQuestionClicked .rankTxtBox ul li input').css('display', 'inline-block');
+  if ($('.hoverQuestionClicked .rankTxtBox').length > 0) {
+    $('.hoverQuestionClicked .rankTxtBox ul').removeClass('d-flex');
+    $('.hoverQuestionClicked .rankTxtBox ul').addClass('rankBoxV');
+  } else {
+    rankTxtBoxH();
+  }
+  $('#rankTxtBoxV').prop('checked', true);
+}
+
+function rankSelectBox() {
+  const rank = $(`
+  <div class="questionBlock">
+    <div class="questionHeader">
+      <h3 contenteditable="true" class="card-title mb-3">
+        Rank Radio
+      </h3>
+    </div>
+    <div class="questionBody rank">
+    </div>
+  </div>`);
+  $('.hoverQuestionClicked .questionBlock').replaceWith(rank);
+  $('#rankSelectBox').prop('checked', true);
+}
+
+$('#rankAnswer, #rankDragAndDrop').on('click', rankDragAndDrop);
 $(document)
-  .on('sortstop', '.rank', rankAfterSort)
+  .on('sortstop', '.rank', rankDragAndDropNumbers)
   .on('click', '.rank__body-rank', function () {
     $(this).focus();
   });
+$('#rankRadio').on('click', rankRadio);
+$(document).on('click', '.hoverQuestionClicked .rankRadio td', rankRadioColumn);
+
+$('#rankTxtBoxH').on('click', rankTxtBoxH);
+$('#rankTxtBoxV').on('click', rankTxtBoxV);
+$('#rankSelectBox').on('click', rankSelectBox);
 
 // matrixAnswer
 function matrixRadio() {
@@ -1802,18 +1987,20 @@ function matrixDropdown() {
   $('.scalePointSpan').text(4);
 }
 
+$('#matrixRadio').on('change', matrixRadio);
+$('#matrixCheck').on('change', matrixCheck);
 $('#matrixAnswer, #matrixLikert').on('click', matrixLikert);
 $('#matrixProfile').on('change', matrixProfile);
 $('#matrixBipolar').on('change', matrixBipolar);
 $('#matrixMaxDiff').on('change', matrixMaxDiff);
-$('#matrixRadio').on('change', matrixRadio);
-$('#matrixCheck').on('change', matrixCheck);
 $('#matrixTxtL').on('change', matrixTxtL);
 $('#matrixTxtM').on('change', matrixTxtM);
 $('#matrixTxtS').on('change', matrixTxtS);
 $('#matrixSumSt').on('change', matrixSumSt);
 $('#matrixSumSp').on('change', matrixSumSp);
 $('#matrixDropdownList').on('change', matrixDropdown);
+
+// side by side
 
 // txtSingleLineAnswer
 function txtSingleLineAnswer() {
@@ -1932,7 +2119,15 @@ $('#uploadImgAnswer').on('click', uploadImgAnswer);
 /* PROJECTS\PREVIEW:  */
 
 // copy elements from edit_survey to preview-mobile;
-/* $('#previewBTN').on('click', function () {}); */
+$('#previewBTN').on('click', function () {
+  const questions = $('.section-block').html();
+  setTimeout(function () {
+    $('#previewLeft').html(questions);
+  }, 300);
+  /* $('#previewLeft').load('edit_survey.html .section-block'); */
+});
+
+
 function preview() {
   $(this)
     .prev()
@@ -1945,8 +2140,8 @@ function previewRemovals() {
     .next()
     .remove();
   $('.preview-mobile .hoverQuestionClicked').remove();
-  $('.preview-mobile .questionMove').remove();
-  $('.preview-mobile .addQuestionControls').remove();
+  $('.preview-mobile .col-1').remove();
+  /*   $('.preview .addQuestionControls').remove(); */
   $('.preview-mobile .dropdownOneEdit').remove();
   $('.preview-mobile .dropdownMultiEdit').remove();
   $('.preview-mobile .addImgIcon').remove();
@@ -1972,13 +2167,6 @@ $('.sport-survey').on('click', showResponseOnClick);
 /* PROJECTS\RESPONSES: VIEW ON-CLICK end-- */
 
 /* PROJECTS\REPORTS: ADD NOTE */
-if (/reports.html/.test(window.location)) {
-  $('.note').summernote({
-    height: 100,
-  });
-  $('.note-editor').addClass('d-none');
-}
-
 function reportNoteBTN() {
   $('.reportAddNote').toggleClass('d-none');
   $('.reportCloseNote').toggleClass('d-none');
@@ -1996,11 +2184,15 @@ function reportNoteEditable() {
     $('.noteValue').removeClass('visibilityHidden');
   }
 }
-
-$('.reportSection')
-  .on('click', '.noteBTN', reportNoteBTN)
-  .on('change keypress keyup keydown paste cut', '.note-editable', reportNoteEditable);
-
+if (/reports.html/.test(window.location)) {
+  $('.note').summernote({
+    height: 100,
+  });
+  $('.note-editor').addClass('d-none');
+  $('.reportSection')
+    .on('click', '.noteBTN', reportNoteBTN)
+    .on('change keypress keyup keydown paste cut', '.note-editable', reportNoteEditable);
+}
 /* PROJECTS\REPORTS: ADD NOTE end */
 
 /* PROJECTS\REPORTS: ADD VISUAL */

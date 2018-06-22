@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Reports | Projects</title>
+  <title>Survey | Projects</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -22,7 +22,8 @@
 
   <link rel="stylesheet" href="./css/font-awesome.min.css">
   <link rel="stylesheet" href="./css/bootstrap.min.css">
-  <link rel="stylesheet" href="./css/summernote-bs4.css">
+  <link rel="stylesheet" href="./css/chosen.min.css">
+  <link rel="stylesheet" href="./js/jquery-ui.min.js">
   <link rel="stylesheet" href="./css/style.css">
 </head>
 
@@ -67,6 +68,7 @@
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="./users_management.html">Users Management</a>
               <a class="dropdown-item" href="./account_management.html">Accounts Management</a>
+
               <a class="dropdown-item" href="#">Logout</a>
             </div>
           </li>
@@ -81,22 +83,29 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarEditSurvey">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item ">
+          <li class="nav-item">
             <a class="nav-link" href="./edit_survey.html">Survey</a>
           </li>
-          <li class="nav-item">
-                        <a class="nav-link" href="./validation.html">Validation & Flow</a>
+          <li class="nav-item active">
+            <a class="nav-link" href="./validation.html">Validation & Flow</a>
           </li>
-          <li class="nav-item ">
+          <li class="nav-item">
             <a class="nav-link" href="./distributions.html">Distributions</a>
           </li>
-          <li class="nav-item ">
+          <li class="nav-item">
             <a class="nav-link" href="./responses.html">Responses</a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="./reports.html">Reports</a>
           </li>
         </ul>
+        <form class="form-inline mr-4">
+          <a id="previewBTN" class="btn btn-primary btn-lg mr-4" href="./preview.html" target="_blank">
+            <i class="fa fa-sign-out pr-2"></i> Preview
+          </a>
+          <button type="button" class="btn btn-lg btn-success px-4">
+            <i class="fa fa-bookmark-o pr-2"></i> Save</button>
+        </form>
       </div>
     </nav>
     <!-- navbar-bootm end -->
@@ -104,80 +113,15 @@
   <!-- Header end-->
   <!-- main -->
   <main>
-    <div class="editSurveySection reportSection">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- left side survey content -->
-          <div class="col-md-10">
-            <section class="reportView my-4 p-5 border rounded">
-              <div class="row py-3">
-                <div class="col-1">
-                  <div class="questionNumber">
-                    <h4>Q1</h4>
-                  </div>
-                </div>
-                <div class="col-11 d-flex justify-content-between">
-                  <div class="questionBlock">
-                    <div class="questionHeader">
-                      <h3 class="card-title  mb-3">
-                        Who is your favorite player?
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="chartSection">
-              </div>
-              <div class="noteValue pt-4 ">
-                <h3>NOTE:</h3>
-                <div class=" noteVal"></div>
-              </div>
-            </section>
-            <section class="reportBtns mb-5">
-              <form>
-                <div class="note mb-3"></div>
-                <button type="button" class="noteBTN reportAddNote btn btn-lg btn-secondary">
-                  <i class="fa fa-sticky-note-o"></i> Add note</button>
-                <button type="button" class="noteBTN reportCloseNote btn btn-lg btn-secondary d-none">
-                  <i class="fa fa-times"></i> Close note</button>
-              </form>
-            </section>
-          </div>
-          <!-- left side survey content end- -->
-          <!-- right side controls -->
-          <div class="col-md-2 pr-0 rightControlsColor">
-            <section class="rightControls pr-4 text-center">
-              <div class="row">
-                <div class="col-12 py-5">
-                  <div class="btn-group" role="group" aria-label="Basic example">
-                    <button id="bar" type="button" class="btn" data-toggle="tooltip" data-placement="bottom" title="bar">
-                      <i class="fa fa-bar-chart"></i>
-                    </button>
-                    <button id="line" type="button" class=" btn" data-toggle="tooltip" data-placement="top" title="line">
-                      <i class="fa fa-line-chart"></i>
-                    </button>
-                    <button id="pie" type="button" class=" btn" data-toggle="tooltip" data-placement="bottom" title="pie">
-                      <i class="fa fa-pie-chart"></i>
-                    </button>
-                  </div>
-                  <button type="button" class="mt-5 reportAddVisual btn btn-lg btn-primary">
-                    <i class="fa fa-line-chart"></i> Add Visual</button>
-                </div>
-              </div>
-            </section>
-          </div>
-        </div>
-      </div>
-    </div>
   </main>
   <!-- main end-->
-  <footer class="footer"></footer>
 
+  <!-- footer -->
+
+  <!-- footer end -->
   <!-- ........................................ -->
   <script src="./js/jquery-3.3.1.slim.min.js"></script>
   <script src="./js/bootstrap.bundle.min.js"></script>
-  <script src="./js/Chart.bundle.min.js"></script>
-  <script src="./js/summernote-bs4.min.js"></script>
   <script src="./js/script.js"></script>
 </body>
 
