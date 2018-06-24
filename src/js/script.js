@@ -263,10 +263,13 @@ function addRadio(place, elementPlaceInDOM) {
   const radioQuestion = $(`
     <div class = "row py-3 hoverQuestion">
       <div class="questionMove">
-        <div class="questionMove__up py-2">
+        <div class="questionMove__valid py-2" title="validation and flow">
+          <i class="fa fa-gear"></i>
+        </div>
+        <div class="questionMove__up py-2" title="move up">
           <i class="fa fa-arrow-up"></i>
         </div>
-        <div class="questionMove__down py-2">
+        <div class="questionMove__down py-2" title="move down">
           <i class="fa fa-arrow-down"></i>
         </div>
       </div>
@@ -371,9 +374,14 @@ function questionMoveDown() {
   const questionPositionPrevSibling = questionPosition.next();
   $(questionPosition).insertAfter(questionPositionPrevSibling);
 }
+
+function questionValidation() {
+  $('#validModal').modal('toggle');
+}
 $('.section-block')
   .on('click', '.questionMove__up', questionMoveUp)
-  .on('click', '.questionMove__down', questionMoveDown);
+  .on('click', '.questionMove__down', questionMoveDown)
+  .on('click', '.questionMove__valid', questionValidation);
 /* PROJECTS\SURVEY: MOVE QUESTION UP and DOWN end-- */
 
 
@@ -801,125 +809,51 @@ $('.scalePointDecrease').on('click', scalePointDecrease);
 $('.scalePointIncrease').on('click', scalePointIncrease);
 /* PROJECTS\SURVEY: INC\DEC end */
 /* PROJECTS\SURVEY: QUESTION, CONTENTEDITABLE ON CLICK */
-function hoverQuestionClicked() {
-  $(this)
-    .addClass('hoverQuestionClicked')
-    .siblings()
-    .removeClass('hoverQuestionClicked');
-
-  if ($('.hoverQuestionClicked').find('.singleMulti').length > 0) {
-    $('.choiceAlign').removeClass('d-none');
-    if ($('.hoverQuestionClicked .singleMulti').find('.alignVertical').length > 0) {
-      $('#vertical').prop('checked', true);
-      $('#horizontal').prop('checked', false);
-    }
-    if ($('.hoverQuestionClicked .singleMulti').find('.alignHorizontal').length > 0) {
-      $('#horizontal').prop('checked', true);
-      $('#vertical').prop('checked', false);
-    }
-  }
-  if ($('.hoverQuestionClicked').find('.slider').length > 0) {
-    $('.sliderType').removeClass('d-none');
-  }
-  if ($(this).find(':radio').length > 0) {
-    $('#singleAnswers').prop('checked', true);
-    $('#singleAnswers').siblings().prop('checked', false);
-    $('.choiceAlign').removeClass('d-none');
-    $('.scalePoint').addClass('d-none');
-    $('.sliderType').addClass('d-none');
-  }
-  if ($(this).find(':checkbox').length > 0) {
-    $('#multibleAnswers').prop('checked', true);
-    $('#multibleAnswers').siblings().prop('checked', false);
-    $('.choiceAlign').removeClass('d-none');
-    $('.scalePoint').addClass('d-none');
-    $('.sliderType').addClass('d-none');
-  }
-  if ($(this).find('.chosen').length > 0) {
-    $('#dropDownOneAnswer').prop('checked', true);
-    $('#dropDownOneAnswer').siblings().prop('checked', false);
-    $('.choiceAlign').addClass('d-none');
-    $('.scalePoint').addClass('d-none');
-    $('.sliderType').addClass('d-none');
-  }
-  if ($(this).find('.chosen-select-multi').length > 0) {
-    $('#dropDownMultiAnswer').prop('checked', true);
-    $('#dropDownMultiAnswer').siblings().prop('checked', false);
-    $('.choiceAlign').addClass('d-none');
-    $('.scalePoint').addClass('d-none');
-    $('.sliderType').addClass('d-none');
-  }
-  if ($(this).find('.slider').length > 0) {
-    $('#sliderAnswer').prop('checked', true);
-    $('#sliderAnswer').siblings().prop('checked', false);
-    $('.choiceAlign').addClass('d-none');
-    $('.scalePoint').addClass('d-none');
-    $('.sliderType').removeClass('d-none');
-  }
-  if ($(this).find('.rank').length > 0) {
-    $('#rankAnswer').prop('checked', true);
-    $('#rankAnswer').siblings().prop('checked', false);
-    $('.choiceAlign').addClass('d-none');
-    $('.scalePoint').removeClass('d-none');
-    $('.sliderType').addClass('d-none');
-  }
-  if ($(this).find('.matrix').length > 0) {
-    $('#matrixAnswer').prop('checked', true);
-    $('#matrixAnswer').siblings().prop('checked', false);
-    $('.choiceAlign').addClass('d-none');
-    $('.scalePoint').removeClass('d-none');
-    $('.scalePointSpan').text(scalePointHeadCounts());
-  }
-  if ($(this).find('.txtSingleLine').length > 0) {
-    $('#txtSingleLineAnswer').prop('checked', true);
-    $('#txtSingleLineAnswer').siblings().prop('checked', false);
-    $('.choiceAlign').addClass('d-none');
-    $('.scalePoint').addClass('d-none');
-    $('.sliderType').addClass('d-none');
-  }
-  if ($(this).find('.txtEssayAnswer').length > 0) {
-    $('#txtEssayAnswer').prop('checked', true);
-    $('#txtEssayAnswer').siblings().prop('checked', false);
-    $('.choiceAlign').addClass('d-none');
-    $('.scalePoint').addClass('d-none');
-    $('.sliderType').addClass('d-none');
-  }
-  if ($(this).find('.txtFormAnswer').length > 0) {
-    $('#txtFormAnswer').prop('checked', true);
-    $('#txtFormAnswer').siblings().prop('checked', false);
-    $('.choiceAlign').addClass('d-none');
-    $('.scalePoint').addClass('d-none');
-    $('.sliderType').addClass('d-none');
-  }
-  if ($(this).find('.uploadImgAnswer').length > 0) {
-    $('#uploadImgAnswer').prop('checked', true);
-    $('#uploadImgAnswer').siblings().prop('checked', false);
-    $('.choiceAlign').addClass('d-none');
-    $('.scalePoint').addClass('d-none');
-    $('.sliderType').addClass('d-none');
-  }
-  /* questionHoverClicked class remove from all blocks when clicked on current block */
-  const x = $(this)
-    .parent()
-    .parent()
-    .parent()
-    .siblings()
-    .children()
-    .children()
-    .children();
-  x.removeClass('hoverQuestionClicked');
-  $('.choices span').text(choicesCurrentNum);
-}
-
 function onQuestionTypeChange() {
   $('.choices span').text(choicesCurrentNum);
+  if ($('.hoverQuestionClicked').find('.singleMulti').length > 0) {
+    $('.choiceType').removeClass('d-none');
+    $('#singleAnswers').prop('checked', true);
+    $('#singleAnswers').siblings().prop('checked', false);
+    if ($('.hoverQuestionClicked').find('.alignVertical').length > 0) {
+      $('#vertical').prop('checked', true);
+      $('#vertical').siblings().prop('checked', false);
+    }
+    if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0) {
+      $('#horizontal').prop('checked', true);
+      $('#horizontal').siblings().prop('checked', false);
+    }
+    if ($('.hoverQuestionClicked').find('.alignColumn').length > 0) {
+      $('#column').prop('checked', true);
+      $('#column').siblings().prop('checked', false);
+    }
+  } else {
+    $('.choiceType').addClass('d-none');
+  }
+  if ($('.hoverQuestionClicked').find('.chosen-container').length > 0) {
+    $('.dropdownType').removeClass('d-none');
+    if ($('.hoverQuestionClicked').find('.dropdownOneEdit').length > 0) {
+      $('#dropDownOneAnswer').prop('checked', true);
+      $('#dropDownOneAnswer').siblings().prop('checked', false);
+    }
+    if ($('.hoverQuestionClicked').find('.dropdownMultiEdit').length > 0) {
+      $('#dropDownMultiAnswer').prop('checked', true);
+      $('#dropDownMultiAnswer').siblings().prop('checked', false);
+    }
+  } else {
+    $('.dropdownType').addClass('d-none');
+  }
   if ($('.hoverQuestionClicked').find('.slider').length > 0) {
     $('.sliderType').removeClass('d-none');
+    $('#sliderAnswer').prop('checked', true);
+    $('#sliderAnswer').siblings().prop('checked', false);
   } else {
     $('.sliderType').addClass('d-none');
   }
   if ($('.hoverQuestionClicked').find('.rank').length > 0) {
     $('.rankType').removeClass('d-none');
+    $('#rankAnswer').prop('checked', true);
+    $('#rankAnswer').siblings().prop('checked', false);
   } else {
     $('.rankType').addClass('d-none');
   }
@@ -928,9 +862,22 @@ function onQuestionTypeChange() {
     $('.scalePointSpan').text(scalePointHeadCounts());
     $('.matrixAnswerType').removeClass('d-none');
     $('.matrixType').removeClass('d-none');
+    $('#matrixAnswer').prop('checked', true);
+    $('#matrixAnswer').siblings().prop('checked', false);
   } else {
     $('.matrixType').addClass('d-none');
     $('.matrixAnswerType').addClass('d-none');
+  }
+  if ($('.hoverQuestionClicked').find('.txtAnswer').length > 0) {
+    $('.txtType').removeClass('d-none');
+    $('#txtSingleLineAnswer').prop('checked', true);
+    $('#txtSingleLineAnswer').siblings().prop('checked', false);
+  } else {
+    $('.txtType').addClass('d-none');
+  }
+  if ($('.hoverQuestionClicked').find('.uploadImgAnswer').length > 0) {
+    $('#uploadImgAnswer').prop('checked', true);
+    $('#uploadImgAnswer').siblings().prop('checked', false);
   }
   if ($('.hoverQuestionClicked').find('.matrix').length > 0 || $('.hoverQuestionClicked').find('.rank').length > 0) {
     $('.scalePoint').removeClass('d-none');
@@ -952,6 +899,136 @@ function onQuestionTypeChange() {
       $('.choiceAlign').addClass('d-none');
     }
   }, 100);
+}
+
+function questionTypeButton() {
+  // choices
+  if ($('.hoverQuestionClicked').find('.singleMulti').length > 0 && $('.hoverQuestionClicked').find(':radio').length > 0) {
+    $('#singleAnswersType').prop('checked', true);
+    $('#singleAnswersType').siblings().prop('checked', false);
+  }
+  if ($('.hoverQuestionClicked').find('.singleMulti').length > 0 && $('.hoverQuestionClicked').find(':checkbox').length > 0) {
+    $('#multibleAnswers').prop('checked', true);
+    $('#multibleAnswers').siblings().prop('checked', false);
+  }
+  // dropdown
+  if ($('.hoverQuestionClicked').find('.dropdownOneEdit').length > 0) {
+    $('#dropDownOneType').prop('checked', true);
+    $('#dropDownOneType').siblings().prop('checked', false);
+  }
+  if ($('.hoverQuestionClicked').find('.dropdownMultiEdit').length > 0) {
+    $('#dropDownMultiAnswer').prop('checked', true);
+    $('#dropDownMultiAnswer').siblings().prop('checked', false);
+  }
+  // slider
+  if ($('.hoverQuestionClicked').find('.slider').length > 0) {
+    $('#slider').prop('checked', true);
+    $('#slider').siblings().prop('checked', false);
+  }
+  if ($('.hoverQuestionClicked').find('.slider').length > 0 && $('.hoverQuestionClicked').find('.stars-slider').length > 0) {
+    $('#stars').prop('checked', true);
+    $('#stars').siblings().prop('checked', false);
+  }
+  // rank
+  if ($('.hoverQuestionClicked').find('.rank').length > 0) {
+    $('#rankDragAndDrop').prop('checked', true);
+    $('#rankDragAndDrop').siblings().prop('checked', false);
+  }
+  if ($('.hoverQuestionClicked').find('.rankRadio').length > 0) {
+    $('#rankRadio').prop('checked', true);
+    $('#rankRadio').siblings().prop('checked', false);
+  }
+  if ($('.hoverQuestionClicked').find('.rankBoxH').length > 0) {
+    $('#rankTxtBoxH').prop('checked', true);
+    $('#rankTxtBoxH').siblings().prop('checked', false);
+  }
+  if ($('.hoverQuestionClicked').find('.rankBoxV').length > 0) {
+    $('#rankTxtBoxV').prop('checked', true);
+    $('#rankTxtBoxV').siblings().prop('checked', false);
+  }
+  // matrix radio / checkbox
+  if ($('.hoverQuestionClicked').find('.matrix').length > 0 && $('.hoverQuestionClicked').find(':radio').length > 0) {
+    $('#matrixRadio').prop('checked', true);
+    $('#matrixRadio').siblings().prop('checked', false);
+  }
+  if ($('.hoverQuestionClicked').find('.matrix').length > 0 && $('.hoverQuestionClicked').find(':checkbox').length > 0) {
+    $('#matrixCheck').prop('checked', true);
+    $('#matrixCheck').siblings().prop('checked', false);
+  }
+  // matrix type
+  if ($('.hoverQuestionClicked').find('.matrixLikert').length > 0 && $('.hoverQuestionClicked').find(':radio').length > 0 || $('.hoverQuestionClicked').find('.matrixLikert').length > 0 && $('.hoverQuestionClicked').find(':checkbox').length > 0) {
+    $('#matrixLikert').prop('checked', true);
+    $('#matrixLikert').siblings().prop('checked', false);
+  }
+  if ($('.hoverQuestionClicked').find('.matrixProfile').length > 0 && $('.hoverQuestionClicked').find(':radio').length > 0 || $('.hoverQuestionClicked').find('.matrixProfile').length > 0 && $('.hoverQuestionClicked').find(':checkbox').length > 0) {
+    $('#matrixProfile').prop('checked', true);
+    $('#matrixProfile').siblings().prop('checked', false);
+  }
+  if ($('.hoverQuestionClicked').find('.matrixBipolar').length > 0 && $('.hoverQuestionClicked').find(':radio').length > 0 || $('.hoverQuestionClicked').find('.matrixBipolar').length > 0 && $('.hoverQuestionClicked').find(':checkbox').length > 0) {
+    $('#matrixBipolar').prop('checked', true);
+    $('#matrixBipolar').siblings().prop('checked', false);
+  }
+  if ($('.hoverQuestionClicked').find('.matrixMaxDiff').length > 0 && $('.hoverQuestionClicked').find(':radio').length > 0 || $('.hoverQuestionClicked').find('.matrixMaxDiff').length > 0 && $('.hoverQuestionClicked').find(':checkbox').length > 0) {
+    $('#matrixMaxDiff').prop('checked', true);
+    $('#matrixMaxDiff').siblings().prop('checked', false);
+  }
+  if ($('.hoverQuestionClicked').find('.sumTotalStatement').length > 0) {
+    $('#matrixSumSt').prop('checked', true);
+    $('#matrixSumSt').siblings().prop('checked', false);
+  }
+  if ($('.hoverQuestionClicked').find('.sumTotalScalepoint').length > 0) {
+    $('#matrixSumSp').prop('checked', true);
+    $('#matrixSumSp').siblings().prop('checked', false);
+  }
+  if ($('.hoverQuestionClicked').find('.matrixDropdownStatement').length > 0) {
+    $('#matrixDropdownList').prop('checked', true);
+    $('#matrixDropdownList').siblings().prop('checked', false);
+  }
+  if ($('.hoverQuestionClicked').find('.matrixTxtS').length > 0) {
+    $('#matrixTxtS').prop('checked', true);
+    $('#matrixTxtS').siblings().prop('checked', false);
+  }
+  if ($('.hoverQuestionClicked').find('.matrixTxtM').length > 0) {
+    $('#matrixTxtM').prop('checked', true);
+    $('#matrixTxtM').siblings().prop('checked', false);
+  }
+  if ($('.hoverQuestionClicked').find('.matrixTxtL').length > 0) {
+    $('#matrixTxtL').prop('checked', true);
+    $('#matrixTxtL').siblings().prop('checked', false);
+  }
+  // text
+  if ($('.hoverQuestionClicked').find('.txtSingleLine').length > 0) {
+    $('#txtSingleLineType').prop('checked', true);
+    $('#txtSingleLineType').siblings().prop('checked', false);
+  }
+  if ($('.hoverQuestionClicked').find('.txtEssayAnswer').length > 0) {
+    $('#txtEssayAnswer').prop('checked', true);
+    $('#txtEssayAnswer').siblings().prop('checked', false);
+  }
+  if ($('.hoverQuestionClicked').find('.txtFormAnswer').length > 0) {
+    $('#txtFormAnswer').prop('checked', true);
+    $('#txtFormAnswer').siblings().prop('checked', false);
+  }
+}
+
+function hoverQuestionClicked() {
+  $(this)
+    .addClass('hoverQuestionClicked')
+    .siblings()
+    .removeClass('hoverQuestionClicked');
+  // show and hide type button according to Q-type
+  onQuestionTypeChange();
+  questionTypeButton();
+  /* questionHoverClicked class remove from all blocks when clicked on current block */
+  const x = $(this)
+    .parent()
+    .parent()
+    .parent()
+    .siblings()
+    .children()
+    .children()
+    .children();
+  x.removeClass('hoverQuestionClicked');
 }
 
 function contentEditClicked() {
@@ -1166,7 +1243,7 @@ function alignC() {
   }
 }
 
-$('#singleAnswers').on('click', singleAnswers);
+$('#singleAnswers, #singleAnswersType').on('click', singleAnswers);
 $('#multibleAnswers').on('click', multibleAnswers);
 $('#vertical').on('click', alignV);
 $('#horizontal').on('click', alignH);
@@ -1219,7 +1296,7 @@ function dropdownOneEdit() {
     width: '60%',
   });
 }
-$('#dropDownOneAnswer').on('click', dropDownOneAnswer);
+$('#dropDownOneAnswer, #dropDownOneType').on('click', dropDownOneAnswer);
 $('.section-block').on('keyup change paste copy cut', '.dropdownOneEdit p', dropdownOneEdit);
 
 // dropDownMultiAnswer
@@ -1530,7 +1607,7 @@ function rankTxtBoxH() {
       </h3>
     </div>
     <div class="questionBody rank rankTxtBox">
-      <ul class="d-flex flex-wrap">
+      <ul class="d-flex flex-wrap rankBoxH">
         <li class="d-flex mx-2">
           <input type="text" class="form-control mr-2" style="width:50px">
           <span contenteditable="true">Click to edit choice1</span>
@@ -1547,7 +1624,11 @@ function rankTxtBoxH() {
     </div>
   </div>`);
   if ($('.hoverQuestionClicked .rankBoxV').length > 0) {
-    $('.hoverQuestionClicked .rankTxtBox ul').addClass('d-flex');
+    $('.hoverQuestionClicked .rankTxtBox ul')
+      .addClass('d-flex')
+      .addClass('flex-wrap')
+      .addClass('rankBoxH')
+      .removeClass('rankBoxV');
   } else {
     $('.hoverQuestionClicked .questionBlock').replaceWith(rank);
 
@@ -1558,28 +1639,21 @@ function rankTxtBoxH() {
 function rankTxtBoxV() {
   // if its a txtBoxH
   $('.hoverQuestionClicked .rankTxtBox ul li input').css('display', 'inline-block');
-  if ($('.hoverQuestionClicked .rankTxtBox').length > 0) {
-    $('.hoverQuestionClicked .rankTxtBox ul').removeClass('d-flex');
-    $('.hoverQuestionClicked .rankTxtBox ul').addClass('rankBoxV');
+  if ($('.hoverQuestionClicked .rankBoxH').length > 0) {
+    $('.hoverQuestionClicked .rankTxtBox ul')
+      .addClass('rankBoxV')
+      .removeClass('d-flex')
+      .removeClass('flex-wrap')
+      .removeClass('rankBoxH');
   } else {
     rankTxtBoxH();
+    $('.hoverQuestionClicked .rankTxtBox ul')
+      .addClass('rankBoxV')
+      .removeClass('d-flex')
+      .removeClass('flex-wrap')
+      .removeClass('rankBoxH');
   }
   $('#rankTxtBoxV').prop('checked', true);
-}
-
-function rankSelectBox() {
-  const rank = $(`
-  <div class="questionBlock">
-    <div class="questionHeader">
-      <h3 contenteditable="true" class="card-title mb-3">
-        Rank Radio
-      </h3>
-    </div>
-    <div class="questionBody rank">
-    </div>
-  </div>`);
-  $('.hoverQuestionClicked .questionBlock').replaceWith(rank);
-  $('#rankSelectBox').prop('checked', true);
 }
 
 $('#rankAnswer, #rankDragAndDrop').on('click', rankDragAndDrop);
@@ -1590,10 +1664,8 @@ $(document)
   });
 $('#rankRadio').on('click', rankRadio);
 $(document).on('click', '.hoverQuestionClicked .rankRadio td', rankRadioColumn);
-
 $('#rankTxtBoxH').on('click', rankTxtBoxH);
 $('#rankTxtBoxV').on('click', rankTxtBoxV);
-$('#rankSelectBox').on('click', rankSelectBox);
 
 // matrixAnswer
 function matrixRadio() {
@@ -1869,24 +1941,39 @@ function matrixBipolar() {
 }
 
 function matrixTxtL() {
+  $('.hoverQuestionClicked .matrix tbody')
+    .addClass('matrixTxtL')
+    .removeClass('matrixTxtM')
+    .removeClass('matrixTxtS');
   $('.hoverQuestionClicked .statement input').prop('checked', false);
-  $('.hoverQuestionClicked .statement input').prop('type', 'text')
+  $('.hoverQuestionClicked .statement input')
+    .prop('type', 'text')
     .addClass('form-control w-75')
     .removeClass('w-50 w-25')
     .removeAttr('name');
 }
 
 function matrixTxtM() {
+  $('.hoverQuestionClicked .matrix tbody')
+    .addClass('matrixTxtM')
+    .removeClass('matrixTxtL')
+    .removeClass('matrixTxtS');
   $('.hoverQuestionClicked .statement input').prop('checked', false);
-  $('.hoverQuestionClicked .statement input').prop('type', 'text')
+  $('.hoverQuestionClicked .statement input')
+    .prop('type', 'text')
     .addClass('form-control w-50')
     .removeClass('w-75 w-25')
     .removeAttr('name');
 }
 
 function matrixTxtS() {
+  $('.hoverQuestionClicked .matrix tbody')
+    .addClass('matrixTxtS')
+    .removeClass('matrixTxtL')
+    .removeClass('matrixTxtM');
   $('.hoverQuestionClicked .statement input').prop('checked', false);
-  $('.hoverQuestionClicked .statement input').prop('type', 'text')
+  $('.hoverQuestionClicked .statement input')
+    .prop('type', 'text')
     .addClass('form-control w-25')
     .removeClass('w-75 w-50')
     .removeAttr('name');
@@ -1895,6 +1982,7 @@ function matrixTxtS() {
 function matrixSumSt() {
   matrixLikert();
   matrixTxtM();
+  $('.hoverQuestionClicked .matrix').find('.matrixTxtM').removeClass('matrixTxtM');
   $('#matrixSumSt').prop('checked', true);
   choicesIncrease();
   $('.hoverQuestionClicked .matrix tbody tr:last th')
@@ -1908,6 +1996,7 @@ function matrixSumSt() {
 function matrixSumSp() {
   matrixLikert();
   matrixTxtM();
+  $('.hoverQuestionClicked .matrix').find('.matrixTxtM').removeClass('matrixTxtM');
   $('#matrixSumSp').prop('checked', true);
   scalePointIncrease();
   $('.hoverQuestionClicked .matrix thead tr th:last')
@@ -2013,15 +2102,13 @@ function txtSingleLineAnswer() {
             Text Single Line
           </h3>
         </div>
-        <div class="questionBody txtSingleLine">
+        <div class="questionBody txtSingleLine txtAnswer">
           <input type="text" class="form-control">
         </div>
       </div>`);
   $('.hoverQuestionClicked .questionBlock').replaceWith(txtSingleLine);
 }
-$('#txtSingleLineAnswer').on('click', txtSingleLineAnswer);
 
-// txtEssayAnswer
 function txtEssayAnswer() {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:radio').prop('checked', false);
@@ -2032,15 +2119,13 @@ function txtEssayAnswer() {
             Text Essay
           </h3>
         </div>
-        <div class="questionBody txtEssayAnswer">
+        <div class="questionBody txtEssayAnswer txtAnswer">
           <textarea class="form-control" rows="5"></textarea>
         </div>
       </div>`);
   $('.hoverQuestionClicked .questionBlock').replaceWith(txtEssay);
 }
-$('#txtEssayAnswer').on('click', txtEssayAnswer);
 
-// txtFormAnswer
 function txtFormAnswer() {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:radio').prop('checked', false);
@@ -2051,7 +2136,7 @@ function txtFormAnswer() {
             Text Form
           </h3>
         </div>
-        <div class="questionBody txtFormAnswer">
+        <div class="questionBody txtFormAnswer txtAnswer">
           <form>
             <div class="form-group row text-right">
               <label class="col-sm-2">Date:</label>
@@ -2088,6 +2173,9 @@ function txtFormAnswer() {
       </div>`);
   $('.hoverQuestionClicked .questionBlock').replaceWith(txtForm);
 }
+
+$('#txtSingleLineAnswer, #txtSingleLineType').on('click', txtSingleLineAnswer);
+$('#txtEssayAnswer').on('click', txtEssayAnswer);
 $('#txtFormAnswer').on('click', txtFormAnswer);
 
 // uploadImgAnswer
@@ -2115,7 +2203,7 @@ function uploadImgAnswer() {
 }
 $('#uploadImgAnswer').on('click', uploadImgAnswer);
 
-/* PROJECTS\SURVEY: CHANGE QUESTION end-- */
+/* PROJECTS\SURVEY: CHANGE QUESTION end-------------------------------------- */
 /* PROJECTS\PREVIEW:  */
 
 // copy elements from edit_survey to preview-mobile;

@@ -678,6 +678,10 @@ input[type="radio"] {
   .addImgIcon:hover {
     color: #007ac0; }
 
+.tableActions button {
+  font-size: 1.2rem;
+  font-weight: bold; }
+
 /* btn component end--------------------- */
 /* card component */
 .projects-list-container {
@@ -1186,7 +1190,7 @@ main .form-inline span {
         display: block; }
       .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove {
         position: absolute;
-        top: 35%;
+        top: 2px;
         left: -30px;
         background-color: #909090;
         color: #fff;
@@ -1195,9 +1199,9 @@ main .form-inline span {
         text-align: center;
         overflow: hidden;
         display: none; }
-        .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__up, .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__down {
+        .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__valid, .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__up, .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__down {
           cursor: pointer; }
-          .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__up:hover, .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__up:hover, .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__down:hover, .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__down:hover {
+          .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__valid:hover, .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__valid:hover, .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__up:hover, .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__up:hover, .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__down:hover, .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove__down:hover {
             background-color: #222; }
       .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionNumberContainer {
         border-right: 1px solid #ccc; }
@@ -1260,11 +1264,13 @@ main .form-inline span {
       font-weight: 600;
       display: inline-block; }
     .editSurveySection .rightControls .matrixType label,
-    .editSurveySection .rightControls .rankType label {
-      display: block; }
+    .editSurveySection .rightControls .dropdown-menu-form label {
+      display: block;
+      width: 100%; }
     .editSurveySection .rightControls-container p {
       cursor: default;
-      padding: 0.3rem 0.2rem;
+      padding: 0.1rem 0.2rem;
+      margin-bottom: 0;
       background-color: #222;
       color: #fff;
       text-align: center;
@@ -1274,9 +1280,11 @@ main .form-inline span {
       @media (min-width: 1500px) {
         .editSurveySection .rightControls-container p {
           font-size: 2rem; } }
+    .editSurveySection .rightControls .change-answers:hover > p {
+      background-color: #161616; }
     .editSurveySection .rightControls .change-answers .answers > * {
       display: block;
-      margin: 5px auto;
+      margin: 2px auto;
       border-radius: 5px;
       width: 100%;
       padding: 1.3rem 0;
@@ -1305,21 +1313,15 @@ main .form-inline span {
         color: #fff;
         font-weight: 700; }
     .editSurveySection .rightControls .change-answers .answers #singleAnswers {
-      display: inline-block;
       width: 47%;
-      font-size: 1.3rem; }
+      display: inline-block; }
       .editSurveySection .rightControls .change-answers .answers #singleAnswers:after {
-        content: "Single choice"; }
-    .editSurveySection .rightControls .change-answers .answers #multibleAnswers {
-      display: inline-block;
+        content: "Choices"; }
+    .editSurveySection .rightControls .change-answers .answers #dropDownOneAnswer {
       width: 51%;
-      font-size: 1.3rem; }
-      .editSurveySection .rightControls .change-answers .answers #multibleAnswers:after {
-        content: "Multiple"; }
-    .editSurveySection .rightControls .change-answers .answers #dropDownOneAnswer:after {
-      content: "Dropdown Single choice"; }
-    .editSurveySection .rightControls .change-answers .answers #dropDownMultiAnswer:after {
-      content: "Dropdown Multi choices"; }
+      display: inline-block; }
+      .editSurveySection .rightControls .change-answers .answers #dropDownOneAnswer:after {
+        content: "Dropdown"; }
     .editSurveySection .rightControls .change-answers .answers #sliderAnswer {
       display: inline-block;
       width: 30.33333333333333%; }
@@ -1335,22 +1337,20 @@ main .form-inline span {
       width: 33.33333333333333%; }
       .editSurveySection .rightControls .change-answers .answers #matrixAnswer:after {
         content: "Matrix"; }
-    .editSurveySection .rightControls .change-answers .answers #txtSingleLineAnswer:after {
-      content: "Text Single Line"; }
-    .editSurveySection .rightControls .change-answers .answers #txtEssayAnswer {
-      display: inline-block;
-      width: 47%; }
-      .editSurveySection .rightControls .change-answers .answers #txtEssayAnswer:after {
-        content: "Text Essay"; }
-    .editSurveySection .rightControls .change-answers .answers #txtFormAnswer {
-      display: inline-block;
-      width: 51%; }
-      .editSurveySection .rightControls .change-answers .answers #txtFormAnswer:after {
-        content: "Text Form"; }
-    .editSurveySection .rightControls .change-answers .answers #uploadImgAnswer:after {
-      content: "Upload Image"; }
+    .editSurveySection .rightControls .change-answers .answers #txtSingleLineAnswer {
+      width: 47%;
+      display: inline-block; }
+      .editSurveySection .rightControls .change-answers .answers #txtSingleLineAnswer:after {
+        content: "Text"; }
+    .editSurveySection .rightControls .change-answers .answers #uploadImgAnswer {
+      width: 51%;
+      display: inline-block; }
+      .editSurveySection .rightControls .change-answers .answers #uploadImgAnswer:after {
+        content: "Upload"; }
     .editSurveySection .rightControls .change-choices {
       font-size: 2rem; }
+      .editSurveySection .rightControls .change-choices:hover > p {
+        background-color: #161616; }
       .editSurveySection .rightControls .change-choices i {
         cursor: pointer;
         font-size: 3rem;
@@ -1362,7 +1362,13 @@ main .form-inline span {
                -o-transform: scale(0.9);
                   transform: scale(0.9); }
       .editSurveySection .rightControls .change-choices i.fa-minus-circle {
-        color: #cb0c0c; }
+        color: #b10c0c; }
+        .editSurveySection .rightControls .change-choices i.fa-minus-circle:hover {
+          color: #f81212; }
+      .editSurveySection .rightControls .change-choices i.fa-plus-circle {
+        color: #036103; }
+        .editSurveySection .rightControls .change-choices i.fa-plus-circle:hover {
+          color: #07b807; }
       .editSurveySection .rightControls .change-choices span {
         color: #222;
         line-height: 1;
@@ -1371,8 +1377,6 @@ main .form-inline span {
         -o-transition: none;
         -moz-transition: none;
         transition: none; }
-      .editSurveySection .rightControls .change-choices i.fa-plus-circle {
-        color: green; }
 
 /* edit_survey section end- */
 /* preview-mobile */
@@ -1588,6 +1592,18 @@ main .form-inline span {
     border-radius: 0; }
 
 /* library end */
+/* users */
+.userTableSection h1 {
+  font-size: 4rem;
+  text-align: center;
+  margin-bottom: 10px; }
+
+.userMangSection h1 {
+  font-size: 4rem;
+  text-align: center;
+  margin-bottom: 10px; }
+
+/* users end */
 /*@import PAGES folder end-----------------------------*/
 
 /*# sourceMappingURL=style.css.map */
