@@ -1191,7 +1191,7 @@ main .form-inline span {
       .editSurveySection .leftContent .section-block .card-body .hoverQuestion .questionMove {
         position: absolute;
         top: 2px;
-        left: -30px;
+        left: -32px;
         background-color: #909090;
         color: #fff;
         border-radius: 10px;
@@ -1337,6 +1337,8 @@ main .form-inline span {
       width: 33.33333333333333%; }
       .editSurveySection .rightControls .change-answers .answers #matrixAnswer:after {
         content: "Matrix"; }
+    .editSurveySection .rightControls .change-answers .answers #sideAnswer:after {
+      content: "Side by Side"; }
     .editSurveySection .rightControls .change-answers .answers #txtSingleLineAnswer {
       width: 47%;
       display: inline-block; }

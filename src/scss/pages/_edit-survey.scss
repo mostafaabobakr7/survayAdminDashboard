@@ -23,7 +23,7 @@
             .questionMove {
               position: absolute;
               top: 2px;
-              left: -30px;
+              left: -32px;
               background-color: #909090;
               color: #fff;
               border-radius: 10px;
@@ -199,6 +199,11 @@
           width: 33.33333333333333%;
           &:after {
             content: "Matrix";
+          }
+        }
+        #sideAnswer {
+          &:after {
+            content: "Side by Side";
           }
         }
         #txtSingleLineAnswer {
