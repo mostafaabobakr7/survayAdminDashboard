@@ -1,6 +1,7 @@
 /* home */
 
 main {
+  min-height: 85vh;
   .section-home {
     position: relative;
     &-folders {
@@ -11,8 +12,9 @@ main {
         }
       }
       &__menu {
+        min-height: 50vh;
         position: absolute;
-        z-index: 100;
+        z-index: 2;
         top: -3rem;
         width: 25rem;
         background-color: #fff;
@@ -69,5 +71,4 @@ main {
     }
   }
 }
-
 /* home end----------------- */

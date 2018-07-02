@@ -136,7 +136,7 @@ function createProjectBTN(ev) {
                         <a class="dropdown-item">
                           <i class="fa fa-sign-out"></i>Preview Survey</a>
                         <a class="dropdown-item">
-                          <i class="fa fa-paper-plane"></i>PROJECTS\DISTRIBUTE Survey</a>
+                          <i class="fa fa-paper-plane"></i>DISTRIBUTE Survey</a>
                         <a class="dropdown-item">
                           <i class="fa fa-comment"></i>Responses</a>
                         <a class="dropdown-item">

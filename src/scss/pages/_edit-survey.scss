@@ -32,51 +32,6 @@
     border: 1px solid #737373;
   }
 }
-.dropdown-menu .review-sub-menu,
-.dropdown-menu .salesforce-sub-menu,
-.dropdown-menu .versions-sub-menu,
-.dropdown-menu .importExport-sub-menu {
-  position: absolute;
-  left: 100%;
-  visibility: hidden;
-  display: block;
-  transition: all 0.1s ease-in-out !important;
-  &:hover {
-    visibility: visible;
-  }
-}
-
-.review-sub-menu {
-  top: 4rem;
-}
-
-.salesforce-sub-menu {
-  top: 7rem;
-}
-
-.versions-sub-menu {
-  top: 22rem;
-}
-
-.importExport-sub-menu {
-  top: 24rem;
-}
-
-.review:hover + .review-sub-menu {
-  visibility: visible;
-}
-
-.salesforce:hover + .salesforce-sub-menu {
-  visibility: visible;
-}
-
-.versions:hover + .versions-sub-menu {
-  visibility: visible;
-}
-
-.importExport:hover + .importExport-sub-menu {
-  visibility: visible;
-}
 
 /* edit_survey section */
 .editSurveySection {
