@@ -8,9 +8,10 @@ let cleanCSS = require('gulp-clean-css');
 let concatCss = require('gulp-concat-css');
 let imagemin = require('gulp-imagemin');
 let uglify = require('gulp-uglify');
+let gulpIgnore = require('gulp-ignore');
+let plumber = require('gulp-plumber');
 let babel = require('gulp-babel');
 let pump = require('pump');
-let plumber = require('gulp-plumber');
 let autoprefixer = require('gulp-autoprefixer');
 let sourcemaps = require('gulp-sourcemaps');
 let postcss = require('gulp-postcss');
@@ -64,11 +65,14 @@ gulp.task('serve', ['sass'], function () {
 gulp.task('minify-html', function () {
   return gulp
     .src(htmlSrc)
-    .pipe(plumber())
+    .pipe(plumber(function (error) {
+      console.error(error.message);
+      gulp.emit('finish');
+    }))
     .pipe(newer(htmlDest))
     .pipe(htmlclean({
       protect: /<\!--%fooTemplate\b.*?%-->/g,
-      edit (html) {
+      edit(html) {
         return html.replace(/\begg(s?)\b/gi, "omelet$1");
       },
     }))
@@ -80,11 +84,18 @@ gulp.task('minify-html', function () {
 gulp.task('scripts', function () {
   return gulp
     .src(jsSrc)
+    .pipe(plumber(function (error) {
+      console.error(error.message);
+      gulp.emit('finish');
+    }))
+    .pipe(sourcemaps.init())
     .pipe(newer(jsDest))
     .pipe(babel({
       presets: ['@babel/env'],
     }))
+    .pipe(gulpIgnore.exclude(["**/*.map"]))
     .pipe(uglify())
+    .pipe(sourcemaps.write('./maps'))
     .pipe(gulp.dest(jsDest))
     .pipe(browserSync.stream());
 });
@@ -93,7 +104,10 @@ gulp.task('scripts', function () {
 gulp.task('minify-img', function () {
   return gulp
     .src(imgSrc)
-    .pipe(plumber())
+    .pipe(plumber(function (error) {
+      console.error(error.message);
+      gulp.emit('finish');
+    }))
     .pipe(newer(imgDest))
     .pipe(imagemin())
     .pipe(gulp.dest(imgDest))

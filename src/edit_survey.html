@@ -96,13 +96,7 @@
             <a class="nav-link" href="./reports.html">Reports</a>
           </li>
         </ul>
-        <form class="form-inline mr-4">
-          <a id="previewBTN" class="btn btn-primary btn-lg mr-4" href="./preview.html" target="_blank">
-            <i class="fa fa-sign-out pr-2"></i> Preview
-          </a>
-          <button type="button" class="btn btn-lg btn-success px-4">
-            <i class="fa fa-bookmark-o pr-2"></i> Save</button>
-        </form>
+
       </div>
     </nav>
     <!-- navbar-bootm end -->
@@ -110,6 +104,109 @@
   <!-- Header end-->
   <!-- main -->
   <main>
+    <section class="section-edit-survey-option py-4">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="look-feel d-inline-block">
+              <a href="#" class="outline-border">
+                <i class="fa fa-paint-brush mr-2"></i> Look & Feel</a>
+            </div>
+            <div class="survey-flow d-inline-block">
+              <a href="#" class="outline-border">
+                <i class="fa fa-random mr-2"></i> Survey Flow</a>
+            </div>
+            <div class="survey-options d-inline-block">
+              <a href="#" class="outline-border">
+                <i class="fa fa-gear mr-2"></i> Survey Options</a>
+            </div>
+            <div class="tools d-inline-block dropright">
+              <a href="#" id="toolsDropdown" class="outline-border dropdown-toggle " role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <i class="fa fa-wrench mr-2"></i> Tools</a>
+
+              <div id="toolsDropdown-menu" class="dropdown-menu toolsDropdown" aria-labelledby="toolsDropdown">
+                <a class="dropdown-item">Auto-Number Questions...</a>
+                <a class="dropdown-item">Reset Recode Values...</a>
+                <a class="dropdown-item review">Review
+                  <i class="fa fa-angle-right"></i>
+                </a>
+                <ul class="dropdown-menu review-sub-menu">
+                  <li>
+                    <a href="#" class="dropdown-item">Search and Replace</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown-item">Strip Formatting</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown-item">Spell Check</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown-item">Generate Test Responses...</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown-item">Check Survey Accessibility...</a>
+                  </li>
+                </ul>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item salesforce">Salesforce
+                  <i class="fa fa-angle-right"></i>
+                </a>
+                <ul class="dropdown-menu salesforce-sub-menu">
+                  <li>
+                    <a href="#" class="dropdown-item">Web-to-Lead</a>
+                  </li>
+                </ul>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item">Quotas...</a>
+                <a class="dropdown-item">Conjoint Analyses...</a>
+                <a class="dropdown-item">Manage Reusable Choices...</a>
+                <a class="dropdown-item">Scoring...</a>
+                <a class="dropdown-item">Translate Survey...</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item versions">Versions
+                  <i class="fa fa-angle-right"></i>
+                </a>
+                <ul class="dropdown-menu versions-sub-menu">
+                  <li>
+                    <a href="#" class="dropdown-item">Create New Version...</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown-item">View Version History...</a>
+                  </li>
+                </ul>
+                <a class="dropdown-item importExport">Import/Export
+                  <i class="fa fa-angle-right"></i>
+                </a>
+                <ul class="dropdown-menu importExport-sub-menu">
+                  <li>
+                    <a href="#" class="dropdown-item">Print Survey</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown-item">Import Survey</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown-item">Export Survey</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown-item">Export Survey to Word...</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <form class="form-inline d-flex justify-content-end">
+              <a id="previewBTN" class="btn btn-primary btn-lg mr-4" href="./preview.html" target="_blank">
+                <i class="fa fa-sign-out pr-2"></i> Preview
+              </a>
+              <button type="button" class="btn btn-lg btn-success px-4">
+                <i class="fa fa-bookmark-o pr-2"></i> Save</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
     <div class="editSurveySection">
       <div class="container-fluid">
         <div class="row">
@@ -125,13 +222,19 @@
                     <div class="col-12">
                       <div class="section-block-card">
                         <div class="card">
-                          <div class="card-header">
-                            <h5 contenteditable="true">Default Question Block</h5>
+                          <div class="card-header d-flex justify-content-between" data-toggle="collapse" data-target="#blockOneId" aria-expanded="false"
+                            aria-controls="blockOneId">
+                            <div class="blockCollapse d-flex">
+                              <i class="fa fa-chevron-down" title="close block"></i>
+                              <i class="fa fa-chevron-right" title="open block"></i>
+                              <h5 contenteditable="true">Default Question Block</h5>
+                            </div>
+                            <span class="questionsNumberInBlock" title="Number of Questions"></span>
                           </div>
-                          <div class="card-body">
+                          <div class="card-body" id="blockOneId">
                             <div class="row py-3 hoverQuestion hoverQuestionClicked">
                               <div class="questionMove">
-                                <div class="questionMove__valid py-2" title="validation and flow">
+                                <div class="questionMove__valid py-2" title="Add Logic">
                                   <i class="fa fa-gear"></i>
                                 </div>
                                 <div class="questionMove__up py-2" title="move up">
@@ -172,11 +275,11 @@
                               <div class="col-1 d-flex justify-content-end">
                                 <div class="addQuestionControls justify-content-between">
                                   <i class="fa fa-plus-circle questionInserBefore" title="Insert Question Before"></i>
+                                  <i class="fa fa-minus-circle questionDelete" title="Delete Question"></i>
                                   <i class="fa fa-plus-circle questionInserAfter" title="Insert Question After"></i>
                                 </div>
                               </div>
                             </div>
-
                           </div>
                         </div>
                         <div class="text-center py-4">
@@ -194,25 +297,192 @@
             <div class="col-xl-2 pr-0 rightControlsColor ">
               <section class="rightControls pr-0">
                 <div class="rightControls-container ">
-                  <!-- change question type -->
-                  <!--<div class="change-question-type py-2">
-                </div> -->
-                  <div class="change-answers ">
-                    <p>QUESTION TYPE</p>
-                    <div class="answers ">
-                      <input type="radio" autocomplete="off" name="answers" id="singleAnswers" checked>
-                      <!--                       <input type="radio" autocomplete="off" name="answers" id="multibleAnswers"> -->
-                      <input type="radio" autocomplete="off" name="answers" id="dropDownOneAnswer">
-                      <input type="radio" autocomplete="off" name="answers" id="sliderAnswer">
-                      <input type="radio" autocomplete="off" name="answers" id="rankAnswer">
-                      <input type="radio" autocomplete="off" name="answers" id="matrixAnswer">
-                      <input type="radio" autocomplete="off" name="answers" id="sideAnswer">
-                      <input type="radio" autocomplete="off" name="answers" id="txtSingleLineAnswer">
-                      <input type="radio" autocomplete="off" name="answers" id="uploadImgAnswer">
+                  <div class="change-answers">
+                    <p>QUESTIONS</p>
+                    <div class="answers">
+                      <input type="radio" autocomplete="off" name="answers" value="singleAnswers" id="singleAnswers">
+                      <input type="radio" autocomplete="off" name="answers" value="dropDownOneAnswer" id="dropDownOneAnswer">
+                      <input type="radio" autocomplete="off" name="answers" value="sliderAnswer" id="sliderAnswer">
+                      <input type="radio" autocomplete="off" name="answers" value="rankAnswer" id="rankAnswer">
+                      <input type="radio" autocomplete="off" name="answers" value="matrixAnswer" id="matrixAnswer">
+                      <!-- <input type="radio" autocomplete="off" name="answers" value="sideAnswer" id="sideAnswer"> -->
+                      <input type="radio" autocomplete="off" name="answers" value="txtSingleLineAnswer" id="txtSingleLineAnswer">
+                      <input type="radio" autocomplete="off" name="answers" value="uploadImgAnswer" id="uploadImgAnswer">
                     </div>
                   </div>
-
-                  <div class="change-choices ">
+                  <div class="change-type">
+                    <p>QUESTIONS TYPES</p>
+                    <div class="types">
+                      <div class="choiceType dropdown dropleft">
+                        <button class="btn btn-light btn-lg btn-block dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+                          aria-expanded="false">
+                          Choice Type
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-form">
+                          <li class="dropdown-item">
+                            <label>
+                              <input type="radio" autocomplete="off" name="choiceType" id="singleAnswersType" checked>Single Answers
+                            </label>
+                          </li>
+                          <li class="dropdown-item">
+                            <label>
+                              <input type="radio" autocomplete="off" name="choiceType" id="multibleAnswers">Multi Answers
+                            </label>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="dropdownType dropdown dropleft d-none">
+                        <button class="btn btn-light btn-lg btn-block dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+                          aria-expanded="false">
+                          Dropdown Type
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-form">
+                          <li class="dropdown-item">
+                            <label>
+                              <input type="radio" autocomplete="off" name="dropdownType" id="dropDownOneType" checked>Dropdown Single choice
+                            </label>
+                          </li>
+                          <li class="dropdown-item">
+                            <label>
+                              <input type="radio" autocomplete="off" name="dropdownType" id="dropDownMultiAnswer">Dropdown Multi choices
+                            </label>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="sliderType dropdown dropleft d-none">
+                        <button class="btn btn-light btn-lg btn-block dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+                          aria-expanded="false">
+                          Slider Type
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-form">
+                          <li class="dropdown-item">
+                            <label>
+                              <input type="radio" autocomplete="off" name="sliderType" id="slider" checked>range
+                            </label>
+                          </li>
+                          <li class="dropdown-item">
+                            <label>
+                              <input type="radio" autocomplete="off" name="sliderType" id="stars">stars
+                            </label>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="rankType d-none">
+                        <div class="dropdown dropleft">
+                          <button class="btn btn-light btn-lg btn-block dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Rank Type
+                          </button>
+                          <ul class="dropdown-menu dropdown-menu-form">
+                            <li class="dropdown-item">
+                              <label>
+                                <input type="radio" autocomplete="off" name="rankType" id="rankDragAndDrop" checked>Drag and Drop
+                              </label>
+                            </li>
+                            <li class="dropdown-item">
+                              <label>
+                                <input type="radio" autocomplete="off" name="rankType" id="rankRadio">Radio
+                              </label>
+                            </li>
+                            <li class="dropdown-item">
+                              <label>
+                                <input type="radio" autocomplete="off" name="rankType" id="rankTxtBoxH">Text Box horizontal
+                              </label>
+                            </li>
+                            <li class="dropdown-item">
+                              <label>
+                                <input type="radio" autocomplete="off" name="rankType" id="rankTxtBoxV">Text Box vertical
+                              </label>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="matrixType dropdown dropleft d-none">
+                        <button class="btn btn-light btn-lg btn-block dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+                          aria-expanded="false">
+                          Matrix Type
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-form">
+                          <li class="dropdown-item">
+                            <label>
+                              <input type="radio" autocomplete="off" name="matrixType" id="matrixLikert" checked>Likert
+                            </label>
+                          </li>
+                          <li class="dropdown-item">
+                            <label>
+                              <input type="radio" autocomplete="off" name="matrixType" id="matrixProfile">Profile
+                            </label>
+                          </li>
+                          <li class="dropdown-item">
+                            <label>
+                              <input type="radio" autocomplete="off" name="matrixType" id="matrixBipolar">Bipolar
+                            </label>
+                          </li>
+                          <li class="dropdown-item">
+                            <label>
+                              <input type="radio" autocomplete="off" name="matrixType" id="matrixMaxDiff">MaxDiff
+                            </label>
+                          </li>
+                          <li class="dropdown-divider"></li>
+                          <li class="dropdown-item" data-toggle="popover" data-placement="left" title="NOTE:" data-content="MUST choose Text type first, from the four choices above ex: Likert,Profile,... ">
+                            <label>
+                              <input type="radio" autocomplete="off" name="matrixType" id="matrixTxtS">Text Entry Short
+                            </label>
+                          </li>
+                          <li class="dropdown-item" data-toggle="popover" data-placement="left" title="NOTE:" data-content="MUST choose Text type first, from the four choices above ex: Likert,Profile,... ">
+                            <label>
+                              <input type="radio" autocomplete="off" name="matrixType" id="matrixTxtM">Text Entry Medium
+                            </label>
+                          </li>
+                          <li class="dropdown-item" data-toggle="popover" data-placement="left" title="NOTE:" data-content="MUST choose Text type first, from the four choices above ex: Likert,Profile,... ">
+                            <label>
+                              <input type="radio" autocomplete="off" name="matrixType" id="matrixTxtL">Text Entry Long
+                            </label>
+                          </li>
+                          <li class="dropdown-divider"></li>
+                          <li class="dropdown-item">
+                            <label>
+                              <input type="radio" autocomplete="off" name="matrixType" id="matrixSumSt">Constant Sum Statement
+                            </label>
+                          </li>
+                          <li class="dropdown-item">
+                            <label>
+                              <input type="radio" autocomplete="off" name="matrixType" id="matrixSumSp">Constant Sum ScalePoint
+                            </label>
+                          </li>
+                          <li class="dropdown-item">
+                            <label>
+                              <input type="radio" autocomplete="off" name="matrixType" id="matrixDropdownList">Dropdown List
+                            </label>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="txtType dropdown dropleft d-none">
+                        <button class="btn btn-light btn-lg btn-block dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+                          aria-expanded="false">
+                          Text Type
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-form">
+                          <li class="dropdown-item">
+                            <label>
+                              <input type="radio" autocomplete="off" name="txtType" id="txtSingleLineType" checked>Text Single Line
+                            </label>
+                          </li>
+                          <li class="dropdown-item">
+                            <label>
+                              <input type="radio" autocomplete="off" name="txtType" id="txtEssayAnswer">Text Essay
+                            </label>
+                          </li>
+                          <li class="dropdown-item">
+                            <label>
+                              <input type="radio" autocomplete="off" name="txtType" id="txtFormAnswer">Text Form
+                            </label>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="change-options">
                     <p class="m-0">OPTIONS</p>
                     <div class="choices text-center py-2">
                       <small class="statementSmall">statement</small>
@@ -237,90 +507,6 @@
                         <input type="radio" autocomplete="off" name="choiceAlign" id="column">align column
                       </label>
                     </div>
-                    <div class="choiceType dropdown dropleft">
-                      <button class="btn btn-secondary btn-lg btn-block dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        Choice Type
-                      </button>
-                      <ul class="dropdown-menu dropdown-menu-form">
-                        <li class="dropdown-item">
-                          <label>
-                            <input type="radio" autocomplete="off" name="choiceType" id="singleAnswersType" checked>Single Answers
-                          </label>
-                        </li>
-                        <li class="dropdown-item">
-                          <label>
-                            <input type="radio" autocomplete="off" name="choiceType" id="multibleAnswers">Multi Answers
-                          </label>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="dropdownType dropdown dropleft d-none">
-                      <button class="btn btn-secondary btn-lg btn-block dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        Dropdown Type
-                      </button>
-                      <ul class="dropdown-menu dropdown-menu-form">
-                        <li class="dropdown-item">
-                          <label>
-                            <input type="radio" autocomplete="off" name="dropdownType" id="dropDownOneType" checked>Dropdown Single choice
-                          </label>
-                        </li>
-                        <li class="dropdown-item">
-                          <label>
-                            <input type="radio" autocomplete="off" name="dropdownType" id="dropDownMultiAnswer">Dropdown Multi choices
-                          </label>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="sliderType dropdown dropleft d-none">
-                      <button class="btn btn-secondary btn-lg btn-block dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        Slider Type
-                      </button>
-                      <ul class="dropdown-menu dropdown-menu-form">
-                        <li class="dropdown-item">
-                          <label>
-                            <input type="radio" autocomplete="off" name="sliderType" id="slider" checked>range
-                          </label>
-                        </li>
-                        <li class="dropdown-item">
-                          <label>
-                            <input type="radio" autocomplete="off" name="sliderType" id="stars">stars
-                          </label>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="rankType d-none">
-                      <div class="dropdown dropleft">
-                        <button class="btn btn-secondary btn-lg btn-block dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
-                          aria-expanded="false">
-                          Rank Type
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-form">
-                          <li class="dropdown-item">
-                            <label>
-                              <input type="radio" autocomplete="off" name="rankType" id="rankDragAndDrop" checked>Drag and Drop
-                            </label>
-                          </li>
-                          <li class="dropdown-item">
-                            <label>
-                              <input type="radio" autocomplete="off" name="rankType" id="rankRadio">Radio
-                            </label>
-                          </li>
-                          <li class="dropdown-item">
-                            <label>
-                              <input type="radio" autocomplete="off" name="rankType" id="rankTxtBoxH">Text Box horizontal
-                            </label>
-                          </li>
-                          <li class="dropdown-item">
-                            <label>
-                              <input type="radio" autocomplete="off" name="rankType" id="rankTxtBoxV">Text Box vertical
-                            </label>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
                     <div class="matrixAnswerType mt-3 text-left d-none">
                       <label class="d-inline-block">
                         <input type="radio" autocomplete="off" name="matrixAnswerType" id="matrixRadio" checked>single answer
@@ -329,89 +515,87 @@
                         <input type="radio" autocomplete="off" name="matrixAnswerType" id="matrixCheck">multi answer
                       </label>
                     </div>
-                    <div class="matrixType dropdown dropleft d-none">
-                      <button class="btn btn-secondary btn-lg btn-block dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+                  </div>
+                  <div class="change-validation">
+                    <p class="m-0">Validation</p>
+                    <div class="dropdown dropleft">
+                      <button class="btn btn-light btn-lg btn-block dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
-                        Matrix Type
+                        Validation Type
                       </button>
                       <ul class="dropdown-menu dropdown-menu-form">
-                        <li class="dropdown-item">
-                          <label>
-                            <input type="radio" autocomplete="off" name="matrixType" id="matrixLikert" checked>Likert
-                          </label>
-                        </li>
-                        <li class="dropdown-item">
-                          <label>
-                            <input type="radio" autocomplete="off" name="matrixType" id="matrixProfile">Profile
-                          </label>
-                        </li>
-                        <li class="dropdown-item">
-                          <label>
-                            <input type="radio" autocomplete="off" name="matrixType" id="matrixBipolar">Bipolar
-                          </label>
-                        </li>
-                        <li class="dropdown-item">
-                          <label>
-                            <input type="radio" autocomplete="off" name="matrixType" id="matrixMaxDiff">MaxDiff
-                          </label>
-                        </li>
+                        <div class="validBasic">
+                          <h6 class="dropdown-header">Basic Validation</h6>
+                          <li class="dropdown-item">
+                            <label>
+                              <input type="radio" autocomplete="off" name="validBasic" value="ForceResponse">Force Response
+                            </label>
+                          </li>
+                          <li class="dropdown-item">
+                            <label>
+                              <input type="radio" autocomplete="off" name="validBasic" value="RequestResponse">Request Response
+                            </label>
+                          </li>
+                        </div>
                         <li class="dropdown-divider"></li>
-                        <li class="dropdown-item" data-toggle="popover" data-placement="left" title="NOTE:" data-content="MUST choose Text type first, from the four choices above ex: Likert,Profile,... ">
-                          <label>
-                            <input type="radio" autocomplete="off" name="matrixType" id="matrixTxtS">Text Entry Short
-                          </label>
-                        </li>
-                        <li class="dropdown-item" data-toggle="popover" data-placement="left" title="NOTE:" data-content="MUST choose Text type first, from the four choices above ex: Likert,Profile,... ">
-                          <label>
-                            <input type="radio" autocomplete="off" name="matrixType" id="matrixTxtM">Text Entry Medium
-                          </label>
-                        </li>
-                        <li class="dropdown-item" data-toggle="popover" data-placement="left" title="NOTE:" data-content="MUST choose Text type first, from the four choices above ex: Likert,Profile,... ">
-                          <label>
-                            <input type="radio" autocomplete="off" name="matrixType" id="matrixTxtL">Text Entry Long
-                          </label>
-                        </li>
+                        <div class="validRange">
+                          <h6 class="dropdown-header">Range Type Validation</h6>
+                          <li class="dropdown-item">
+                            <label>
+                              <input type="radio" autocomplete="off" name="validRange" value="ForceResponse">Minimum Characters
+                            </label>
+                          </li>
+                          <li class="dropdown-item">
+                            <label>
+                              <input type="radio" autocomplete="off" name="validRange" value="RequestResponse">Maximum Characters
+                            </label>
+                          </li>
+                          <li class="dropdown-item">
+                            <label>
+                              <input type="radio" autocomplete="off" name="validRange" value="RequestResponse">Range
+                            </label>
+                          </li>
+                        </div>
                         <li class="dropdown-divider"></li>
-                        <li class="dropdown-item">
-                          <label>
-                            <input type="radio" autocomplete="off" name="matrixType" id="matrixSumSt">Constant Sum Statement
-                          </label>
-                        </li>
-                        <li class="dropdown-item">
-                          <label>
-                            <input type="radio" autocomplete="off" name="matrixType" id="matrixSumSp">Constant Sum ScalePoint
-                          </label>
-                        </li>
-                        <li class="dropdown-item">
-                          <label>
-                            <input type="radio" autocomplete="off" name="matrixType" id="matrixDropdownList">Dropdown List
-                          </label>
-                        </li>
+                        <div class="validTxt d-none">
+                          <h6 class="dropdown-header">Text Type Validation</h6>
+                          <li class="dropdown-item">
+                            <label>
+                              <input type="radio" autocomplete="off" name="validTxt" value="ForceResponse">Numbers
+                            </label>
+                          </li>
+                          <li class="dropdown-item">
+                            <label>
+                              <input type="radio" autocomplete="off" name="validTxt" value="RequestResponse">Text
+                            </label>
+                          </li>
+                          <li class="dropdown-item">
+                            <label>
+                              <input type="radio" autocomplete="off" name="validTxt" value="RequestResponse">Date "Calendar"
+                            </label>
+                          </li>
+                        </div>
+                        <li class="dropdown-divider"></li>
+                        <div class="validConditional">
+                          <h6 class="dropdown-header">Conditional Validation</h6>
+                          <li class="dropdown-item">
+                            <label>
+                              <input type="radio" autocomplete="off" name="validation" value="ForceResponse">Custom Validation
+                            </label>
+                          </li>
+                        </div>
+                        <li class="dropdown-divider"></li>
                       </ul>
                     </div>
-                    <div class="txtType dropdown dropleft d-none">
-                      <button class="btn btn-secondary btn-lg btn-block dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        Text Type
-                      </button>
-                      <ul class="dropdown-menu dropdown-menu-form">
-                        <li class="dropdown-item">
-                          <label>
-                            <input type="radio" autocomplete="off" name="txtType" id="txtSingleLineType" checked>Text Single Line
-                          </label>
-                        </li>
-                        <li class="dropdown-item">
-                          <label>
-                            <input type="radio" autocomplete="off" name="txtType" id="txtEssayAnswer">Text Essay
-                          </label>
-                        </li>
-                        <li class="dropdown-item">
-                          <label>
-                            <input type="radio" autocomplete="off" name="txtType" id="txtFormAnswer">Text Form
-                          </label>
-                        </li>
-                      </ul>
-                    </div>
+                  </div>
+                  <div class="change-action">
+                    <p>Actions</p>
+                    <button id="actionAdd" class="btn actionAdd" type="button">
+                      <i class="fa fa-sticky-note-o"></i> Add Note</button>
+                    <button id="actionCopy" class="btn actionCopy" type="button">
+                      <i class="fa fa-files-o"></i> Copy Question</button>
+                    <button id="actionPreview" class="btn actionPreview" type="button">
+                      <i class="fa fa-search"></i> Preview Question</button>
                   </div>
                 </div>
                 <!-- change question type end -->
@@ -449,9 +633,12 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h2>Validation and Flow</h2>
+            <h2>Add Logic</h2>
           </div>
-          <div id="validModalBody" class="modal-body py-5"></div>
+          <div id="validModalBody" class="modal-body d-flex justify-content-between py-5">
+            <button id="addSkipLogic" class="btn btn-lg btn-outline-success mx-2" type="button">Add Skip Logic</button>
+            <button id="addDisplayLogic" class="btn btn-lg btn-outline-primary mx-2" type="button">Add Display Logic</button>
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary btn-lg" data-dismiss="modal">Close</button>
           </div>

@@ -15,6 +15,31 @@ $(function () {
 $(function () {
   $('[data-toggle="tooltip"]').tooltip();
 });
+// prevent click on card-header to collapse
+$(document).on('click', '.card-header h5, .card-header .addImgIcon', function (event) {
+  event.stopPropagation();
+});
+// make validation radio btn unchackable
+$(document).ready(function () {
+  $("input[name^=valid]").click(function () {
+    // Get the storedValue
+    var previousValue = $(this).data('storedValue');
+    // if previousValue = true then
+    //     Step 1: toggle radio button check mark.
+    //     Step 2: save data-StoredValue as false to indicate radio button is unchecked.
+    if (previousValue) {
+      $(this).prop('checked', !previousValue);
+      $(this).data('storedValue', !previousValue);
+    }
+    // If previousValue is other than true
+    //    Step 1: save data-StoredValue as true to for currently checked radio button.
+    //    Step 2: save data-StoredValue as false for all non-checked radio buttons.
+    else {
+      $(this).data('storedValue', true);
+      $("input[name=validation]:not(:checked)").data("storedValue", false);
+    }
+  });
+});
 /* GENERAL end */
 
 /* PROJECTS: section-home-folders__menu */
@@ -127,20 +152,17 @@ function createProjectBTN(ev) {
             </div>
           </div>
         </div>`);
-  if (projectCreationName)
-  {
+  if (projectCreationName) {
     $('#projectName').removeClass('is-invalid');
     $('.projects-list .container-fluid').prepend(card);
     $('#create_project').modal('hide');
-  } else
-  {
+  } else {
     $('#projectName').addClass('is-invalid');
   }
 }
 $('#createProjectBTN').on('click', createProjectBTN);
 $('#projectName').keypress(function (e) {
-  if (e.which === 13)
-  {
+  if (e.which === 13) {
     e.preventDefault();
     $('#createProjectBTN').click();
   }
@@ -153,109 +175,113 @@ $('#projectName').on('change keyup paste', function () {
 /* PROJECTS: create project end----------*/
 /* PROJECTS: card (project) on click go to edit_survey */
 function onClickGoToEditSurvey() {
-  const projectCreationName = $(this)
-    .find('.projectName')
-    .html();
-  localStorage.setItem('projectCreationName', projectCreationName);
+  const projectCreationName = $(this).find('.projectName').html();
+  sessionStorage.setItem('projectCreationName', projectCreationName);
   /* FOR GITHUB redirect only, else remove pathname paramater */
-  if (window.location.host === 'mostafaabobakr7.github.io')
-  {
+  if (window.location.host === 'mostafaabobakr7.github.io') {
     const path = ('survayAdminDashboard/edit_survey.html');
     window.location.pathname = path;
-  } else if (window.location.host === 'invadems.com' || window.location.host === 'www.invadems.com')
-  {
+  } else if (window.location.host === 'invadems.com' || window.location.host === 'www.invadems.com') {
     const path = ('projects/FreeMinds/edit_survey.html');
     window.location.pathname = path;
-  } else
-  {
+  } else {
     window.location.pathname = 'edit_survey.html';
   }
 }
 $('.projects-list').on('click', '.card-body', onClickGoToEditSurvey);
 /* PROJECTS: card (project) on click go to edit_survey end--- */
-/* PROJECTS: get the clicked PROJECT name from localstorage */
+/* PROJECTS: get the clicked PROJECT name from sessionStorage */
 $(document).ready(() => {
   const loc = window.location.href;
-  const projectCreationName = localStorage.getItem('projectCreationName');
-  if (/edit_survey/.test(loc) || /distributions/.test(loc) || /responses/.test(loc) || /reports/.test(loc))
-  {
+  const projectCreationName = sessionStorage.getItem('projectCreationName');
+  if (/edit_survey/.test(loc) || /distributions/.test(loc) || /responses/.test(loc) || /reports/.test(loc)) {
     $('.projectNameEdit').html(`${projectCreationName}`);
   }
 });
 /* PROJECTS: get the clicked PROJECT name from localstorage end--*/
 
 
-
-
 /* PROJECTS\SURVEY: ADD BLOCK function */
 function addBlock() {
-  const block = $(`<div class="section-block-card">
-                        <div class="text-right">
-                          <button type="button" class="blockClose btn btn-danger px-3 mx-1" title="Delete">
-                            <i class="fa fa-times"></i>
-                          </button>
-                        </div>
-                        <div class="card">
-                          <div class="card-header" >
-                            <h5 contenteditable="true">Default Question Block</h5>
-                          </div>
-                          <div class="card-body">
-                            <div class="row py-3 hoverQuestion ">
-                              <div class="questionMove">
-                                <div class="questionMove__up py-2">
-                                  <i class="fa fa-arrow-up"></i>
-                                </div>
-                                <div class="questionMove__down py-2">
-                                  <i class="fa fa-arrow-down"></i>
-                                </div>
-                              </div>
-                              <div class="col-1">
-                                <div class="questionNumber">
-                                  <h4 contenteditable="true">Q1</h4>
-                                </div>
-                              </div>
-                              <div class="col-11 d-flex justify-content-between">
-                                <div class="questionBlock">
-                                  <div class="questionHeader" >
-                                    <h3 contenteditable="true" class="card-title  mb-3">
-                                      Click to write the question text
-                                    </h3>
-                                  </div>
-                                  <div class="questionBody">
-                                    <div class="card-text mb-2">
-                                      <input type="radio" name="question">
-                                      <span contenteditable="true">Click to write Choice 1</span>
-                                    </div>
-                                    <div class="card-text mb-2">
-                                      <input type="radio" name="question">
-                                      <span contenteditable="true">Click to write Choice 2</span>
-                                    </div>
-                                    <div class="card-text mb-2">
-                                      <input type="radio" name="question">
-                                    <span contenteditable="true">Click to write Choice 3</span>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="addQuestionControls  justify-content-between">
-                                  <i class="fa fa-plus-circle questionInserBefore" title="Insert Question Before"></i>
-                                  <i class="fa fa-plus-circle questionInserAfter" title="Insert Question After"></i>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="text-center py-4">
-                          <a id="addBlock" href="#" class="btn btn-primary btn-lg">
-                            <i class="fa fa-plus mr-2"></i> Add Block</a>
-                        </div>
-                      </div>`);
+  const blockId = `block_${new Date().getTime()}`;
+  const block = $(`
+  <div class="section-block-card">
+    <div class="text-right">
+      <button type="button" class="blockClose btn btn-danger px-3 mx-1" title="Delete Block">
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
+    <div class="card">
+      <div class="card-header d-flex justify-content-between" data-toggle="collapse" aria-expanded="false" data-target="#${blockId}" aria-controls="${blockId}">
+        <div class="blockCollapse d-flex">
+          <i class="fa fa-chevron-down" title="close block"></i>
+          <i class="fa fa-chevron-right" title="open block"></i>
+          <h5 contenteditable="true">Question Block</h5>
+        </div>
+        <span class="questionsNumberInBlock" title="Number of Questions">1</span>
+      </div>
+      <div class="card-body" id="${blockId}">
+        <div class="row py-3 hoverQuestion">
+          <div class="questionMove">
+            <div class="questionMove__valid py-2" title="Add Logic">
+              <i class="fa fa-gear"></i>
+            </div>
+            <div class="questionMove__up py-2" title="move up">
+              <i class="fa fa-arrow-up"></i>
+            </div>
+            <div class="questionMove__down py-2" title="move down">
+              <i class="fa fa-arrow-down"></i>
+            </div>
+          </div>
+          <div class="col-1 questionNumberContainer">
+            <div class="questionNumber">
+              <h4 contenteditable="true">Q1</h4>
+            </div>
+          </div>
+          <div class="col-10 ">
+            <div class="questionBlock">
+              <div class="questionHeader">
+                <h3 contenteditable="true" class="card-title mb-3">
+                  First Question Click to edit?
+                </h3>
+              </div>
+              <div class="questionBody singleMulti">
+                <div class="card-text mb-2 alignVertical">
+                  <input type="radio" name="radioName">
+                  <span contenteditable="true">Click to write Choice 1</span>
+                </div>
+                <div class="card-text mb-2 alignVertical">
+                  <input type="radio" name="radioName">
+                  <span contenteditable="true">Click to write Choice 2</span>
+                </div>
+                <div class="card-text mb-2 alignVertical">
+                  <input type="radio" name="radioName">
+                  <span contenteditable="true">Click to write Choice 3</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-1 d-flex justify-content-end">
+            <div class="addQuestionControls justify-content-between">
+              <i class="fa fa-plus-circle questionInserBefore" title="Insert Question Before"></i>
+              <i class="fa fa-minus-circle questionDelete" title="Delete Question"></i>
+              <i class="fa fa-plus-circle questionInserAfter" title="Insert Question After"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center py-4">
+      <a id="addBlock" href="#" class="btn btn-primary btn-lg">
+        <i class="fa fa-plus mr-2"></i> Add Block</a>
+    </div>
+  </div>`);
   $('.section-block .col-12').append(block);
 }
 
 function removeBlock() {
   $(this)
-    .parent()
-    .parent()
+    .parents('.section-block-card')
     .remove();
 }
 $('.section-block')
@@ -263,14 +289,21 @@ $('.section-block')
   .on('click', '.blockClose', removeBlock);
 /* PROJECTS\SURVEY: ADD BLOCK function end--*/
 /* PROJECTS\SURVEY: ADD QUESTION RADIO */
-let num = 1;
-
+function questionsNumberInBlock() {
+  const questionsNum = $('.hoverQuestionClicked').siblings().length + 1;
+  $('.hoverQuestionClicked')
+    .parents('.card-body').prev()
+    .children('.questionsNumberInBlock').text(questionsNum);
+  return questionsNum;
+}
+$(document).ready(questionsNumberInBlock);
 function addRadio(place, elementPlaceInDOM) {
+  const qestionNum = questionsNumberInBlock();
   const radioName = new Date().getTime();
   const radioQuestion = $(`
     <div class = "row py-3 hoverQuestion">
       <div class="questionMove">
-        <div class="questionMove__valid py-2" title="validation and flow">
+        <div class="questionMove__valid py-2" title="Add Logic">
           <i class="fa fa-gear"></i>
         </div>
         <div class="questionMove__up py-2" title="move up">
@@ -282,7 +315,7 @@ function addRadio(place, elementPlaceInDOM) {
       </div>
       <div class="col-1 questionNumberContainer">
         <div class="questionNumber">
-          <h4 contenteditable="true">Q${num + 1}</h4>
+          <h4 contenteditable="true">Q${qestionNum + 1}</h4>
         </div>
       </div>
       <div class = "col-10" >
@@ -315,50 +348,49 @@ function addRadio(place, elementPlaceInDOM) {
             <i class="fa fa-plus-circle questionInserAfter" title="Insert Question After"></i>
           </div>
         </div>
-    </div>
-`);
+    </div>`);
 
   /* INSERT BEFORE QUESTION */
-  if (place === 'BEFORE')
-  {
+  if (place === 'BEFORE') {
     radioQuestion.insertBefore(elementPlaceInDOM);
   }
   /* INSERT AFTER QUESTION */
-  if (place === 'AFTER')
-  {
+  if (place === 'AFTER') {
     radioQuestion.insertAfter(elementPlaceInDOM);
   }
-  ++num;
+  questionsNumberInBlock();
 }
 
 function questionInserBefore() {
   /* GET CARD_BODY of the CLICKED ICON to insert BEFORE IT */
-  const elBefore = $(this)
-    .parent()
-    .parent()
-    .parent();
-  /* elBefore = <div class="row py-3"> */
+  const elBefore = $(this).parents('.hoverQuestion');
   addRadio('BEFORE', elBefore);
 }
 
 function questionInserAfter() {
   /* GET CARD_BODY of the CLICKED ICON to insert AFTER IT */
-  const elAfter = $(this)
-    .parent()
-    .parent()
-    .parent();
-  /* elAfter = <div class="row py-3"> */
+  const elAfter = $(this).parents('.hoverQuestion');
   addRadio('AFTER', elAfter);
 }
 
 function questionDelete() {
-  /* GET CARD_BODY of the CLICKED ICON to insert AFTER IT */
-  /* elementDelete = <div class="row py-3"> */
-  $(this)
-    .parent()
-    .parent()
-    .parent()
-    .remove();
+  if ($(this).parents('.hoverQuestion').hasClass('hoverQuestionClicked')) {
+    questionsNumberInBlock();
+    let num = $('.hoverQuestionClicked').parent().prev().children('.questionsNumberInBlock').text();
+    if (num !== '1') {
+      $(this).parents('.hoverQuestion').prev().siblings().removeClass('hoverQuestionClicked');
+      if ($(this).parents('.hoverQuestion').is(':first-child')) {
+        $(this).parents('.hoverQuestion').next().addClass('hoverQuestionClicked');
+      }
+      if ($(this).parents('.hoverQuestion').is(':last-child')) {
+        $(this).parents('.hoverQuestion').prev().addClass('hoverQuestionClicked');
+      } else {
+        $(this).parents('.hoverQuestion').prev().addClass('hoverQuestionClicked');
+      }
+      $(this).parents('.hoverQuestion').remove();
+      questionsNumberInBlock();
+    }
+  }
 }
 $('.section-block')
   .on('click', '.questionInserBefore', questionInserBefore)
@@ -368,20 +400,15 @@ $('.section-block')
 /* PROJECTS\SURVEY: MOVE QUESTION UP and DOWN */
 function questionMoveUp() {
   // <div .row></div>
-  const questionPosition = $(this)
-    .parent()
-    .parent();
-  // get upper sibling
+  const questionPosition = $(this).parents('.hoverQuestion');
   const questionPositionPrevSibling = questionPosition.prev();
   $(questionPosition).insertBefore(questionPositionPrevSibling);
 }
 
 function questionMoveDown() {
-  const questionPosition = $(this)
-    .parent()
-    .parent();
-  const questionPositionPrevSibling = questionPosition.next();
-  $(questionPosition).insertAfter(questionPositionPrevSibling);
+  const questionPosition = $(this).parents('.hoverQuestion');
+  const questionPositionNextSibling = questionPosition.next();
+  $(questionPosition).insertAfter(questionPositionNextSibling);
 }
 
 function questionValidation() {
@@ -397,58 +424,44 @@ $('.section-block')
 /* PROJECTS\SURVEY: INC\DEC */
 function choicesCurrentNum() {
   let size;
-  if ($('.hoverQuestionClicked').find('.alignVertical').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.alignVertical').length > 0) {
     size = $('.hoverQuestionClicked .card-text').length;
   }
-  if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0) {
     size = $('.hoverQuestionClicked .upperHead td').length;
   }
-  if ($('.hoverQuestionClicked').find('.alignColumn').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.alignColumn').length > 0) {
     size = $('.hoverQuestionClicked .upperHead td').length;
   }
-  if ($('.hoverQuestionClicked').find('.chosen').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.chosen').length > 0) {
     size = $('.hoverQuestionClicked .chosen option').length;
   }
-  if ($('.hoverQuestionClicked').find('.dropdownListChosen').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.dropdownListChosen').length > 0) {
     size = $('.hoverQuestionClicked .dropdownListChosen:first option').length;
   }
-  if ($('.hoverQuestionClicked').find('.chosen-select-multi').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.chosen-select-multi').length > 0) {
     size = $('.hoverQuestionClicked .chosen-select-multi option').length;
   }
-  if ($('.hoverQuestionClicked').find('.range-slider').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.range-slider').length > 0) {
     size = $('.hoverQuestionClicked .range-slider').length;
   }
-  if ($('.hoverQuestionClicked').find('.stars-slider').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.stars-slider').length > 0) {
     size = $('.hoverQuestionClicked .stars-slider').length;
   }
-  if ($('.hoverQuestionClicked').find('.rank__body').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.rank__body').length > 0) {
     size = $('.hoverQuestionClicked .rank__body').length;
   }
-  if ($('.hoverQuestionClicked').find('.rankRadio').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.rankRadio').length > 0) {
     size = $('.hoverQuestionClicked .rankRadio tr').length - 1;
   }
-  if ($('.hoverQuestionClicked').find('.rankTxtBox').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.rankTxtBox').length > 0) {
     size = $('.hoverQuestionClicked .rankTxtBox li').length;
   }
 
-  if ($('.hoverQuestionClicked').find('.matrix').length > 0)
-  {
-    if ($('.hoverQuestionClicked .matrixLikert tbody tr:last th').text() !== 'Total')
-    {
+  if ($('.hoverQuestionClicked').find('.matrix').length > 0) {
+    if ($('.hoverQuestionClicked .matrixLikert tbody tr:last th').text() !== 'Total') {
       size = $('.hoverQuestionClicked .matrix tbody tr').length;
-    } else
-    {
+    } else {
       size = $('.hoverQuestionClicked .matrix tbody tr').length - 1;
     }
   }
@@ -457,30 +470,23 @@ function choicesCurrentNum() {
 
 function scalePointHeadCounts() {
   let scalePointHead;
-  if ($('.hoverQuestionClicked').find('.rankRadio').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.rankRadio').length > 0) {
     scalePointHead = $('.hoverQuestionClicked .rankRadio thead tr th').length - 1;
   }
-  if ($('.hoverQuestionClicked').find('.matrixLikert').length > 0)
-  {
-    if ($('.hoverQuestionClicked .matrixLikert thead tr th:last').text() !== 'Total')
-    {
+  if ($('.hoverQuestionClicked').find('.matrixLikert').length > 0) {
+    if ($('.hoverQuestionClicked .matrixLikert thead tr th:last').text() !== 'Total') {
       scalePointHead = $('.hoverQuestionClicked .matrix thead tr th').length - 1;
-    } else
-    {
+    } else {
       scalePointHead = $('.hoverQuestionClicked .matrix thead tr th').length - 2;
     }
   }
-  if ($('.hoverQuestionClicked').find('.matrixBipolar').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.matrixBipolar').length > 0) {
     scalePointHead = $('.hoverQuestionClicked .statement:last td').length;
   }
-  if ($('.hoverQuestionClicked').find('.dropdownListChosen').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.dropdownListChosen').length > 0) {
     scalePointHead = $('.hoverQuestionClicked .dropdownListChosen:first option').length;
   }
-  if ($('.hoverQuestionClicked').find('.matrixProfile').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.matrixProfile').length > 0) {
     scalePointHead = $('.hoverQuestionClicked .matrixProfile tr:first td').length;
   }
   return scalePointHead;
@@ -492,84 +498,65 @@ function choicesDecrease() {
   $('.hoverQuestionClicked input').prop('checked', false);
 
   const spanNum = $('.choices span').html();
-  if (spanNum !== '1')
-  {
-    if ($('.hoverQuestionClicked').find('.alignVertical').length > 0)
-    {
+  if (spanNum !== '1') {
+    if ($('.hoverQuestionClicked').find('.alignVertical').length > 0) {
       $('.hoverQuestionClicked .alignVertical:last-child').remove();
     }
-    if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0)
-    {
+    if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0) {
       $('.hoverQuestionClicked .upperHead td:last').remove();
       $('.hoverQuestionClicked .lowerHead td:last').remove();
     }
-    if ($('.hoverQuestionClicked').find('.alignColumn').length > 0)
-    {
+    if ($('.hoverQuestionClicked').find('.alignColumn').length > 0) {
       $('.hoverQuestionClicked .upperHead td:last').remove();
     }
-    if ($('.hoverQuestionClicked').find('.chosen').length > 0)
-    {
+    if ($('.hoverQuestionClicked').find('.chosen').length > 0) {
       $('.hoverQuestionClicked .chosen option:last').remove();
       $('.hoverQuestionClicked .dropdownOneEdit p:last-child').remove();
       $('.hoverQuestionClicked .chosen').val('').trigger('chosen:updated');
     }
-    if ($('.hoverQuestionClicked').find('.chosen-select-multi').length > 0)
-    {
+    if ($('.hoverQuestionClicked').find('.chosen-select-multi').length > 0) {
       $('.hoverQuestionClicked .chosen-select-multi option:last').remove();
       $('.hoverQuestionClicked .dropdownMultiEdit p:last-child').remove();
       $('.hoverQuestionClicked .chosen-select-multi').val('').trigger('chosen:updated');
     }
-    if ($('.hoverQuestionClicked').find('.range-slider').length > 0)
-    {
+    if ($('.hoverQuestionClicked').find('.range-slider').length > 0) {
       $('.hoverQuestionClicked .slider .range-slider:last-child').prev().remove();
       $('.hoverQuestionClicked .slider .range-slider:last-child').remove();
     }
-    if ($('.hoverQuestionClicked').find('.stars-slider').length > 0)
-    {
+    if ($('.hoverQuestionClicked').find('.stars-slider').length > 0) {
       $('.hoverQuestionClicked .slider .stars-slider:last-child').remove();
     }
-    if ($('.hoverQuestionClicked').find('.rank').length > 0)
-    {
+    if ($('.hoverQuestionClicked').find('.rank').length > 0) {
       $('.hoverQuestionClicked .rank .rank__body:last-child').remove();
     }
-    if ($('.hoverQuestionClicked').find('.rankRadio').length > 0)
-    {
+    if ($('.hoverQuestionClicked').find('.rankRadio').length > 0) {
       $('.hoverQuestionClicked .rankRadio tr:last').remove();
     }
-    if ($('.hoverQuestionClicked').find('.rankTxtBox').length > 0)
-    {
+    if ($('.hoverQuestionClicked').find('.rankTxtBox').length > 0) {
       $('.hoverQuestionClicked .rankTxtBox ul li:last').remove();
     }
-    if ($('.hoverQuestionClicked').find('.matrixLikert').length > 0)
-    {
-      if ($('.hoverQuestionClicked .matrix tbody tr:last th').text() !== 'Total')
-      {
+    if ($('.hoverQuestionClicked').find('.matrixLikert').length > 0) {
+      if ($('.hoverQuestionClicked .matrix tbody tr:last th').text() !== 'Total') {
         $('.hoverQuestionClicked .matrix tbody tr:last-child').remove();
         $('.scalePointSpan').text(scalePointHeadCounts());
-      } else
-      {
+      } else {
         $('.hoverQuestionClicked .matrix tbody tr').eq(-2).remove();
         $('.scalePointSpan').text(scalePointHeadCounts());
       }
     }
-    if ($('.hoverQuestionClicked').find('.matrixProfile').length > 0)
-    {
-      if ($('.hoverQuestionClicked .matrix tbody tr:last th').text() !== 'Total')
-      {
+    if ($('.hoverQuestionClicked').find('.matrixProfile').length > 0) {
+      if ($('.hoverQuestionClicked .matrix tbody tr:last th').text() !== 'Total') {
         $('.hoverQuestionClicked .matrixProfile tr:last').remove();
       }
     }
     if ($('.hoverQuestionClicked').find('.matrixBipolar').length > 0 ||
-      $('.hoverQuestionClicked').find('.matrixMaxDiff').length > 0)
-    {
-      if ($('.hoverQuestionClicked .matrix tbody tr:last th').text() !== 'Total')
-      {
+      $('.hoverQuestionClicked').find('.matrixMaxDiff').length > 0) {
+      if ($('.hoverQuestionClicked .matrix tbody tr:last th').text() !== 'Total') {
         $('.hoverQuestionClicked .matrix tbody .statement:last').remove();
       }
     }
 
-    if ($('.hoverQuestionClicked').find('.matrixDropdownStatement').length > 0)
-    {
+    if ($('.hoverQuestionClicked').find('.matrixDropdownStatement').length > 0) {
       $('.hoverQuestionClicked .matrixDropdownStatement:last').remove();
     }
   }
@@ -582,146 +569,111 @@ function choicesIncrease() {
   $('.hoverQuestionClicked input').prop('checked', false);
 
   let choiceNum = choicesCurrentNum();
-  if (choiceNum !== 10)
-  {
-    if ($('.hoverQuestionClicked').find('.alignVertical').length > 0)
-    {
-      const inc = $('.hoverQuestionClicked .alignVertical:last-child').clone();
-      inc.insertAfter('.hoverQuestionClicked .alignVertical:last-child');
-      $('.hoverQuestionClicked .alignVertical:last-child span').text(`Click to write Choice ${choiceNum + 1}`);
-    }
-    if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0)
-    {
-      const tUpper = $('.upperHead td:last').clone();
-      tUpper.insertAfter('.upperHead td:last');
-      $('.upperHead td:last span').text(`Click to write Choice ${choiceNum + 1}`);
-      const tLower = $('.lowerHead td:last').clone();
-      tLower.insertAfter('.lowerHead td:last');
-    }
-    if ($('.hoverQuestionClicked').find('.alignColumn').length > 0)
-    {
-      const alignColumn = $('.hoverQuestionClicked tbody tr td:last').clone();
-      $('.hoverQuestionClicked tbody tr').append(alignColumn);
-      $('.hoverQuestionClicked tbody tr td:last span').text(`Click to write Choice ${choiceNum + 1}`);
-    }
-    const choiceDropdown = $(`<option value="option${choiceNum + 1}">option${choiceNum + 1}</option>`);
-    const choiceDropdownEdit = $(`<p contenteditable="true">option${choiceNum + 1}</p>`);
-    if ($('.hoverQuestionClicked').find('.chosen').length > 0)
-    {
-      $('.hoverQuestionClicked .dropdownOneEdit').append(choiceDropdownEdit);
-      $('.hoverQuestionClicked .chosen').append(choiceDropdown);
-      $('.hoverQuestionClicked .chosen').val('').trigger('chosen:updated');
-    }
-
-    if ($('.hoverQuestionClicked').find('.chosen-select-multi').length > 0)
-    {
-      $('.hoverQuestionClicked .dropdownMultiEdit').append(choiceDropdownEdit);
-      $('.hoverQuestionClicked .chosen-select-multi').append(choiceDropdown);
-      $('.hoverQuestionClicked .chosen-select-multi').val('').trigger('chosen:updated');
-    }
-
-    if ($('.hoverQuestionClicked .slider').find('.range-slider').length > 0)
-    {
-      const sliderTxt = $('.hoverQuestionClicked .slider p:last').clone();
-      const sliderDiv = $('.hoverQuestionClicked .slider .range-slider:last').clone();
-      $('.hoverQuestionClicked .slider').append(sliderTxt).append(sliderDiv);
-      $('.hoverQuestionClicked .slider p:last').text(`slider${choiceNum + 1}`);
-    }
-    if ($('.hoverQuestionClicked .slider').find('.stars-slider').length > 0)
-    {
-      const star = $('.hoverQuestionClicked .stars-slider:last').clone();
-      star.insertAfter('.hoverQuestionClicked .stars-slider:last');
-      $('.hoverQuestionClicked .stars-slider:last span').text(`rate${choiceNum + 1}`);
-    }
-    if ($('.hoverQuestionClicked').find('.rank').length > 0)
-    {
-      const rank = $('.hoverQuestionClicked .rank .rank__body:last').clone();
-      $('.hoverQuestionClicked .rank').append(rank);
-      $('.hoverQuestionClicked .rank .rank__body:last .rank__body-text').text(`text${choiceNum + 1}`);
-      $('.hoverQuestionClicked .rank .rank__body:last .rank__body-rank').text(`${choiceNum + 1}`);
-    }
-    if ($('.hoverQuestionClicked').find('.rankRadio').length > 0)
-    {
-      let matrixName = new Date().getTime();
-      const rank = $('.hoverQuestionClicked .rankRadio tr:last').clone();
-      $('.hoverQuestionClicked .rankRadio tbody').append(rank);
-      $('.hoverQuestionClicked .rankRadio tr:last th').text(`Click to write Choice ${choiceNum + 1}`);
-      $('.hoverQuestionClicked .rankRadio tr:last td input').attr('name', matrixName);
-    }
-    if ($('.hoverQuestionClicked').find('.rankTxtBox').length > 0)
-    {
-      let matrixName = new Date().getTime();
-      const rank = $('.hoverQuestionClicked .rankTxtBox ul li:last').clone();
-      $('.hoverQuestionClicked .rankTxtBox ul').append(rank);
-      $('.hoverQuestionClicked .rankTxtBox ul li:last span').text(`Click to edit choice${choiceNum + 1}`);
-    }
+  if ($('.hoverQuestionClicked').find('.alignVertical').length > 0) {
+    const inc = $('.hoverQuestionClicked .alignVertical:last-child').clone();
+    inc.insertAfter('.hoverQuestionClicked .alignVertical:last-child');
+    $('.hoverQuestionClicked .alignVertical:last-child span').text(`Click to write Choice ${choiceNum + 1}`);
+  }
+  if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0) {
+    const tUpper = $('.upperHead td:last').clone();
+    tUpper.insertAfter('.upperHead td:last');
+    $('.upperHead td:last span').text(`Click to write Choice ${choiceNum + 1}`);
+    const tLower = $('.lowerHead td:last').clone();
+    tLower.insertAfter('.lowerHead td:last');
+  }
+  if ($('.hoverQuestionClicked').find('.alignColumn').length > 0) {
+    const alignColumn = $('.hoverQuestionClicked tbody tr td:last').clone();
+    $('.hoverQuestionClicked tbody tr').append(alignColumn);
+    $('.hoverQuestionClicked tbody tr td:last span').text(`Click to write Choice ${choiceNum + 1}`);
+  }
+  const choiceDropdown = $(`<option value="option${choiceNum + 1}">option${choiceNum + 1}</option>`);
+  const choiceDropdownEdit = $(`<p contenteditable="true">option${choiceNum + 1}</p>`);
+  if ($('.hoverQuestionClicked').find('.chosen').length > 0) {
+    $('.hoverQuestionClicked .dropdownOneEdit').append(choiceDropdownEdit);
+    $('.hoverQuestionClicked .chosen').append(choiceDropdown);
+    $('.hoverQuestionClicked .chosen').val('').trigger('chosen:updated');
   }
 
-  if ($('.hoverQuestionClicked').find('.matrixLikert').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.chosen-select-multi').length > 0) {
+    $('.hoverQuestionClicked .dropdownMultiEdit').append(choiceDropdownEdit);
+    $('.hoverQuestionClicked .chosen-select-multi').append(choiceDropdown);
+    $('.hoverQuestionClicked .chosen-select-multi').val('').trigger('chosen:updated');
+  }
+
+  if ($('.hoverQuestionClicked .slider').find('.range-slider').length > 0) {
+    const sliderTxt = $('.hoverQuestionClicked .slider p:last').clone();
+    const sliderDiv = $('.hoverQuestionClicked .slider .range-slider:last').clone();
+    $('.hoverQuestionClicked .slider').append(sliderTxt).append(sliderDiv);
+    $('.hoverQuestionClicked .slider p:last').text(`slider${choiceNum + 1}`);
+  }
+  if ($('.hoverQuestionClicked .slider').find('.stars-slider').length > 0) {
+    const star = $('.hoverQuestionClicked .stars-slider:last').clone();
+    star.insertAfter('.hoverQuestionClicked .stars-slider:last');
+    $('.hoverQuestionClicked .stars-slider:last span').text(`rate${choiceNum + 1}`);
+  }
+  if ($('.hoverQuestionClicked').find('.rank').length > 0) {
+    const rank = $('.hoverQuestionClicked .rank .rank__body:last').clone();
+    $('.hoverQuestionClicked .rank').append(rank);
+    $('.hoverQuestionClicked .rank .rank__body:last .rank__body-text').text(`text${choiceNum + 1}`);
+    $('.hoverQuestionClicked .rank .rank__body:last .rank__body-rank').text(`${choiceNum + 1}`);
+  }
+  if ($('.hoverQuestionClicked').find('.rankRadio').length > 0) {
     let matrixName = new Date().getTime();
-    if (choicesCurrentNum() !== 10)
-    {
-      if ($('.hoverQuestionClicked .matrix tbody tr:last th').text() !== 'Total')
-      {
-        const choiceMatrixStatement = $('.hoverQuestionClicked .statement:last').clone();
-        $('.hoverQuestionClicked .matrix tbody').append(choiceMatrixStatement);
-        $('.hoverQuestionClicked .statement:last').find('input').attr('name', matrixName);
-        $('.hoverQuestionClicked .statement:last th').text(`statement${choicesCurrentNum()}`);
-      } else
-      {
-        const choiceMatrixStatement = $('.hoverQuestionClicked .statement').eq(-2).clone();
-        $('.hoverQuestionClicked .matrix tbody .statement:last').before(choiceMatrixStatement);
-        $('.hoverQuestionClicked .statement th').eq(-2).text(`statement${choicesCurrentNum()}`);
-      }
+    const rank = $('.hoverQuestionClicked .rankRadio tr:last').clone();
+    $('.hoverQuestionClicked .rankRadio tbody').append(rank);
+    $('.hoverQuestionClicked .rankRadio tr:last th').text(`Click to write Choice ${choiceNum + 1}`);
+    $('.hoverQuestionClicked .rankRadio tr:last td input').attr('name', matrixName);
+  }
+  if ($('.hoverQuestionClicked').find('.rankTxtBox').length > 0) {
+    let matrixName = new Date().getTime();
+    const rank = $('.hoverQuestionClicked .rankTxtBox ul li:last').clone();
+    $('.hoverQuestionClicked .rankTxtBox ul').append(rank);
+    $('.hoverQuestionClicked .rankTxtBox ul li:last span').text(`Click to edit choice${choiceNum + 1}`);
+  }
+
+  if ($('.hoverQuestionClicked').find('.matrixLikert').length > 0) {
+    let matrixName = new Date().getTime();
+    if ($('.hoverQuestionClicked .matrix tbody tr:last th').text() !== 'Total') {
+      const choiceMatrixStatement = $('.hoverQuestionClicked .statement:last').clone();
+      $('.hoverQuestionClicked .matrix tbody').append(choiceMatrixStatement);
+      $('.hoverQuestionClicked .statement:last').find('input').attr('name', matrixName);
+      $('.hoverQuestionClicked .statement:last th').text(`statement${choicesCurrentNum()}`);
+    } else {
+      const choiceMatrixStatement = $('.hoverQuestionClicked .statement').eq(-2).clone();
+      $('.hoverQuestionClicked .matrix tbody .statement:last').before(choiceMatrixStatement);
+      $('.hoverQuestionClicked .statement th').eq(-2).text(`statement${choicesCurrentNum()}`);
     }
   }
-  if ($('.hoverQuestionClicked').find('.matrixProfile').length > 0)
-  {
-    if (choicesCurrentNum() !== 10)
-    {
-      if ($('.hoverQuestionClicked .matrix tbody tr:last th').text() !== 'Total')
-      {
-        const clone = $('.hoverQuestionClicked .matrixProfile tr:last').clone();
-        const newName = Number($('.hoverQuestionClicked .matrixProfile tr:last td:last input').prop('name')) + 1;
-        clone.insertAfter('.hoverQuestionClicked .matrixProfile tr:last');
-        $('.hoverQuestionClicked .matrixProfile tr:last th').text(`statement${choiceNum + 1}`);
-        $('.hoverQuestionClicked .matrixProfile tr:last td input').prop('name', newName);
-      }
+  if ($('.hoverQuestionClicked').find('.matrixProfile').length > 0) {
+    if ($('.hoverQuestionClicked .matrix tbody tr:last th').text() !== 'Total') {
+      const clone = $('.hoverQuestionClicked .matrixProfile tr:last').clone();
+      const newName = Number($('.hoverQuestionClicked .matrixProfile tr:last td:last input').prop('name')) + 1;
+      clone.insertAfter('.hoverQuestionClicked .matrixProfile tr:last');
+      $('.hoverQuestionClicked .matrixProfile tr:last th').text(`statement${choiceNum + 1}`);
+      $('.hoverQuestionClicked .matrixProfile tr:last td input').prop('name', newName);
     }
   }
 
-  if ($('.hoverQuestionClicked').find('.matrixBipolar').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.matrixBipolar').length > 0) {
     let matrixName = new Date().getTime();
-    if (choicesCurrentNum() !== 10)
-    {
-      if ($('.hoverQuestionClicked .matrix tbody tr:last th').text() !== 'Total')
-      {
-        const choiceMatrixStatement = $('.hoverQuestionClicked .statement:last').clone();
-        $('.hoverQuestionClicked .matrix tbody').append(choiceMatrixStatement);
-        $('.hoverQuestionClicked .statement:last').find('input').attr('name', matrixName);
-        $('.hoverQuestionClicked .statement:last th:first').text(`statement${choicesCurrentNum()}`);
-      }
+    if ($('.hoverQuestionClicked .matrix tbody tr:last th').text() !== 'Total') {
+      const choiceMatrixStatement = $('.hoverQuestionClicked .statement:last').clone();
+      $('.hoverQuestionClicked .matrix tbody').append(choiceMatrixStatement);
+      $('.hoverQuestionClicked .statement:last').find('input').attr('name', matrixName);
+      $('.hoverQuestionClicked .statement:last th:first').text(`statement${choicesCurrentNum()}`);
     }
   }
 
-  if ($('.hoverQuestionClicked').find('.matrixMaxDiff').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.matrixMaxDiff').length > 0) {
     let matrixName = new Date().getTime();
-    if (choicesCurrentNum() !== 10)
-    {
-      if ($('.hoverQuestionClicked .matrix tbody tr:last th').text() !== 'Total')
-      {
-        const choiceMatrixStatement = $('.hoverQuestionClicked .statement:last').clone();
-        $('.hoverQuestionClicked .matrix tbody').append(choiceMatrixStatement);
-        $('.hoverQuestionClicked .statement:last').find('input').attr('name', matrixName);
-        $('.hoverQuestionClicked .statement:last td').eq(1).text(`statement${choicesCurrentNum()}`);
-      }
+    if ($('.hoverQuestionClicked .matrix tbody tr:last th').text() !== 'Total') {
+      const choiceMatrixStatement = $('.hoverQuestionClicked .statement:last').clone();
+      $('.hoverQuestionClicked .matrix tbody').append(choiceMatrixStatement);
+      $('.hoverQuestionClicked .statement:last').find('input').attr('name', matrixName);
+      $('.hoverQuestionClicked .statement:last td').eq(1).text(`statement${choicesCurrentNum()}`);
     }
   }
-  if ($('.hoverQuestionClicked').find('.dropdownListChosen').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.dropdownListChosen').length > 0) {
     $('.matrixDropdownStatement .addImgIcon').remove();
     $('.hoverQuestionClicked .matrixDropdownStatement:last').clone().insertAfter('.hoverQuestionClicked .matrixDropdownStatement:last');
     $('.hoverQuestionClicked .matrixDropdownStatement:last th').text(`statement${choicesCurrentNum()}`);
@@ -739,30 +691,24 @@ function scalePointDecrease() {
   $('.hoverQuestionClicked').find('.addImgIcon').remove();
   $('.hoverQuestionClicked input').prop('checked', false);
 
-  if ($('.hoverQuestionClicked ').find('.rankRadio').length > 0)
-  {
+  if ($('.hoverQuestionClicked ').find('.rankRadio').length > 0) {
     let scalePointHeadCount = scalePointHeadCounts();
-    if (scalePointHeadCount !== 2)
-    {
+    if (scalePointHeadCount !== 2) {
       $('.hoverQuestionClicked thead th:last-child').remove();
       $('.hoverQuestionClicked .rankRadio tbody tr').each(function () {
         $(this).find('td:last-child').remove();
       });
     }
   }
-  if ($('.hoverQuestionClicked ').find('.matrixLikert').length > 0)
-  {
+  if ($('.hoverQuestionClicked ').find('.matrixLikert').length > 0) {
     let scalePointHeadCount = scalePointHeadCounts();
-    if (scalePointHeadCount !== 2)
-    {
-      if ($('.hoverQuestionClicked .matrixLikert thead tr th:last').text() !== 'Total')
-      {
+    if (scalePointHeadCount !== 2) {
+      if ($('.hoverQuestionClicked .matrixLikert thead tr th:last').text() !== 'Total') {
         $('.hoverQuestionClicked thead th:last-child').remove();
         $('.hoverQuestionClicked .statement').each(function () {
           $(this).find('td:last-child').remove();
         });
-      } else
-      {
+      } else {
         $('.hoverQuestionClicked thead th').eq(-2).remove();
         $('.hoverQuestionClicked .statement').each(function () {
           $(this).find('td').eq(-2).remove();
@@ -770,37 +716,29 @@ function scalePointDecrease() {
       }
     }
   }
-  if ($('.hoverQuestionClicked ').find('.matrixBipolar').length > 0)
-  {
-    if ($('.hoverQuestionClicked .matrixLikert thead tr th:last').text() !== 'Total')
-    {
+  if ($('.hoverQuestionClicked ').find('.matrixBipolar').length > 0) {
+    if ($('.hoverQuestionClicked .matrixLikert thead tr th:last').text() !== 'Total') {
       let scalePointHeadCount = scalePointHeadCounts();
-      if (scalePointHeadCount !== 2)
-      {
+      if (scalePointHeadCount !== 2) {
         $('.hoverQuestionClicked .statement').each(function () {
           $(this).find('td:last').remove();
         });
       }
     }
   }
-  if ($('.hoverQuestionClicked').find('.matrixProfile').length > 0)
-  {
-    if ($('.hoverQuestionClicked .matrixLikert thead tr th:last').text() !== 'Total')
-    {
+  if ($('.hoverQuestionClicked').find('.matrixProfile').length > 0) {
+    if ($('.hoverQuestionClicked .matrixLikert thead tr th:last').text() !== 'Total') {
       let scalePointHeadCount = scalePointHeadCounts();
-      if (scalePointHeadCount !== 2)
-      {
+      if (scalePointHeadCount !== 2) {
         $('.hoverQuestionClicked .matrixProfile tr').each(function () {
           $(this).find('td:last').remove();
         });
       }
     }
   }
-  if ($('.hoverQuestionClicked').find('.dropdownListChosen').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.dropdownListChosen').length > 0) {
     let scalePointHeadCount = scalePointHeadCounts();
-    if (scalePointHeadCount !== 2)
-    {
+    if (scalePointHeadCount !== 2) {
       $('.hoverQuestionClicked .dropdownOneEdit').each(function () {
         $(this).find(':last-child').remove();
       });
@@ -818,90 +756,65 @@ function scalePointIncrease() {
   $('.hoverQuestionClicked').find('.addImgIcon').remove();
   $('.hoverQuestionClicked input').prop('checked', false);
 
-  if ($('.hoverQuestionClicked').find('.rankRadio').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.rankRadio').length > 0) {
     let scalePointHeadCount = scalePointHeadCounts();
-    if (scalePointHeadCount !== 10)
-    {
-      const scalePointHead = $(`<th>${scalePointHeadCount + 1}</th>`);
+    const scalePointHead = $(`<th>${scalePointHeadCount + 1}</th>`);
+    $('.hoverQuestionClicked thead tr').append(scalePointHead);
+    $('.hoverQuestionClicked .rankRadio tbody tr').each(function () {
+      const lasttd = $(this).find('td:last').clone();
+      $(this).append(lasttd);
+    });
+  }
+  if ($('.hoverQuestionClicked').find('.matrixLikert').length > 0) {
+    let scalePointHeadCount = scalePointHeadCounts();
+    const scalePointHead = $(`<th scope="col" contenteditable="true">scalePoint${scalePointHeadCount + 1}</th>`);
+    if ($('.hoverQuestionClicked .matrixLikert thead tr th:last').text() !== 'Total') {
       $('.hoverQuestionClicked thead tr').append(scalePointHead);
-      $('.hoverQuestionClicked .rankRadio tbody tr').each(function () {
+      $('.hoverQuestionClicked .statement').each(function () {
         const lasttd = $(this).find('td:last').clone();
         $(this).append(lasttd);
       });
-
+    } else {
+      $('.hoverQuestionClicked thead tr th:last').before(scalePointHead);
+      $('.hoverQuestionClicked .statement').each(function () {
+        const lasttd = $(this).find('td').eq(-2).clone();
+        $(this).append(lasttd);
+      });
     }
   }
-  if ($('.hoverQuestionClicked').find('.matrixLikert').length > 0)
-  {
-    let scalePointHeadCount = scalePointHeadCounts();
-    if (scalePointHeadCount !== 10)
-    {
-      const scalePointHead = $(`<th scope="col" contenteditable="true">scalePoint${scalePointHeadCount + 1}</th>`);
-      if ($('.hoverQuestionClicked .matrixLikert thead tr th:last').text() !== 'Total')
-      {
-        $('.hoverQuestionClicked thead tr').append(scalePointHead);
-        $('.hoverQuestionClicked .statement').each(function () {
-          const lasttd = $(this).find('td:last').clone();
-          $(this).append(lasttd);
-        });
-      } else
-      {
-        $('.hoverQuestionClicked thead tr th:last').before(scalePointHead);
-        $('.hoverQuestionClicked .statement').each(function () {
-          const lasttd = $(this).find('td').eq(-2).clone();
-          $(this).append(lasttd);
-        });
-      }
-    }
-  }
-  if ($('.hoverQuestionClicked ').find('.matrixBipolar').length > 0)
-  {
-    if ($('.hoverQuestionClicked .matrixLikert thead tr th:last').text() !== 'Total')
-    {
+  if ($('.hoverQuestionClicked ').find('.matrixBipolar').length > 0) {
+    if ($('.hoverQuestionClicked .matrixLikert thead tr th:last').text() !== 'Total') {
       let scalePointHeadCount = scalePointHeadCounts();
-      if (scalePointHeadCount !== 10)
-      {
-        $('.hoverQuestionClicked .statement').each(function () {
-          const inc = $(this).find('td:last').clone();
-          inc.insertAfter($(this).find('td:last'));
-        });
-      }
+      $('.hoverQuestionClicked .statement').each(function () {
+        const inc = $(this).find('td:last').clone();
+        inc.insertAfter($(this).find('td:last'));
+      });
     }
   }
 
-  if ($('.hoverQuestionClicked').find('.matrixProfile').length > 0)
-  {
-    if ($('.hoverQuestionClicked .matrixLikert thead tr th:last').text() !== 'Total')
-    {
+  if ($('.hoverQuestionClicked').find('.matrixProfile').length > 0) {
+    if ($('.hoverQuestionClicked .matrixLikert thead tr th:last').text() !== 'Total') {
       let scalePointHeadCount = scalePointHeadCounts();
-      if (scalePointHeadCount !== 10)
-      {
-        $('.hoverQuestionClicked .matrixProfile tr').each(function () {
-          const inc = $(this).find('td:last').clone();
-          inc.insertAfter($(this).find('td:last'));
-          $(this).find('td:last label').text(`scalePoint${scalePointHeadCount + 1}`);
-        });
-      }
+      $('.hoverQuestionClicked .matrixProfile tr').each(function () {
+        const inc = $(this).find('td:last').clone();
+        inc.insertAfter($(this).find('td:last'));
+        $(this).find('td:last label').text(`scalePoint${scalePointHeadCount + 1}`);
+      });
     }
   }
-  if ($('.hoverQuestionClicked').find('.dropdownListChosen').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.dropdownListChosen').length > 0) {
     let choiceNum = scalePointHeadCounts();
-    if (choiceNum !== 10)
-    {
-      $('.hoverQuestionClicked .dropdownOneEdit').each(function () {
-        const clone = $(this).find(':last-child').clone();
-        $(this).append(clone);
-        $(this).find(':last-child').text(`option${choiceNum + 1}`).removeClass('editable-focus');
-      });
-      $('.hoverQuestionClicked .dropdownListChosen').each(function () {
-        const clone = $(this).find(':last-child').clone();
-        $(this).append(clone);
-        $(this).find(':last-child').text(`option${choiceNum + 1}`);
-      });
-      $('.hoverQuestionClicked .dropdownListChosen').val('').trigger('chosen:updated');
-    }
+    $('.hoverQuestionClicked .dropdownOneEdit').each(function () {
+      const clone = $(this).find(':last-child').clone();
+      $(this).append(clone);
+      $(this).find(':last-child').text(`option${choiceNum + 1}`).removeClass('editable-focus');
+    });
+    $('.hoverQuestionClicked .dropdownListChosen').each(function () {
+      const clone = $(this).find(':last-child').clone();
+      $(this).append(clone);
+      $(this).find(':last-child').text(`option${choiceNum + 1}`);
+    });
+    $('.hoverQuestionClicked .dropdownListChosen').val('').trigger('chosen:updated');
   }
   $('.scalePointSpan').text(scalePointHeadCounts());
 }
@@ -912,253 +825,208 @@ $('.scalePointIncrease').on('click', scalePointIncrease);
 /* PROJECTS\SURVEY: INC\DEC end */
 /* PROJECTS\SURVEY: QUESTION, CONTENTEDITABLE ON CLICK */
 
-// "Q-type" adjust to match clicked Q
+// "QUESTIONS" adjust to match clicked Q + show proper "QUESTIONS TYPES"
 function onQuestionTypeChange() {
-  $('.choices span').text(choicesCurrentNum);
-  if ($('.hoverQuestionClicked').find('.singleMulti').length > 0)
-  {
+  $('.choices span').text(choicesCurrentNum());
+  if ($('.hoverQuestionClicked').find('.singleMulti').length > 0) {
     $('#singleAnswers').prop('checked', true);
     $('#singleAnswers').siblings().prop('checked', false);
     $('.choiceType').removeClass('d-none');
-    if ($('.hoverQuestionClicked').find('.alignVertical').length > 0)
-    {
+    if ($('.hoverQuestionClicked').find('.alignVertical').length > 0) {
       $('#vertical').prop('checked', true);
       $('#vertical').siblings().prop('checked', false);
     }
-    if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0)
-    {
+    if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0) {
       $('#horizontal').prop('checked', true);
       $('#horizontal').siblings().prop('checked', false);
     }
-    if ($('.hoverQuestionClicked').find('.alignColumn').length > 0)
-    {
+    if ($('.hoverQuestionClicked').find('.alignColumn').length > 0) {
       $('#column').prop('checked', true);
       $('#column').siblings().prop('checked', false);
     }
-  } else
-  {
+  } else {
     $('.choiceType').addClass('d-none');
   }
-  if ($('.hoverQuestionClicked').find('.chosen-container').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.dropdownAnswer').length > 0 && $('.hoverQuestionClicked').find('.chosen-container').length > 0) {
     $('.dropdownType').removeClass('d-none');
-    if ($('.hoverQuestionClicked').find('.dropdownOneEdit').length > 0)
-    {
+    if ($('.hoverQuestionClicked').find('.dropdownOneEdit').length > 0) {
       $('#dropDownOneAnswer').prop('checked', true);
       $('#dropDownOneAnswer').siblings().prop('checked', false);
     }
-    if ($('.hoverQuestionClicked').find('.dropdownMultiEdit').length > 0)
-    {
+    if ($('.hoverQuestionClicked').find('.dropdownMultiEdit').length > 0) {
       $('#dropDownMultiAnswer').prop('checked', true);
       $('#dropDownMultiAnswer').siblings().prop('checked', false);
     }
-  } else
-  {
+  } else {
     $('.dropdownType').addClass('d-none');
   }
-  if ($('.hoverQuestionClicked').find('.slider').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.slider').length > 0) {
     $('.sliderType').removeClass('d-none');
     $('#sliderAnswer').prop('checked', true);
     $('#sliderAnswer').siblings().prop('checked', false);
-  } else
-  {
+  } else {
     $('.sliderType').addClass('d-none');
   }
-  if ($('.hoverQuestionClicked').find('.rank').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.rank').length > 0) {
     $('.rankType').removeClass('d-none');
     $('#rankAnswer').prop('checked', true);
     $('#rankAnswer').siblings().prop('checked', false);
-  } else
-  {
+  } else {
     $('.rankType').addClass('d-none');
   }
-  if ($('.hoverQuestionClicked').find('.matrix').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.matrix').length > 0) {
     $('.choiceAlign').addClass('d-none');
     $('.scalePointSpan').text(scalePointHeadCounts());
     $('.matrixAnswerType').removeClass('d-none');
     $('.matrixType').removeClass('d-none');
     $('#matrixAnswer').prop('checked', true);
     $('#matrixAnswer').siblings().prop('checked', false);
-  } else
-  {
+  } else {
     $('.matrixType').addClass('d-none');
     $('.matrixAnswerType').addClass('d-none');
   }
-  if ($('.hoverQuestionClicked').find('.txtAnswer').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.txtAnswer').length > 0) {
     $('.txtType').removeClass('d-none');
+    $('.validTxt').removeClass('d-none');
     $('#txtSingleLineAnswer').prop('checked', true);
     $('#txtSingleLineAnswer').siblings().prop('checked', false);
-  } else
-  {
+  } else {
     $('.txtType').addClass('d-none');
+    $('.validTxt').addClass('d-none');
   }
-  if ($('.hoverQuestionClicked').find('.uploadImgAnswer').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.uploadImgAnswer').length > 0) {
     $('#uploadImgAnswer').prop('checked', true);
     $('#uploadImgAnswer').siblings().prop('checked', false);
   }
-  if ($('.hoverQuestionClicked').find('.matrix').length > 0 || $('.hoverQuestionClicked').find('.rank').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.matrix').length > 0 || $('.hoverQuestionClicked').find('.rank').length > 0) {
     $('.scalePoint').removeClass('d-none');
-  } else
-  {
+  } else {
     $('.scalePoint').addClass('d-none');
   }
   setTimeout(function () {
-    if ($('.hoverQuestionClicked').find('.singleMulti').length > 0)
-    {
+    if ($('.hoverQuestionClicked').find('.singleMulti').length > 0) {
       $('.choiceAlign').removeClass('d-none');
-      if ($('.hoverQuestionClicked').find('.alignVertical').length > 0)
-      {
+      if ($('.hoverQuestionClicked').find('.alignVertical').length > 0) {
         $('#vertical').prop('checked', true);
         $('#horizontal').prop('checked', false);
       }
-      if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0)
-      {
+      if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0) {
         $('#horizontal').prop('checked', true);
         $('#vertical').prop('checked', false);
       }
-    } else
-    {
+    } else {
       $('.choiceAlign').addClass('d-none');
     }
   }, 100);
+  $('.choices span').text(choicesCurrentNum());
 }
-// "Type button" adjust to match the current clicked Q
+// inside "QUESTIONS TYPES" btn adjust option to match the current clicked Q
 function questionTypeButton() {
+  $('.choices span').text(choicesCurrentNum());
   // choices
-  if ($('.hoverQuestionClicked').find('.singleMulti').length > 0 && $('.hoverQuestionClicked').find(':radio').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.singleMulti').length > 0 && $('.hoverQuestionClicked').find(':radio').length > 0) {
     $('#singleAnswersType').prop('checked', true);
     $('#singleAnswersType').siblings().prop('checked', false);
   }
-  if ($('.hoverQuestionClicked').find('.singleMulti').length > 0 && $('.hoverQuestionClicked').find(':checkbox').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.singleMulti').length > 0 && $('.hoverQuestionClicked').find(':checkbox').length > 0) {
     $('#multibleAnswers').prop('checked', true);
     $('#multibleAnswers').siblings().prop('checked', false);
   }
   // dropdown
-  if ($('.hoverQuestionClicked').find('.dropdownOneEdit').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.dropdownOneEdit').length > 0) {
     $('#dropDownOneType').prop('checked', true);
     $('#dropDownOneType').siblings().prop('checked', false);
   }
-  if ($('.hoverQuestionClicked').find('.dropdownMultiEdit').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.dropdownMultiEdit').length > 0) {
     $('#dropDownMultiAnswer').prop('checked', true);
     $('#dropDownMultiAnswer').siblings().prop('checked', false);
   }
   // slider
-  if ($('.hoverQuestionClicked').find('.slider').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.slider').length > 0) {
     $('#slider').prop('checked', true);
     $('#slider').siblings().prop('checked', false);
   }
-  if ($('.hoverQuestionClicked').find('.slider').length > 0 && $('.hoverQuestionClicked').find('.stars-slider').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.slider').length > 0 && $('.hoverQuestionClicked').find('.stars-slider').length > 0) {
     $('#stars').prop('checked', true);
     $('#stars').siblings().prop('checked', false);
   }
   // rank
-  if ($('.hoverQuestionClicked').find('.rank').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.rank').length > 0) {
     $('#rankDragAndDrop').prop('checked', true);
     $('#rankDragAndDrop').siblings().prop('checked', false);
   }
-  if ($('.hoverQuestionClicked').find('.rankRadio').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.rankRadio').length > 0) {
     $('#rankRadio').prop('checked', true);
     $('#rankRadio').siblings().prop('checked', false);
   }
-  if ($('.hoverQuestionClicked').find('.rankBoxH').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.rankBoxH').length > 0) {
     $('#rankTxtBoxH').prop('checked', true);
     $('#rankTxtBoxH').siblings().prop('checked', false);
   }
-  if ($('.hoverQuestionClicked').find('.rankBoxV').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.rankBoxV').length > 0) {
     $('#rankTxtBoxV').prop('checked', true);
     $('#rankTxtBoxV').siblings().prop('checked', false);
   }
   // matrix radio / checkbox
-  if ($('.hoverQuestionClicked').find('.matrix').length > 0 && $('.hoverQuestionClicked').find(':radio').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.matrix').length > 0 && $('.hoverQuestionClicked').find(':radio').length > 0) {
     $('#matrixRadio').prop('checked', true);
     $('#matrixRadio').siblings().prop('checked', false);
   }
-  if ($('.hoverQuestionClicked').find('.matrix').length > 0 && $('.hoverQuestionClicked').find(':checkbox').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.matrix').length > 0 && $('.hoverQuestionClicked').find(':checkbox').length > 0) {
     $('#matrixCheck').prop('checked', true);
     $('#matrixCheck').siblings().prop('checked', false);
   }
   // matrix type
-  if ($('.hoverQuestionClicked').find('.matrixLikert').length > 0 && $('.hoverQuestionClicked').find(':radio').length > 0 || $('.hoverQuestionClicked').find('.matrixLikert').length > 0 && $('.hoverQuestionClicked').find(':checkbox').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.matrixLikert').length > 0 && $('.hoverQuestionClicked').find(':radio').length > 0 || $('.hoverQuestionClicked').find('.matrixLikert').length > 0 && $('.hoverQuestionClicked').find(':checkbox').length > 0) {
     $('#matrixLikert').prop('checked', true);
     $('#matrixLikert').siblings().prop('checked', false);
   }
-  if ($('.hoverQuestionClicked').find('.matrixProfile').length > 0 && $('.hoverQuestionClicked').find(':radio').length > 0 || $('.hoverQuestionClicked').find('.matrixProfile').length > 0 && $('.hoverQuestionClicked').find(':checkbox').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.matrixProfile').length > 0 && $('.hoverQuestionClicked').find(':radio').length > 0 || $('.hoverQuestionClicked').find('.matrixProfile').length > 0 && $('.hoverQuestionClicked').find(':checkbox').length > 0) {
     $('#matrixProfile').prop('checked', true);
     $('#matrixProfile').siblings().prop('checked', false);
   }
-  if ($('.hoverQuestionClicked').find('.matrixBipolar').length > 0 && $('.hoverQuestionClicked').find(':radio').length > 0 || $('.hoverQuestionClicked').find('.matrixBipolar').length > 0 && $('.hoverQuestionClicked').find(':checkbox').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.matrixBipolar').length > 0 && $('.hoverQuestionClicked').find(':radio').length > 0 || $('.hoverQuestionClicked').find('.matrixBipolar').length > 0 && $('.hoverQuestionClicked').find(':checkbox').length > 0) {
     $('#matrixBipolar').prop('checked', true);
     $('#matrixBipolar').siblings().prop('checked', false);
   }
-  if ($('.hoverQuestionClicked').find('.matrixMaxDiff').length > 0 && $('.hoverQuestionClicked').find(':radio').length > 0 || $('.hoverQuestionClicked').find('.matrixMaxDiff').length > 0 && $('.hoverQuestionClicked').find(':checkbox').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.matrixMaxDiff').length > 0 && $('.hoverQuestionClicked').find(':radio').length > 0 || $('.hoverQuestionClicked').find('.matrixMaxDiff').length > 0 && $('.hoverQuestionClicked').find(':checkbox').length > 0) {
     $('#matrixMaxDiff').prop('checked', true);
     $('#matrixMaxDiff').siblings().prop('checked', false);
   }
-  if ($('.hoverQuestionClicked').find('.sumTotalStatement').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.sumTotalStatement').length > 0) {
     $('#matrixSumSt').prop('checked', true);
     $('#matrixSumSt').siblings().prop('checked', false);
   }
-  if ($('.hoverQuestionClicked').find('.sumTotalScalepoint').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.sumTotalScalepoint').length > 0) {
     $('#matrixSumSp').prop('checked', true);
     $('#matrixSumSp').siblings().prop('checked', false);
   }
-  if ($('.hoverQuestionClicked').find('.matrixDropdownStatement').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.matrixDropdownStatement').length > 0) {
     $('#matrixDropdownList').prop('checked', true);
     $('#matrixDropdownList').siblings().prop('checked', false);
   }
-  if ($('.hoverQuestionClicked').find('.matrixTxtS').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.matrixTxtS').length > 0) {
     $('#matrixTxtS').prop('checked', true);
     $('#matrixTxtS').siblings().prop('checked', false);
   }
-  if ($('.hoverQuestionClicked').find('.matrixTxtM').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.matrixTxtM').length > 0) {
     $('#matrixTxtM').prop('checked', true);
     $('#matrixTxtM').siblings().prop('checked', false);
   }
-  if ($('.hoverQuestionClicked').find('.matrixTxtL').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.matrixTxtL').length > 0) {
     $('#matrixTxtL').prop('checked', true);
     $('#matrixTxtL').siblings().prop('checked', false);
   }
   // text
-  if ($('.hoverQuestionClicked').find('.txtSingleLine').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.txtSingleLine').length > 0) {
     $('#txtSingleLineType').prop('checked', true);
     $('#txtSingleLineType').siblings().prop('checked', false);
   }
-  if ($('.hoverQuestionClicked').find('.txtEssayAnswer').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.txtEssayAnswer').length > 0) {
     $('#txtEssayAnswer').prop('checked', true);
     $('#txtEssayAnswer').siblings().prop('checked', false);
   }
-  if ($('.hoverQuestionClicked').find('.txtFormAnswer').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.txtFormAnswer').length > 0) {
     $('#txtFormAnswer').prop('checked', true);
     $('#txtFormAnswer').siblings().prop('checked', false);
   }
@@ -1169,19 +1037,16 @@ function hoverQuestionClicked() {
     .addClass('hoverQuestionClicked')
     .siblings()
     .removeClass('hoverQuestionClicked');
-  // show and hide type button according to Q-type
-  onQuestionTypeChange();
-  questionTypeButton();
   /* questionHoverClicked class remove from all blocks when clicked on current block */
   const x = $(this)
-    .parent()
-    .parent()
-    .parent()
+    .parents('.section-block-card')
     .siblings()
     .children()
     .children()
     .children();
   x.removeClass('hoverQuestionClicked');
+  onQuestionTypeChange();
+  questionTypeButton();
 }
 // deal with the clicked contentEdit element to add outline-class, addImgIcon
 function contentEditClicked() {
@@ -1193,28 +1058,28 @@ function contentEditClicked() {
     .remove();
   $(this).addClass('editable-focus');
 
-  if ($(this).next() !== addImg && !$(this).parent('.dropdownOneEdit').length > 0 && !$(this).parent('.dropdownMultiEdit').length > 0 && !$(this).parents('.matrix').length > 0 && !$(this).parents('.rankRadio').length > 0)
-  {
+  if ($(this).next() !== addImg && !$(this).parent('.dropdownOneEdit').length > 0 && !$(this).parent('.dropdownMultiEdit').length > 0 && !$(this).parents('.matrix').length > 0 && !$(this).parents('.rankRadio').length > 0 && !$(this).parent('.questionNumber').length > 0) {
     addImg.insertAfter(this);
   }
-  if ($(this).find('picture').length > 0)
-  {
+  if ($(this).find('picture').length > 0) {
     addImg.remove();
   }
-  /*     $(this).focusout(function () {
-        setTimeout(() => {
-          $(this).removeClass('editable-focus');
-          $(this).next().remove();
-        }, 200);
-      }); */
+
+  // $(this).focusout(function () {
+  //   setTimeout(() => {
+  //     $(this).removeClass('editable-focus');
+  //     $(this).next().remove();
+  //   }, 200);
+  // });
 }
+
 // get the clicked conentEditable element to place the selected Img in it
 function getEdit() {
   const content = $('.editable-focus');
   return content;
 }
 // toggle Modal to every clicked addImgIcon
-function addImgModalToggle() {
+function addImgModalToggleModal() {
   $('#addImgModal').modal('toggle');
 }
 // add Img from the Modal to the clicked contentEditable element
@@ -1233,14 +1098,14 @@ function removeImg() {
   picture.parent().removeAttr('style');
   picture.remove();
 }
-if (/edit_survey.html/.test(window.location.href))
-{
+if (/edit_survey.html/.test(window.location.href)) {
+  $(document).ready(hoverQuestionClicked);
   $('.rightControls').sticky();
   $('.section-block').on('click', '.hoverQuestion', hoverQuestionClicked);
-  $('input[type=radio][name=answers]').on('change click', onQuestionTypeChange);
+  $('input[type=radio][name=answers]').on('change', onQuestionTypeChange);
   $(document)
     .on('click', '[contenteditable="true"]', contentEditClicked)
-    .on('click', '.addImgIcon', addImgModalToggle);
+    .on('click', '.addImgIcon', addImgModalToggleModal);
   $('#addImgModal').on('click', 'picture', addImgFromModal);
   $('.hoverQuestionClicked').on('click', '.removeImgIcon', removeImg);
 }
@@ -1260,11 +1125,9 @@ $('#addImgModal').on('shown.bs.modal hidden.bs.modal', function () {
 function singleAnswers() {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:radio').prop('checked', false);
-  if ($('.hoverQuestionClicked input').prop('type') === 'checkbox')
-  {
+  if ($('.hoverQuestionClicked input').prop('type') === 'checkbox') {
     $('.hoverQuestionClicked .singleMulti input').prop('type', 'radio');
-  } else
-  {
+  } else {
     const radioName = new Date().getTime();
     const singleAnswer = $(`
         <div class="questionBlock">
@@ -1295,16 +1158,14 @@ function singleAnswers() {
 function multibleAnswers() {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
   $('.hoverQuestionClicked input:radio').prop('checked', false);
-  if ($('.hoverQuestionClicked .singleMulti input').prop('type') !== 'radio')
-  {
+  if ($('.hoverQuestionClicked .singleMulti input').prop('type') !== 'radio') {
     singleAnswers();
   }
   $('.hoverQuestionClicked .singleMulti input').prop('type', 'checkbox');
 }
 // align Ver, Hor, Col
 function alignV() {
-  if ($('.hoverQuestionClicked').find('.alignColumn').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.alignColumn').length > 0) {
     const qsTitle = $('.hoverQuestionClicked .questionHeader .card-title').html();
     const tr = $('.hoverQuestionClicked div.alignColumn').removeClass('alignColumn').addClass('alignVertical');
     const alignHor = $(`
@@ -1322,8 +1183,7 @@ function alignV() {
     $('.hoverQuestionClicked .questionHeader .card-title').html(qsTitle);
     tr.appendTo('.hoverQuestionClicked .questionBody');
   }
-  if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0) {
     const qsTitle = $('.hoverQuestionClicked .questionHeader .card-title').html();
     const trTwo = $('.hoverQuestionClicked .alignHorizontal input');
     const trOne = $('.hoverQuestionClicked .alignHorizontal span');
@@ -1348,12 +1208,10 @@ function alignV() {
 }
 
 function alignH() {
-  if ($('.hoverQuestionClicked').find('.alignColumn').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.alignColumn').length > 0) {
     alignV();
   }
-  if ($('.hoverQuestionClicked').find('.alignVertical').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.alignVertical').length > 0) {
     const qsTitle = $('.hoverQuestionClicked .questionHeader .card-title').html();
     const trTwo = $('.hoverQuestionClicked .alignVertical input');
     const trOne = $('.hoverQuestionClicked .alignVertical span');
@@ -1380,12 +1238,10 @@ function alignH() {
 }
 
 function alignC() {
-  if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.alignHorizontal').length > 0) {
     alignV();
   }
-  if ($('.hoverQuestionClicked').find('.alignVertical').length > 0)
-  {
+  if ($('.hoverQuestionClicked').find('.alignVertical').length > 0) {
     const qsTitle = $('.hoverQuestionClicked .questionHeader .card-title').html();
     const tr = $('.hoverQuestionClicked .alignVertical').removeClass('alignVertical').addClass('alignColumn');
     const alignCol = $(`
@@ -1423,7 +1279,7 @@ function dropDownOneAnswer() {
             Dropdown single answer
           </h3>
         </div>
-        <div class="questionBody py-4">
+        <div class="questionBody py-4 dropdownAnswer">
           <select class="chosen">
             <option value="option1">option1</option>
             <option value="option2">option2</option>
@@ -1443,6 +1299,7 @@ function dropDownOneAnswer() {
     disable_search_threshold: 10,
     width: '60%',
   });
+  $('.choices span').text('4');
 }
 
 function dropdownOneEdit() {
@@ -1473,7 +1330,7 @@ function dropDownMultiAnswer() {
             Dropdown Multi answer
           </h3>
         </div>
-        <div class="questionBody py-4">
+        <div class="questionBody py-4 dropdownAnswer">
           <select multiple class ="chosen-select-multi">
             <option value="option1">option1</option>
             <option value="option2">option2</option>
@@ -1493,6 +1350,7 @@ function dropDownMultiAnswer() {
     disable_search_threshold: 10,
     width: '60%',
   });
+  $('.choices span').text('4');
 }
 
 function dropdownMultiEdit() {
@@ -1636,11 +1494,9 @@ function starsMouseOver() {
 
     // Now highlight all the stars that's not after the current hovered star
     $(this).parent().children('li.star').each(function (e) {
-      if (e < onStar)
-      {
+      if (e < onStar) {
         $(this).addClass('hover');
-      } else
-      {
+      } else {
         $(this).removeClass('hover');
       }
     });
@@ -1660,12 +1516,10 @@ function starsClick() {
     let onStar = parseInt($(this).data('value'), 10); // The star currently selected
     let stars = $(this).parent().children('li.star');
 
-    for (let i = 0; i < stars.length; i++)
-    {
+    for (let i = 0; i < stars.length; i++) {
       $(stars[i]).removeClass('selected');
     }
-    for (let i = 0; i < onStar; i++)
-    {
+    for (let i = 0; i < onStar; i++) {
       $(stars[i]).addClass('selected');
     }
   });
@@ -1792,15 +1646,13 @@ function rankTxtBoxH() {
       </ul>
     </div>
   </div>`);
-  if ($('.hoverQuestionClicked .rankBoxV').length > 0)
-  {
+  if ($('.hoverQuestionClicked .rankBoxV').length > 0) {
     $('.hoverQuestionClicked .rankTxtBox ul')
       .addClass('d-flex')
       .addClass('flex-wrap')
       .addClass('rankBoxH')
       .removeClass('rankBoxV');
-  } else
-  {
+  } else {
     $('.hoverQuestionClicked .questionBlock').replaceWith(rank);
 
   }
@@ -1810,15 +1662,13 @@ function rankTxtBoxH() {
 function rankTxtBoxV() {
   // if its a txtBoxH
   $('.hoverQuestionClicked .rankTxtBox ul li input').css('display', 'inline-block');
-  if ($('.hoverQuestionClicked .rankBoxH').length > 0)
-  {
+  if ($('.hoverQuestionClicked .rankBoxH').length > 0) {
     $('.hoverQuestionClicked .rankTxtBox ul')
       .addClass('rankBoxV')
       .removeClass('d-flex')
       .removeClass('flex-wrap')
       .removeClass('rankBoxH');
-  } else
-  {
+  } else {
     rankTxtBoxH();
     $('.hoverQuestionClicked .rankTxtBox ul')
       .addClass('rankBoxV')
@@ -2324,11 +2174,12 @@ function sideBySide() {
         </div>
       </div>`);
   $('.hoverQuestionClicked .questionBlock').replaceWith(sideAnswer);
+  $('#sideAnswer').siblings().prop('checked', false);
   $('#sideAnswer').prop('checked', true);
   $('.choices span').text('3');
   $('.scalePointSpan').text('3');
 }
-$('#sideAnswer').on('change', sideBySide);
+$('#sideAnswer').on('click', sideBySide);
 // txtSingleLineAnswer
 function txtSingleLineAnswer() {
   $('.hoverQuestionClicked input:checkbox').prop('checked', false);
@@ -2442,6 +2293,25 @@ function uploadImgAnswer() {
 $('#uploadImgAnswer').on('click', uploadImgAnswer);
 
 /* PROJECTS\SURVEY: CHANGE QUESTION end-------------------------------------- */
+/* PROJECTS\SURVEY: ACTIONS*/
+function actionAdd() {
+  const post = $(``);
+}
+function actionCopy() {
+  const copy = $('.hoverQuestionClicked').clone(true, true);
+  copy.insertAfter('.hoverQuestionClicked');
+  $('.card-body .hoverQuestionClicked').next().removeClass('hoverQuestionClicked');
+  questionsNumberInBlock();
+}
+function actionPreview() {
+
+}
+$('#actionAdd').on('click', actionAdd);
+$('#actionCopy').on('click', actionCopy);
+$('#actionPreview').on('click', actionPreview);
+/* PROJECTS\SURVEY: ACTIONS end----------------------------------------*/
+
+
 /* PROJECTS\PREVIEW:  */
 
 // copy elements from edit_survey to preview-mobile;
@@ -2497,24 +2367,20 @@ function reportNoteBTN() {
   $('.reportAddNote').toggleClass('d-none');
   $('.reportCloseNote').toggleClass('d-none');
   $('.note-editor').toggleClass('d-none');
-  if ($('.note-editable').val())
-  {
+  if ($('.note-editable').val()) {
     $('.noteValue').removeClass('visibilityHidden');
   }
 }
 
 function reportNoteEditable() {
   $('.noteVal').html($('.note-editable').html());
-  if ($('.noteVal').is(':empty'))
-  {
+  if ($('.noteVal').is(':empty')) {
     $('.noteValue').addClass('visibilityHidden');
-  } else
-  {
+  } else {
     $('.noteValue').removeClass('visibilityHidden');
   }
 }
-if (/reports.html/.test(window.location))
-{
+if (/reports.html/.test(window.location)) {
   $('.note').summernote({
     height: 100,
   });
@@ -2580,16 +2446,13 @@ function reportBtnChangeOnClick() {
 }
 
 function reportAddVisual() {
-  if ($('#bar').hasClass('btn-group-active'))
-  {
+  if ($('#bar').hasClass('btn-group-active')) {
     chart('bar');
   }
-  if ($('#line').hasClass('btn-group-active'))
-  {
+  if ($('#line').hasClass('btn-group-active')) {
     chart('line');
   }
-  if ($('#pie').hasClass('btn-group-active'))
-  {
+  if ($('#pie').hasClass('btn-group-active')) {
     chart('pie');
   }
 }
@@ -2600,8 +2463,7 @@ function reportRemoveVisual() {
     .remove();
   $(this).remove();
 }
-if (/reports.html/.test(window.location.href))
-{
+if (/reports.html/.test(window.location.href)) {
   chart('bar');
   $('.reportSection').on('click', '.btn-group .btn', reportBtnChangeOnClick);
   $('.reportAddVisual').on('click', reportAddVisual);
@@ -2611,8 +2473,7 @@ if (/reports.html/.test(window.location.href))
 
 /* DASHBOARD: */
 function chartDashboard(type, canvasID) {
-  if (/index.html/.test(window.location.href) || window.location.pathname === '/projects/FreeMinds/' || window.location.host === 'freeminds.com' || window.location.host === 'freeminds-mena.net')
-  {
+  if (/index.html/.test(window.location.href) || window.location.pathname === '/projects/FreeMinds/' || window.location.host === 'freeminds.com' || window.location.host === 'freeminds-mena.net') {
     let ctx = document
       .querySelector(`#${canvasID}`)
       .getContext('2d');

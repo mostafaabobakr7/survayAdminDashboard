@@ -1,5 +1,84 @@
-/* edit_survey section */
+.section-edit-survey-option {
+  color: #222;
+  background-color: #fff;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #ccc;
+  .toolsDropdown {
+    a {
+      position: relative;
+      padding-left: 2.2rem;
+      & i {
+        position: absolute;
+        right: 2px;
+        top: 6px;
+      }
+      .review-dropdown {
+        display: none;
+      }
+      .review:hover .review-dropdown {
+        display: inline-block;
+      }
+    }
+  }
+}
+.outline-border {
+  padding: 1rem;
+  font-size: 1.3rem;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  &:active,
+  &:hover {
+    color: #222;
+    border: 1px solid #737373;
+  }
+}
+.dropdown-menu .review-sub-menu,
+.dropdown-menu .salesforce-sub-menu,
+.dropdown-menu .versions-sub-menu,
+.dropdown-menu .importExport-sub-menu {
+  position: absolute;
+  left: 100%;
+  visibility: hidden;
+  display: block;
+  transition: all 0.1s ease-in-out !important;
+  &:hover {
+    visibility: visible;
+  }
+}
 
+.review-sub-menu {
+  top: 4rem;
+}
+
+.salesforce-sub-menu {
+  top: 7rem;
+}
+
+.versions-sub-menu {
+  top: 22rem;
+}
+
+.importExport-sub-menu {
+  top: 24rem;
+}
+
+.review:hover + .review-sub-menu {
+  visibility: visible;
+}
+
+.salesforce:hover + .salesforce-sub-menu {
+  visibility: visible;
+}
+
+.versions:hover + .versions-sub-menu {
+  visibility: visible;
+}
+
+.importExport:hover + .importExport-sub-menu {
+  visibility: visible;
+}
+
+/* edit_survey section */
 .editSurveySection {
   overflow: hidden;
   .leftContent {
@@ -10,7 +89,31 @@
     .section-block {
       .card {
         &-header {
-          display: flex;
+          cursor: pointer;
+          & > * {
+            display: inline-block;
+          }
+          &.collapsed .fa-chevron-down,
+          & .fa-chevron-right {
+            display: none;
+          }
+          &.collapsed .fa-chevron-right,
+          & .fa-chevron-down {
+            display: inline-block;
+          }
+          i {
+            color: #434242;
+          }
+          i.fa-chevron-down {
+            &:hover {
+              color: #b10c0c;
+            }
+          }
+          i.fa-chevron-right {
+            &:hover {
+              color: #036103;
+            }
+          }
         }
         &-body {
           .hoverQuestion {
@@ -23,10 +126,10 @@
             .questionMove {
               position: absolute;
               top: 2px;
-              left: -32px;
+              left: -29px;
               background-color: #909090;
               color: #fff;
-              border-radius: 10px;
+              border-radius: 3px;
               width: 30px;
               text-align: center;
               overflow: hidden;
@@ -53,13 +156,13 @@
                 overflow-x: auto !important;
                 overflow-y: auto !important;
                 white-space: nowrap;
-                &>* {
+                & > * {
                   margin-bottom: 5px;
                 }
                 @media (max-width: 575px) {
                   width: 33rem !important;
                 }
-                &>*:not(.matrix) {
+                & > *:not(.matrix) {
                   @media (max-width: 575px) {
                     width: 33rem !important;
                   }
@@ -74,20 +177,6 @@
           }
           & .row:hover .addQuestionControls {
             display: flex;
-          }
-          .addQuestionControls {
-            display: none;
-            flex-direction: column;
-            i {
-              cursor: pointer;
-              font-size: 2.2rem;
-            }
-            .fa-plus-circle {
-              color: green;
-            }
-            .fa-minus-circle {
-              color: #cb0c0c;
-            }
           }
         }
       }
@@ -129,17 +218,17 @@
         border-radius: 4px;
         font-weight: 600;
         font-size: 1.6rem;
-        @media(min-width: 1500px) {
+        @media (min-width: 1500px) {
           font-size: 2rem;
         }
       }
     }
     .change-answers {
-      &:hover>p {
+      &:hover > p {
         background-color: #161616;
       }
       .answers {
-        &>* {
+        & > * {
           display: block;
           margin: 2px auto;
           border-radius: 5px;
@@ -222,36 +311,20 @@
         }
       }
     }
-    .change-choices {
-      &:hover>p {
-        background-color: #161616;
+    .change-type {
+      .types {
+        min-height: 31px;
       }
-      font-size: 2rem;
-      i {
-        cursor: pointer;
-        font-size: 3rem;
-        margin: 0 1rem;
-        &:active {
-          transform: scale(0.9)
+    }
+
+    .change-validation {
+      .dropdown-menu-form {
+        label {
+          display: block;
         }
-      }
-      i.fa-minus-circle {
-        color: #b10c0c;
-        &:hover {
-          color: #f81212;
+        input {
+          border-radius: 2px;
         }
-      }
-      i.fa-plus-circle {
-        color: #036103;
-        &:hover {
-          color: rgb(7, 184, 7);
-        }
-      }
-      span {
-        color: #222;
-        line-height: 1;
-        font-weight: 700;
-        transition: none;
       }
     }
   }

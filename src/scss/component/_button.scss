@@ -8,7 +8,27 @@
     box-shadow: none;
   }
 }
+  i.fa-minus-circle {
+    color: #b10c0c;
+    &:hover {
+      color: #f81212;
+    }
+  }
+  i.fa-plus-circle {
+    color: #036103;
+    &:hover {
+      color: rgb(7, 184, 7);
+    }
+  }
+.addQuestionControls {
+  display: none;
+  flex-direction: column;
+  i {
+    cursor: pointer;
+    font-size: 2.2rem;
+  }
 
+}
 .addImgIcon {
   cursor: pointer;
   font-size: 2rem;
@@ -23,5 +43,54 @@
     font-weight: bold;
   }
 }
+.change-options {
+  min-height: 200px;
+  &:hover>p {
+    background-color: #161616;
+  }
+  font-size: 2rem;
+  i {
+    cursor: pointer;
+    font-size: 3rem;
+    margin: 0 1rem;
+    &:active {
+      transform: scale(0.9)
+    }
+  }
 
+  span {
+    color: #222;
+    line-height: 1;
+    font-weight: 700;
+    transition: none;
+  }
+}
+.change-action {
+  button{
+    font-size: 1.6rem;
+  }
+  .actionAdd{
+    &:hover{
+      color: #b10c0c;
+    }
+  }
+  .actionCopy{
+    &:hover{
+      color: #036103;
+    }
+  }
+  .actionPreview{
+    &:hover{
+      color: rgb(0, 146, 146);
+    }
+  }
+}
+.modalValidation{
+  .modal-body{
+    button{
+      font-size: 1.8rem;
+      min-width: 38rem;
+    }
+  }
+}
 /* btn component end--------------------- */
