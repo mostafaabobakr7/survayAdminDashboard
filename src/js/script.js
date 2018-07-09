@@ -2862,8 +2862,7 @@ function displayLogicAdd() {
 }
 function displayLogicRemove() {
   const element = $(this).parents('.newAddDisplayLogic');
-  if (element.index() !== 1) {
-    console.log(element.index())
+  if (element.index() !== 1){
     element.remove();
   }
 }

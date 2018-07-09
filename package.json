@@ -15,7 +15,6 @@
     "ckeditor": "^4.9.2",
     "fine-uploader": "^5.16.2",
     "font-awesome": "^4.7.0",
-    "gulp-sass-glob": "^1.0.9",
     "jquery": "^3.3.1",
     "medium-editor": "^5.23.3",
     "popper.js": "^1.14.3",
@@ -31,28 +30,35 @@
     "Explorer >= 5",
     "Samsung >= 4"
   ],
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.46",
-    "@babel/preset-env": "^7.0.0-beta.46",
-    "@types/jquery": "^3.3.3",
-    "babel-core": "^7.0.0-alpha.20",
+    "babelify": "^6.4.0",
     "browser-sync": "^2.24.5",
+    "browserify": "^11.2.0",
     "browserslist": "^3.2.0",
     "eslint": "^4.0.0",
     "eslint-plugin-compat": "^2.2.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
-    "gulp-babel": "^8.0.0-beta.2",
-    "gulp-clean-css": "^3.9.0",
-    "gulp-concat-css": "^2.3.0",
     "gulp-htmlclean": "^2.7.16",
-    "gulp-ignore": "^2.0.2",
     "gulp-imagemin": "^4.0.0",
-    "gulp-newer": "^1.3.0",
-    "gulp-plumber": "^1.1.0",
     "gulp-postcss": "^7.0.1",
     "gulp-sass": "^4.0.1",
+    "gulp-sass-glob": "^1.0.9",
+    "gulp-clean-css": "^3.9.0",
+    "gulp-concat-css": "^2.3.0",
+    "gulp-babel": "^8.0.0-beta.2",
+    "gulp-browserify": "^0.5.1",
+    "gulp-ignore": "^2.0.2",
+    "gulp-newer": "^1.3.0",
+    "gulp-plumber": "^1.1.0",
     "gulp-uglify": "^3.0.0",
+    "gulp-uglify-es": "^1.0.4",
+    "gulp-util": "^3.0.8",
     "postcss": "^6.0.22",
     "postcss-animation": "0.0.12",
     "postcss-animations": "^6.1.1",
@@ -63,6 +69,7 @@
     "postcss-merge-rules": "^2.1.2",
     "pump": "^2.0.0",
     "stylelint": "^9.1.3",
-    "stylelint-no-unsupported-browser-features": "^2.0.0"
+    "stylelint-no-unsupported-browser-features": "^2.0.0",
+    "vinyl-source-stream": "^1.1.0"
   }
 }
