@@ -80,7 +80,7 @@
             }
             .questionMove {
               position: absolute;
-              top: 2px;
+              top: 5px;
               left: -29px;
               background-color: #909090;
               color: #fff;
@@ -122,8 +122,8 @@
                     width: 33rem !important;
                   }
                 }
-                .txtSingleLine input[type="text"],
-                .txtFormAnswer input[type="text"],
+                .txtSingleLine input[type='text'],
+                .txtFormAnswer input[type='text'],
                 textarea {
                   margin-bottom: 2rem;
                 }
@@ -148,6 +148,9 @@
     position: relative;
   }
   .rightControls {
+    & > * {
+      user-select: none;
+    }
     min-height: 100vh;
     label {
       cursor: pointer;
@@ -194,7 +197,7 @@
           line-height: 2;
           position: relative;
           &:before {
-            content: "";
+            content: '';
             height: 0;
             width: 0;
           }
@@ -214,54 +217,54 @@
           width: 47%;
           display: inline-block;
           &:after {
-            content: "Choices";
+            content: 'Choices';
           }
         }
         #dropDownOneAnswer {
           width: 51%;
           display: inline-block;
           &:after {
-            content: "Dropdown";
+            content: 'Dropdown';
           }
         }
         #sliderAnswer {
           display: inline-block;
           width: 30.33333333333333%;
           &:after {
-            content: "Slider";
+            content: 'Slider';
           }
         }
         #rankAnswer {
           display: inline-block;
           width: 32.33333333333333%;
           &:after {
-            content: "Rank";
+            content: 'Rank';
           }
         }
         #matrixAnswer {
           display: inline-block;
           width: 33.33333333333333%;
           &:after {
-            content: "Matrix";
+            content: 'Matrix';
           }
         }
         #sideAnswer {
           &:after {
-            content: "Side by Side";
+            content: 'Side by Side';
           }
         }
         #txtSingleLineAnswer {
           width: 47%;
           display: inline-block;
           &:after {
-            content: "Text";
+            content: 'Text';
           }
         }
         #uploadImgAnswer {
           width: 51%;
           display: inline-block;
           &:after {
-            content: "Upload";
+            content: 'Upload';
           }
         }
       }

@@ -1,53 +1,6 @@
-/*@import abstract folder */
-
-@import "./abstracts/variables";
-@import "./abstracts/mixins";
-@import "./abstracts/functions";
-/*@import abstract folder end-----------------------------*/
-
-/*@import base folder */
-
-@import "./base/base";
-@import "./base/addClass";
-@import "./base/typography";
-@import "./base/utilities";
-@import "./base/animation";
-/*@import base folder end-----------------------------*/
-
-/*@import layout folder */
-
-@import "./layouts/navigation";
-@import "./layouts/header";
-@import "./layouts/footer";
-/*@import layout folder end-----------------------------*/
-
-/*@import component */
-
-@import "./component/radio";
-@import "./component/button";
-@import "./component/card";
-@import "./component/form";
-@import "./component/modal";
-@import "./component/dropdown";
-@import "./component/editable";
-@import "./component/slider";
-@import "./component/rank";
-@import "./component/matrix";
-@import "./component/images";
-@import "./component/stars";
-/*@import component end-----------------------------*/
-
-/*@import PAGES folder */
-
-@import "./pages/projects";
-@import "./pages/edit-survey";
-@import "./pages/preview-mobile";
-@import "./pages/preview";
-@import "./pages/distribution";
-@import "./pages/responses";
-@import "./pages/reports";
-@import "./pages/dashboard";
-@import "./pages/library";
-@import "./pages/usersmang";
-@import "./pages/accountmang";
-/*@import PAGES folder end-----------------------------*/
+@import "./abstracts/*";
+@import "./base/*";
+@import "./layouts/*";
+@import "./component/*";
+@import "./layouts/*";
+@import "./pages/*";

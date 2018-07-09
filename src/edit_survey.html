@@ -20,10 +20,10 @@
   <link rel="apple-touch-startup-image" href="./img/FreeMind.png">
   <link rel="apple-touch-icon" type="image/png" href="./img/FreeMind.png" />
 
-  <link rel="stylesheet" href="./css/font-awesome.min.css">
-  <link rel="stylesheet" href="./css/bootstrap.min.css">
-  <link rel="stylesheet" href="./css/chosen.min.css">
-  <link rel="stylesheet" href="./js/jquery-ui.min.js">
+  <link rel="stylesheet" href="./css/plugins/font-awesome.min.css">
+  <link rel="stylesheet" href="./css/plugins/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/plugins/chosen.min.css">
+  <link rel="stylesheet" href="./js/plugins/jquery-ui.min.js">
   <link rel="stylesheet" href="./css/style.css">
 </head>
 
@@ -197,7 +197,7 @@
           </div>
           <div class="col-md-4">
             <form class="form-inline d-flex justify-content-end">
-              <a id="previewBTN" class="btn btn-primary btn-lg mr-4" href="./preview.html" target="_blank">
+              <a id="previewBTN" class="btn btn-lg btn-primary  mr-4" href="./preview.html" target="_blank">
                 <i class="fa fa-sign-out pr-2"></i> Preview
               </a>
               <button type="button" class="btn btn-lg btn-success px-4">
@@ -234,9 +234,6 @@
                           <div class="card-body" id="blockOneId">
                             <div class="row py-3 hoverQuestion hoverQuestionClicked">
                               <div class="questionMove">
-                                <div class="questionMove__valid py-2" title="Add Logic">
-                                  <i class="fa fa-gear"></i>
-                                </div>
                                 <div class="questionMove__up py-2" title="move up">
                                   <i class="fa fa-arrow-up"></i>
                                 </div>
@@ -526,12 +523,12 @@
                       <ul class="dropdown-menu dropdown-menu-form">
                         <div class="validBasic">
                           <h6 class="dropdown-header">Basic Validation</h6>
-                          <li class="dropdown-item">
+                          <li>
                             <label>
                               <input type="radio" autocomplete="off" name="validBasic" value="ForceResponse">Force Response
                             </label>
                           </li>
-                          <li class="dropdown-item">
+                          <li>
                             <label>
                               <input type="radio" autocomplete="off" name="validBasic" value="RequestResponse">Request Response
                             </label>
@@ -540,17 +537,17 @@
                         <li class="dropdown-divider"></li>
                         <div class="validRange">
                           <h6 class="dropdown-header">Range Type Validation</h6>
-                          <li class="dropdown-item">
+                          <li>
                             <label>
                               <input type="radio" autocomplete="off" name="validRange" value="ForceResponse">Minimum Characters
                             </label>
                           </li>
-                          <li class="dropdown-item">
+                          <li>
                             <label>
                               <input type="radio" autocomplete="off" name="validRange" value="RequestResponse">Maximum Characters
                             </label>
                           </li>
-                          <li class="dropdown-item">
+                          <li>
                             <label>
                               <input type="radio" autocomplete="off" name="validRange" value="RequestResponse">Range
                             </label>
@@ -559,17 +556,17 @@
                         <li class="dropdown-divider"></li>
                         <div class="validTxt d-none">
                           <h6 class="dropdown-header">Text Type Validation</h6>
-                          <li class="dropdown-item">
+                          <li>
                             <label>
                               <input type="radio" autocomplete="off" name="validTxt" value="ForceResponse">Numbers
                             </label>
                           </li>
-                          <li class="dropdown-item">
+                          <li>
                             <label>
                               <input type="radio" autocomplete="off" name="validTxt" value="RequestResponse">Text
                             </label>
                           </li>
-                          <li class="dropdown-item">
+                          <li>
                             <label>
                               <input type="radio" autocomplete="off" name="validTxt" value="RequestResponse">Date "Calendar"
                             </label>
@@ -578,7 +575,7 @@
                         <li class="dropdown-divider"></li>
                         <div class="validConditional">
                           <h6 class="dropdown-header">Conditional Validation</h6>
-                          <li class="dropdown-item">
+                          <li>
                             <label>
                               <input type="radio" autocomplete="off" name="validation" value="ForceResponse">Custom Validation
                             </label>
@@ -590,12 +587,18 @@
                   </div>
                   <div class="change-action">
                     <p>Actions</p>
-                    <button id="actionAdd" class="btn actionAdd" type="button">
-                      <i class="fa fa-sticky-note-o"></i> Add Note</button>
-                    <button id="actionCopy" class="btn actionCopy" type="button">
-                      <i class="fa fa-files-o"></i> Copy Question</button>
-                    <button id="actionPreview" class="btn actionPreview" type="button">
-                      <i class="fa fa-search"></i> Preview Question</button>
+                    <div class="d-flex flex-column">
+                      <button id="addDisplayLogic" data-toggle="modal" data-target="#displayLogicModal" class="btn addDisplayLogic" type="button">
+                        <i class="fa fa-mail-forward"></i> Add Display Logic</button>
+                      <button id="addSkipLogic" class="btn addSkipLogic" type="button">
+                        <i class="fa fa-mail-reply"></i> Add Skip Logic</button>
+                      <button id="actionAdd" class="btn actionAdd" type="button">
+                        <i class="fa fa-sticky-note-o"></i> Add Note</button>
+                      <button id="actionCopy" class="btn actionCopy" type="button">
+                        <i class="fa fa-files-o"></i> Copy Question</button>
+                      <button id="actionPreview" class="btn actionPreview" type="button">
+                        <i class="fa fa-search"></i> Preview Question</button>
+                    </div>
                   </div>
                 </div>
                 <!-- change question type end -->
@@ -629,31 +632,74 @@
   <!-- modal add img end -->
   <!-- modal validation -->
   <div class="modalValidation">
-    <div id="validModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="displayLogicModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h2>Add Logic</h2>
+            <h2>Display Logic
+              <span id="displayLogicModalHeader" class="text-muted"></span>
+            </h2>
           </div>
-          <div id="validModalBody" class="modal-body d-flex justify-content-between py-5">
-            <button id="addSkipLogic" class="btn btn-lg btn-outline-success mx-2" type="button">Add Skip Logic</button>
-            <button id="addDisplayLogic" class="btn btn-lg btn-outline-primary mx-2" type="button">Add Display Logic</button>
+          <div class="modal-body">
+            <p>Display this Question only if the following condition is met:</p>
+            <div class="newAddDisplayLogic d-flex justify-content-between my-2">
+              <div class="displayLogicControls d-flex">
+
+                <div class="section-home-dropdown dropdown mr-2">
+                  <button class="dropdown-toggle dropdownChooseBtn section-home-dropdown__link" role="button" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    Question
+                  </button>
+                  <div class="displayLogicDropdown-menu dropdown-menu section-home-dropdown__menu" aria-labelledby="folderDropdown">
+                    <a class="displayLogicQuestion dropdown-item section-home-dropdown__item checked">
+                      <i class="fa fa-check"></i> Question</a>
+                    <a class="displayLogicEmbedded dropdown-item section-home-dropdown__item">
+                      <i class="fa fa-check"></i> Embedded Data</a>
+                    <a class="displayLogicQuota dropdown-item section-home-dropdown__item">
+                      <i class="fa fa-check"></i> Quota</a>
+                    <a class="displayLogicContact dropdown-item section-home-dropdown__item">
+                      <i class="fa fa-check"></i> Contact List</a>
+                    <a class="displayLogicGeoIP dropdown-item section-home-dropdown__item">
+                      <i class="fa fa-check"></i> GeoIP Location</a>
+                    <a class="displayLogicLoop dropdown-item section-home-dropdown__item">
+                      <i class="fa fa-check"></i> Loop & Merge</a>
+                    <a class="displayLogicRelationship dropdown-item section-home-dropdown__item">
+                      <i class="fa fa-check"></i> Evaluator's Relationship</a>
+                    <a class="displayLogicMetadata dropdown-item section-home-dropdown__item">
+                      <i class="fa fa-check"></i> Subject's Metadata</a>
+                    <a class="displayLogicDevice dropdown-item section-home-dropdown__item">
+                      <i class="fa fa-check"></i> Device Type</a>
+                  </div>
+                </div>
+                <div class="displayLogicQuestionDropdown">
+                  <select class="custom-select displayLogicQuestionDropdown-menu">
+                    <option value="" disabled selected>Select Question...</option>
+                  </select>
+                </div>
+              </div>
+              <div class="displayLogicAddRemove align-self-center">
+                <i class="displayLogicRemove fa fa-minus-circle" title="remove logic"></i>
+                <i class="displayLogicAdd fa fa-plus-circle ml-2" title="add logic"></i>
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary btn-lg" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-outline-success px-5 btn-lg" data-dismiss="modal">Save</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+  </div>
   <!-- modal validation end -->
   <!-- ........................................ -->
-  <script src="./js/jquery-3.3.1.slim.min.js"></script>
-  <script src="./js/bootstrap.bundle.min.js"></script>
-  <script src="./js/dropzone.js"></script>
-  <script src="./js/chosen.jquery.min.js"></script>
-  <script src="./js/jquery.sticky.min.js"></script>
-  <script src="./js/jquery-ui.min.js"></script>
+  <script src="./js/plugins/jquery-3.3.1.slim.min.js"></script>
+  <script src="./js/plugins/bootstrap.bundle.min.js"></script>
+  <script src="./js/plugins/dropzone.js"></script>
+  <script src="./js/plugins/chosen.jquery.min.js"></script>
+  <script src="./js/plugins/jquery.sticky.min.js"></script>
+  <script src="./js/plugins/jquery-ui.min.js"></script>
   <script src="./js/script.js"></script>
 </body>
 

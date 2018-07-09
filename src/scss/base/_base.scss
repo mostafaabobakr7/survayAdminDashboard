@@ -6,7 +6,7 @@
   margin: 0;
   padding: 0;
   box-sizing: inherit;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.1s ease-in-out;
   background-repeat: no-repeat;
   /* projects that use icons. It doesn't affect much on most layouts I tried applying it on, as it only really comes up when inline or inline-block elements line up with each other on the same line. */
   vertical-align: middle;
@@ -67,5 +67,7 @@ img {
 table {
   width: max-content;
 }
-
+button {
+  cursor: pointer;
+}
 /* Base end-------------------- */

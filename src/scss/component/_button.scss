@@ -68,7 +68,33 @@ i.fa-plus-circle {
 }
 .change-action {
   button {
+    text-align: left;
+    width: 100%;
     font-size: 1.6rem;
+    background: none;
+    border-left: 3px solid transparent;
+    &:hover {
+      border-left: 3px solid #222;
+    }
+  }
+  i {
+    transition: all 0s !important;
+  }
+  .addDisplayLogic {
+    i {
+      transform: scaleY(-1);
+    }
+    &:hover {
+      color: #300cb1;
+    }
+  }
+  .addSkipLogic {
+    i {
+      transform: rotate(-90deg);
+    }
+    &:hover {
+      color: #5b7205;
+    }
   }
   .actionAdd {
     &:hover {
@@ -82,7 +108,7 @@ i.fa-plus-circle {
   }
   .actionPreview {
     &:hover {
-      color: rgb(0, 146, 146);
+      color: #009292;
     }
   }
 }
@@ -90,7 +116,15 @@ i.fa-plus-circle {
   .modal-body {
     button {
       font-size: 1.8rem;
-      min-width: 38rem;
+    }
+  }
+}
+.displayLogicAddRemove {
+  i {
+    cursor: pointer;
+    font-size: 2.3rem;
+    &:active {
+      transform: scale(0.9);
     }
   }
 }
